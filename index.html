@@ -66,7 +66,7 @@ input[type=date]{color-scheme:dark}
 .top h2{margin:0;font-size:19px;font-weight:800}.top small{color:var(--mut)}
 .back{width:42px;height:42px;border-radius:14px;border:1px solid var(--bd);background:var(--card);font-size:20px;cursor:pointer;flex:none}
 .tabs{display:flex;background:rgba(255,255,255,.07);border-radius:16px;padding:4px;margin:10px 0}
-.tabs button{flex:1;border:0;background:none;padding:10px;border-radius:12px;font-weight:700;cursor:pointer;color:var(--mut)}
+.tabs button{flex:1;border:0;background:none;padding:10px 3px;font-size:13px;border-radius:12px;font-weight:700;cursor:pointer;color:var(--mut)}
 .tabs button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:#2a1c00}
 /* lessons */
 .ls{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
@@ -147,6 +147,21 @@ details.card summary{cursor:pointer;font-weight:800;color:var(--g1);font-size:16
 details.card[open] summary{margin-bottom:10px}
 .lt{display:flex;gap:8px;align-items:center;margin:6px 0}.lt span{width:80px;font-weight:700;flex:none}
 #syncb{position:fixed;top:6px;left:8px;z-index:40;font-size:11px;font-weight:700;padding:2px 9px;border-radius:12px;background:#0a1438cc;border:1px solid var(--bd);color:var(--mut);pointer-events:none}#syncb.ok{color:var(--grn)}#syncb.w{color:var(--amb)}#syncb.e{color:var(--red)}
+/* ===== ARCHIVE ===== */
+.arck{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.arck div{background:var(--card);border:1px solid var(--bd);border-radius:14px;text-align:center;padding:8px 2px}
+.arck b{display:block;font-size:22px;line-height:1.3}.arck span{font-size:11px;color:var(--mut)}
+.arck .r b{color:var(--red)}.arck .a b{color:var(--amb)}.arck .g b{color:var(--grn)}
+.arcw{overflow-x:auto;border-radius:14px;border:1px solid var(--bd);margin:6px 0 12px}
+table.at{width:100%;border-collapse:collapse;font-size:13px}
+table.at th{background:#13245f;color:var(--g1);padding:7px 6px;font-weight:800;white-space:nowrap;line-height:1.4}
+table.at th small{display:block;font-weight:600;color:var(--mut);font-size:11px}
+table.at td{border-top:1px solid #ffffff14;padding:6px;text-align:center}
+table.at td.nm{text-align:right;font-weight:700;min-width:120px}
+table.at .ar{color:var(--red);font-weight:900}.at .ae{color:var(--amb);font-weight:900}.at .ap{color:var(--grn)}.at .az{color:var(--mut)}
+.dchips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px}
+.dchips button{flex:none;border:1px solid var(--bd);background:var(--card);color:var(--ink);border-radius:20px;padding:5px 12px;font-weight:700;font-size:12px;cursor:pointer}
+.dchips button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:#2a1c00;border-color:transparent}
 /* ================= PRINT PAPER ================= */
 #printArea{display:none}
 @page{size:A4;margin:8mm}
@@ -372,7 +387,7 @@ const sKey=(d,c,s,l)=>`${d}|${c}|${s}|${l}`;
 function vSec(p){
  const {cls,sec}=p,tab=p.tab||'att',list=studentsOf(cls,sec);
  let h=`<div class="top"><button class="back" onclick="history.back()">→</button><div><h2>${esc(cls)} — شعبة ${esc(sec)}</h2><small>${list.length} طالب</small></div></div>
- <div class="tabs"><button class="${tab==='att'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'att'})},false)">تسجيل الحضور</button><button class="${tab==='stu'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'stu'})},false)">الطلاب</button><button class="${tab==='rep'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'rep'})},false)">التقارير والوصولات</button></div>`;
+ <div class="tabs"><button class="${tab==='att'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'att'})},false)">تسجيل الحضور</button><button class="${tab==='stu'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'stu'})},false)">الطلاب</button><button class="${tab==='arc'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'arc'})},false)">🗂 الأرشيف</button><button class="${tab==='rep'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'rep'})},false)">التقارير والوصولات</button></div>`;
  if(tab==='att'){
   const teachers=[...new Set(db.sessions.map(x=>x.teacher))],subs=[...new Set(db.sessions.map(x=>x.subject))];
   h+=`<div class="card"><label style="margin-top:0">تاريخ اليوم</label><input type="date" value="${sel.date}" onchange="sel.date=this.value;sel.lesson=null;render()">
@@ -385,6 +400,8 @@ function vSec(p){
    <datalist id="tl">${teachers.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><datalist id="sl">${subs.map(t=>`<option value="${esc(t)}">`).join('')}</datalist>
    <button class="btn gold full" style="margin-top:14px" onclick="startAtt(${J({cls,sec})})">${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?'تعديل الحضور المسجّل 🔐':'ابدأ تسجيل الطلاب'}</button></div>`;
   }
+ }else if(tab==='arc'){
+  h+=arcView(cls,sec);
  }else if(tab==='rep'){
   h+=`<div class="card"><h3>📊 تقارير</h3><div class="btns"><button class="btn gold" onclick="repDialog(${J(['sec',cls,sec])})">📊 تقرير الشعبة</button><button class="btn blue" onclick="repDialog(${J(['cls',cls])})">📚 تقرير الصف</button></div></div>
   <div class="card"><h3>🎫 تقرير ووصولات طالب</h3>${list.length?`<label style="margin-top:0">اختر الطالب</label><select id="rpS">${list.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select><div class="btns" style="margin-top:10px"><button class="btn gold" onclick="docDialog($('#rpS').value,'report')">📄 تقرير الطالب</button><button class="btn red" onclick="docDialog($('#rpS').value,'warn')">⚠️ إنذار</button><button class="btn blue" onclick="docDialog($('#rpS').value,'pledge')">✍️ تعهد</button><button class="btn" onclick="docDialog($('#rpS').value,'leave')">🏖 إجازة</button></div>`:'<div class="empty" style="padding:6px">لا يوجد طلاب في هذه الشعبة</div>'}</div>
@@ -399,6 +416,79 @@ function vSec(p){
  return h+foot();
 }
 function pickLesson(n,p){sel.lesson=n;const e=db.sessions.find(x=>x.id===sKey(sel.date,p.cls,p.sec,n));if(e){sel.teacher=e.teacher;sel.subject=e.subject}render()}
+
+/* ---------- ARCHIVE: غيابات الشعبة ليوم معيّن ---------- */
+let arcD=todayStr();
+function arcData(cls,sec,date){
+ const ses=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date===date),list=studentsOf(cls,sec);
+ const L=db.lessons.map((l,i)=>({n:i+1,t:l.t||'',ses:ses.find(x=>x.lesson===i+1)||null}));
+ ses.forEach(x=>{if(!L.some(q=>q.n===x.lesson))L.push({n:x.lesson,t:'',ses:x})});
+ L.sort((a,b)=>a.n-b.n);
+ L.forEach(q=>{q.a=q.ses?list.filter(s=>q.ses.marks[s.id]==='a').length:0;q.e=q.ses?list.filter(s=>q.ses.marks[s.id]==='e').length:0});
+ const rec=L.filter(q=>q.ses);
+ const rows=list.map(s=>{const m=rec.map(q=>q.ses.marks[s.id]||'p'),a=m.filter(v=>v==='a').length,e=m.filter(v=>v==='e').length;
+  return{s,m,a,e,full:rec.length>0&&a===rec.length}}).filter(r=>r.a||r.e);
+ const teachers=[...new Set(rec.map(q=>q.ses.teacher).filter(Boolean))];
+ return{L,rec,rows,teachers,list,tot:{stu:rows.filter(r=>r.a).length,full:rows.filter(r=>r.full).length,exc:rows.filter(r=>!r.a&&r.e).length}}}
+const arcSt=r=>r.full?'غياب يوم كامل':r.a?'غياب دروس':'مجاز';
+const arcCell=v=>v==='a'?['غائب','ar']:v==='e'?['مجاز','ae']:v==='p'?['✓','ap']:['—','az'];
+const arcName=(cls,sec,d)=>('أرشيف_غياب_'+cls+'_شعبة_'+sec+'_'+d).replace(/[\\\/:*?"<>|\s]+/g,'_');
+
+function arcView(cls,sec){
+ const d=arcData(cls,sec,arcD),P=J({cls,sec,tab:'arc'});
+ const dates=[...new Set(db.sessions.filter(x=>x.cls===cls&&x.sec===sec).map(x=>x.date))].sort().reverse().slice(0,12);
+ let h=`<div class="card"><label style="margin-top:0">اختر اليوم</label>
+ <div class="btns" style="flex-wrap:nowrap"><button class="btn sm" onclick="arcGo(-1)">→ السابق</button><input type="date" value="${arcD}" style="flex:1;min-width:0" onchange="arcD=this.value||todayStr();render()"><button class="btn sm" onclick="arcGo(1)">التالي ←</button></div>
+ <div class="dchips"><button class="${arcD===todayStr()?'on':''}" onclick="arcD=todayStr();render()">اليوم</button>${dates.filter(x=>x!==todayStr()).map(x=>`<button class="${x===arcD?'on':''}" onclick="arcD='${x}';render()">${fmtD(x)}</button>`).join('')}</div></div>
+ <div class="card"><h3 style="margin:0 0 4px">🗂 ${fmtD(arcD,true)}</h3><small style="color:var(--mut)">${esc(cls)} — شعبة ${esc(sec)} • ${d.list.length} طالب</small>`;
+ if(!d.rec.length)return h+`<div class="empty" style="padding:18px 0">لا توجد دروس مسجّلة في هذا اليوم.</div></div>`+foot();
+ h+=`<div class="arck"><div><b>${d.rec.length}<small style="font-size:13px;color:var(--mut)">/${d.L.length}</small></b><span>دروس مسجّلة</span></div><div><b>${d.teachers.length}</b><span>مدرسون حضروا</span></div><div class="r"><b>${d.tot.stu}</b><span>طلاب غائبون</span></div><div class="a"><b>${d.tot.full}</b><span>غياب يوم كامل</span></div></div>
+ <h4 style="margin:6px 0 0;color:var(--g1)">الدروس والمدرسون</h4><div class="arcw"><table class="at"><thead><tr><th>الدرس</th><th>الوقت</th><th>المدرس</th><th>المادة</th><th>غائب</th><th>مجاز</th></tr></thead><tbody>
+ ${d.L.map(q=>q.ses?`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td class="nm">${esc(q.ses.teacher)}</td><td>${esc(q.ses.subject)}</td><td class="${q.a?'ar':'az'}">${q.a}</td><td class="${q.e?'ae':'az'}">${q.e}</td></tr>`:`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td class="az" colspan="4">لم يُسجَّل</td></tr>`).join('')}</tbody></table></div>
+ <h4 style="margin:6px 0 0;color:var(--g1)">غيابات الطلاب</h4>`;
+ h+=d.rows.length?`<div class="arcw"><table class="at"><thead><tr><th>#</th><th>الطالب</th>${d.rec.map(q=>`<th>${ORD[q.n-1]||q.n}<small>${esc(q.ses.teacher)}</small></th>`).join('')}<th>الحالة</th></tr></thead><tbody>
+ ${d.rows.map((r,i)=>`<tr><td>${i+1}</td><td class="nm">${esc(r.s.name)}</td>${r.m.map(v=>{const c=arcCell(v);return `<td class="${c[1]}">${c[0]}</td>`}).join('')}<td class="${r.a?'ar':'ae'}" style="white-space:nowrap">${arcSt(r)}</td></tr>`).join('')}</tbody></table></div>`
+ :`<div class="empty" style="padding:14px 0">لا غياب في هذا اليوم — حضور كامل ✓</div>`;
+ h+=`<div class="btns" style="margin-top:10px"><button class="btn gold" onclick="arcPrint(${J(cls)},${J(sec)},0)">🖨 طباعة</button><button class="btn blue" onclick="arcPrint(${J(cls)},${J(sec)},1)">📄 PDF</button><button class="btn" style="background:#1d6f42;color:#fff" onclick="arcXlsx(${J(cls)},${J(sec)})">📊 Excel</button></div></div>`;
+ return h+foot()}
+function arcGo(n){arcD=addDays(arcD,n);render()}
+
+function arcHTML(cls,sec,date){
+ const d=arcData(cls,sec,date);
+ let h=`<div class="tk rep">${tkWm()}${tkHead('أرشيف غياب الشعبة','🗂')}<div class="tk-b">
+ <div class="tk-sh"><div><small>الصف</small><b>${esc(cls)}</b></div><div><small>الشعبة</small><b>${esc(sec)}</b></div><div><small>عدد الطلاب</small><b>${d.list.length}</b></div><div><small>التاريخ</small><b style="font-size:13px">${fmtD(date,true)}</b></div></div>`;
+ if(!d.rec.length)return h+`<div class="tk-box">لا توجد دروس مسجّلة لهذه الشعبة في هذا اليوم.</div></div>${tkFoot()}</div>`;
+ h+=`${tkK([[d.rec.length+'/'+d.L.length,'دروس مسجّلة','',1],[d.teachers.length,'مدرسون حضروا'],[d.tot.stu,'طلاب غائبون','r'],[d.tot.full,'غياب يوم كامل','a']])}
+ <h4>الدروس والمدرسون</h4><table class="tk-t"><thead><tr><th>الدرس</th><th>الوقت</th><th>المدرس</th><th>المادة</th><th>غائب</th><th>مجاز</th></tr></thead><tbody>
+ ${d.L.map(q=>q.ses?`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td style="text-align:right;font-weight:700">${esc(q.ses.teacher)}</td><td>${esc(q.ses.subject)}</td><td class="${q.a?'rd':''}">${q.a}</td><td class="${q.e?'am':''}">${q.e}</td></tr>`:`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td colspan="4" style="color:#889">لم يُسجَّل</td></tr>`).join('')}</tbody></table>
+ <h4>غيابات الطلاب</h4>`;
+ h+=d.rows.length?`<table class="tk-t"><thead><tr><th>#</th><th>اسم الطالب</th>${d.rec.map(q=>`<th>${ORD[q.n-1]||q.n}<br><span style="font-weight:600;font-size:10px">${esc(q.ses.teacher)}</span></th>`).join('')}<th>الحالة</th></tr></thead><tbody>
+ ${d.rows.map((r,i)=>`<tr><td>${i+1}</td><td style="text-align:right;font-weight:700">${esc(r.s.name)}</td>${r.m.map(v=>`<td class="${v==='a'?'rd':v==='e'?'am':v==='p'?'gn':''}">${arcCell(v)[0]}</td>`).join('')}<td class="${r.a?'rd':'am'}">${arcSt(r)}</td></tr>`).join('')}</tbody></table>`
+ :`<div class="tk-box">لا غياب في هذا اليوم — حضور كامل ✓</div>`;
+ return h+tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة'])+`</div>${tkFoot()}</div>`}
+
+function arcPrint(cls,sec,pdf){
+ const old=document.title,fin=()=>{document.title=old;removeEventListener('afterprint',fin)};
+ document.title=arcName(cls,sec,arcD);addEventListener('afterprint',fin);
+ if(pdf)toast('في نافذة الطباعة اختر «حفظ كـ PDF»');
+ printDoc(arcHTML(cls,sec,arcD))}
+
+function arcXlsx(cls,sec){
+ if(typeof XLSX==='undefined'){toast('مكتبة Excel لم تُحمَّل — تحقق من الإنترنت');return}
+ const d=arcData(cls,sec,arcD);
+ if(!d.rec.length){toast('لا توجد دروس مسجّلة في هذا اليوم');return}
+ const head=[[SCHOOL],['أرشيف غياب الشعبة — '+cls+' / شعبة '+sec],['التاريخ: '+fmtD(arcD,true)],[]];
+ const a1=head.concat([['الدرس','الوقت','المدرس','المادة','عدد الغائبين','عدد المجازين']],
+  d.L.map(q=>q.ses?[lessonName(q.n),q.t,q.ses.teacher,q.ses.subject,q.a,q.e]:[lessonName(q.n),q.t,'لم يُسجَّل','','','']),
+  [[],['الدروس المسجّلة',d.rec.length+' من '+d.L.length],['المدرسون الذين حضروا',d.teachers.length],['الطلاب الغائبون',d.tot.stu],['غياب يوم كامل',d.tot.full]]);
+ const a2=head.concat([['#','اسم الطالب','رقم القيد'].concat(d.rec.map(q=>lessonName(q.n)+' — '+q.ses.teacher),['دروس الغياب','دروس الإجازة','الحالة'])],
+  d.rows.map((r,i)=>[i+1,r.s.name,r.s.reg||''].concat(r.m.map(v=>arcCell(v)[0]),[r.a,r.e,arcSt(r)])));
+ const wb=XLSX.utils.book_new(),w1=XLSX.utils.aoa_to_sheet(a1),w2=XLSX.utils.aoa_to_sheet(a2);
+ w1['!cols']=[{wch:16},{wch:14},{wch:24},{wch:18},{wch:13},{wch:13}];
+ w2['!cols']=[{wch:5},{wch:28},{wch:11}].concat(d.rec.map(()=>({wch:18})),[{wch:12},{wch:12},{wch:16}]);
+ XLSX.utils.book_append_sheet(wb,w1,'الدروس والمدرسون');XLSX.utils.book_append_sheet(wb,w2,'غيابات الطلاب');
+ wb.Workbook={Views:[{RTL:true}]};
+ try{XLSX.writeFile(wb,arcName(cls,sec,arcD)+'.xlsx');toast('تم تجهيز ملف Excel ✓')}catch(e){toast('تعذّر إنشاء الملف')}}
 
 /* ---------- ATTENDANCE ---------- */
 let draft=null;
