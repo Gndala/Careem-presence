@@ -250,6 +250,9 @@ table.tk-t th{background:var(--c1);color:#fff;padding:5px 6px;font-weight:800}
 table.tk-t td{border-bottom:1px solid #e3e7f3;padding:4px 6px;text-align:center}
 table.tk-t tr{page-break-inside:avoid}
 table.tk-t tbody tr:nth-child(even) td{background:var(--soft)}
+.tk.arcpg{display:flex;flex-direction:column}.tk.arcpg .tk-b{flex:1}
+.tk-mini{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--soft);border:1.5px dashed var(--c2);border-radius:14px;padding:6px 14px;font-weight:800;color:var(--c1);margin-bottom:6px}
+table.tk-t.big th.nmc{width:22%}table.tk-t.big td.st{white-space:nowrap;font-size:12px;padding:5px 3px}table.tk-t.big td:nth-child(2){line-height:1.35;padding:5px 6px}table.tk-t.big tbody td{padding-top:5px;padding-bottom:5px}
 table.tk-t.big{font-size:13.5px}table.tk-t.big th,table.tk-t.big td{padding:7px 4px;border:1px solid #cfd6ea}table.tk-t.big td.rd{background:#fde2e5}table.tk-t.big td.am{background:#fff0cf}table.tk-t.big td.gn{background:#e8f8f1}
 .tk-lg{font-size:11.5px;color:#556;margin:2px 0 4px}
 table.tk-t .rd{color:#c0283a;font-weight:900}.tk-t .am{color:#c27a00;font-weight:800}.tk-t .gn{color:#0f8a5f;font-weight:800}
@@ -460,19 +463,42 @@ function arcView(cls,sec){
  return h+foot()}
 function arcGo(n){arcD=addDays(arcD,n);render()}
 
+/* طباعة الأرشيف: تقسيم تلقائي إلى صفحات، كل صفحة بترويسة وعنوان قسم وترقيم */
+function arcCap(){const p=document.createElement('div');p.style.cssText='position:absolute;left:-99999px;top:0;width:194mm;height:281mm';document.body.appendChild(p);const h=p.getBoundingClientRect().height;p.remove();return h}
+function arcMeasure(fn){const m=document.createElement('div');m.style.cssText='position:absolute;left:-99999px;top:0;width:194mm;visibility:hidden';document.body.appendChild(m);try{return fn(m)}finally{m.remove()}}
 function arcHTML(cls,sec,date){
- const d=arcData(cls,sec,date);
- let h=`<div class="tk rep">${tkWm()}${tkHead('أرشيف غياب الشعبة','🗂')}<div class="tk-b">
- <div class="tk-sh"><div><small>الصف</small><b>${esc(cls)}</b></div><div><small>الشعبة</small><b>${esc(sec)}</b></div><div><small>عدد الطلاب</small><b>${d.list.length}</b></div><div><small>التاريخ</small><b style="font-size:13px">${fmtD(date,true)}</b></div></div>`;
- if(!d.rec.length)return h+`<div class="tk-box">لا توجد دروس مسجّلة لهذه الشعبة في هذا اليوم.</div></div>${tkFoot()}</div>`;
- h+=`${tkK([[d.rec.length+'/'+d.L.length,'دروس مسجّلة','',1],[d.teachers.length,'مدرسون حضروا'],[d.tot.stu,'طلاب غائبون','r'],[d.tot.full,'غياب يوم كامل','a']])}
- <h4>الدروس والمدرسون</h4><table class="tk-t big"><thead><tr><th>الدرس</th><th>الوقت</th><th>المدرس</th><th>المادة</th><th>غائب</th><th>مجاز</th></tr></thead><tbody>
- ${d.L.map(q=>q.ses?`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td style="text-align:right;font-weight:700">${esc(q.ses.teacher)}</td><td>${esc(q.ses.subject)}</td><td class="${q.a?'rd':''}">${q.a}</td><td class="${q.e?'am':''}">${q.e}</td></tr>`:`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td colspan="4" style="color:#889">لم يُسجَّل</td></tr>`).join('')}</tbody></table>
- <h4>غيابات الطلاب</h4>`;
- h+=d.rows.length?`<div class="tk-lg">🟥 غائب &nbsp; 🟨 مجاز &nbsp; ✓ حاضر &nbsp; — لم يُسجَّل الدرس</div><table class="tk-t big"><thead><tr><th>#</th><th>اسم الطالب</th>${d.L.map(q=>`<th>${lessonName(q.n)}<br><span style="font-weight:600;font-size:10px">${q.ses?esc(q.ses.teacher):'لم يُسجَّل'}</span></th>`).join('')}<th>غياب</th><th>مجاز</th><th>الحالة</th></tr></thead><tbody>
- ${d.rows.map((r,i)=>`<tr><td>${i+1}</td><td style="text-align:right;font-weight:700">${esc(r.s.name)}</td>${r.m.map(v=>`<td class="${v==='a'?'rd':v==='e'?'am':v==='p'?'gn':''}">${arcCell(v)[0]}</td>`).join('')}<td class="${r.a?'rd':''}">${r.a}</td><td class="${r.e?'am':''}">${r.e}</td><td class="${arcPc(r)}">${arcSt(r)}</td></tr>`).join('')}</tbody></table>`
- :`<div class="tk-box">لا غياب في هذا اليوم — حضور كامل ✓</div>`;
- return h+tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة'])+`</div>${tkFoot()}</div>`}
+ const d=arcData(cls,sec,date),n=d.rows.length,cap=arcCap()*0.96;
+ const card=(body,k,N,minh)=>`<div class="tk rep arcpg"${minh?` style="min-height:${Math.floor(minh)}px"`:''}>${tkWm()}${tkHead('أرشيف غياب الشعبة','🗂')}<div class="tk-b">${body}</div><div class="tk-ft"><span>${SCHOOL}</span><span>صفحة ${k} من ${N}</span><span>تصميم: <b>${DESIGNER}</b></span></div></div>`;
+ const sh=`<div class="tk-sh"><div><small>الصف</small><b>${esc(cls)}</b></div><div><small>الشعبة</small><b>${esc(sec)}</b></div><div><small>عدد الطلاب</small><b>${d.list.length}</b></div><div><small>التاريخ</small><b style="font-size:13px">${fmtD(date,true)}</b></div></div>`;
+ const bar=`<div class="tk-mini"><span>${esc(cls)} — شعبة ${esc(sec)}</span><span>${fmtD(date,true)}</span><span>${d.list.length} طالب</span></div>`;
+ const SIG=tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة']);
+ if(!d.rec.length)return card(sh+`<div class="tk-box">لا توجد دروس مسجّلة لهذه الشعبة في هذا اليوم.</div>`,1,1,cap);
+ const pre=sh+tkK([[d.rec.length+'/'+d.L.length,'دروس مسجّلة','',1],[d.teachers.length,'مدرسون حضروا'],[d.tot.stu,'طلاب غائبون','r'],[d.tot.full,'غياب يوم كامل','a']])+
+ `<h4>الدروس والمدرسون</h4><table class="tk-t big"><thead><tr><th>الدرس</th><th>الوقت</th><th>المدرس</th><th>المادة</th><th>غائب</th><th>مجاز</th></tr></thead><tbody>
+ ${d.L.map(q=>q.ses?`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td style="text-align:right;font-weight:700">${esc(q.ses.teacher)}</td><td>${esc(q.ses.subject)}</td><td class="${q.a?'rd':''}">${q.a}</td><td class="${q.e?'am':''}">${q.e}</td></tr>`:`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td colspan="4" style="color:#889">لم يُسجَّل</td></tr>`).join('')}</tbody></table>`;
+ if(!n)return card(pre+`<h4>غيابات الطلاب</h4><div class="tk-box">لا غياب في هذا اليوم — حضور كامل ✓</div>`+SIG,1,1,cap);
+ const lg='<div class="tk-lg">🟥 غائب &nbsp; 🟨 مجاز &nbsp; ✓ حاضر &nbsp; — لم يُسجَّل الدرس</div>';
+ const mHead=`<tr><th>#</th><th class="nmc">اسم الطالب</th>${d.L.map(q=>`<th>${lessonName(q.n)}<br><span style="font-weight:600;font-size:10px">${q.ses?esc(q.ses.teacher):'لم يُسجَّل'}</span></th>`).join('')}<th>غياب</th><th>مجاز</th><th>الحالة</th></tr>`;
+ const mRow=i=>{const r=d.rows[i];return `<tr><td>${i+1}</td><td style="text-align:right;font-weight:700">${esc(r.s.name)}</td>${r.m.map(v=>`<td class="${v==='a'?'rd':v==='e'?'am':v==='p'?'gn':''}">${arcCell(v)[0]}</td>`).join('')}<td class="${r.a?'rd':''}">${r.a}</td><td class="${r.e?'am':''}">${r.e}</td><td class="st ${arcPc(r)}">${arcSt(r)}</td></tr>`};
+ const mBlock=(ix,cont)=>`<h4>غيابات الطلاب${cont?' (تابع)':''}</h4>${lg}<table class="tk-t big"><thead>${mHead}</thead><tbody>${ix.map(mRow).join('')}</tbody></table>`;
+ const H=el=>el.getBoundingClientRect().height,all=d.rows.map((_,i)=>i);
+ const P1=arcMeasure(m=>{m.innerHTML=card(pre,1,1,0);return H(m.firstElementChild)});
+ const T1=arcMeasure(m=>{m.innerHTML=card(pre+mBlock([],0),1,1,0);return H(m.firstElementChild)})-P1;
+ const S=arcMeasure(m=>{m.innerHTML=card(bar+mBlock([],1),2,2,0);return H(m.firstElementChild)});
+ const hs=arcMeasure(m=>{m.innerHTML=SIG;return H(m.firstElementChild)})+26;
+ const rh=arcMeasure(m=>{m.innerHTML=card(bar+mBlock(all,1),2,2,0);return [...m.querySelectorAll('tbody tr')].map(H)});
+ const pg=[{m:false,rows:[]}];let room=0;
+ const two=rh.slice(0,Math.min(n,4)).reduce((a,b)=>a+b,0);
+ if(cap-P1-T1>=two){pg[0].m=true;room=cap-P1-T1}else{pg.push({m:true,rows:[]});room=cap-S}
+ let cur=pg[pg.length-1];
+ all.forEach(i=>{if(rh[i]>room&&cur.rows.length){cur={m:true,rows:[]};pg.push(cur);room=cap-S}cur.rows.push(i);room-=rh[i]});
+ if(room<hs){if(pg.length===1){const rs=pg[0].rows;pg[0]={m:false,rows:[]};pg.push({m:true,rows:rs})}else{const last=pg[pg.length-1],mv=last.rows.length>2?2:last.rows.length;pg.push({m:true,rows:last.rows.splice(last.rows.length-mv,mv)})}}
+ const N=pg.length;let started=false;
+ return pg.map((p,k)=>{
+  let body=k===0?pre:bar;
+  if(p.m&&p.rows.length){body+=mBlock(p.rows,started);started=true}
+  if(k===N-1)body+=SIG;
+  return card(body,k+1,N,cap)}).join('')}
 
 function arcPrint(cls,sec,pdf){
  const old=document.title,fin=()=>{document.title=old;removeEventListener('afterprint',fin)};
