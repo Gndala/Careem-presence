@@ -88,12 +88,13 @@ input[type=date]{color-scheme:dark}
 .av{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--navy2),#26408f);border:1.5px solid var(--bd);overflow:hidden;flex:none;display:grid;place-items:center;font-weight:900;color:var(--g1);font-size:18px}
 .av img{width:100%;height:100%;object-fit:cover}
 .nm{flex:1;min-width:0}.nm b{display:block;font-weight:700;line-height:1.35}.nm small{color:var(--mut);font-size:12px}
-.acts{display:grid;grid-template-columns:1fr 1fr 54px;gap:8px;margin-top:9px}
+.acts{display:grid;grid-template-columns:1fr 1fr 50px 50px;gap:8px;margin-top:9px}
 .acts button{border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);padding:10px 0;font-weight:800;cursor:pointer;position:relative}
 .acts .bA.on{background:linear-gradient(135deg,#ff7b88,#e0384c);border-color:transparent;color:#fff}
 .acts .bE.on{background:linear-gradient(135deg,#ffcf6b,#f0952a);border-color:transparent;color:#2a1700}
 .acts .bB i{position:absolute;top:-6px;left:-4px;background:var(--g1);color:#2a1c00;border-radius:10px;font-size:11px;font-style:normal;min-width:19px;padding:0 4px;font-weight:900}
 .acts .bB.has{border-color:var(--g1);color:var(--g1)}
+.acts .bW{opacity:.55}.acts .bW.on{opacity:1;background:linear-gradient(135deg,#25d366,#128c7e);border-color:transparent;color:#fff}
 .savebar{position:fixed;bottom:0;left:0;right:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#060b22 35%)}
 .savebar .btn{max-width:732px;display:block;margin:auto}
 /* student rows */
@@ -353,7 +354,14 @@ function startAtt(p){
 function rowH(s,i){
  const m=draft.marks[s.id],b=(draft.beh[s.id]||[]).length+(draft.notes[s.id]?1:0);
  return `<div class="row ${m||''}" id="r_${s.id}"><div class="t"><div class="num">${i+1}</div>${av(s)}<div class="nm"><b>${esc(s.name)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small></div></div>
- <div class="acts"><button class="bA ${m==='a'?'on':''}" onclick="mark('${s.id}','a')">غائب</button><button class="bE ${m==='e'?'on':''}" onclick="mark('${s.id}','e')">مجاز</button><button class="bB ${b?'has':''}" onclick="behSheet('${s.id}')">⚑${b?`<i>${b}</i>`:''}</button></div></div>`}
+ <div class="acts"><button class="bA ${m==='a'?'on':''}" onclick="mark('${s.id}','a')">غائب</button><button class="bE ${m==='e'?'on':''}" onclick="mark('${s.id}','e')">مجاز</button><button class="bB ${b?'has':''}" onclick="behSheet('${s.id}')">⚑${b?`<i>${b}</i>`:''}</button><button class="bW ${m?'on':''}" aria-label="إرسال إلى واتساب" onclick="waOne('${s.id}')">📲</button></div></div>`}
+function waOne(id){
+ const m=draft.marks[id];
+ if(!m){toast('علّم الطالب غائباً أو مجازاً أولاً');return}
+ const s=db.students.find(x=>x.id===id);
+ const t=`*${SCHOOL}*\n${m==='a'?'❌ غياب طالب':'🟡 إجازة طالب'}\n👤 ${s.name}\n${draft.cls} — شعبة ${draft.sec}\n📅 ${fmtD(draft.date,true)}\n${lessonName(draft.lesson)} • ${draft.subject} • الأستاذ ${draft.teacher}`;
+ window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+}
 function vAtt(){
  if(!draft)return vHome();
  const list=studentsOf(draft.cls,draft.sec);
