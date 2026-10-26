@@ -468,7 +468,7 @@ function delStudent(id){askAdmin(()=>confirmBox('حذف الطالب نهائي�
 /* ---------- PRINT DOCS ---------- */
 function infoBlock(s){return `<div class="pp-info"><div class="ph">${s.photo?`<img src="${s.photo}">`:'الصورة'}</div><table><tr><td>اسم الطالب</td><td colspan="3"><b>${esc(s.name)}</b></td></tr><tr><td>الصف</td><td>${esc(s.cls)}</td><td>الشعبة</td><td>${esc(s.sec)}</td></tr><tr><td>رقم القيد</td><td>${esc(s.reg||'—')}</td><td>الصفحة</td><td>${esc(s.page||'—')}</td></tr></table></div>`}
 function pHead(num){return `<div class="pp-head"><img src="${LOGO}"><div class="pp-t"><div class="rg">جمهورية العراق — وزارة التربية</div><div class="a">${SCHOOL}</div><div class="e">${SCHOOL_EN}</div></div><div class="pp-no">${num?`رقم الوصل<b>${num}</b>`:''}التاريخ<br>${fmtD(todayStr())}</div></div>`}
-const pFoot=()=>`<div class="pp-foot"><span>${SCHOOL}</span><span>تصميم: <b>${DESIGNER}</b></span></div>`;
+const pFoot=()=>`<div class="pp-foot" style="justify-content:center"><span>${SCHOOL}</span></div>`;
 function docDialog(id,kind){
  const s=db.students.find(x=>x.id===id);
  if(kind==='report'){return printDoc(reportHTML(s))}
