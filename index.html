@@ -229,7 +229,7 @@ async function idbGet(k){try{const d=await idb();return await new Promise(res=>{
 async function idbPut(k,v){try{const d=await idb();d.transaction('kv','readwrite').objectStore('kv').put(v,k)}catch(e){mem[k]=v}}
 let st_;function save(){clearTimeout(st_);cloud.dirty=true;st_=setTimeout(()=>{cloud.dirty=false;idbPut('db',db);cloudSave();flushDefer()},150)}
 function snapshot(){idbPut('prev',JSON.parse(JSON.stringify(db)))}
-function defDB(){return{v:1,counter:0,code:'123123',wa:{},
+function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,
  students:[],
  structure:{'الرابع العلمي':['أ','ب'],'الرابع الأدبي':['أ'],'الخامس العلمي':['أ','ب'],'الخامس الأدبي':['أ'],'السادس العلمي':['أ','ب'],'السادس الأدبي':['أ']},
  sessions:[],
@@ -242,13 +242,20 @@ const isAdmin=()=>Date.now()<adminUntil;
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
 function openModal(h){const m=$('#modal');m.innerHTML='<div class="sheet">'+h+'</div>';m.classList.add('show')}
 function closeModal(){const m=$('#modal');m.classList.remove('show');m.innerHTML=''}
+async function sha(v){try{if(!(window.crypto&&crypto.subtle))return null;const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('nahj|'+v));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return null}}
+const isHash=c=>/^[0-9a-f]{64}$/.test(c||'');
+async function pinOk(v){
+ if(isHash(db.code))return (await sha(v))===db.code;
+ if(v!==db.code)return false;
+ const h=await sha(v);if(h){db.code=h;save()}
+ return true}
 function askAdmin(cb){
  if(isAdmin())return cb();
  openModal(`<h3>🔐 رمز الإدارة</h3><div style="color:var(--mut);font-size:13px">هذا الإجراء يحتاج إلى الرمز السري.</div>
  <input id="pin" class="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="••••••" style="margin:14px 0">
  <div class="btns"><button class="btn gold" id="pinok">تأكيد</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
  const inp=$('#pin');setTimeout(()=>inp.focus(),80);
- const go_=()=>{if(inp.value===db.code){adminUntil=Date.now()+10*60*1000;closeModal();cb()}else{inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake');inp.value='';toast('الرمز غير صحيح')}};
+ const go_=async()=>{if(await pinOk(inp.value)){adminUntil=Date.now()+10*60*1000;closeModal();cb()}else{inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake');inp.value='';toast('الرمز غير صحيح')}};
  $('#pinok').onclick=go_;inp.onkeydown=e=>{if(e.key==='Enter')go_()};
 }
 function confirmBox(msg,cb,label='تأكيد'){openModal(`<h3>تنبيه</h3><p>${msg}</p><div class="btns"><button class="btn red" id="cfok">${label}</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);$('#cfok').onclick=()=>{closeModal();cb()}}
@@ -259,19 +266,19 @@ const av=s=>`<div class="av">${s.photo?`<img src="${s.photo}" alt="">`:esc(initi
 
 /* ---------- statistics ---------- */
 function stats(s){
- const ss=db.sessions.filter(x=>x.cls===s.cls&&x.sec===s.sec),byD={};
+ const fd=db.fd||1,ss=db.sessions.filter(x=>(x.cls===s.cls&&x.sec===s.sec)||(x.marks&&x.marks[s.id])||(x.beh&&x.beh[s.id])||(x.notes&&x.notes[s.id])),byD={};
  ss.forEach(x=>(byD[x.date]=byD[x.date]||[]).push(x));
  const r={fullAbs:0,fullExc:0,partAbs:0,partExc:0,absL:0,excL:0,days:0,log:[],behLog:[],neg:0,pos:0,beh:{}};
  Object.keys(byD).sort().forEach(d=>{
   const L=byD[d].sort((a,b)=>a.lesson-b.lesson);r.days++;
   const a=L.filter(x=>x.marks[s.id]==='a').length,e=L.filter(x=>x.marks[s.id]==='e').length;
-  if(a===L.length)r.fullAbs++;else if(e===L.length)r.fullExc++;else{r.partAbs+=a;r.partExc+=e}
+  if(a===L.length&&L.length>=fd)r.fullAbs++;else if(e===L.length&&L.length>=fd)r.fullExc++;else{r.partAbs+=a;r.partExc+=e}
   r.absL+=a;r.excL+=e;
   L.forEach(x=>{
    const m=x.marks[s.id];if(m)r.log.push({date:d,lesson:x.lesson,subject:x.subject,teacher:x.teacher,st:m});
    const b=(x.beh&&x.beh[s.id])||[],nt=(x.notes&&x.notes[s.id])||'';
    if(b.length||nt){r.behLog.push({date:d,lesson:x.lesson,subject:x.subject,teacher:x.teacher,tags:b,note:nt});
-    b.forEach(t=>{r.beh[t]=(r.beh[t]||0)+1;const k=(db.behaviors.find(z=>z.n===t)||{}).k;if(k==='pos')r.pos++;else r.neg++})}
+    b.forEach(t=>{r.beh[t]=(r.beh[t]||0)+1;const bo=db.behaviors.find(z=>z.n===t);if(bo){if(bo.k==='pos')r.pos++;else r.neg++}})}
   });
  });
  return r;
@@ -320,7 +327,7 @@ function vSec(p){
  <div class="tabs"><button class="${tab==='att'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'att'})},false)">تسجيل الحضور</button><button class="${tab==='stu'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'stu'})},false)">الطلاب والتقارير</button></div>`;
  if(tab==='att'){
   const teachers=[...new Set(db.sessions.map(x=>x.teacher))],subs=[...new Set(db.sessions.map(x=>x.subject))];
-  h+=`<div class="card"><label style="margin-top:0">تاريخ اليوم</label><input type="date" value="${sel.date}" onchange="sel.date=this.value;sel.lesson=null;render()">
+  h+=`<div class="card"><label style="margin-top:0">تاريخ اليوم</label><input type="date" max="${todayStr()}" value="${sel.date}" onchange="sel.date=this.value;sel.lesson=null;render()">
   <label>اختر الدرس</label><div class="ls">`+db.lessons.map((l,i)=>{const n=i+1,done=db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,n));
    return `<div class="l ${sel.lesson===n?'on':''} ${done?'done':''}" onclick="pickLesson(${n},${J({cls,sec})})"><b>${lessonName(n)}</b><small>${esc(l.t)}</small></div>`}).join('')+`</div></div>`;
   if(sel.lesson){
@@ -376,7 +383,7 @@ function cnt(){if(!draft)return;const n=studentsOf(draft.cls,draft.sec).length,v
 function mark(id,t){if(draft.marks[id]===t)delete draft.marks[id];else draft.marks[id]=t;updRow(id);cnt()}
 function updRow(id){const s=db.students.find(x=>x.id===id),el=$('#r_'+id);if(!el)return;const i=studentsOf(draft.cls,draft.sec).findIndex(x=>x.id===id);el.outerHTML=rowH(s,i)}
 function clearMarks(){confirmBox('إلغاء علامات الغياب والإجازة لجميع الطلاب؟',()=>{draft.marks={};render()})}
-function leaveAtt(){confirmBox('الخروج دون حفظ؟ ستضيع التغييرات الحالية.',()=>{const p={cls:draft.cls,sec:draft.sec};draft=null;history.back()},'خروج')}
+function leaveAtt(){confirmBox('الخروج دون حفظ؟ ستضيع التغييرات الحالية.',()=>{draft=null;history.back()},'خروج')}
 function saveAtt(){
  const i=db.sessions.findIndex(x=>x.id===draft.id);
  if(i>=0)db.sessions[i]=draft;else db.sessions.push(draft);
@@ -402,7 +409,7 @@ function vStu(p){
  const x=stats(s);
  let h=`<div class="top"><button class="back" onclick="history.back()">→</button><div><h2>ملف الطالب</h2></div></div>
  <div class="card"><div class="prof"><div class="ph">${s.photo?`<img src="${s.photo}">`:esc(initial(s.name))}</div><div><h2>${esc(s.name)}</h2><p>${esc(s.cls)} — شعبة ${esc(s.sec)}</p><p>رقم القيد: <b>${esc(s.reg||'—')}</b> • الصفحة: <b>${esc(s.page||'—')}</b></p></div></div></div>
- <div class="kp"><div class="k r"><b>${x.fullAbs}</b><span>غياب يوم كامل</span></div><div class="k a"><b>${x.partAbs}</b><span>غياب دروس (في أيام حضر فيها)</span></div><div class="k y"><b>${x.fullExc+x.excL?x.excL:0}</b><span>دروس مجازة</span></div><div class="k g"><b>${x.days}</b><span>أيام مسجّلة</span></div></div>
+ <div class="kp"><div class="k r"><b>${x.fullAbs}</b><span>غياب يوم كامل</span></div><div class="k a"><b>${x.partAbs}</b><span>غياب دروس (في أيام حضر فيها)</span></div><div class="k y"><b>${x.excL}</b><span>دروس مجازة</span></div><div class="k g"><b>${x.days}</b><span>أيام مسجّلة</span></div></div>
  <div class="card"><h3>السلوك</h3>${Object.keys(x.beh).length?'<div class="chips">'+Object.entries(x.beh).map(([t,n])=>{const k=(db.behaviors.find(z=>z.n===t)||{}).k;return `<span class="b ${k==='pos'?'g':'r'}" style="font-size:13px;padding:4px 12px">${esc(t)} × ${n}</span>`}).join('')+'</div>':'<div class="empty" style="padding:6px">لا توجد سلوكيات مسجّلة</div>'}</div>
  <div class="card"><h3>سجل الغياب والإجازات</h3>${x.log.length?`<table class="t"><tr><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>الحالة</th></tr>`+x.log.slice().reverse().map(r=>`<tr><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td><span class="b ${r.st==='a'?'r':'a'}">${r.st==='a'?'غائب':'مجاز'}</span></td></tr>`).join('')+'</table>':'<div class="empty" style="padding:6px">لا يوجد غياب مسجّل ✓</div>'}</div>
  <div class="card"><h3>طباعة</h3><div class="btns"><button class="btn gold" onclick="docDialog('${s.id}','report')">📄 تقرير مفصّل PDF</button><button class="btn red" onclick="docDialog('${s.id}','warn')">⚠️ وصل إنذار</button><button class="btn blue" onclick="docDialog('${s.id}','pledge')">✍️ وصل تعهد</button></div></div>
@@ -451,6 +458,7 @@ function setPh(d){tmpPhoto=d;$('#edph').innerHTML=d?`<img src="${d}">`:'لا ت�
 function saveStudent(id){
  const name=$('#eN').value.trim(),cls=$('#eC').value.trim(),sec=$('#eS').value.trim();
  if(!name||!cls||!sec){toast('الاسم والصف والشعبة مطلوبة');return}
+ if(/[|\/]/.test(cls+sec)){toast('لا تستخدم الرمزين | أو / في الصف والشعبة');return}
  const o={name,reg:$('#eR').value.trim(),page:$('#eP').value.trim(),cls,sec,photo:tmpPhoto};
  if(id){Object.assign(db.students.find(x=>x.id===id),o)}else db.students.push({id:uid(),...o});
  ensureStruct(cls,sec);save();closeModal();toast('تم الحفظ ✓');render();
@@ -623,7 +631,7 @@ function vAdmin(){
  <details class="card" open><summary>📥 استيراد الأسماء من Excel</summary>
   <p style="color:var(--mut);font-size:13px;margin:0 0 10px">يقرأ الأعمدة: الاسم، القيد، الصفحة، الصف، الشعبة (إن وُجدت)، ويرتّب الأسماء أبجدياً تلقائياً.</p>
   <div class="btns"><button class="btn gold" onclick="pickXlsx()">اختر ملف Excel</button><button class="btn" onclick="editStudent(null)">＋ إضافة طالب</button></div></details>
- <details class="card"><summary>⏱ أوقات الدروس</summary>${db.lessons.map((l,i)=>`<div class="lt"><span>${lessonName(i+1)}</span><input value="${esc(l.t)}" onchange="db.lessons[${i}].t=this.value;save()"></div>`).join('')}
+ <details class="card"><summary>⏱ أوقات الدروس</summary><label style="margin-top:0">أقل عدد دروس مسجّلة ليُحسب الغياب «يوم كامل»</label><input type="number" min="1" inputmode="numeric" value="${db.fd||1}" onchange="db.fd=Math.max(1,parseInt(this.value)||1);save();toast('تم الحفظ ✓')"><small style="color:var(--mut);display:block;margin:4px 0 10px">مثال: اجعلها 7 إن كان اليوم الكامل 7 دروس، فلا يُحسب غياب درس واحد يوماً كاملاً.</small>${db.lessons.map((l,i)=>`<div class="lt"><span>${lessonName(i+1)}</span><input value="${esc(l.t)}" onchange="db.lessons[${i}].t=this.value;save()"></div>`).join('')}
   <div class="btns"><button class="btn sm" onclick="db.lessons.push({t:''});save();render()">＋ درس</button><button class="btn sm" onclick="if(db.lessons.length>1){db.lessons.pop();save();render()}">حذف الأخير</button></div></details>
  <details class="card"><summary>🏫 الصفوف والشعب</summary>${struct}<div class="two" style="margin-top:10px"><input id="nc" placeholder="اسم صف جديد"><button class="btn gold" onclick="addCls()">إضافة صف</button></div></details>
  <details class="card"><summary>⚑ قائمة السلوكيات</summary><div class="chips">${db.behaviors.map((b,i)=>`<span class="chip ${b.k} on">${esc(b.n)}<b onclick="db.behaviors.splice(${i},1);save();render()" style="color:inherit">×</b></span>`).join('')}</div>
@@ -631,16 +639,19 @@ function vAdmin(){
  <details class="card"><summary>📲 مجموعات واتساب</summary><p style="color:var(--mut);font-size:13px;margin:0 0 6px">ألصق رابط دعوة مجموعة كل صف (يبدأ بـ chat.whatsapp.com). اتركه فارغاً إن لم تريد ربط الصف.</p>${Object.keys(db.structure).map(c=>`<label>${esc(c)}</label><input dir="ltr" placeholder="https://chat.whatsapp.com/..." value="${esc((db.wa||{})[c]||'')}" onchange="setWa(${J(c)},this.value)">`).join('')}</details>
  <details class="card"><summary>♻️ النسخ الاحتياطي والاسترداد</summary>
   <div class="btns"><button class="btn gold" onclick="exportDB()">⬇ تنزيل نسخة احتياطية</button><button class="btn" onclick="importDB()">⬆ استرداد من ملف</button><button class="btn" onclick="restorePrev()">↩ استرداد آخر حالة تلقائية</button></div>
-  <p style="color:var(--mut);font-size:12px">تُحفظ البيانات على هذا الجهاز. نزّل نسخة احتياطية بشكل دوري.</p></details>
+  <p style="color:var(--mut);font-size:12px">تُحفظ البيانات على الجهاز وتُزامَن مع السحابة عند توفر الاتصال. نزّل نسخة احتياطية بشكل دوري.</p></details>
  <details class="card"><summary>🔑 الرمز السري</summary><label style="margin-top:0">رمز جديد</label><input id="npin" type="password" inputmode="numeric" placeholder="6 أرقام أو أكثر"><button class="btn gold full" style="margin-top:8px" onclick="chPin()">تغيير الرمز</button></details>
  <details class="card"><summary style="color:var(--red)">⚠️ حذف البيانات</summary><div class="btns"><button class="btn" onclick="wipe('sessions')">حذف سجلات الحضور</button><button class="btn" onclick="wipe('students')">حذف كل الطلاب</button></div></details>${foot()}`;
 }
-function addCls(){const v=$('#nc').value.trim();if(!v)return;ensureStruct(v,'أ');save();render()}
-function addSec(c){openModal(`<h3>شعبة جديدة في ${esc(c)}</h3><input id="nsec" placeholder="مثال: ج"><div class="btns" style="margin-top:12px"><button class="btn gold" onclick="const v=$('#nsec').value.trim();if(v){ensureStruct(${J(c)},v);save();closeModal();render()}">إضافة</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
+function addCls(){const v=$('#nc').value.trim();if(!v)return;if(/[|\/]/.test(v)){toast('لا تستخدم الرمزين | أو / في الأسماء');return}ensureStruct(v,'أ');save();render()}
+function addSec(c){openModal(`<h3>شعبة جديدة في ${esc(c)}</h3><input id="nsec" placeholder="مثال: ج"><div class="btns" style="margin-top:12px"><button class="btn gold" onclick="const v=$('#nsec').value.trim();if(v&&/[|\/]/.test(v)){toast('لا تستخدم الرمزين | أو /')}else if(v){ensureStruct(${J(c)},v);save();closeModal();render()}">إضافة</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
 function delSec([c,s]){if(db.students.some(x=>x.cls===c&&x.sec===s)){toast('لا يمكن حذف شعبة فيها طلاب');return}db.structure[c]=db.structure[c].filter(x=>x!==s);if(!db.structure[c].length&&!db.students.some(x=>x.cls===c))delete db.structure[c];save();render()}
 function addBeh(){const v=$('#nb').value.trim();if(!v)return;db.behaviors.push({n:v,k:$('#nk').value});save();render()}
-function chPin(){const v=$('#npin').value.trim();if(v.length<4){toast('الرمز قصير جداً');return}db.code=v;save();toast('تم تغيير الرمز ✓');$('#npin').value=''}
-function wipe(w){askAdmin(()=>confirmBox(w==='sessions'?'حذف جميع سجلات الحضور والغياب؟':'حذف جميع الطلاب وسجلاتهم؟',()=>{snapshot();if(w==='sessions')db.sessions=[];else{db.students=[];db.sessions=[]}save();toast('تم الحذف — يمكن الاسترداد من الحالة التلقائية');render()},'حذف'))}
+async function chPin(){const v=$('#npin').value.trim();if(v.length<4){toast('الرمز قصير جداً');return}db.code=(await sha(v))||v;save();toast('تم تغيير الرمز ✓');$('#npin').value=''}
+function wipe(w){askAdmin(()=>{
+ openModal(`<h3>⚠️ تأكيد الحذف</h3><p>${w==='sessions'?'سيُحذف كل سجل الحضور والغياب':'سيُحذف كل الطلاب وسجلاتهم'} <b>من كل الأجهزة</b> لأن البيانات متزامنة. نزّل نسخة احتياطية أولاً.</p><label>اكتب كلمة «حذف» للتأكيد</label><input id="wcf" autocomplete="off"><div class="btns" style="margin-top:14px"><button class="btn red" id="wok">حذف نهائي</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
+ $('#wok').onclick=()=>{if($('#wcf').value.trim()!=='حذف'){toast('اكتب كلمة حذف للتأكيد');return}snapshot();if(w==='sessions')db.sessions=[];else{db.students=[];db.sessions=[]}save();closeModal();toast('تم الحذف');render()}
+})}
 function exportDB(){const b=new Blob([JSON.stringify(db)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='nahj-attendance-backup-'+todayStr()+'.json';a.click()}
 function importDB(){askAdmin(()=>{const i=document.createElement('input');i.type='file';i.accept='.json,application/json';i.onchange=async()=>{try{const o=JSON.parse(await i.files[0].text());if(!Array.isArray(o.students)||!o.structure)throw 0;confirmBox('سيتم استبدال البيانات الحالية بالنسخة المحددة. المتابعة؟',()=>{snapshot();db=Object.assign(defDB(),o);save();toast('تم الاسترداد ✓');render()},'استرداد')}catch(e){toast('الملف غير صالح')}};i.click()})}
 async function restorePrev(){askAdmin(async()=>{const p=await idbGet('prev');if(!p){toast('لا توجد حالة سابقة');return}confirmBox('استرداد الحالة التلقائية السابقة؟',()=>{const cur=JSON.parse(JSON.stringify(db));db=Object.assign(defDB(),p);idbPut('prev',cur);save();toast('تم الاسترداد ✓');render()},'استرداد')})}
@@ -684,7 +695,7 @@ function parseSheets(wb){
   const tc=$('#iC')?.value.trim()||'',ts=$('#iS')?.value.trim()||'';
   if(need&&(!tc||!ts)&&all.some(x=>(!x.cls&&!tc)||(!x.sec&&!ts))){toast('حدّد الصف والشعبة');return}
   snapshot();let add=0,upd=0;
-  all.forEach(x=>{const cls=x.cls||tc,sec=x.sec||ts;
+  all.forEach(x=>{const cls=(x.cls||tc).replace(/[|\/]/g,'-'),sec=(x.sec||ts).replace(/[|\/]/g,'-');
    const d=db.students.find(s=>s.cls===cls&&s.sec===sec&&norm(s.name)===norm(x.name));
    if(d){if(x.reg)d.reg=x.reg;if(x.page)d.page=x.page;upd++}else{db.students.push({id:uid(),name:x.name,reg:x.reg,page:x.page,cls,sec,photo:''});add++}
    ensureStruct(cls,sec)});
@@ -700,7 +711,7 @@ let FS=null;
 const stab=o=>{if(o===null||typeof o!=='object')return JSON.stringify(o);if(Array.isArray(o))return'['+o.map(stab).join(',')+']';return'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+stab(o[k])).join(',')+'}'};
 const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||''});
 const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo;
-const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},v:db.v||1});
+const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,v:db.v||1});
 /* الجلسات تُخزَّن في مستند لكل (صف+شعبة+شهر) لتقليل عدد القراءات */
 const sparts=id=>{const p=id.split('|'),m=p[0].slice(0,7);return{doc:(p[1]+'|'+p[2]+'|'+m).replace(/\//g,'_'),key:p[0]+'_'+p[3],cls:p[1],sec:p[2],month:m}};
 
@@ -734,7 +745,7 @@ function cloudSave(){
  Object.entries(up).forEach(([did,u])=>{
   const ref=FS.collection('sessions').doc(did),keys=Object.keys(u.sets);
   if(keys.length)ops.push(b=>b.set(ref,{cls:u.p.cls,sec:u.p.sec,month:u.p.month,lessons:u.sets},{mergeFields:['cls','sec','month',...keys.map(k=>new FP('lessons',k))]}));
-  if(u.dels.length)ops.push(b=>{const a=[];u.dels.forEach(k=>a.push(new FP('lessons',k),FV.delete()));b.update(ref,...a)});
+  if(u.dels.length)ops.push(b=>{const o={};u.dels.forEach(k=>{o[k]=FV.delete()});b.set(ref,{lessons:o},{merge:true})});
  });
  const c=cfgObj();if(stab(c)!==cloud.cfg)ops.push(b=>b.set(FS.collection('meta').doc('config'),c));
  for(let i=0;i<ops.length;i+=200){const b=FS.batch();ops.slice(i,i+200).forEach(f=>f(b));b.commit().catch(cloudErr)}
@@ -779,11 +790,11 @@ function startListeners(){
  FS.collection('meta').doc('config').onSnapshot({includeMetadataChanges:true},d=>{
   cloud.err=false;cloud.pend.cfg=d.metadata.hasPendingWrites;cbadge();
   if(!d.exists){if(!d.metadata.fromCache&&!cloud.mig){cloud.mig=true;migrate()}return}
-  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},v:c.v||1});
+  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,v:c.v||1});
   if(j===cloud.cfg)return;
   whenClean('cfg',()=>{
    if(Array.isArray(c.structure)){db.structure={};c.structure.forEach(x=>{db.structure[x.c]=x.s||[]})}
-   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};
+   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;
    cloud.cfg=j;softRender()});
  },cloudErr);
  FS.collection('meta').doc('counter').onSnapshot(d=>{if(d.exists&&db)db.counter=Math.max(db.counter||0,d.data().n||0)},()=>{});
