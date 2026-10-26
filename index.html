@@ -7,6 +7,7 @@
 <title>نظام الحضور والغياب — ثانوية نهج البلاغة الأهلية للبنين</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -66,7 +67,7 @@ input[type=date]{color-scheme:dark}
 .top h2{margin:0;font-size:19px;font-weight:800}.top small{color:var(--mut)}
 .back{width:42px;height:42px;border-radius:14px;border:1px solid var(--bd);background:var(--card);font-size:20px;cursor:pointer;flex:none}
 .tabs{display:flex;background:rgba(255,255,255,.07);border-radius:16px;padding:4px;margin:10px 0}
-.tabs button{flex:1;border:0;background:none;padding:10px 3px;font-size:13px;border-radius:12px;font-weight:700;cursor:pointer;color:var(--mut)}
+.tabs button{flex:1;border:0;background:none;padding:10px;border-radius:12px;font-weight:700;cursor:pointer;color:var(--mut)}
 .tabs button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:#2a1c00}
 /* lessons */
 .ls{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
@@ -87,14 +88,12 @@ input[type=date]{color-scheme:dark}
 .av{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--navy2),#26408f);border:1.5px solid var(--bd);overflow:hidden;flex:none;display:grid;place-items:center;font-weight:900;color:var(--g1);font-size:18px}
 .av img{width:100%;height:100%;object-fit:cover}
 .nm{flex:1;min-width:0}.nm b{display:block;font-weight:700;line-height:1.35}.nm small{color:var(--mut);font-size:12px}
-.acts{display:grid;grid-template-columns:1fr 1fr 50px 50px;gap:8px;margin-top:9px}
+.acts{display:grid;grid-template-columns:1fr 1fr 54px;gap:8px;margin-top:9px}
 .acts button{border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);padding:10px 0;font-weight:800;cursor:pointer;position:relative}
 .acts .bA.on{background:linear-gradient(135deg,#ff7b88,#e0384c);border-color:transparent;color:#fff}
 .acts .bE.on{background:linear-gradient(135deg,#ffcf6b,#f0952a);border-color:transparent;color:#2a1700}
 .acts .bB i{position:absolute;top:-6px;left:-4px;background:var(--g1);color:#2a1c00;border-radius:10px;font-size:11px;font-style:normal;min-width:19px;padding:0 4px;font-weight:900}
 .acts .bB.has{border-color:var(--g1);color:var(--g1)}
-.acts .bW.has{border-color:#25D366;background:#25D36624}
-.acts .bW:not(.has){opacity:.55}
 .savebar{position:fixed;bottom:0;left:0;right:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#060b22 35%)}
 .savebar .btn{max-width:732px;display:block;margin:auto}
 /* student rows */
@@ -147,24 +146,6 @@ details.card summary{cursor:pointer;font-weight:800;color:var(--g1);font-size:16
 details.card[open] summary{margin-bottom:10px}
 .lt{display:flex;gap:8px;align-items:center;margin:6px 0}.lt span{width:80px;font-weight:700;flex:none}
 #syncb{position:fixed;top:6px;left:8px;z-index:40;font-size:11px;font-weight:700;padding:2px 9px;border-radius:12px;background:#0a1438cc;border:1px solid var(--bd);color:var(--mut);pointer-events:none}#syncb.ok{color:var(--grn)}#syncb.w{color:var(--amb)}#syncb.e{color:var(--red)}
-/* ===== ARCHIVE ===== */
-.arck{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
-.arck div{background:var(--card);border:1px solid var(--bd);border-radius:14px;text-align:center;padding:8px 2px}
-.arck b{display:block;font-size:22px;line-height:1.3}.arck span{font-size:11px;color:var(--mut)}
-.arck .r b{color:var(--red)}.arck .a b{color:var(--amb)}.arck .g b{color:var(--grn)}
-.arcl{font-size:12px;color:var(--mut);margin:2px 0 4px}
-.arcw{overflow-x:auto;border-radius:14px;border:1px solid var(--bd);margin:6px 0 12px}
-table.at{width:100%;border-collapse:collapse;font-size:15px}
-table.at th{background:#13245f;color:var(--g1);padding:10px 8px;font-size:14px;font-weight:800;white-space:nowrap;line-height:1.5;border:1px solid #ffffff1a}
-table.at th small{display:block;font-weight:600;color:var(--mut);font-size:11px}
-table.at td{border:1px solid #ffffff1a;padding:11px 8px;text-align:center;min-width:66px}
-table.at td.ar{background:#ff5a6a30}table.at td.ae{background:#ffb43a30}
-table.at th.nm,table.at td.nm{position:sticky;right:0;z-index:1}table.at th.nm{background:#13245f;z-index:2}table.at td.nm{background:#101b4a}
-table.at td.nm{text-align:right;font-weight:700;min-width:130px}
-table.at .ar{color:var(--red);font-weight:900}.at .ae{color:var(--amb);font-weight:900}.at .ap{color:var(--grn)}.at .az{color:var(--mut)}
-.dchips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px}
-.dchips button{flex:none;border:1px solid var(--bd);background:var(--card);color:var(--ink);border-radius:20px;padding:5px 12px;font-weight:700;font-size:12px;cursor:pointer}
-.dchips button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:#2a1c00;border-color:transparent}
 /* ================= PRINT PAPER ================= */
 #printArea{display:none}
 @page{size:A4;margin:8mm}
@@ -210,66 +191,6 @@ table.pp-t2 tr:nth-child(even) td{background:#fbf7e8}
 .pp-tear{border-top:2px dashed #666;margin-top:18px;padding-top:10px;position:relative}
 .pp-tear:before{content:"✂";position:absolute;top:-13px;right:14px;background:#fff;padding:0 6px;font-size:16px}
 .pp-line{display:inline-block;min-width:130px;border-bottom:1.5px dotted #0b1a4a;text-align:center;font-weight:800}
-/* ===== TICKET DOCS ===== */
-.tk,.tk *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box}
-.tk{--c1:#0b1a4a;--c2:#1b3a9a;--ac:#d4a62a;--soft:#f3f6ff;font-family:'Cairo',sans-serif;direction:rtl;color:#0b1a4a;background:#fff;border:2px solid var(--c1);border-radius:24px;position:relative;font-size:13px;line-height:1.7;page-break-after:always}
-.tk:last-child{page-break-after:auto}
-.tk.warn{--c1:#7e1220;--c2:#c0283a;--ac:#f0b429;--soft:#fff4f4}
-.tk.pledge{--c1:#0b3a6e;--c2:#1f7ac0;--ac:#e0b43a;--soft:#f0f7ff}
-.tk.leave{--c1:#0b5a44;--c2:#16a379;--ac:#e0b43a;--soft:#effaf5}
-.tk .wm{position:absolute;left:50%;top:50%;width:320px;height:320px;transform:translate(-50%,-50%);opacity:.05;object-fit:contain;pointer-events:none}
-.tk-h{display:flex;align-items:center;gap:12px;padding:14px 18px 16px;background:linear-gradient(120deg,var(--c1),var(--c2));color:#fff;position:relative;border-radius:21px 21px 0 0}
-.tk-h:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:repeating-linear-gradient(90deg,var(--ac) 0 14px,transparent 14px 20px)}
-.tk-h .lg{width:70px;height:70px;object-fit:contain;background:#fff;border-radius:50%;padding:4px;border:3px solid var(--ac);flex:none}
-.tk-h .tt{flex:1;text-align:center}.tk-h .tt small{display:block;font-size:11px;opacity:.85}.tk-h .tt b{display:block;font-size:20px;font-weight:900;color:#fff}.tk-h .tt i{font-style:normal;font-size:11px;letter-spacing:.8px;color:var(--ac);font-weight:700}
-.tk-h .tb{min-width:100px;text-align:center;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);border-radius:16px;padding:5px 8px;flex:none}
-.tk-h .tb span{font-size:22px;display:block;line-height:1.2}.tk-h .tb b{display:block;font-size:14px;font-weight:900;color:var(--ac)}.tk-h .tb em{display:block;font-style:normal;font-size:10.5px;opacity:.92}
-.tk-b{padding:14px 18px;position:relative}
-.tk-s{display:flex;gap:14px;align-items:center;background:var(--soft);border:1.5px dashed var(--c2);border-radius:20px;padding:10px 12px}
-.tk-s .ph{width:96px;height:120px;border-radius:16px;overflow:hidden;border:3px solid var(--c1);background:#fff;display:grid;place-items:center;color:#9aa;font-size:11px;flex:none;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--ac)}
-.tk-s .ph img{width:100%;height:100%;object-fit:cover}
-.tk-s .in{flex:1}.tk-s h2{margin:0 0 6px;font-size:21px;font-weight:900;color:var(--c1)}
-.tk-s .g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.tk-s .g div{background:#fff;border-radius:12px;border:1px solid #dde2f0;padding:3px 6px;text-align:center}
-.tk-s .g small{display:block;font-size:10.5px;color:#667}.tk-s .g b{font-size:14px;color:var(--c1)}
-.tk-s .bc{height:24px;margin-top:8px;background:repeating-linear-gradient(90deg,var(--c1) 0 2px,transparent 2px 4px,var(--c1) 4px 5px,transparent 5px 8px,var(--c1) 8px 11px,transparent 11px 13px);border-radius:2px;opacity:.85}
-.tk-per{margin:8px 0 0;font-size:12px;color:#556;text-align:center}
-.tk-k{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0;position:relative}
-.tk-k div{background:var(--soft);border-radius:16px;text-align:center;padding:6px 3px;border:1.5px solid #e1e6f5}
-.tk-k b{display:block;font-size:24px;font-weight:900;line-height:1.2;color:var(--c1)}.tk-k span{font-size:11px;color:#556}
-.tk-k .r b{color:#c0283a}.tk-k .a b{color:#c27a00}.tk-k .g b{color:#0f8a5f}
-.tk-sh{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--soft);border:1.5px dashed var(--c2);border-radius:18px;padding:10px}
-.tk-sh div{background:#fff;border-radius:12px;border:1px solid #dde2f0;text-align:center;padding:4px}.tk-sh small{display:block;font-size:10.5px;color:#667}.tk-sh b{font-size:16px;color:var(--c1)}
-.tk h4{margin:14px 0 6px;font-size:14px;font-weight:900;color:var(--c1);display:flex;align-items:center;gap:8px;position:relative}
-.tk h4:before{content:"";width:6px;height:18px;border-radius:4px;background:linear-gradient(var(--c2),var(--ac))}
-.tk-chip{display:inline-block;padding:1px 12px;border-radius:20px;border:1.5px solid;margin:2px;font-weight:700;font-size:12px}
-.tk-chip.neg{color:#c0283a;border-color:#c0283a;background:#fff4f4}.tk-chip.pos{color:#0f8a5f;border-color:#0f8a5f;background:#effaf5}
-table.tk-t{width:100%;border-collapse:collapse;font-size:12px;position:relative}
-table.tk-t thead{display:table-header-group}
-table.tk-t th{background:var(--c1);color:#fff;padding:5px 6px;font-weight:800}
-table.tk-t td{border-bottom:1px solid #e3e7f3;padding:4px 6px;text-align:center}
-table.tk-t tr{page-break-inside:avoid}
-table.tk-t tbody tr:nth-child(even) td{background:var(--soft)}
-.tk.arcpg{display:flex;flex-direction:column}.tk.arcpg .tk-b{flex:1}
-.tk-mini{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--soft);border:1.5px dashed var(--c2);border-radius:14px;padding:6px 14px;font-weight:800;color:var(--c1);margin-bottom:6px}
-table.tk-t.big th.nmc{width:22%}table.tk-t.big td.st{white-space:nowrap;font-size:12px;padding:5px 3px}table.tk-t.big td:nth-child(2){line-height:1.35;padding:5px 6px}table.tk-t.big tbody td{padding-top:5px;padding-bottom:5px}
-table.tk-t.big{font-size:13.5px}table.tk-t.big th,table.tk-t.big td{padding:7px 4px;border:1px solid #cfd6ea}table.tk-t.big td.rd{background:#fde2e5}table.tk-t.big td.am{background:#fff0cf}table.tk-t.big td.gn{background:#e8f8f1}
-.tk-lg{font-size:11.5px;color:#556;margin:2px 0 4px}
-table.tk-t .rd{color:#c0283a;font-weight:900}.tk-t .am{color:#c27a00;font-weight:800}.tk-t .gn{color:#0f8a5f;font-weight:800}
-table.tk-t tr.tot td{background:var(--c1)!important;color:#fff;font-weight:900}
-.tk-c{text-align:center;margin:12px 0 4px}
-.tk-lv{display:inline-block;background:linear-gradient(120deg,var(--c1),var(--c2));color:#fff;font-weight:900;font-size:20px;padding:3px 38px;border-radius:30px;border:2.5px solid var(--ac)}
-.tk-box{background:var(--soft);border:1.5px solid var(--c2);border-radius:18px;padding:10px 16px;font-size:14px;line-height:2;margin:10px 0;position:relative}
-.tk-sig{display:flex;gap:12px;margin-top:22px;position:relative}.tk-sig div{flex:1;text-align:center;border-top:1.5px dashed var(--c1);padding-top:4px;font-weight:700;font-size:12.5px}
-.tk-pf{position:relative;border-top:2.5px dashed var(--c2);margin:20px -20px 0}
-.tk-pf:before,.tk-pf:after{content:"";position:absolute;top:-14px;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--c1);border-top-color:transparent;border-right-color:transparent;transform:rotate(45deg)}
-.tk-pf:before{right:-15px}
-.tk-pf:after{left:-15px;border-top-color:var(--c1);border-right-color:var(--c1);border-left-color:transparent;border-bottom-color:transparent;transform:rotate(45deg)}
-.tk-stub{padding-top:10px;font-size:13px;line-height:2.1;position:relative}
-.tk-ln{display:inline-block;min-width:130px;border-bottom:1.5px dotted var(--c1);text-align:center;font-weight:800}
-.tk-ft{display:flex;justify-content:space-between;padding:8px 18px;background:var(--soft);border-top:1.5px solid #e1e6f5;border-radius:0 0 21px 21px;font-size:11px;color:#556;position:relative}
-.tk-ft b{color:var(--c1)}
-.chk{display:flex;gap:10px;align-items:center;margin:12px 0 4px;font-weight:700;cursor:pointer}.chk input{width:20px;height:20px;margin:0;flex:none}
 </style>
 </head>
 <body>
@@ -307,7 +228,7 @@ async function idbGet(k){try{const d=await idb();return await new Promise(res=>{
 async function idbPut(k,v){try{const d=await idb();d.transaction('kv','readwrite').objectStore('kv').put(v,k)}catch(e){mem[k]=v}}
 let st_;function save(){clearTimeout(st_);cloud.dirty=true;st_=setTimeout(()=>{cloud.dirty=false;idbPut('db',db);cloudSave();flushDefer()},150)}
 function snapshot(){idbPut('prev',JSON.parse(JSON.stringify(db)))}
-function defDB(){return{v:1,counter:0,code:'123123',
+function defDB(){return{v:1,counter:0,code:'123123',wa:{},
  students:[],
  structure:{'الرابع العلمي':['أ','ب'],'الرابع الأدبي':['أ'],'الخامس العلمي':['أ','ب'],'الخامس الأدبي':['أ'],'السادس العلمي':['أ','ب'],'السادس الأدبي':['أ']},
  sessions:[],
@@ -336,8 +257,8 @@ const initial=n=>(String(n).trim()[0]||'؟');
 const av=s=>`<div class="av">${s.photo?`<img src="${s.photo}" alt="">`:esc(initial(s.name))}</div>`;
 
 /* ---------- statistics ---------- */
-function stats(s,rg){
- const ss=db.sessions.filter(x=>x.cls===s.cls&&x.sec===s.sec&&inRg(x.date,rg)),byD={};
+function stats(s){
+ const ss=db.sessions.filter(x=>x.cls===s.cls&&x.sec===s.sec),byD={};
  ss.forEach(x=>(byD[x.date]=byD[x.date]||[]).push(x));
  const r={fullAbs:0,fullExc:0,partAbs:0,partExc:0,absL:0,excL:0,days:0,log:[],behLog:[],neg:0,pos:0,beh:{}};
  Object.keys(byD).sort().forEach(d=>{
@@ -357,7 +278,7 @@ function stats(s,rg){
 
 /* ---------- router ---------- */
 let view={n:'home',p:{}};
-function go(n,p={},push=true){view={n,p};if(push)history.pushState({n,p},'');else history.replaceState({n,p},'');render();window.scrollTo(0,0)}
+function go(n,p={},push=true){view={n,p};if(push)history.pushState({n,p},'');render();window.scrollTo(0,0)}
 addEventListener('popstate',e=>{view=e.state||{n:'home',p:{}};render()});
 function openAdmin(){askAdmin(()=>go('admin'))}
 function render(){
@@ -382,7 +303,7 @@ function vHome(){
  if(!cs.length)h+='<div class="card empty">لا توجد صفوف بعد. أضِفها من لوحة الإدارة.</div>';
  cs.forEach(c=>{
   const n=db.students.filter(s=>s.cls===c).length;
-  h+=`<div class="card cls"><div class="h"><b>${esc(c)}</b><span style="display:flex;gap:8px;align-items:center"><small>${n} طالب</small><button class="btn sm" onclick="repDialog(${J(['cls',c])})">📚 تقرير الصف</button></span></div><div class="secs">`+
+  h+=`<div class="card cls"><div class="h"><b>${esc(c)}</b><small>${n} طالب</small></div><div class="secs">`+
   db.structure[c].map(s=>`<div class="sec" onclick="sel.lesson=null;go('sec',${J({cls:c,sec:s})})"><small>شعبة</small><b>${esc(s)}</b><small>${studentsOf(c,s).length} طالب</small></div>`).join('')+
   (db.structure[c].length?'':'<small style="color:var(--mut)">لا توجد شعب</small>')+`</div></div>`;
  });
@@ -395,7 +316,7 @@ const sKey=(d,c,s,l)=>`${d}|${c}|${s}|${l}`;
 function vSec(p){
  const {cls,sec}=p,tab=p.tab||'att',list=studentsOf(cls,sec);
  let h=`<div class="top"><button class="back" onclick="history.back()">→</button><div><h2>${esc(cls)} — شعبة ${esc(sec)}</h2><small>${list.length} طالب</small></div></div>
- <div class="tabs"><button class="${tab==='att'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'att'})},false)">تسجيل الحضور</button><button class="${tab==='stu'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'stu'})},false)">الطلاب</button><button class="${tab==='arc'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'arc'})},false)">🗂 الأرشيف</button><button class="${tab==='rep'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'rep'})},false)">التقارير والوصولات</button></div>`;
+ <div class="tabs"><button class="${tab==='att'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'att'})},false)">تسجيل الحضور</button><button class="${tab==='stu'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'stu'})},false)">الطلاب والتقارير</button></div>`;
  if(tab==='att'){
   const teachers=[...new Set(db.sessions.map(x=>x.teacher))],subs=[...new Set(db.sessions.map(x=>x.subject))];
   h+=`<div class="card"><label style="margin-top:0">تاريخ اليوم</label><input type="date" value="${sel.date}" onchange="sel.date=this.value;sel.lesson=null;render()">
@@ -406,14 +327,8 @@ function vSec(p){
    <label style="margin-top:0">اسم المدرس</label><input id="fT" list="tl" value="${esc(sel.teacher)}" oninput="sel.teacher=this.value" placeholder="اكتب اسم المدرس">
    <label>المادة</label><input id="fS" list="sl" value="${esc(sel.subject)}" oninput="sel.subject=this.value" placeholder="اكتب اسم المادة">
    <datalist id="tl">${teachers.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><datalist id="sl">${subs.map(t=>`<option value="${esc(t)}">`).join('')}</datalist>
-   <button class="btn gold full" style="margin-top:14px" onclick="startAtt(${J({cls,sec})})">${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?'تعديل الحضور المسجّل 🔐':'ابدأ تسجيل الطلاب'}</button></div>`;
+   <button class="btn gold full" style="margin-top:14px" onclick="startAtt(${J({cls,sec})})">${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?'تعديل الحضور المسجّل 🔐':'ابدأ تسجيل الطلاب'}</button>${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?`<button class="btn full" style="margin-top:8px" onclick="waPrompt(${J(sKey(sel.date,cls,sec,sel.lesson))})">📲 إرسال الغياب إلى واتساب</button>`:''}</div>`;
   }
- }else if(tab==='arc'){
-  h+=arcView(cls,sec);
- }else if(tab==='rep'){
-  h+=`<div class="card"><h3>📊 تقارير</h3><div class="btns"><button class="btn gold" onclick="repDialog(${J(['sec',cls,sec])})">📊 تقرير الشعبة</button><button class="btn blue" onclick="repDialog(${J(['cls',cls])})">📚 تقرير الصف</button></div></div>
-  <div class="card"><h3>🎫 تقرير ووصولات طالب</h3>${list.length?`<label style="margin-top:0">اختر الطالب</label><select id="rpS">${list.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select><div class="btns" style="margin-top:10px"><button class="btn gold" onclick="docDialog($('#rpS').value,'report')">📄 تقرير الطالب</button><button class="btn red" onclick="docDialog($('#rpS').value,'warn')">⚠️ إنذار</button><button class="btn blue" onclick="docDialog($('#rpS').value,'pledge')">✍️ تعهد</button><button class="btn" onclick="docDialog($('#rpS').value,'leave')">🏖 إجازة</button></div>`:'<div class="empty" style="padding:6px">لا يوجد طلاب في هذه الشعبة</div>'}</div>
-  <div class="card"><h3>الإدارة 🔐</h3><div class="btns"><button class="btn" style="color:var(--red)" onclick="delSection(${J(cls)},${J(sec)})">🗑 حذف هذه الشعبة</button><button class="btn" style="color:var(--red)" onclick="delClass(${J(cls)})">🗑 حذف الصف بالكامل</button></div></div>`;
  }else{
   h+=`<div class="btns" style="margin-bottom:6px"><button class="btn gold" onclick="editStudent(null,${J(cls)},${J(sec)})">＋ إضافة طالب جديد 🔐</button></div>`;
   if(!list.length)h+='<div class="card empty">لا يوجد طلاب في هذه الشعبة.<br>استورد ملف Excel أو أضف طالباً من هنا.</div>';
@@ -424,104 +339,6 @@ function vSec(p){
  return h+foot();
 }
 function pickLesson(n,p){sel.lesson=n;const e=db.sessions.find(x=>x.id===sKey(sel.date,p.cls,p.sec,n));if(e){sel.teacher=e.teacher;sel.subject=e.subject}render()}
-
-/* ---------- ARCHIVE: غيابات الشعبة ليوم معيّن ---------- */
-let arcD=todayStr(),arcAll=false;
-function arcData(cls,sec,date){
- const ses=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date===date),list=studentsOf(cls,sec);
- const L=db.lessons.map((l,i)=>({n:i+1,t:l.t||'',ses:ses.find(x=>x.lesson===i+1)||null}));
- ses.forEach(x=>{if(!L.some(q=>q.n===x.lesson))L.push({n:x.lesson,t:'',ses:x})});
- L.sort((a,b)=>a.n-b.n);
- L.forEach(q=>{q.a=q.ses?list.filter(s=>q.ses.marks[s.id]==='a').length:0;q.e=q.ses?list.filter(s=>q.ses.marks[s.id]==='e').length:0});
- const rec=L.filter(q=>q.ses);
- const rows=list.map(s=>{const m=L.map(q=>q.ses?(q.ses.marks[s.id]||'p'):null),a=m.filter(v=>v==='a').length,e=m.filter(v=>v==='e').length;
-  return{s,m,a,e,full:rec.length>0&&a===rec.length}}).filter(r=>arcAll||r.a||r.e);
- const teachers=[...new Set(rec.map(q=>q.ses.teacher).filter(Boolean))];
- return{L,rec,rows,teachers,list,tot:{stu:rows.filter(r=>r.a).length,full:rows.filter(r=>r.full).length,exc:rows.filter(r=>!r.a&&r.e).length}}}
-const arcSt=r=>r.full?'غياب يوم كامل':r.a?'غياب دروس':r.e?'مجاز':'حاضر';
-const arcSc=r=>r.a?'ar':r.e?'ae':'ap',arcPc=r=>r.a?'rd':r.e?'am':'gn';
-const arcCell=v=>v==='a'?['غائب','ar']:v==='e'?['مجاز','ae']:v==='p'?['✓','ap']:['—','az'];
-const arcName=(cls,sec,d)=>('أرشيف_غياب_'+cls+'_شعبة_'+sec+'_'+d).replace(/[\\\/:*?"<>|\s]+/g,'_');
-
-function arcView(cls,sec){
- const d=arcData(cls,sec,arcD),P=J({cls,sec,tab:'arc'});
- const dates=[...new Set(db.sessions.filter(x=>x.cls===cls&&x.sec===sec).map(x=>x.date))].sort().reverse().slice(0,12);
- let h=`<div class="card"><label style="margin-top:0">اختر اليوم</label>
- <div class="btns" style="flex-wrap:nowrap"><button class="btn sm" onclick="arcGo(-1)">→ السابق</button><input type="date" value="${arcD}" style="flex:1;min-width:0" onchange="arcD=this.value||todayStr();render()"><button class="btn sm" onclick="arcGo(1)">التالي ←</button></div>
- <div class="dchips"><button class="${arcD===todayStr()?'on':''}" onclick="arcD=todayStr();render()">اليوم</button>${dates.filter(x=>x!==todayStr()).map(x=>`<button class="${x===arcD?'on':''}" onclick="arcD='${x}';render()">${fmtD(x)}</button>`).join('')}</div>
- <label class="chk"><input type="checkbox" ${arcAll?'checked':''} onchange="arcAll=this.checked;render()">إظهار جميع طلاب الشعبة (وليس الغائبين فقط)</label></div>
- <div class="card"><h3 style="margin:0 0 4px">🗂 ${fmtD(arcD,true)}</h3><small style="color:var(--mut)">${esc(cls)} — شعبة ${esc(sec)} • ${d.list.length} طالب</small>`;
- if(!d.rec.length)return h+`<div class="empty" style="padding:18px 0">لا توجد دروس مسجّلة في هذا اليوم.</div></div>`+foot();
- h+=`<div class="arck"><div><b>${d.rec.length}<small style="font-size:13px;color:var(--mut)">/${d.L.length}</small></b><span>دروس مسجّلة</span></div><div><b>${d.teachers.length}</b><span>مدرسون حضروا</span></div><div class="r"><b>${d.tot.stu}</b><span>طلاب غائبون</span></div><div class="a"><b>${d.tot.full}</b><span>غياب يوم كامل</span></div></div>
- <h4 style="margin:6px 0 0;color:var(--g1)">الدروس والمدرسون</h4><div class="arcw"><table class="at"><thead><tr><th>الدرس</th><th>الوقت</th><th>المدرس</th><th>المادة</th><th>غائب</th><th>مجاز</th></tr></thead><tbody>
- ${d.L.map(q=>q.ses?`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td class="nm">${esc(q.ses.teacher)}</td><td>${esc(q.ses.subject)}</td><td class="${q.a?'ar':'az'}">${q.a}</td><td class="${q.e?'ae':'az'}">${q.e}</td></tr>`:`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td class="az" colspan="4">لم يُسجَّل</td></tr>`).join('')}</tbody></table></div>
- <h4 style="margin:6px 0 0;color:var(--g1)">غيابات الطلاب</h4><div class="arcl">🟥 غائب &nbsp; 🟨 مجاز &nbsp; ✓ حاضر &nbsp; — لم يُسجَّل الدرس</div>`;
- h+=d.rows.length?`<div class="arcw"><table class="at"><thead><tr><th>#</th><th class="nm">الطالب</th>${d.L.map(q=>`<th>${lessonName(q.n)}<small>${q.ses?esc(q.ses.teacher):'لم يُسجَّل'}</small></th>`).join('')}<th>غياب</th><th>مجاز</th><th>الحالة</th></tr></thead><tbody>
- ${d.rows.map((r,i)=>`<tr><td>${i+1}</td><td class="nm">${esc(r.s.name)}</td>${r.m.map(v=>{const c=arcCell(v);return `<td class="${c[1]}">${c[0]}</td>`}).join('')}<td class="${r.a?'ar':'az'}">${r.a}</td><td class="${r.e?'ae':'az'}">${r.e}</td><td class="${arcSc(r)}" style="white-space:nowrap">${arcSt(r)}</td></tr>`).join('')}</tbody></table></div>`
- :`<div class="empty" style="padding:14px 0">لا غياب في هذا اليوم — حضور كامل ✓</div>`;
- h+=`<div class="btns" style="margin-top:10px"><button class="btn gold" onclick="arcPrint(${J(cls)},${J(sec)},0)">🖨 طباعة</button><button class="btn blue" onclick="arcPrint(${J(cls)},${J(sec)},1)">📄 PDF</button><button class="btn" style="background:#1d6f42;color:#fff" onclick="arcXlsx(${J(cls)},${J(sec)})">📊 Excel</button></div></div>`;
- return h+foot()}
-function arcGo(n){arcD=addDays(arcD,n);render()}
-
-/* طباعة الأرشيف: تقسيم تلقائي إلى صفحات، كل صفحة بترويسة وعنوان قسم وترقيم */
-function arcCap(){const p=document.createElement('div');p.style.cssText='position:absolute;left:-99999px;top:0;width:194mm;height:281mm';document.body.appendChild(p);const h=p.getBoundingClientRect().height;p.remove();return h}
-function arcMeasure(fn){const m=document.createElement('div');m.style.cssText='position:absolute;left:-99999px;top:0;width:194mm;visibility:hidden';document.body.appendChild(m);try{return fn(m)}finally{m.remove()}}
-function arcHTML(cls,sec,date){
- const d=arcData(cls,sec,date),n=d.rows.length,cap=arcCap()*0.96;
- const card=(body,k,N,minh)=>`<div class="tk rep arcpg"${minh?` style="min-height:${Math.floor(minh)}px"`:''}>${tkWm()}${tkHead('أرشيف غياب الشعبة','🗂')}<div class="tk-b">${body}</div><div class="tk-ft"><span>${SCHOOL}</span><span>صفحة ${k} من ${N}</span><span>تصميم: <b>${DESIGNER}</b></span></div></div>`;
- const sh=`<div class="tk-sh"><div><small>الصف</small><b>${esc(cls)}</b></div><div><small>الشعبة</small><b>${esc(sec)}</b></div><div><small>عدد الطلاب</small><b>${d.list.length}</b></div><div><small>التاريخ</small><b style="font-size:13px">${fmtD(date,true)}</b></div></div>`;
- const bar=`<div class="tk-mini"><span>${esc(cls)} — شعبة ${esc(sec)}</span><span>${fmtD(date,true)}</span><span>${d.list.length} طالب</span></div>`;
- const SIG=tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة']);
- if(!d.rec.length)return card(sh+`<div class="tk-box">لا توجد دروس مسجّلة لهذه الشعبة في هذا اليوم.</div>`,1,1,cap);
- const pre=sh+tkK([[d.rec.length+'/'+d.L.length,'دروس مسجّلة','',1],[d.teachers.length,'مدرسون حضروا'],[d.tot.stu,'طلاب غائبون','r'],[d.tot.full,'غياب يوم كامل','a']])+
- `<h4>الدروس والمدرسون</h4><table class="tk-t big"><thead><tr><th>الدرس</th><th>الوقت</th><th>المدرس</th><th>المادة</th><th>غائب</th><th>مجاز</th></tr></thead><tbody>
- ${d.L.map(q=>q.ses?`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td style="text-align:right;font-weight:700">${esc(q.ses.teacher)}</td><td>${esc(q.ses.subject)}</td><td class="${q.a?'rd':''}">${q.a}</td><td class="${q.e?'am':''}">${q.e}</td></tr>`:`<tr><td>${ORD[q.n-1]||q.n}</td><td>${esc(q.t)}</td><td colspan="4" style="color:#889">لم يُسجَّل</td></tr>`).join('')}</tbody></table>`;
- if(!n)return card(pre+`<h4>غيابات الطلاب</h4><div class="tk-box">لا غياب في هذا اليوم — حضور كامل ✓</div>`+SIG,1,1,cap);
- const lg='<div class="tk-lg">🟥 غائب &nbsp; 🟨 مجاز &nbsp; ✓ حاضر &nbsp; — لم يُسجَّل الدرس</div>';
- const mHead=`<tr><th>#</th><th class="nmc">اسم الطالب</th>${d.L.map(q=>`<th>${lessonName(q.n)}<br><span style="font-weight:600;font-size:10px">${q.ses?esc(q.ses.teacher):'لم يُسجَّل'}</span></th>`).join('')}<th>غياب</th><th>مجاز</th><th>الحالة</th></tr>`;
- const mRow=i=>{const r=d.rows[i];return `<tr><td>${i+1}</td><td style="text-align:right;font-weight:700">${esc(r.s.name)}</td>${r.m.map(v=>`<td class="${v==='a'?'rd':v==='e'?'am':v==='p'?'gn':''}">${arcCell(v)[0]}</td>`).join('')}<td class="${r.a?'rd':''}">${r.a}</td><td class="${r.e?'am':''}">${r.e}</td><td class="st ${arcPc(r)}">${arcSt(r)}</td></tr>`};
- const mBlock=(ix,cont)=>`<h4>غيابات الطلاب${cont?' (تابع)':''}</h4>${lg}<table class="tk-t big"><thead>${mHead}</thead><tbody>${ix.map(mRow).join('')}</tbody></table>`;
- const H=el=>el.getBoundingClientRect().height,all=d.rows.map((_,i)=>i);
- const P1=arcMeasure(m=>{m.innerHTML=card(pre,1,1,0);return H(m.firstElementChild)});
- const T1=arcMeasure(m=>{m.innerHTML=card(pre+mBlock([],0),1,1,0);return H(m.firstElementChild)})-P1;
- const S=arcMeasure(m=>{m.innerHTML=card(bar+mBlock([],1),2,2,0);return H(m.firstElementChild)});
- const hs=arcMeasure(m=>{m.innerHTML=SIG;return H(m.firstElementChild)})+26;
- const rh=arcMeasure(m=>{m.innerHTML=card(bar+mBlock(all,1),2,2,0);return [...m.querySelectorAll('tbody tr')].map(H)});
- const pg=[{m:false,rows:[]}];let room=0;
- const two=rh.slice(0,Math.min(n,4)).reduce((a,b)=>a+b,0);
- if(cap-P1-T1>=two){pg[0].m=true;room=cap-P1-T1}else{pg.push({m:true,rows:[]});room=cap-S}
- let cur=pg[pg.length-1];
- all.forEach(i=>{if(rh[i]>room&&cur.rows.length){cur={m:true,rows:[]};pg.push(cur);room=cap-S}cur.rows.push(i);room-=rh[i]});
- if(room<hs){if(pg.length===1){const rs=pg[0].rows;pg[0]={m:false,rows:[]};pg.push({m:true,rows:rs})}else{const last=pg[pg.length-1],mv=last.rows.length>2?2:last.rows.length;pg.push({m:true,rows:last.rows.splice(last.rows.length-mv,mv)})}}
- const N=pg.length;let started=false;
- return pg.map((p,k)=>{
-  let body=k===0?pre:bar;
-  if(p.m&&p.rows.length){body+=mBlock(p.rows,started);started=true}
-  if(k===N-1)body+=SIG;
-  return card(body,k+1,N,cap)}).join('')}
-
-function arcPrint(cls,sec,pdf){
- const old=document.title,fin=()=>{document.title=old;removeEventListener('afterprint',fin)};
- document.title=arcName(cls,sec,arcD);addEventListener('afterprint',fin);
- if(pdf)toast('في نافذة الطباعة اختر «حفظ كـ PDF»');
- printDoc(arcHTML(cls,sec,arcD))}
-
-function arcXlsx(cls,sec){
- if(typeof XLSX==='undefined'){toast('مكتبة Excel لم تُحمَّل — تحقق من الإنترنت');return}
- const d=arcData(cls,sec,arcD);
- if(!d.rec.length){toast('لا توجد دروس مسجّلة في هذا اليوم');return}
- const head=[[SCHOOL],['أرشيف غياب الشعبة — '+cls+' / شعبة '+sec],['التاريخ: '+fmtD(arcD,true)],[]];
- const a1=head.concat([['الدرس','الوقت','المدرس','المادة','عدد الغائبين','عدد المجازين']],
-  d.L.map(q=>q.ses?[lessonName(q.n),q.t,q.ses.teacher,q.ses.subject,q.a,q.e]:[lessonName(q.n),q.t,'لم يُسجَّل','','','']),
-  [[],['الدروس المسجّلة',d.rec.length+' من '+d.L.length],['المدرسون الذين حضروا',d.teachers.length],['الطلاب الغائبون',d.tot.stu],['غياب يوم كامل',d.tot.full]]);
- const a2=head.concat([['#','اسم الطالب','رقم القيد'].concat(d.L.map(q=>lessonName(q.n)+(q.ses?' — '+q.ses.teacher:' (لم يُسجَّل)')),['دروس الغياب','دروس الإجازة','الحالة'])],
-  d.rows.map((r,i)=>[i+1,r.s.name,r.s.reg||''].concat(r.m.map(v=>arcCell(v)[0]),[r.a,r.e,arcSt(r)])));
- const wb=XLSX.utils.book_new(),w1=XLSX.utils.aoa_to_sheet(a1),w2=XLSX.utils.aoa_to_sheet(a2);
- w1['!cols']=[{wch:16},{wch:14},{wch:24},{wch:18},{wch:13},{wch:13}];
- w2['!cols']=[{wch:5},{wch:28},{wch:11}].concat(d.L.map(()=>({wch:20})),[{wch:12},{wch:12},{wch:16}]);
- XLSX.utils.book_append_sheet(wb,w1,'الدروس والمدرسون');XLSX.utils.book_append_sheet(wb,w2,'غيابات الطلاب');
- wb.Workbook={Views:[{RTL:true}]};
- try{XLSX.writeFile(wb,arcName(cls,sec,arcD)+'.xlsx');toast('تم تجهيز ملف Excel ✓')}catch(e){toast('تعذّر إنشاء الملف')}}
 
 /* ---------- ATTENDANCE ---------- */
 let draft=null;
@@ -536,7 +353,7 @@ function startAtt(p){
 function rowH(s,i){
  const m=draft.marks[s.id],b=(draft.beh[s.id]||[]).length+(draft.notes[s.id]?1:0);
  return `<div class="row ${m||''}" id="r_${s.id}"><div class="t"><div class="num">${i+1}</div>${av(s)}<div class="nm"><b>${esc(s.name)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small></div></div>
- <div class="acts"><button class="bA ${m==='a'?'on':''}" onclick="mark('${s.id}','a')">غائب</button><button class="bE ${m==='e'?'on':''}" onclick="mark('${s.id}','e')">مجاز</button><button class="bB ${b?'has':''}" onclick="behSheet('${s.id}')">⚑${b?`<i>${b}</i>`:''}</button><button class="bW ${waNum(s.gphone)?'has':''}" onclick="waRow('${s.id}')" aria-label="واتساب ولي الأمر">💬</button></div></div>`}
+ <div class="acts"><button class="bA ${m==='a'?'on':''}" onclick="mark('${s.id}','a')">غائب</button><button class="bE ${m==='e'?'on':''}" onclick="mark('${s.id}','e')">مجاز</button><button class="bB ${b?'has':''}" onclick="behSheet('${s.id}')">⚑${b?`<i>${b}</i>`:''}</button></div></div>`}
 function vAtt(){
  if(!draft)return vHome();
  const list=studentsOf(draft.cls,draft.sec);
@@ -555,7 +372,7 @@ function leaveAtt(){confirmBox('الخروج دون حفظ؟ ستضيع التغ
 function saveAtt(){
  const i=db.sessions.findIndex(x=>x.id===draft.id);
  if(i>=0)db.sessions[i]=draft;else db.sessions.push(draft);
- save();const wq=waQueue();draft=null;toast('تم حفظ الحضور ✓');history.back();if(wq)setTimeout(()=>wq.auto?waAutoBatch(wq):waNotify(wq),450);
+ save();const sid=draft.id,any=Object.keys(draft.marks).length>0;draft=null;toast('تم حفظ الحضور ✓');history.back();if(any)setTimeout(()=>waPrompt(sid),350);
 }
 function behSheet(id){
  const s=db.students.find(x=>x.id===id),cur=new Set(draft.beh[id]||[]);
@@ -580,9 +397,9 @@ function vStu(p){
  <div class="kp"><div class="k r"><b>${x.fullAbs}</b><span>غياب يوم كامل</span></div><div class="k a"><b>${x.partAbs}</b><span>غياب دروس (في أيام حضر فيها)</span></div><div class="k y"><b>${x.fullExc+x.excL?x.excL:0}</b><span>دروس مجازة</span></div><div class="k g"><b>${x.days}</b><span>أيام مسجّلة</span></div></div>
  <div class="card"><h3>السلوك</h3>${Object.keys(x.beh).length?'<div class="chips">'+Object.entries(x.beh).map(([t,n])=>{const k=(db.behaviors.find(z=>z.n===t)||{}).k;return `<span class="b ${k==='pos'?'g':'r'}" style="font-size:13px;padding:4px 12px">${esc(t)} × ${n}</span>`}).join('')+'</div>':'<div class="empty" style="padding:6px">لا توجد سلوكيات مسجّلة</div>'}</div>
  <div class="card"><h3>سجل الغياب والإجازات</h3>${x.log.length?`<table class="t"><tr><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>الحالة</th></tr>`+x.log.slice().reverse().map(r=>`<tr><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td><span class="b ${r.st==='a'?'r':'a'}">${r.st==='a'?'غائب':'مجاز'}</span></td></tr>`).join('')+'</table>':'<div class="empty" style="padding:6px">لا يوجد غياب مسجّل ✓</div>'}</div>
- <div class="card"><h3>طباعة</h3><div class="btns"><button class="btn gold" onclick="docDialog('${s.id}','report')">📄 تقرير مفصّل PDF</button><button class="btn red" onclick="docDialog('${s.id}','warn')">⚠️ وصل إنذار</button><button class="btn blue" onclick="docDialog('${s.id}','pledge')">✍️ وصل تعهد</button><button class="btn" onclick="docDialog('${s.id}','leave')">🏖 وصل إجازة</button></div></div>
- <div class="card"><h3>💬 ولي الأمر والواتساب</h3><div style="margin-bottom:10px">${s.gphone?`<b>${esc(s.gname||'ولي الأمر')}</b> • <span dir="ltr">${esc(s.gphone)}</span>`:'<span style="color:var(--mut)">لم يُضَف هاتف ولي الأمر — أضِفه من «تعديل» أدناه.</span>'}</div><button class="btn full" style="background:#25D366;color:#062b13" onclick="waDialog('${s.id}')">💬 إرسال رسالة واتساب (اختياري)</button></div>
-  <div class="card"><h3>الإدارة 🔐</h3><div class="btns"><button class="btn" onclick="editStudent('${s.id}')">✏️ تعديل / التقاط صورة</button><button class="btn" style="color:var(--red)" onclick="delStudent('${s.id}')">🗑 حذف الطالب</button></div></div>`;
+ <div class="card"><h3>طباعة</h3><div class="btns"><button class="btn gold" onclick="docDialog('${s.id}','report')">📄 تقرير مفصّل PDF</button><button class="btn red" onclick="docDialog('${s.id}','warn')">⚠️ وصل إنذار</button><button class="btn blue" onclick="docDialog('${s.id}','pledge')">✍️ وصل تعهد</button></div></div>
+ <div class="card"><h3>📲 إرسال إلى واتساب</h3><div class="btns"><button class="btn gold" onclick="waStuText('${s.id}')">💬 رسالة نصية</button><button class="btn red" onclick="waWarnDlg('${s.id}')">⚠️ صورة إنذار</button><button class="btn blue" onclick="waReportImg('${s.id}')">📄 صورة تقرير</button></div></div>
+ <div class="card"><h3>الإدارة 🔐</h3><div class="btns"><button class="btn" onclick="editStudent('${s.id}')">✏️ تعديل / التقاط صورة</button><button class="btn" style="color:var(--red)" onclick="delStudent('${s.id}')">🗑 حذف الطالب</button></div></div>`;
  return h+foot();
 }
 
@@ -612,146 +429,188 @@ async function capturePhoto(cb){
 /* ---------- STUDENT EDIT ---------- */
 let tmpPhoto='';
 function editStudent(id,cls,sec){askAdmin(()=>{
- const s=id?db.students.find(x=>x.id===id):{name:'',reg:'',page:'',cls:cls||'',sec:sec||'',photo:'',gname:'',gphone:''};tmpPhoto=s.photo||'';
+ const s=id?db.students.find(x=>x.id===id):{name:'',reg:'',page:'',cls:cls||'',sec:sec||'',photo:''};tmpPhoto=s.photo||'';
  openModal(`<h3>${id?'تعديل بيانات الطالب':'إضافة طالب جديد'}</h3>
  <div class="edph" id="edph">${tmpPhoto?`<img src="${tmpPhoto}">`:'لا توجد صورة'}</div>
  <div class="btns"><button class="btn sm" onclick="capturePhoto(d=>setPh(d))">📷 التقاط صورة</button><button class="btn sm" onclick="pickPhoto(d=>setPh(d))">🖼 رفع صورة</button>${tmpPhoto?'<button class="btn sm" onclick="setPh(\'\')">إزالة</button>':''}</div>
  <label>الاسم الكامل</label><input id="eN" value="${esc(s.name)}">
  <div class="two"><div><label>رقم القيد</label><input id="eR" value="${esc(s.reg)}" inputmode="numeric"></div><div><label>الصفحة</label><input id="eP" value="${esc(s.page)}" inputmode="numeric"></div></div>
  <div class="two"><div><label>الصف</label><input id="eC" list="dc" value="${esc(s.cls)}"></div><div><label>الشعبة</label><input id="eS" list="ds" value="${esc(s.sec)}"></div></div>
- <div class="two"><div><label>اسم ولي الأمر</label><input id="eGn" value="${esc(s.gname||'')}"></div><div><label>هاتف ولي الأمر (واتساب)</label><input id="eGp" inputmode="tel" value="${esc(s.gphone||'')}" placeholder="07701234567"></div></div>
-  <datalist id="dc">${Object.keys(db.structure).map(c=>`<option value="${esc(c)}">`).join('')}</datalist><datalist id="ds">${[...new Set(Object.values(db.structure).flat())].map(c=>`<option value="${esc(c)}">`).join('')}</datalist>
+ <datalist id="dc">${Object.keys(db.structure).map(c=>`<option value="${esc(c)}">`).join('')}</datalist><datalist id="ds">${[...new Set(Object.values(db.structure).flat())].map(c=>`<option value="${esc(c)}">`).join('')}</datalist>
  <div class="btns" style="margin-top:16px"><button class="btn gold" onclick="saveStudent(${id?`'${id}'`:'null'})">حفظ</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
 })}
 function setPh(d){tmpPhoto=d;$('#edph').innerHTML=d?`<img src="${d}">`:'لا توجد صورة'}
 function saveStudent(id){
  const name=$('#eN').value.trim(),cls=$('#eC').value.trim(),sec=$('#eS').value.trim();
  if(!name||!cls||!sec){toast('الاسم والصف والشعبة مطلوبة');return}
- const o={name,reg:$('#eR').value.trim(),page:$('#eP').value.trim(),cls,sec,photo:tmpPhoto,gname:$('#eGn').value.trim(),gphone:$('#eGp').value.trim()};
+ const o={name,reg:$('#eR').value.trim(),page:$('#eP').value.trim(),cls,sec,photo:tmpPhoto};
  if(id){Object.assign(db.students.find(x=>x.id===id),o)}else db.students.push({id:uid(),...o});
  ensureStruct(cls,sec);save();closeModal();toast('تم الحفظ ✓');render();
 }
 function delStudent(id){askAdmin(()=>confirmBox('حذف الطالب نهائياً؟ (يمكن الاسترداد من نسخة الإدارة التلقائية)',()=>{snapshot();db.students=db.students.filter(s=>s.id!==id);save();toast('تم الحذف');history.back()},'حذف'))}
 
-/* ---------- PRINT DOCS (ticket style) ---------- */
-const inRg=(d,rg)=>!rg||((!rg.from||d>=rg.from)&&(!rg.to||d<=rg.to));
-const rgTxt=rg=>rg&&(rg.from||rg.to)?((rg.from?'من '+fmtD(rg.from):'')+' '+(rg.to?'إلى '+fmtD(rg.to):'')).trim():'كامل الفترة المسجّلة';
-const addDays=(d,n)=>{const t=new Date(d+'T12:00:00');t.setDate(t.getDate()+n);return t.toISOString().slice(0,10)};
-const daysBetween=(a,b)=>Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5)+1;
-const tkWm=()=>`<img class="wm" src="${LOGO}" alt="">`;
-function tkHead(type,icon,num){return `<div class="tk-h"><img class="lg" src="${LOGO}" alt=""><div class="tt"><small>جمهورية العراق — وزارة التربية</small><b>${SCHOOL}</b><i>${SCHOOL_EN}</i></div><div class="tb"><span>${icon}</span><b>${type}</b>${num?`<em>رقم ${num}</em>`:''}<em>${fmtD(todayStr())}</em></div></div>`}
-function tkStu(s){return `<div class="tk-s"><div class="ph">${s.photo?`<img src="${s.photo}" alt="">`:'الصورة'}</div><div class="in"><h2>${esc(s.name)}</h2><div class="g"><div><small>الصف</small><b>${esc(s.cls)}</b></div><div><small>الشعبة</small><b>${esc(s.sec)}</b></div><div><small>رقم القيد</small><b>${esc(s.reg||'—')}</b></div><div><small>الصفحة</small><b>${esc(s.page||'—')}</b></div></div><div class="bc"></div></div></div>`}
-const tkFoot=()=>`<div class="tk-ft"><span>${SCHOOL}</span><span>تصميم: <b>${DESIGNER}</b></span></div>`;
-const tkSig=a=>`<div class="tk-sig">${a.map(x=>`<div>${x}</div>`).join('')}</div>`;
-const tkPf=()=>'<div class="tk-pf"></div>';
-const tkK=(arr)=>`<div class="tk-k">${arr.map(([v,l,c,sm])=>`<div class="${c||''}"><b${sm?' style="font-size:15px"':''}>${v}</b><span>${l}</span></div>`).join('')}</div>`;
-
+/* ---------- PRINT DOCS ---------- */
+function infoBlock(s){return `<div class="pp-info"><div class="ph">${s.photo?`<img src="${s.photo}">`:'الصورة'}</div><table><tr><td>اسم الطالب</td><td colspan="3"><b>${esc(s.name)}</b></td></tr><tr><td>الصف</td><td>${esc(s.cls)}</td><td>الشعبة</td><td>${esc(s.sec)}</td></tr><tr><td>رقم القيد</td><td>${esc(s.reg||'—')}</td><td>الصفحة</td><td>${esc(s.page||'—')}</td></tr></table></div>`}
+function pHead(num){return `<div class="pp-head"><img src="${LOGO}"><div class="pp-t"><div class="rg">جمهورية العراق — وزارة التربية</div><div class="a">${SCHOOL}</div><div class="e">${SCHOOL_EN}</div></div><div class="pp-no">${num?`رقم الوصل<b>${num}</b>`:''}التاريخ<br>${fmtD(todayStr())}</div></div>`}
+const pFoot=()=>`<div class="pp-foot"><span>${SCHOOL}</span><span>تصميم: <b>${DESIGNER}</b></span></div>`;
 function docDialog(id,kind){
- const s=db.students.find(x=>x.id===id);if(!s){toast('اختر طالباً أولاً');return}
- if(kind==='report')return repDialog(['stu',id]);
- const x=stats(s),T={warn:'وصل إنذار',pledge:'وصل تعهد',leave:'وصل إجازة'}[kind],t=todayStr();
- const rs=`<option>كثرة الغياب عن الدوام</option><option>التأخر المتكرر</option><option>سلوك غير منضبط</option><option>الإخلال بنظام الدرس</option><option>أخرى (اكتبها أدناه)</option>`;
- let f='';
- if(kind==='warn')f=`<label>درجة الإنذار</label><select id="dLv"><option>إنذار أول</option><option>إنذار ثانٍ</option><option>إنذار ثالث</option><option>إنذار نهائي</option></select><label>سبب الإنذار</label><select id="dRs">${rs}</select><label>تفاصيل / ملاحظات إضافية (اختياري)</label><textarea id="dNt" rows="2"></textarea>`;
- if(kind==='pledge')f=`<label>موضوع التعهد</label><select id="dRs">${rs}</select><label>تفاصيل / ملاحظات إضافية (اختياري)</label><textarea id="dNt" rows="2"></textarea><div class="two"><div><label>اسم ولي الأمر</label><input id="dGn" value="${esc(s.gname||'')}"></div><div><label>رقم الهاتف</label><input id="dGp" inputmode="tel" value="${esc(s.gphone||'')}"></div></div><label>صلة القرابة</label><input id="dGr" placeholder="الأب / الأخ / ...">`;
- if(kind==='leave')f=`<label>نوع الإجازة</label><select id="dTy"><option>إجازة مرضية</option><option>ظرف عائلي</option><option>مراجعة طبيب / مستشفى</option><option>سفر</option><option>إجازة أخرى</option></select><div class="two"><div><label>من تاريخ</label><input type="date" id="dFr" value="${t}"></div><div><label>إلى تاريخ</label><input type="date" id="dTo" value="${t}"></div></div><label>السبب / ملاحظات (اختياري)</label><textarea id="dNt" rows="2"></textarea><div class="two"><div><label>اسم ولي الأمر</label><input id="dGn" value="${esc(s.gname||'')}"></div><div><label>رقم الهاتف</label><input id="dGp" inputmode="tel" value="${esc(s.gphone||'')}"></div></div>`;
- openModal(`<h3>${T}</h3><div style="color:var(--mut)">${esc(s.name)}</div>${f}<div class="btns" style="margin-top:14px"><button class="btn gold" onclick="doPrint('${id}','${kind}')">🖨 طباعة / حفظ PDF</button>${kind==='leave'?`<button class="btn" style="background:#25D366;color:#062b13" onclick="waLeave('${id}')">💬 واتساب</button>`:''}<button class="btn" onclick="closeModal()">إلغاء</button></div>`);
- if(kind!=='leave'&&!x.fullAbs&&!x.absL&&x.neg)$('#dRs').selectedIndex=2;
+ const s=db.students.find(x=>x.id===id);
+ if(kind==='report'){return printDoc(reportHTML(s))}
+ const x=stats(s),isW=kind==='warn';
+ openModal(`<h3>${isW?'وصل إنذار':'وصل تعهد'}</h3><div style="color:var(--mut)">${esc(s.name)}</div>
+ ${isW?`<label>درجة الإنذار</label><select id="dLv"><option>إنذار أول</option><option>إنذار ثانٍ</option><option>إنذار ثالث</option><option>إنذار نهائي</option></select>`:''}
+ <label>${isW?'سبب الإنذار':'موضوع التعهد'}</label><select id="dRs"><option>كثرة الغياب عن الدوام</option><option>التأخر المتكرر</option><option>سلوك غير منضبط</option><option>الإخلال بنظام الدرس</option><option>أخرى (اكتبها أدناه)</option></select>
+ <label>تفاصيل / ملاحظات إضافية (اختياري)</label><textarea id="dNt" rows="2"></textarea>
+ ${isW?'':`<div class="two"><div><label>اسم ولي الأمر</label><input id="dGn"></div><div><label>رقم الهاتف</label><input id="dGp" inputmode="tel"></div></div><label>صلة القرابة</label><input id="dGr" placeholder="الأب / الأخ / ...">`}
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="doPrint('${id}','${kind}')">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
+ if(!x.fullAbs&&!x.absL&&x.neg)$('#dRs').selectedIndex=2;
 }
 async function doPrint(id,kind){
- const s=db.students.find(x=>x.id===id),v=k=>$('#'+k)?.value.trim()||'';
- const o={lv:v('dLv'),rs:v('dRs'),nt:v('dNt'),gn:v('dGn'),gp:v('dGp'),gr:v('dGr'),ty:v('dTy'),fr:v('dFr'),to:v('dTo')};
- if(kind==='leave'&&o.fr&&o.to&&o.to<o.fr){toast('تاريخ النهاية قبل البداية');return}
+ const s=db.students.find(x=>x.id===id),o={lv:$('#dLv')?.value||'',rs:$('#dRs').value,nt:$('#dNt').value.trim(),gn:$('#dGn')?.value.trim()||'',gp:$('#dGp')?.value.trim()||'',gr:$('#dGr')?.value.trim()||''};
  closeModal();const cn=await nextNum();const num=new Date().getFullYear()+'/'+cn;
- printDoc(kind==='warn'?warnHTML(s,o,num):kind==='pledge'?pledgeHTML(s,o,num):leaveHTML(s,o,num));
+ printDoc(kind==='warn'?warnHTML(s,o,num):pledgeHTML(s,o,num));
 }
 function printDoc(h){$('#printArea').innerHTML=h;setTimeout(()=>window.print(),400)}
-function repDialog(a){
- const k=a[0];let t,sub;
- if(k==='stu'){const s=db.students.find(x=>x.id===a[1]);if(!s)return;t='تقرير الطالب';sub=s.name}
- else if(k==='sec'){t='تقرير الشعبة';sub=a[1]+' — شعبة '+a[2]}
- else{t='تقرير الصف';sub=a[1]}
- openModal(`<h3>📊 ${t}</h3><div style="color:var(--mut)">${esc(sub)}</div><div class="two"><div><label>من تاريخ (اختياري)</label><input type="date" id="rgF"></div><div><label>إلى تاريخ (اختياري)</label><input type="date" id="rgT"></div></div><div class="btns" style="margin-top:14px"><button class="btn gold" onclick="runRep(${J(a)})">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
-function runRep(a){
- const rg={from:$('#rgF').value,to:$('#rgT').value};
- if(rg.from&&rg.to&&rg.to<rg.from){toast('تاريخ النهاية قبل البداية');return}
- closeModal();
- printDoc(a[0]==='stu'?reportHTML(db.students.find(x=>x.id===a[1]),rg):a[0]==='sec'?secReportHTML(a[1],a[2],rg):clsReportHTML(a[1],rg))}
-
-function reportHTML(s,rg){
- const x=stats(s,rg);
- const tags=Object.entries(x.beh).map(([t,n])=>{const k=(db.behaviors.find(z=>z.n===t)||{}).k;return `<span class="tk-chip ${k==='pos'?'pos':'neg'}">${esc(t)} × ${n}</span>`}).join('');
- return `<div class="tk rep">${tkWm()}${tkHead('تقرير طالب','📄')}<div class="tk-b">${tkStu(s)}
- <div class="tk-per">الفترة: <b>${rgTxt(rg)}</b></div>
- ${tkK([[x.fullAbs,'غياب يوم كامل','r'],[x.partAbs,'غياب دروس (حضور جزئي)','a'],[x.absL,'مجموع الدروس الغائبة'],[x.excL,'دروس مجازة','g']])}
- ${tkK([[x.days,'أيام مسجّلة'],[x.neg,'ملاحظات سلوكية سلبية','r'],[x.pos,'ملاحظات إيجابية','g'],[x.fullExc,'أيام مجازة كاملة']])}
- <h4>السلوك</h4><div>${tags||'لا توجد سلوكيات مسجّلة.'}</div>
- ${x.behLog.length?`<table class="tk-t" style="margin-top:8px"><thead><tr><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>المدرس</th><th>السلوك / الملاحظة</th></tr></thead><tbody>${x.behLog.map(r=>`<tr><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td>${esc(r.teacher)}</td><td style="text-align:right">${esc(r.tags.join(' ، '))}${r.note?' — '+esc(r.note):''}</td></tr>`).join('')}</tbody></table>`:''}
- <h4>سجل الغياب والإجازات</h4>${x.log.length?`<table class="tk-t"><thead><tr><th>#</th><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>المدرس</th><th>الحالة</th></tr></thead><tbody>${x.log.map((r,i)=>`<tr><td>${i+1}</td><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td>${esc(r.teacher)}</td><td class="${r.st==='a'?'rd':'am'}">${r.st==='a'?'غائب':'مجاز'}</td></tr>`).join('')}</tbody></table>`:'<div>لا يوجد غياب مسجّل — سجل حضور كامل ✓</div>'}
- ${tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة'])}</div>${tkFoot()}</div>`;
+function reportHTML(s){
+ const x=stats(s);
+ const tags=Object.entries(x.beh).map(([t,n])=>`${esc(t)} (${n})`).join(' ، ');
+ return `<div class="pp">${pHead('')}<div class="pp-title"><span>تقرير الطالب التفصيلي</span></div>${infoBlock(s)}
+ <h4>ملخص الحضور والغياب</h4><div class="pp-k"><div class="r"><b>${x.fullAbs}</b><span>غياب يوم كامل</span></div><div class="a"><b>${x.partAbs}</b><span>غياب دروس (أيام حضور جزئي)</span></div><div><b>${x.absL}</b><span>مجموع الدروس الغائبة</span></div><div class="g"><b>${x.excL}</b><span>دروس مجازة</span></div></div>
+ <div class="pp-k" style="margin-top:7px"><div><b>${x.days}</b><span>أيام مسجّلة</span></div><div class="r"><b>${x.neg}</b><span>ملاحظات سلوكية سلبية</span></div><div class="g"><b>${x.pos}</b><span>ملاحظات إيجابية</span></div><div><b>${x.fullExc}</b><span>أيام مجازة كاملة</span></div></div>
+ <h4>السلوك</h4><div style="position:relative">${tags||'لا توجد سلوكيات مسجّلة.'}</div>
+ ${x.behLog.length?`<table class="pp-t2" style="margin-top:6px"><tr><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>المدرس</th><th>السلوك / الملاحظة</th></tr>${x.behLog.map(r=>`<tr><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td>${esc(r.teacher)}</td><td style="text-align:right">${esc(r.tags.join(' ، '))}${r.note?' — '+esc(r.note):''}</td></tr>`).join('')}</table>`:''}
+ <h4>سجل الغياب والإجازات</h4>${x.log.length?`<table class="pp-t2"><tr><th>#</th><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>المدرس</th><th>الحالة</th></tr>${x.log.map((r,i)=>`<tr><td>${i+1}</td><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td>${esc(r.teacher)}</td><td style="font-weight:800;color:${r.st==='a'?'#c0283a':'#c27a00'}">${r.st==='a'?'غائب':'مجاز'}</td></tr>`).join('')}</table>`:'<div style="position:relative">لا يوجد غياب مسجّل — سجل حضور كامل.</div>'}
+ <div class="pp-sig"><div>المرشد التربوي</div><div>معاون المدير</div><div>مدير المدرسة</div></div>${pFoot()}</div>`;
 }
 function warnHTML(s,o,num){
  const x=stats(s);
- return `<div class="tk warn">${tkWm()}${tkHead('وصل إنذار','⚠️',num)}<div class="tk-b">${tkStu(s)}
- <div class="tk-c"><span class="tk-lv">${esc(o.lv)}</span></div>
- <div class="tk-box">السيد ولي أمر الطالب المذكور أعلاه المحترم،<br>تحية طيبة،<br>نُعلمكم بأنه تقرر توجيه (<b>${esc(o.lv)}</b>) إلى ابنكم بسبب: <b>${esc(o.rs)}</b>.${o.nt?`<br>${esc(o.nt)}`:''}<br>يُرجى الالتزام بالدوام الرسمي وتقديم ما يثبت عذر الغياب، وفي حال التكرار ستُتخذ الإجراءات الإدارية وفق التعليمات والضوابط النافذة.</div>
- ${tkK([[x.fullAbs,'غياب يوم كامل','r'],[x.absL,'مجموع الدروس الغائبة','a'],[x.excL,'دروس مجازة','g'],[x.neg,'ملاحظات سلوكية','r']])}
- ${tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة'])}
- ${tkPf()}<div class="tk-stub"><b>وصل استلام ولي الأمر</b> — رقم ${num}<br>استلمتُ أنا <span class="tk-ln"></span> ولي أمر الطالب <b>${esc(s.name)}</b> (${esc(s.cls)} / ${esc(s.sec)}) هذا الإنذار بتاريخ <span class="tk-ln" style="min-width:90px"></span> وأتعهد بالالتزام بما ورد فيه.<br>التوقيع: <span class="tk-ln"></span> &nbsp; رقم الهاتف: <span class="tk-ln"></span></div></div>${tkFoot()}</div>`;
+ return `<div class="pp pp-warn">${pHead(num)}<div class="pp-title"><span>وصل إنذار</span></div>${infoBlock(s)}
+ <div class="pp-box"><div style="text-align:center;font-weight:900;font-size:18px;color:#a3202f">${esc(o.lv)}</div>
+ السيد ولي أمر الطالب المذكور أعلاه المحترم،<br>تحية طيبة،<br>
+ نُعلمكم بأنه تقرر توجيه (<b>${esc(o.lv)}</b>) إلى ابنكم بسبب: <b>${esc(o.rs)}</b>.${o.nt?`<br>${esc(o.nt)}`:''}<br>
+ علماً أن سجلّه حتى تاريخه: غياب يوم كامل (<b>${x.fullAbs}</b>) يوم، وغياب دروس (<b>${x.absL}</b>) درس، ودروس مجازة (<b>${x.excL}</b>).<br>
+ يُرجى الالتزام بالدوام الرسمي وتقديم ما يثبت عذر الغياب، وفي حال التكرار ستُتخذ الإجراءات الإدارية وفق التعليمات والضوابط النافذة.</div>
+ <div class="pp-sig"><div>المرشد التربوي</div><div>معاون المدير</div><div>مدير المدرسة</div></div>
+ <div class="pp-tear"><b>وصل استلام ولي الأمر</b> — رقم ${num}<br>استلمتُ أنا <span class="pp-line"></span> ولي أمر الطالب <b>${esc(s.name)}</b> (${esc(s.cls)} / ${esc(s.sec)}) هذا الإنذار بتاريخ <span class="pp-line" style="min-width:90px"></span> وأتعهد بالالتزام بما ورد فيه.<br>التوقيع: <span class="pp-line"></span> &nbsp; رقم الهاتف: <span class="pp-line"></span></div>${pFoot()}</div>`;
 }
 function pledgeHTML(s,o,num){
  const x=stats(s);
- return `<div class="tk pledge">${tkWm()}${tkHead('وصل تعهد','✍️',num)}<div class="tk-b">${tkStu(s)}
- <div class="tk-box">أنا الموقّع أدناه <span class="tk-ln">${esc(o.gn)}</span> ولي أمر الطالب <b>${esc(s.name)}</b> في ${esc(s.cls)} — شعبة ${esc(s.sec)}، صلة القرابة: <span class="tk-ln" style="min-width:80px">${esc(o.gr)}</span>، رقم الهاتف: <span class="tk-ln">${esc(o.gp)}</span>،<br>أتعهد بأن يلتزم ابني بما يلي وأتحمّل المسؤولية الكاملة عن ذلك:
+ return `<div class="pp">${pHead(num)}<div class="pp-title"><span>وصل تعهد</span></div>${infoBlock(s)}
+ <div class="pp-box">أنا الموقّع أدناه <span class="pp-line">${esc(o.gn)}</span> ولي أمر الطالب <b>${esc(s.name)}</b> في ${esc(s.cls)} — شعبة ${esc(s.sec)}، صلة القرابة: <span class="pp-line" style="min-width:80px">${esc(o.gr)}</span>، رقم الهاتف: <span class="pp-line">${esc(o.gp)}</span>،<br>
+ أتعهد بأن يلتزم ابني بما يلي وأتحمّل المسؤولية الكاملة عن ذلك:
  <ol style="margin:4px 0;padding-right:22px"><li>موضوع التعهد: <b>${esc(o.rs)}</b>${o.nt?' — '+esc(o.nt):''}.</li><li>الالتزام بالدوام الرسمي والحضور في المواعيد المحددة وعدم الغياب إلا بعذر مقبول يُقدَّم خلال أسبوع.</li><li>الالتزام بالسلوك القويم واحترام المدرسين والزملاء وأنظمة المدرسة.</li><li>مراجعة إدارة المدرسة عند الطلب ومتابعة مستوى ابني باستمرار.</li></ol>
- وفي حال مخالفة هذا التعهد يحق للإدارة اتخاذ الإجراءات اللازمة وفق الضوابط النافذة.</div>
- ${tkK([[x.fullAbs,'غياب يوم كامل','r'],[x.absL,'مجموع الدروس الغائبة','a'],[x.excL,'دروس مجازة','g'],[x.neg,'ملاحظات سلوكية','r']])}
- ${tkSig(['توقيع ولي الأمر','توقيع الطالب','مدير المدرسة'])}</div>${tkFoot()}</div>`;
-}
-function leaveHTML(s,o,num){
- const n=o.fr&&o.to?Math.max(1,daysBetween(o.fr,o.to)):'',back=o.to?addDays(o.to,1):'';
- return `<div class="tk leave">${tkWm()}${tkHead('وصل إجازة','🏖',num)}<div class="tk-b">${tkStu(s)}
- <div class="tk-c"><span class="tk-lv">${esc(o.ty)}</span></div>
- ${tkK([[o.fr?fmtD(o.fr):'—','من تاريخ','',1],[o.to?fmtD(o.to):'—','إلى تاريخ','',1],[n||'—','عدد الأيام','g'],[back?fmtD(back):'—','تاريخ المباشرة','',1]])}
- <div class="tk-box">يُسمح للطالب المذكور أعلاه بالتغيّب عن الدوام الرسمي${n?` لمدة (<b>${n}</b>) يوم`:''}${o.fr?` اعتباراً من <b>${fmtD(o.fr)}</b>`:''}${o.to?` ولغاية <b>${fmtD(o.to)}</b>`:''}، وذلك بسبب: <b>${esc(o.ty)}</b>${o.nt?' — '+esc(o.nt):''}.<br>على الطالب مراجعة مدرسيه لتعويض ما فاته من دروس، وتقديم ما يثبت العذر عند الطلب، والمباشرة بالدوام في ${back?'<b>'+fmtD(back)+'</b>':'الموعد المحدد'}.<br>ولي الأمر: <span class="tk-ln">${esc(o.gn)}</span> &nbsp; هاتف: <span class="tk-ln">${esc(o.gp)}</span></div>
- ${tkSig(['توقيع ولي الأمر','المرشد التربوي','مدير المدرسة'])}
- ${tkPf()}<div class="tk-stub"><b>وصل المباشرة بعد الإجازة</b> — رقم ${num}<br>باشر الطالب <b>${esc(s.name)}</b> (${esc(s.cls)} / ${esc(s.sec)}) الدوام بتاريخ <span class="tk-ln" style="min-width:100px"></span><br>توقيع مسؤول الدوام: <span class="tk-ln"></span> &nbsp; توقيع ولي الأمر: <span class="tk-ln"></span></div></div>${tkFoot()}</div>`;
+ وفي حال مخالفة هذا التعهد يحق للإدارة اتخاذ الإجراءات اللازمة وفق الضوابط النافذة.<br>
+ <span style="font-size:12px;color:#556">سجل الطالب حتى تاريخه: غياب يوم كامل (${x.fullAbs}) • غياب دروس (${x.absL}) • ملاحظات سلوكية (${x.neg})</span></div>
+ <div class="pp-sig"><div>توقيع ولي الأمر</div><div>توقيع الطالب</div><div>مدير المدرسة</div></div>${pFoot()}</div>`;
 }
 
-function secReportHTML(cls,sec,rg){
- const list=studentsOf(cls,sec),rows=list.map(s=>({s,x:stats(s,rg)}));
- const T=rows.reduce((a,{x})=>({fa:a.fa+x.fullAbs,pa:a.pa+x.partAbs,al:a.al+x.absL,el:a.el+x.excL,ng:a.ng+x.neg,ps:a.ps+x.pos}),{fa:0,pa:0,al:0,el:0,ng:0,ps:0});
- const days=new Set(db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&inRg(x.date,rg)).map(x=>x.date)).size;
- const top=rows.filter(r=>r.x.absL>0).sort((a,b)=>b.x.fullAbs-a.x.fullAbs||b.x.absL-a.x.absL).slice(0,5);
- return `<div class="tk rep">${tkWm()}${tkHead('تقرير شعبة','📊')}<div class="tk-b">
- <div class="tk-sh"><div><small>الصف</small><b>${esc(cls)}</b></div><div><small>الشعبة</small><b>${esc(sec)}</b></div><div><small>عدد الطلاب</small><b>${list.length}</b></div><div><small>الفترة</small><b style="font-size:13px">${rgTxt(rg)}</b></div></div>
- ${tkK([[days,'أيام مسجّلة'],[T.fa,'أيام غياب كاملة','r'],[T.al,'مجموع الدروس الغائبة','a'],[T.el,'دروس مجازة','g']])}
- ${top.length?`<h4>الأكثر غياباً</h4><div>${top.map(r=>`<span class="tk-chip neg">${esc(r.s.name)} — ${r.x.fullAbs} يوم / ${r.x.absL} درس</span>`).join('')}</div>`:''}
- <h4>سجل طلاب الشعبة</h4>
- ${rows.length?`<table class="tk-t"><thead><tr><th>#</th><th>اسم الطالب</th><th>القيد</th><th>غياب يوم كامل</th><th>غياب دروس</th><th>مجموع الدروس</th><th>مجاز</th><th>سلوك سلبي</th><th>إيجابي</th></tr></thead><tbody>${rows.map(({s,x},i)=>`<tr><td>${i+1}</td><td style="text-align:right;font-weight:700">${esc(s.name)}</td><td>${esc(s.reg||'—')}</td><td class="${x.fullAbs?'rd':''}">${x.fullAbs}</td><td class="${x.partAbs?'am':''}">${x.partAbs}</td><td class="${x.absL?'rd':''}">${x.absL}</td><td class="${x.excL?'am':''}">${x.excL}</td><td class="${x.neg?'rd':''}">${x.neg}</td><td class="${x.pos?'gn':''}">${x.pos}</td></tr>`).join('')}<tr class="tot"><td colspan="3">المجموع</td><td>${T.fa}</td><td>${T.pa}</td><td>${T.al}</td><td>${T.el}</td><td>${T.ng}</td><td>${T.ps}</td></tr></tbody></table>`:'<div>لا يوجد طلاب في هذه الشعبة.</div>'}
- ${tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة'])}</div>${tkFoot()}</div>`;
-}
-function clsReportHTML(cls,rg){
- const secs=db.structure[cls]||[],all=[];
- const per=secs.map(sec=>{const list=studentsOf(cls,sec),rs=list.map(s=>{const x=stats(s,rg);all.push({s,x});return x});
-  const sum=k=>rs.reduce((a,x)=>a+x[k],0);
-  return{sec,n:list.length,fa:sum('fullAbs'),pa:sum('partAbs'),al:sum('absL'),el:sum('excL'),ng:sum('neg'),ps:sum('pos')}});
- const T=per.reduce((a,p)=>({n:a.n+p.n,fa:a.fa+p.fa,pa:a.pa+p.pa,al:a.al+p.al,el:a.el+p.el,ng:a.ng+p.ng,ps:a.ps+p.ps}),{n:0,fa:0,pa:0,al:0,el:0,ng:0,ps:0});
- const days=new Set(db.sessions.filter(x=>x.cls===cls&&inRg(x.date,rg)).map(x=>x.date)).size;
- const top=all.filter(r=>r.x.absL>0).sort((a,b)=>b.x.fullAbs-a.x.fullAbs||b.x.absL-a.x.absL).slice(0,10);
- return `<div class="tk rep">${tkWm()}${tkHead('تقرير صف','📚')}<div class="tk-b">
- <div class="tk-sh"><div><small>الصف</small><b>${esc(cls)}</b></div><div><small>عدد الشعب</small><b>${secs.length}</b></div><div><small>عدد الطلاب</small><b>${T.n}</b></div><div><small>الفترة</small><b style="font-size:13px">${rgTxt(rg)}</b></div></div>
- ${tkK([[days,'أيام مسجّلة'],[T.fa,'أيام غياب كاملة','r'],[T.al,'مجموع الدروس الغائبة','a'],[T.el,'دروس مجازة','g']])}
- <h4>ملخص الشعب</h4>
- ${per.length?`<table class="tk-t"><thead><tr><th>الشعبة</th><th>الطلاب</th><th>غياب يوم كامل</th><th>غياب دروس</th><th>مجموع الدروس</th><th>مجاز</th><th>سلوك سلبي</th><th>إيجابي</th></tr></thead><tbody>${per.map(p=>`<tr><td style="font-weight:800">${esc(p.sec)}</td><td>${p.n}</td><td class="${p.fa?'rd':''}">${p.fa}</td><td class="${p.pa?'am':''}">${p.pa}</td><td class="${p.al?'rd':''}">${p.al}</td><td class="${p.el?'am':''}">${p.el}</td><td class="${p.ng?'rd':''}">${p.ng}</td><td class="${p.ps?'gn':''}">${p.ps}</td></tr>`).join('')}<tr class="tot"><td>المجموع</td><td>${T.n}</td><td>${T.fa}</td><td>${T.pa}</td><td>${T.al}</td><td>${T.el}</td><td>${T.ng}</td><td>${T.ps}</td></tr></tbody></table>`:'<div>لا توجد شعب في هذا الصف.</div>'}
- ${top.length?`<h4>الطلاب الأكثر غياباً في الصف</h4><table class="tk-t"><thead><tr><th>#</th><th>اسم الطالب</th><th>الشعبة</th><th>غياب يوم كامل</th><th>مجموع الدروس</th><th>مجاز</th><th>سلوك سلبي</th></tr></thead><tbody>${top.map(({s,x},i)=>`<tr><td>${i+1}</td><td style="text-align:right;font-weight:700">${esc(s.name)}</td><td>${esc(s.sec)}</td><td class="${x.fullAbs?'rd':''}">${x.fullAbs}</td><td class="rd">${x.absL}</td><td class="${x.excL?'am':''}">${x.excL}</td><td class="${x.neg?'rd':''}">${x.neg}</td></tr>`).join('')}</tbody></table>`:''}
- ${tkSig(['المرشد التربوي','معاون المدير','مدير المدرسة'])}</div>${tkFoot()}</div>`;
-}
 
+/* ---------- WHATSAPP ---------- */
+function setWa(c,v){
+ v=v.trim();db.wa=db.wa||{};
+ if(!v){delete db.wa[c];save();toast('تم إلغاء ربط '+c);return}
+ if(!/^https:\/\/chat\.whatsapp\.com\/\S+$/i.test(v)){toast('الرابط غير صالح — يجب أن يبدأ بـ https://chat.whatsapp.com/');return}
+ db.wa[c]=v;save();toast('تم ربط مجموعة '+c+' ✓');
+}
+function waText(x){
+ const list=studentsOf(x.cls,x.sec),ab=list.filter(s=>x.marks[s.id]==='a'),ex=list.filter(s=>x.marks[s.id]==='e');
+ let t=`*${SCHOOL}*\n📋 كشف الغياب\n${x.cls} — شعبة ${x.sec}\n📅 ${fmtD(x.date,true)}\n${lessonName(x.lesson)} • ${x.subject} • الأستاذ ${x.teacher}\n`;
+ t+=ab.length?`\n❌ الغائبون (${ab.length}):\n`+ab.map((s,i)=>`${i+1}. ${s.name}`).join('\n'):'\n✅ لا يوجد غائبون';
+ if(ex.length)t+=`\n\n🟡 المجازون (${ex.length}):\n`+ex.map((s,i)=>`${i+1}. ${s.name}`).join('\n');
+ return t+`\n\nالحاضرون: ${list.length-ab.length-ex.length} من ${list.length}`;
+}
+function waPrompt(id){
+ const x=db.sessions.find(z=>z.id===id);if(!x){toast('لا يوجد تسجيل لهذا الدرس');return}
+ const link=(db.wa||{})[x.cls];
+ openModal(`<h3>📲 إرسال الغياب إلى واتساب</h3><div style="color:var(--mut);font-size:13px">يمكنك تعديل النص قبل الإرسال.</div>
+ <textarea id="waT" rows="9" style="margin-top:10px">${esc(waText(x))}</textarea>
+ <div class="btns" style="margin-top:12px"><button class="btn gold" onclick="waSend()">إرسال عبر واتساب</button>${link?`<button class="btn blue" onclick="waGroup(${J(link)})">نسخ وفتح مجموعة ${esc(x.cls)}</button>`:''}</div>
+ <div class="btns" style="margin-top:8px"><button class="btn sm" onclick="waCopy()">نسخ النص</button><button class="btn sm" onclick="closeModal()">إغلاق</button></div>
+ <small style="color:var(--mut);display:block;margin-top:8px">${link?'زر "إرسال عبر واتساب" يفتح واتساب لتختار المجموعة. زر "نسخ وفتح" يفتح مجموعة الصف مباشرة، ثم الصق النص.':'اختر المجموعة من واتساب بعد الضغط. يمكن ربط مجموعة كل صف من لوحة الإدارة ← مجموعات واتساب.'}</small>`);
+}
+function waCopy(){
+ const t=$('#waT').value;
+ const done=()=>toast('تم نسخ النص ✓');
+ if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(t).then(done,()=>{$('#waT').select();document.execCommand('copy');done()});
+ $('#waT').select();document.execCommand('copy');done();
+}
+function waSend(){window.open('https://wa.me/?text='+encodeURIComponent($('#waT').value),'_blank')}
+function waGroup(link){waCopy();setTimeout(()=>window.open(link,'_blank'),400)}
+
+
+/* ---------- WHATSAPP: STUDENT (text / warning image / report image) ---------- */
+function waModal(text,cls,title){
+ const link=(db.wa||{})[cls];
+ openModal(`<h3>${title}</h3><div style="color:var(--mut);font-size:13px">يمكنك تعديل النص قبل الإرسال.</div>
+ <textarea id="waT" rows="10" style="margin-top:10px">${esc(text)}</textarea>
+ <div class="btns" style="margin-top:12px"><button class="btn gold" onclick="waSend()">إرسال عبر واتساب</button>${link?`<button class="btn blue" onclick="waGroup(${J(link)})">نسخ وفتح مجموعة ${esc(cls)}</button>`:''}</div>
+ <div class="btns" style="margin-top:8px"><button class="btn sm" onclick="waCopy()">نسخ النص</button><button class="btn sm" onclick="closeModal()">إغلاق</button></div>`);
+}
+function waStuText(id){
+ const s=db.students.find(x=>x.id===id),x=stats(s),ab=x.log.filter(r=>r.st==='a').slice(-5).reverse();
+ let t=`*${SCHOOL}*\n📋 تبليغ بشأن الطالب\n👤 ${s.name}\n${s.cls} — شعبة ${s.sec}\n\n❌ غياب يوم كامل: ${x.fullAbs}\n❌ غياب دروس: ${x.partAbs} (مجموع الدروس الغائبة: ${x.absL})\n🟡 دروس مجازة: ${x.excL}`;
+ if(x.neg)t+=`\n⚠️ ملاحظات سلوكية: ${x.neg}`;
+ if(ab.length)t+=`\n\nآخر الغيابات:\n`+ab.map(r=>`• ${fmtD(r.date)} — ${lessonName(r.lesson)} — ${r.subject}`).join('\n');
+ t+=`\n\nيرجى المتابعة والالتزام بالدوام.`;
+ waModal(t,s.cls,'💬 رسالة عن الطالب');
+}
+function waWarnDlg(id){
+ const s=db.students.find(x=>x.id===id),x=stats(s);
+ openModal(`<h3>⚠️ صورة وصل إنذار</h3><div style="color:var(--mut)">${esc(s.name)}</div>
+ <label>درجة الإنذار</label><select id="dLv"><option>إنذار أول</option><option>إنذار ثانٍ</option><option>إنذار ثالث</option><option>إنذار نهائي</option></select>
+ <label>سبب الإنذار</label><select id="dRs"><option>كثرة الغياب عن الدوام</option><option>التأخر المتكرر</option><option>سلوك غير منضبط</option><option>الإخلال بنظام الدرس</option><option>أخرى (اكتبها أدناه)</option></select>
+ <label>تفاصيل / ملاحظات إضافية (اختياري)</label><textarea id="dNt" rows="2"></textarea>
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="doWarnImg('${id}')">تجهيز الصورة</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
+ if(!x.fullAbs&&!x.absL&&x.neg)$('#dRs').selectedIndex=2;
+}
+async function doWarnImg(id){
+ const s=db.students.find(x=>x.id===id),o={lv:$('#dLv').value,rs:$('#dRs').value,nt:$('#dNt').value.trim(),gn:'',gp:'',gr:''};
+ closeModal();const cn=await nextNum(),num=new Date().getFullYear()+'/'+cn;
+ makeImage(warnHTML(s,o,num),'انذار-'+s.name,`⚠️ ${SCHOOL}\n${o.lv} — الطالب ${s.name} (${s.cls} / ${s.sec})\nالسبب: ${o.rs}`,s.cls);
+}
+function waReportImg(id){
+ const s=db.students.find(x=>x.id===id);
+ makeImage(reportHTML(s),'تقرير-'+s.name,`📄 ${SCHOOL}\nتقرير الطالب ${s.name} (${s.cls} / ${s.sec})`,s.cls);
+}
+let waImg={files:[],cap:''};
+async function makeImage(html,name,cap,cls){
+ if(typeof html2canvas==='undefined'){toast('مكتبة الصور لم تُحمَّل — تحقق من الإنترنت');return}
+ toast('جارٍ تجهيز الصورة…');
+ const box=document.createElement('div');box.style.cssText='position:fixed;left:-10000px;top:0;width:794px;background:#fff';
+ box.innerHTML=html;document.body.appendChild(box);
+ try{
+  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  const cv=await html2canvas(box,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false});
+  const W=cv.width,PH=Math.round(W*1.4142),parts=[];
+  if(cv.height<=PH*1.08)parts.push(cv);
+  else for(let y=0;y<cv.height;y+=PH){const h=Math.min(PH,cv.height-y),c=document.createElement('canvas');c.width=W;c.height=h;c.getContext('2d').drawImage(cv,0,y,W,h,0,0,W,h);parts.push(c)}
+  const blobs=await Promise.all(parts.map(c=>new Promise(r=>c.toBlob(r,'image/jpeg',.92))));
+  const nm=name.replace(/[\\\/:*?"<>|]/g,'');
+  waImg={cap,files:blobs.map((b,i)=>new File([b],nm+(blobs.length>1?'-'+(i+1):'')+'.jpg',{type:'image/jpeg'}))};
+  imgModal(cls);
+ }catch(e){console.error(e);toast('تعذّر إنشاء الصورة')}
+ finally{box.remove()}
+}
+function imgModal(cls){
+ const link=(db.wa||{})[cls],urls=waImg.files.map(f=>URL.createObjectURL(f));
+ openModal(`<h3>📲 الصورة جاهزة${urls.length>1?` (${urls.length} صفحات)`:''}</h3>
+ <div style="max-height:46vh;overflow:auto;border-radius:14px;background:#fff">${urls.map(u=>`<img src="${u}" style="width:100%;display:block;margin-bottom:4px">`).join('')}</div>
+ <div class="btns" style="margin-top:12px"><button class="btn gold" onclick="shareImg()">إرسال عبر واتساب</button><button class="btn" onclick="saveImg()">⬇ تنزيل الصورة</button></div>
+ <div class="btns" style="margin-top:8px">${link?`<button class="btn blue sm" onclick="window.open(${J(link)},'_blank')">فتح مجموعة ${esc(cls)}</button>`:''}<button class="btn sm" onclick="closeModal()">إغلاق</button></div>
+ <small style="color:var(--mut);display:block;margin-top:8px">زر الإرسال يفتح قائمة المشاركة، اختر واتساب ثم المجموعة. إن لم تظهر القائمة نزّل الصورة وأرفقها يدوياً.</small>`);
+}
+async function shareImg(){
+ const files=waImg.files;
+ if(navigator.canShare&&navigator.canShare({files})){
+  try{await navigator.share({files,text:waImg.cap});return}catch(e){if(e&&e.name==='AbortError')return}
+ }
+ saveImg();toast('المشاركة غير مدعومة هنا — نُزّلت الصورة، أرفقها في واتساب');
+}
+function saveImg(){waImg.files.forEach((f,i)=>setTimeout(()=>{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();a.remove()},i*400))}
 
 /* ---------- ADMIN ---------- */
 function vAdmin(){
- const struct=Object.keys(db.structure).map(c=>`<div style="margin:10px 0"><b>${esc(c)}</b> <span style="color:var(--mut);font-size:12px">(${db.students.filter(s=>s.cls===c).length} طالب)</span><div class="chips" style="margin-top:6px">${db.structure[c].map(s=>`<span class="chip">${esc(s)}<b onclick="delSec(${J([c,s])})">×</b></span>`).join('')}<span class="chip" onclick="addSec(${J(c)})">＋ شعبة</span><span class="chip" style="color:var(--red)" onclick="delClass(${J(c)})">🗑 حذف الصف</span></div></div>`).join('');
+ const struct=Object.keys(db.structure).map(c=>`<div style="margin:10px 0"><b>${esc(c)}</b> <span style="color:var(--mut);font-size:12px">(${db.students.filter(s=>s.cls===c).length} طالب)</span><div class="chips" style="margin-top:6px">${db.structure[c].map(s=>`<span class="chip">${esc(s)}<b onclick="delSec(${J([c,s])})">×</b></span>`).join('')}<span class="chip" onclick="addSec(${J(c)})">＋ شعبة</span></div></div>`).join('');
  return `<div class="top"><button class="back" onclick="go('home')">→</button><div><h2>🔐 لوحة الإدارة</h2><small>جميع التعديلات تتم من هنا</small></div></div>
  <details class="card" open><summary>📥 استيراد الأسماء من Excel</summary>
   <p style="color:var(--mut);font-size:13px;margin:0 0 10px">يقرأ الأعمدة: الاسم، القيد، الصفحة، الصف، الشعبة (إن وُجدت)، ويرتّب الأسماء أبجدياً تلقائياً.</p>
@@ -761,28 +620,16 @@ function vAdmin(){
  <details class="card"><summary>🏫 الصفوف والشعب</summary>${struct}<div class="two" style="margin-top:10px"><input id="nc" placeholder="اسم صف جديد"><button class="btn gold" onclick="addCls()">إضافة صف</button></div></details>
  <details class="card"><summary>⚑ قائمة السلوكيات</summary><div class="chips">${db.behaviors.map((b,i)=>`<span class="chip ${b.k} on">${esc(b.n)}<b onclick="db.behaviors.splice(${i},1);save();render()" style="color:inherit">×</b></span>`).join('')}</div>
   <div class="two" style="margin-top:10px"><input id="nb" placeholder="سلوك جديد"><select id="nk"><option value="neg">سلبي</option><option value="pos">إيجابي</option></select></div><button class="btn gold full" style="margin-top:8px" onclick="addBeh()">إضافة</button></details>
+ <details class="card"><summary>📲 مجموعات واتساب</summary><p style="color:var(--mut);font-size:13px;margin:0 0 6px">ألصق رابط دعوة مجموعة كل صف (يبدأ بـ chat.whatsapp.com). اتركه فارغاً إن لم تريد ربط الصف.</p>${Object.keys(db.structure).map(c=>`<label>${esc(c)}</label><input dir="ltr" placeholder="https://chat.whatsapp.com/..." value="${esc((db.wa||{})[c]||'')}" onchange="setWa(${J(c)},this.value)">`).join('')}</details>
  <details class="card"><summary>♻️ النسخ الاحتياطي والاسترداد</summary>
   <div class="btns"><button class="btn gold" onclick="exportDB()">⬇ تنزيل نسخة احتياطية</button><button class="btn" onclick="importDB()">⬆ استرداد من ملف</button><button class="btn" onclick="restorePrev()">↩ استرداد آخر حالة تلقائية</button></div>
   <p style="color:var(--mut);font-size:12px">تُحفظ البيانات على هذا الجهاز. نزّل نسخة احتياطية بشكل دوري.</p></details>
- ${waAdminHTML()}
-  <details class="card"><summary>🔑 الرمز السري</summary><label style="margin-top:0">رمز جديد</label><input id="npin" type="password" inputmode="numeric" placeholder="4 أرقام أو أكثر"><button class="btn gold full" style="margin-top:8px" onclick="chPin()">تغيير الرمز</button></details>
+ <details class="card"><summary>🔑 الرمز السري</summary><label style="margin-top:0">رمز جديد</label><input id="npin" type="password" inputmode="numeric" placeholder="6 أرقام أو أكثر"><button class="btn gold full" style="margin-top:8px" onclick="chPin()">تغيير الرمز</button></details>
  <details class="card"><summary style="color:var(--red)">⚠️ حذف البيانات</summary><div class="btns"><button class="btn" onclick="wipe('sessions')">حذف سجلات الحضور</button><button class="btn" onclick="wipe('students')">حذف كل الطلاب</button></div></details>${foot()}`;
 }
 function addCls(){const v=$('#nc').value.trim();if(!v)return;ensureStruct(v,'أ');save();render()}
 function addSec(c){openModal(`<h3>شعبة جديدة في ${esc(c)}</h3><input id="nsec" placeholder="مثال: ج"><div class="btns" style="margin-top:12px"><button class="btn gold" onclick="const v=$('#nsec').value.trim();if(v){ensureStruct(${J(c)},v);save();closeModal();render()}">إضافة</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
-function delSec([c,s]){delSection(c,s)}
-function delSection(c,s){askAdmin(()=>{
- const n=studentsOf(c,s).length,m=db.sessions.filter(x=>x.cls===c&&x.sec===s).length;
- confirmBox(`حذف شعبة <b>${esc(s)}</b> من <b>${esc(c)}</b> نهائياً؟<br>سيُحذف <b>${n}</b> طالب و<b>${m}</b> سجل حضور. (يمكن الاسترداد من الحالة التلقائية)`,()=>{
-  snapshot();db.students=db.students.filter(x=>!(x.cls===c&&x.sec===s));db.sessions=db.sessions.filter(x=>!(x.cls===c&&x.sec===s));
-  db.structure[c]=(db.structure[c]||[]).filter(x=>x!==s);save();toast('تم حذف الشعبة');
-  if(view.n==='admin')render();else go('home')},'حذف')})}
-function delClass(c){askAdmin(()=>{
- const n=db.students.filter(x=>x.cls===c).length,m=db.sessions.filter(x=>x.cls===c).length,k=(db.structure[c]||[]).length;
- confirmBox(`حذف الصف <b>${esc(c)}</b> بالكامل نهائياً؟<br>سيُحذف <b>${k}</b> شعبة و<b>${n}</b> طالب و<b>${m}</b> سجل حضور. (يمكن الاسترداد من الحالة التلقائية)`,()=>{
-  snapshot();db.students=db.students.filter(x=>x.cls!==c);db.sessions=db.sessions.filter(x=>x.cls!==c);delete db.structure[c];
-  save();toast('تم حذف الصف');
-  if(view.n==='admin')render();else go('home')},'حذف')})}
+function delSec([c,s]){if(db.students.some(x=>x.cls===c&&x.sec===s)){toast('لا يمكن حذف شعبة فيها طلاب');return}db.structure[c]=db.structure[c].filter(x=>x!==s);if(!db.structure[c].length&&!db.students.some(x=>x.cls===c))delete db.structure[c];save();render()}
 function addBeh(){const v=$('#nb').value.trim();if(!v)return;db.behaviors.push({n:v,k:$('#nk').value});save();render()}
 function chPin(){const v=$('#npin').value.trim();if(v.length<4){toast('الرمز قصير جداً');return}db.code=v;save();toast('تم تغيير الرمز ✓');$('#npin').value=''}
 function wipe(w){askAdmin(()=>confirmBox(w==='sessions'?'حذف جميع سجلات الحضور والغياب؟':'حذف جميع الطلاب وسجلاتهم؟',()=>{snapshot();if(w==='sessions')db.sessions=[];else{db.students=[];db.sessions=[]}save();toast('تم الحذف — يمكن الاسترداد من الحالة التلقائية');render()},'حذف'))}
@@ -802,7 +649,7 @@ function parseSheets(wb){
   let hr=-1,map={};
   for(let r=0;r<Math.min(rows.length,12);r++){
    const m={};rows[r].forEach((c,ix)=>{const t=norm(c);if(!t)return;
-    if(t.includes('هاتف')||t.includes('موبايل')||t.includes('جوال')||t.includes('واتس'))m.gp=ix;else if(t.includes('ولي'))m.gn=ix;else if(t.includes('صفحه'))m.page=ix;else if(t.includes('قيد'))m.reg=ix;else if(t.includes('شعبه'))m.sec=ix;else if(t.includes('صف')||t.includes('مرحله'))m.cls=ix;else if(t.includes('اسم')&&m.name===undefined)m.name=ix});
+    if(t.includes('صفحه'))m.page=ix;else if(t.includes('قيد'))m.reg=ix;else if(t.includes('شعبه'))m.sec=ix;else if(t.includes('صف')||t.includes('مرحله'))m.cls=ix;else if(t.includes('اسم'))m.name=ix});
    if(m.name!==undefined){hr=r;map=m;break}
   }
   let start=hr+1;
@@ -816,7 +663,7 @@ function parseSheets(wb){
   for(let r=start;r<rows.length;r++){
    const g=k=>map[k]===undefined?'':String(rows[r][map[k]]??'').trim(),name=g('name');
    if(!name||/^\d+$/.test(name)||!/[\u0600-\u06FFA-Za-z]/.test(name))continue;
-   all.push({name:name.replace(/\s+/g,' '),reg:g('reg'),page:g('page'),cls:g('cls'),sec:g('sec'),gname:g('gn'),gphone:g('gp')});
+   all.push({name:name.replace(/\s+/g,' '),reg:g('reg'),page:g('page'),cls:g('cls'),sec:g('sec')});
   }
  });
  if(!all.length){toast('لم يُعثر على أسماء في الملف');return}
@@ -831,194 +678,11 @@ function parseSheets(wb){
   snapshot();let add=0,upd=0;
   all.forEach(x=>{const cls=x.cls||tc,sec=x.sec||ts;
    const d=db.students.find(s=>s.cls===cls&&s.sec===sec&&norm(s.name)===norm(x.name));
-   if(d){if(x.reg)d.reg=x.reg;if(x.page)d.page=x.page;if(x.gname)d.gname=x.gname;if(x.gphone)d.gphone=x.gphone;upd++}else{db.students.push({id:uid(),name:x.name,reg:x.reg,page:x.page,cls,sec,photo:'',gname:x.gname||'',gphone:x.gphone||''});add++}
+   if(d){if(x.reg)d.reg=x.reg;if(x.page)d.page=x.page;upd++}else{db.students.push({id:uid(),name:x.name,reg:x.reg,page:x.page,cls,sec,photo:''});add++}
    ensureStruct(cls,sec)});
   db.students.sort(cmp);save();closeModal();toast(`تمت إضافة ${add} وتحديث ${upd}`);render();
  };
 }
-
-/* ---------- WHATSAPP (اختياري) ---------- */
-const WA_AD='٠١٢٣٤٥٦٧٨٩',WA_PD='۰۱۲۳۴۵۶۷۸۹';
-function waNum(p){
- let d=String(p||'').replace(/[٠-٩]/g,c=>WA_AD.indexOf(c)).replace(/[۰-۹]/g,c=>WA_PD.indexOf(c)).replace(/\D/g,'');
- if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='964'+d.slice(1);else if(d.length===10&&d[0]==='7')d='964'+d;
- return d.length>=11&&d.length<=15?d:''}
-const WA_DEF={mode:'manual',api:'',onSave:false,
- greet:'السلام عليكم ورحمة الله وبركاته\nالسيد {ولي_الأمر} المحترم،\nنحيطكم علماً بخصوص الطالب: *{الطالب}* ({الصف} — شعبة {الشعبة})',
- foot:'يرجى المتابعة والتواصل مع إدارة المدرسة عند الحاجة.\n{المدرسة}',
- pr:'حاضر ✅',ab:'غائب ❌',ex:'مجاز 🟡',fullAb:'⚠️ غياب يوم كامل',fullEx:'🟡 إجازة ليوم كامل',fullPr:'✅ حضر طوال اليوم',tot:'📊 سجل الطالب حتى تاريخه:'};
-const WA_TK=['greet','foot','pr','ab','ex','fullAb','fullEx','fullPr','tot'];
-function waC(){const o=Object.assign({},WA_DEF,(db&&db.wa)||{});WA_TK.forEach(k=>{if(!String(o[k]||'').trim())o[k]=WA_DEF[k]});return o}
-const waIsAuto=()=>{const c=waC();return c.mode==='auto'&&!!c.api};
-const waFill=(t,s)=>String(t).split('{الطالب}').join(s.name||'').split('{الصف}').join(s.cls||'').split('{الشعبة}').join(s.sec||'').split('{ولي_الأمر}').join(s.gname||'ولي أمر الطالب').split('{المدرسة}').join(SCHOOL);
-function statsDraft(s){const bk=db.sessions;db.sessions=bk.filter(x=>x.id!==draft.id).concat([draft]);try{return stats(s)}finally{db.sessions=bk}}
-
-function waOpen(phone,text){
- const n=waNum(phone);if(!n){toast('رقم ولي الأمر غير مُدخل أو غير صالح');return false}
- const u='https://wa.me/'+n+'?text='+encodeURIComponent(text);
- const w=window.open(u,'_blank');
- if(!w){if(draft){toast('اسمح بالنوافذ المنبثقة لفتح واتساب');return false}location.href=u}
- return true}
-
-/* إرسال تلقائي عبر خدمة وسيطة (Cloud Function) — لا يُخزَّن أي مفتاح سري في هذا الملف */
-async function waAuto(phone,text){
- const n=waNum(phone);if(!n)return{ok:false,err:'رقم غير صالح'};
- const c=waC();if(!c.api)return{ok:false,err:'لم يُضبط رابط الخدمة'};
- try{
-  const u=(typeof firebase!=='undefined'&&firebase.apps.length)?firebase.auth().currentUser:null,tok=u?await u.getIdToken():'';
-  const r=await Promise.race([fetch(c.api,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok},body:JSON.stringify({to:n,text})}),new Promise((_,j)=>setTimeout(()=>j(new Error('انتهت المهلة')),20000))]);
-  const d=await r.json().catch(()=>({}));
-  return r.ok&&d.ok!==false?{ok:true}:{ok:false,err:d.error||('HTTP '+r.status)};
- }catch(e){return{ok:false,err:String((e&&e.message)||e)}}}
-async function waGo(ph,msg,auto,fb){
- if(!waNum(ph)){toast('رقم ولي الأمر غير مُدخل أو غير صالح');return false}
- if(auto){
-  toast('جارٍ الإرسال…');const r=await waAuto(ph,msg);
-  if(r.ok){toast('تم الإرسال تلقائياً ✓');return true}
-  toast('تعذّر الإرسال التلقائي: '+r.err);
-  if(!(fb&&!draft))return false}
- return waOpen(ph,msg)}
-
-function waText(s,P){
- const c=waC(),L=[waFill(c.greet,s)],stt=m=>m==='a'?c.ab:m==='e'?c.ex:c.pr;
- if(P.cur){const q=P.cur;L.push('','📅 '+fmtD(q.date,true),`• ${lessonName(q.lesson)}${q.subject?' ('+q.subject+')':''}: ${stt(q.m)}`)}
- if(P.day){
-  const d=P.day.date,ln=P.day.lesson,ses=db.sessions.filter(x=>x.cls===s.cls&&x.sec===s.sec&&x.date===d&&(!ln||x.lesson===ln)).sort((a,b)=>a.lesson-b.lesson);
-  L.push('','📅 '+fmtD(d,true)+(ln?' — '+lessonName(ln):''));
-  if(!ses.length)L.push('• لا توجد دروس مسجّلة في هذا التاريخ');
-  else{
-   ses.forEach(x=>{L.push(`• ${lessonName(x.lesson)}${x.subject?' ('+x.subject+')':''}: ${stt(x.marks[s.id])}`)});
-   if(!ln){const a=ses.filter(x=>x.marks[s.id]==='a').length,e=ses.filter(x=>x.marks[s.id]==='e').length;
-    if(a===ses.length)L.push(c.fullAb);else if(e===ses.length)L.push(c.fullEx);else if(!a&&!e)L.push(c.fullPr)}}}
- if(P.tot){
-  const x=(P.cur&&draft)?statsDraft(s):stats(s),dd=new Set(x.log.filter(r=>r.st==='a').map(r=>r.date)).size;
-  L.push('',c.tot,`• مجموع أيام الغياب: ${dd} يوم (منها ${x.fullAbs} يوم كامل)`,`• مجموع الدروس الغائبة: ${x.absL} درس`,`• الدروس المجازة: ${x.excL} درس`)}
- if(P.leave){
-  const q=P.leave,n=q.fr&&q.to?Math.max(1,daysBetween(q.fr,q.to)):'',back=q.to?addDays(q.to,1):'';
-  L.push('','🏖 '+(q.ty||'إجازة')+(q.nt?' — '+q.nt:''));
-  if(q.fr)L.push(`• من ${fmtD(q.fr)}${q.to?' إلى '+fmtD(q.to):''}${n?' ('+n+' يوم)':''}`);
-  if(back)L.push('• المباشرة بالدوام: '+fmtD(back))}
- if(P.note)L.push('','📝 '+P.note);
- L.push('',waFill(c.foot,s));
- return L.join('\n')}
-
-function waDialog(id){
- const s=db.students.find(x=>x.id===id);if(!s)return;
- openModal(`<h3>💬 رسالة واتساب لولي الأمر</h3><div style="color:var(--mut)">${esc(s.name)} — ${esc(s.cls)} / ${esc(s.sec)}</div>
- <div class="two"><div><label>هاتف ولي الأمر</label><input id="wP" inputmode="tel" value="${esc(s.gphone||'')}" placeholder="07701234567" oninput="waGen()"></div><div><label>اسم ولي الأمر</label><input id="wN" value="${esc(s.gname||'')}" oninput="waGen()"></div></div>
- <label class="chk"><input type="checkbox" id="wD" checked onchange="waTg()">غياب / إجازة الطالب (درس أو يوم)</label>
- <div id="wDb" class="two"><div><label>التاريخ</label><input type="date" id="wDt" value="${todayStr()}" onchange="waLs()"></div><div><label>النطاق</label><select id="wSc" onchange="waGen()"></select></div></div>
- <label class="chk"><input type="checkbox" id="wT" checked onchange="waGen()">إجمالي أيام الغياب حتى الآن</label>
- <label class="chk"><input type="checkbox" id="wL" onchange="waTg()">إجازة (من – إلى)</label>
- <div id="wLb" style="display:none"><select id="wTy" onchange="waGen()"><option>إجازة مرضية</option><option>ظرف عائلي</option><option>مراجعة طبيب / مستشفى</option><option>سفر</option><option>إجازة أخرى</option></select><div class="two" style="margin-top:8px"><div><label>من</label><input type="date" id="wFr" value="${todayStr()}" onchange="waGen()"></div><div><label>إلى</label><input type="date" id="wTo" value="${todayStr()}" onchange="waGen()"></div></div></div>
- <label>ملاحظة (اختياري)</label><input id="wNt" oninput="waGen()" placeholder="تُضاف في نهاية الرسالة">
- <label>معاينة الرسالة (يمكنك تعديلها)</label><textarea id="wM" rows="9"></textarea>
- <label class="chk"><input type="checkbox" id="wSv">حفظ الهاتف والاسم في ملف الطالب 🔐</label>
- <div class="btns" style="margin-top:8px">${waIsAuto()?`<button class="btn blue" onclick="waSend('${id}',1)">🚀 إرسال تلقائي</button>`:''}<button class="btn" style="background:#25D366;color:#062b13" onclick="waSend('${id}')">📲 فتح واتساب</button><button class="btn" onclick="closeModal()">إلغاء</button></div>
- <div style="font-size:12px;color:var(--mut);margin-top:6px">تُفتح محادثة واتساب والرسالة جاهزة، ثم تضغط «إرسال» داخل واتساب.</div>`);
- waS=s;waLs()}
-let waS=null;
-function waTg(){$('#wDb').style.display=$('#wD').checked?'':'none';$('#wLb').style.display=$('#wL').checked?'':'none';waGen()}
-function waLs(){
- const s=waS,d=$('#wDt').value,ses=db.sessions.filter(x=>x.cls===s.cls&&x.sec===s.sec&&x.date===d).sort((a,b)=>a.lesson-b.lesson);
- $('#wSc').innerHTML='<option value="0">اليوم كاملاً</option>'+ses.map(x=>`<option value="${x.lesson}">${lessonName(x.lesson)}${x.subject?' ('+esc(x.subject)+')':''}</option>`).join('');
- waGen()}
-function waGen(){
- if(!waS||!$('#wM'))return;
- const s=Object.assign({},waS,{gname:$('#wN').value.trim()}),P={};
- if($('#wD').checked)P.day={date:$('#wDt').value,lesson:+$('#wSc').value||0};
- if($('#wT').checked)P.tot=1;
- if($('#wL').checked)P.leave={ty:$('#wTy').value,fr:$('#wFr').value,to:$('#wTo').value};
- const n=$('#wNt').value.trim();if(n)P.note=n;
- $('#wM').value=waText(s,P)}
-async function waSend(id,auto){
- const ph=$('#wP').value.trim(),nm=$('#wN').value.trim(),sv=$('#wSv').checked,msg=$('#wM').value;
- if(!(await waGo(ph,msg,auto,false)))return;
- if(sv){closeModal();askAdmin(()=>{const s=db.students.find(x=>x.id===id);if(s){s.gphone=ph;s.gname=nm;save();toast('تم حفظ رقم ولي الأمر ✓');render()}})}}
-async function waLeave(id){
- const s=db.students.find(x=>x.id===id),v=k=>$('#'+k)?.value.trim()||'';
- const ph=v('dGp')||s.gphone,nm=v('dGn')||s.gname;
- await waGo(ph,waText(Object.assign({},s,{gname:nm}),{leave:{ty:v('dTy'),fr:v('dFr'),to:v('dTo'),nt:v('dNt')}}),waIsAuto(),true)}
-
-/* --- زر واتساب داخل شاشة تسجيل الحضور (لكل طالب) --- */
-function waRow(id){
- const s=db.students.find(x=>x.id===id);if(!s||!draft)return;waS=s;
- openModal(`<h3>💬 واتساب ولي الأمر</h3><div style="color:var(--mut)">${esc(s.name)} — ${lessonName(draft.lesson)}</div>
- <div class="two"><div><label>هاتف ولي الأمر</label><input id="wP" inputmode="tel" value="${esc(s.gphone||'')}" placeholder="07701234567"></div><div><label>اسم ولي الأمر</label><input id="wN" value="${esc(s.gname||'')}" oninput="waGenR()"></div></div>
- <label class="chk"><input type="checkbox" id="wT" checked onchange="waGenR()">إجمالي أيام الغياب حتى الآن</label>
- <label>ملاحظة (اختياري)</label><input id="wNt" oninput="waGenR()" placeholder="تُضاف في نهاية الرسالة">
- <label>معاينة الرسالة (يمكنك تعديلها)</label><textarea id="wM" rows="9"></textarea>
- <label class="chk"><input type="checkbox" id="wSv">حفظ الهاتف والاسم في ملف الطالب 🔐</label>
- <div class="btns" style="margin-top:8px">${waIsAuto()?`<button class="btn blue" onclick="waSend('${id}',1)">🚀 إرسال تلقائي</button>`:''}<button class="btn" style="background:#25D366;color:#062b13" onclick="waSend('${id}')">📲 فتح واتساب</button><button class="btn" onclick="closeModal()">إلغاء</button></div>
- <div style="font-size:12px;color:var(--mut);margin-top:6px">تُرسل حالة هذا الدرس كما هي الآن، حتى قبل حفظ الحضور.</div>`);
- waGenR()}
-function waGenR(){
- if(!waS||!draft||!$('#wM'))return;
- const s=Object.assign({},waS,{gname:$('#wN').value.trim()}),P={cur:{date:draft.date,lesson:draft.lesson,subject:draft.subject,m:draft.marks[s.id]||''}};
- if($('#wT').checked)P.tot=1;const n=$('#wNt').value.trim();if(n)P.note=n;
- $('#wM').value=waText(s,P)}
-
-/* --- إشعار بعد حفظ الحضور --- */
-function waQueue(){
- const c=waC(),auto=waIsAuto()&&!!c.onSave;
- if(!auto&&localStorage.getItem('waAsk')==='0')return null;
- const sent=draft.wa||{};
- const items=Object.entries(draft.marks).filter(([i,m])=>(m==='a'||m==='e')&&waNum((db.students.find(x=>x.id===i)||{}).gphone)&&sent[i]!==m);
- return items.length?{id:draft.id,date:draft.date,lesson:draft.lesson,items,auto}:null}
-let waQ=null;
-function waMarkSent(sid,stuId){const x=db.sessions.find(z=>z.id===sid);if(x){x.wa=x.wa||{};x.wa[stuId]=x.marks[stuId]||'';save()}}
-async function waAutoBatch(q){
- toast('جارٍ إرسال الإشعارات…');let ok=0;const bad=[],badItems=[];
- for(const it of q.items){
-  const s=db.students.find(x=>x.id===it[0]);if(!s)continue;
-  const r=await waAuto(s.gphone,waText(s,{day:{date:q.date,lesson:q.lesson},tot:1}));
-  if(r.ok){ok++;waMarkSent(q.id,s.id)}else{bad.push(s.name+' — '+r.err);badItems.push(it)}}
- if(!bad.length){toast(`تم إرسال ${ok} رسالة ✓`);return}
- waQ=Object.assign({},q,{items:badItems,auto:false});
- openModal(`<h3>نتيجة الإرسال التلقائي</h3><p>نجح: <b style="color:var(--grn)">${ok}</b> • فشل: <b style="color:var(--red)">${bad.length}</b></p><div style="color:var(--red);font-size:13px">${bad.map(esc).join('<br>')}</div><div class="btns" style="margin-top:12px"><button class="btn gold" onclick="closeModal();waNotify(waQ)">إرسال يدوي للفاشلين</button><button class="btn" onclick="closeModal()">إغلاق</button></div>`)}
-function waNotify(q){
- waQ=q;const au=waIsAuto();
- openModal(`<h3>📲 إشعار أولياء الأمور (اختياري)</h3><div style="color:var(--mut);font-size:13px">${lessonName(q.lesson)} — ${au?'اضغط «إرسال للجميع» أو أرسل لكل طالب على حدة.':'اضغط 💬 لفتح واتساب برسالة جاهزة لكل طالب.'}</div>
- <label class="chk"><input type="checkbox" id="qT" checked>إضافة إجمالي أيام الغياب</label>
- ${q.items.map(([i,m])=>{const s=db.students.find(x=>x.id===i);return `<div class="lt" style="gap:8px"><span style="flex:1;width:auto">${esc(s.name)} <span class="b ${m==='a'?'r':'y'}">${m==='a'?'غائب':'مجاز'}</span></span><button class="btn sm" style="background:#25D366;color:#062b13" onclick="waQuick('${i}',this)">💬 ${au?'إرسال':'واتساب'}</button></div>`}).join('')}
- <div class="btns" style="margin-top:12px">${au?`<button class="btn blue" onclick="closeModal();waAutoBatch(waQ)">🚀 إرسال للجميع تلقائياً</button>`:''}<button class="btn" onclick="closeModal()">تخطّي / إغلاق</button></div>`)}
-async function waQuick(id,b){
- const s=db.students.find(x=>x.id===id),msg=waText(s,{day:{date:waQ.date,lesson:waQ.lesson},tot:$('#qT').checked});
- if(waIsAuto()){
-  b.disabled=true;b.textContent='…';const r=await waAuto(s.gphone,msg);
-  if(r.ok){b.textContent='✓ أُرسل';b.style.opacity='.6';waMarkSent(waQ.id,id)}else{b.disabled=false;b.textContent='💬 إرسال';toast('تعذّر الإرسال: '+r.err)}
-  return}
- if(waOpen(s.gphone,msg)){b.textContent='✓ فُتح';b.style.opacity='.6'}}
-
-/* --- إعدادات واتساب في لوحة الإدارة --- */
-function waSet(k,v){db.wa=Object.assign({},db.wa||{});db.wa[k]=v;save();if(k==='mode'&&v==='auto'&&!waC().api)toast('أدخل رابط خدمة الإرسال أولاً')}
-function waReset(){confirmBox('استعادة صيغة الرسالة الافتراضية؟',()=>{const o=Object.assign({},db.wa||{});WA_TK.forEach(k=>delete o[k]);db.wa=o;save();render();toast('تمت الاستعادة ✓')})}
-function waPreview(){
- const s={name:'أحمد محمد علي',cls:'الرابع العلمي',sec:'أ',gname:'محمد علي'};
- const t=waText(s,{cur:{date:todayStr(),lesson:2,subject:'الرياضيات',m:'a'},tot:1});
- openModal(`<h3>👁 معاينة الرسالة</h3><textarea rows="12" readonly style="direction:rtl">${esc(t)}</textarea><div class="btns" style="margin-top:12px"><button class="btn" onclick="closeModal()">إغلاق</button></div>`)}
-function waTest(){
- openModal(`<h3>🧪 رسالة تجريبية</h3><label style="margin-top:0">رقم الهاتف</label><input id="tP" inputmode="tel" placeholder="07701234567"><div class="btns" style="margin-top:12px"><button class="btn gold" id="tOk">إرسال تجريبي</button><button class="btn" onclick="closeModal()">إغلاق</button></div>`);
- $('#tOk').onclick=async()=>{const p=$('#tP').value.trim();if(!waNum(p)){toast('رقم غير صالح');return}
-  const b=$('#tOk');b.disabled=true;const r=await waAuto(p,'رسالة تجريبية من '+SCHOOL+' ✅');b.disabled=false;
-  toast(r.ok?'تم الإرسال ✓ تحقق من الواتساب':'فشل: '+r.err)}}
-function waAdminHTML(){
- const c=waC(),v=k=>esc(c[k]),f=(k,l)=>`<div><label>${l}</label><input value="${v(k)}" onchange="waSet('${k}',this.value)"></div>`;
- return `<details class="card"><summary>💬 واتساب أولياء الأمور</summary>
- <label class="chk" style="margin-top:0"><input type="checkbox" ${localStorage.getItem('waAsk')==='0'?'':'checked'} onchange="localStorage.setItem('waAsk',this.checked?'1':'0')">إظهار نافذة الإشعار بعد حفظ الحضور (على هذا الجهاز)</label>
- <label>طريقة الإرسال</label><select onchange="waSet('mode',this.value)"><option value="manual" ${c.mode==='auto'?'':'selected'}>يدوي — يفتح واتساب والرسالة جاهزة</option><option value="auto" ${c.mode==='auto'?'selected':''}>تلقائي — عبر خدمة الإرسال (API)</option></select>
- <label>رابط خدمة الإرسال (Cloud Function)</label><input dir="ltr" value="${v('api')}" placeholder="https://...cloudfunctions.net/sendWhatsApp" onchange="waSet('api',this.value.trim())">
- <label class="chk"><input type="checkbox" ${c.onSave?'checked':''} onchange="waSet('onSave',this.checked)">إرسال تلقائي فور حفظ الحضور (للغائبين والمجازين فقط، بدون نافذة)</label>
- <div class="btns" style="margin-top:8px"><button class="btn sm" onclick="waTest()">🧪 رسالة تجريبية</button></div>
- <label style="color:var(--g1);font-weight:800;margin-top:16px">✏️ صيغة الرسالة</label>
- <p style="color:var(--mut);font-size:12px;margin:0">المتغيرات: {الطالب} {الصف} {الشعبة} {ولي_الأمر} {المدرسة}</p>
- <label>التحية والمقدمة</label><textarea rows="4" onchange="waSet('greet',this.value)">${v('greet')}</textarea>
- <label>الخاتمة</label><textarea rows="2" onchange="waSet('foot',this.value)">${v('foot')}</textarea>
- <div class="two">${f('pr','نص «حاضر»')}${f('ab','نص «غائب»')}</div>
- <div class="two">${f('ex','نص «مجاز»')}${f('tot','عنوان السجل')}</div>
- <div class="two">${f('fullAb','غياب يوم كامل')}${f('fullEx','إجازة يوم كامل')}</div>${f('fullPr','حضر طوال اليوم')}
- <div class="btns" style="margin-top:12px"><button class="btn sm" onclick="waPreview()">👁 معاينة</button><button class="btn sm" onclick="waReset()">↩ الصيغة الافتراضية</button></div>
- <p style="color:var(--mut);font-size:12px;margin:10px 0 0">في الوضع اليدوي لا تُرسل أي رسالة إلا بعد ضغط «إرسال» داخل واتساب.</p></details>`}
 
 /* ---------- CLOUD SYNC (Firebase Firestore) ---------- */
 /* ضع إعدادات مشروعك هنا (Firebase Console ← Project settings ← Your apps ← Web app) */
@@ -1026,9 +690,9 @@ const FIREBASE_CONFIG={apiKey:'AIzaSyB-SZwVTdZXpQiey9y7w2ODjjTZ9sokFs8',authDoma
 const cloud={on:false,tried:false,st:{},se:{},cfg:'',legacy:null,mig:false,srv:{},got:{},pend:{},defer:{},pr:false,dirty:false,err:false};
 let FS=null;
 const stab=o=>{if(o===null||typeof o!=='object')return JSON.stringify(o);if(Array.isArray(o))return'['+o.map(stab).join(',')+']';return'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+stab(o[k])).join(',')+'}'};
-const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||'',gname:s.gname||'',gphone:s.gphone||''});
-const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo&&a.gname===b.gname&&a.gphone===b.gphone;
-const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||null,v:db.v||1});
+const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||''});
+const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo;
+const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},v:db.v||1});
 /* الجلسات تُخزَّن في مستند لكل (صف+شعبة+شهر) لتقليل عدد القراءات */
 const sparts=id=>{const p=id.split('|'),m=p[0].slice(0,7);return{doc:(p[1]+'|'+p[2]+'|'+m).replace(/\//g,'_'),key:p[0]+'_'+p[3],cls:p[1],sec:p[2],month:m}};
 
@@ -1107,11 +771,11 @@ function startListeners(){
  FS.collection('meta').doc('config').onSnapshot({includeMetadataChanges:true},d=>{
   cloud.err=false;cloud.pend.cfg=d.metadata.hasPendingWrites;cbadge();
   if(!d.exists){if(!d.metadata.fromCache&&!cloud.mig){cloud.mig=true;migrate()}return}
-  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||null,v:c.v||1});
+  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},v:c.v||1});
   if(j===cloud.cfg)return;
   whenClean('cfg',()=>{
    if(Array.isArray(c.structure)){db.structure={};c.structure.forEach(x=>{db.structure[x.c]=x.s||[]})}
-   ['lessons','behaviors','code','wa'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});
+   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};
    cloud.cfg=j;softRender()});
  },cloudErr);
  FS.collection('meta').doc('counter').onSnapshot(d=>{if(d.exists&&db)db.counter=Math.max(db.counter||0,d.data().n||0)},()=>{});
