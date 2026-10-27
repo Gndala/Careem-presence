@@ -338,7 +338,14 @@ function askAdmin(cb,min=3){
  $('#pinok').onclick=go_;inp.onkeydown=e=>{if(e.key==='Enter')go_()};
 }
 function confirmBox(msg,cb,label='تأكيد'){openModal(`<h3>تنبيه</h3><p>${msg}</p><div class="btns"><button class="btn red" id="cfok">${label}</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);$('#cfok').onclick=()=>{closeModal();cb()}}
-const studentsOf=(c,s)=>db.students.filter(x=>x.cls===c&&x.sec===s).sort(cmp);
+const pls=s=>[...(s.hist||[]),{c:s.cls,s:s.sec,f:s.since||'',t:''}];
+const placeOn=(s,c,sec,d)=>pls(s).some(p=>p.c===c&&p.s===sec&&(!p.f||d>=p.f)&&(!p.t||d<=p.t));
+const studentsOf=(c,s,date)=>db.students.filter(x=>date?placeOn(x,c,s,date):(x.cls===c&&x.sec===s)).sort(cmp);
+const studentsIn=(c,sec,from,to)=>db.students.filter(x=>pls(x).some(p=>p.c===c&&p.s===sec&&(!p.f||p.f<=to)&&(!p.t||p.t>=from))).sort(cmp);
+const addDays=(d,n)=>{const x=new Date(d+'T12:00:00');x.setDate(x.getDate()+n);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
+function recMove(s,cls,sec,date){
+ s.hist=(s.hist||[]).concat([{c:s.cls,s:s.sec,f:s.since||'',t:addDays(date,-1)}]);
+ s.cls=cls;s.sec=sec;s.since=date}
 function ensureStruct(c,s){if(!db.structure[c])db.structure[c]=[];if(s&&!db.structure[c].includes(s))db.structure[c].push(s)}
 const initial=n=>(String(n).trim()[0]||'؟');
 const av=s=>`<div class="av">${s.photo?`<img src="${s.photo}" alt="">`:esc(initial(s.name))}</div>`;
@@ -348,7 +355,7 @@ const AL_DEF={a1:3,a2:5,a3:7,ban:10},WL=['','إنذار أول','إنذار ثا
 const alv=()=>Object.assign({},AL_DEF,db.al||{});
 function alLevel(d){const a=alv(),k=d>=a.ban?4:d>=a.a3?3:d>=a.a2?2:d>=a.a1?1:0;return k?{k,n:k===4?'إنذار نهائي / حد الحرمان':WL[k]}:null}
 function stats(s){
- const fd=db.fd||1,ss=db.sessions.filter(x=>(x.cls===s.cls&&x.sec===s.sec)||(x.marks&&x.marks[s.id])||(x.beh&&x.beh[s.id])||(x.notes&&x.notes[s.id])),byD={};
+ const fd=db.fd||1,pl=pls(s),ss=db.sessions.filter(x=>pl.some(p=>x.cls===p.c&&x.sec===p.s&&(!p.f||x.date>=p.f)&&(!p.t||x.date<=p.t))||(x.marks&&x.marks[s.id])||(x.beh&&x.beh[s.id])||(x.notes&&x.notes[s.id])),byD={};
  ss.forEach(x=>(byD[x.date]=byD[x.date]||[]).push(x));
  const r={fullAbs:0,fullExc:0,partAbs:0,partExc:0,absL:0,excL:0,lateL:0,days:0,log:[],behLog:[],neg:0,pos:0,beh:{}};
  Object.keys(byD).sort().forEach(d=>{
@@ -459,17 +466,17 @@ function waOne(id){
 }
 function vAtt(){
  if(!draft)return vHome();
- const list=studentsOf(draft.cls,draft.sec);
+ const list=studentsOf(draft.cls,draft.sec,draft.date);
  return `<div class="sticky"><div class="top" style="margin:0"><button class="back" onclick="leaveAtt()">→</button><div><h2 style="font-size:17px">${lessonName(draft.lesson)} — ${esc(draft.subject)}</h2><small>${esc(draft.cls)} / ${esc(draft.sec)} • ${esc(draft.teacher)} • ${fmtD(draft.date)}</small></div></div>
  <div class="pills"><div class="pill p-ok"><b id="cP">0</b>حاضر</div><div class="pill p-ab"><b id="cA">0</b>غائب</div><div class="pill p-ex"><b id="cE">0</b>مجاز</div><div class="pill p-lt"><b id="cL">0</b>متأخر</div></div></div>
  <div class="btns" style="margin-bottom:4px"><button class="btn sm" onclick="clearMarks()">تحضير الجميع</button></div>
  ${list.map(rowH).join('')}<div style="height:70px"></div>
  <div class="savebar"><button class="btn gold full" onclick="saveAtt()">💾 حفظ الحضور</button></div>`;
 }
-function cnt(){if(!draft)return;const n=studentsOf(draft.cls,draft.sec).length,v=Object.values(draft.marks),a=v.filter(x=>x==='a').length,e=v.filter(x=>x==='e').length,lt=v.filter(x=>x==='l').length;
+function cnt(){if(!draft)return;const n=studentsOf(draft.cls,draft.sec,draft.date).length,v=Object.values(draft.marks),a=v.filter(x=>x==='a').length,e=v.filter(x=>x==='e').length,lt=v.filter(x=>x==='l').length;
  const set=(i,x)=>{const el=$('#'+i);if(el)el.textContent=x};set('cP',n-a-e);set('cA',a);set('cE',e);set('cL',lt)}
 function mark(id,t){if(draft.marks[id]===t)delete draft.marks[id];else draft.marks[id]=t;updRow(id);cnt()}
-function updRow(id){const s=db.students.find(x=>x.id===id),el=$('#r_'+id);if(!el)return;const i=studentsOf(draft.cls,draft.sec).findIndex(x=>x.id===id);el.outerHTML=rowH(s,i)}
+function updRow(id){const s=db.students.find(x=>x.id===id),el=$('#r_'+id);if(!el)return;const i=studentsOf(draft.cls,draft.sec,draft.date).findIndex(x=>x.id===id);el.outerHTML=rowH(s,i)}
 function clearMarks(){confirmBox('إلغاء علامات الغياب والإجازة لجميع الطلاب؟',()=>{draft.marks={};render()})}
 function leaveAtt(){confirmBox('الخروج دون حفظ؟ ستضيع التغييرات الحالية.',()=>{draft=null;history.back()},'خروج')}
 function saveAtt(){
@@ -503,7 +510,7 @@ function vStu(p){
  <div class="card"><h3>سجل الغياب والإجازات</h3>${x.log.length?`<table class="t"><tr><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>الحالة</th></tr>`+x.log.slice().reverse().map(r=>`<tr><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td><span class="b ${r.st==='a'?'r':r.st==='l'?'y':'a'}">${stLbl(r.st)}</span></td></tr>`).join('')+'</table>':'<div class="empty" style="padding:6px">لا يوجد غياب مسجّل ✓</div>'}</div>
  <div class="card"><h3>طباعة</h3><div class="btns"><button class="btn gold" onclick="docDialog('${s.id}','report')">📄 تقرير مفصّل PDF</button><button class="btn red" onclick="docDialog('${s.id}','warn')">⚠️ وصل إنذار</button><button class="btn blue" onclick="docDialog('${s.id}','pledge')">✍️ وصل تعهد</button></div></div>
  <div class="card"><h3>📲 إرسال إلى واتساب</h3><div class="btns"><button class="btn gold" onclick="waStuText('${s.id}')">💬 رسالة نصية</button><button class="btn red" onclick="waWarnDlg('${s.id}')">⚠️ صورة إنذار</button><button class="btn blue" onclick="waReportImg('${s.id}')">📄 صورة تقرير</button></div></div>
- <div class="card"><h3>الإدارة 🔐</h3><div class="btns"><button class="btn" onclick="editStudent('${s.id}')">✏️ تعديل / التقاط صورة</button><button class="btn" style="color:var(--red)" onclick="delStudent('${s.id}')">🗑 حذف الطالب</button></div></div>`;
+ <div class="card"><h3>الإدارة 🔐</h3><div class="btns"><button class="btn" onclick="editStudent('${s.id}')">✏️ تعديل / التقاط صورة</button><button class="btn blue" onclick="moveDlg('${s.id}')">🔀 نقل إلى شعبة أخرى</button><button class="btn" style="color:var(--red)" onclick="delStudent('${s.id}')">🗑 حذف الطالب</button></div></div>`;
  return h+foot();
 }
 
@@ -549,7 +556,7 @@ function saveStudent(id){
  if(!name||!cls||!sec){toast('الاسم والصف والشعبة مطلوبة');return}
  if(/[|\/]/.test(cls+sec)){toast('لا تستخدم الرمزين | أو / في الصف والشعبة');return}
  const o={name,reg:$('#eR').value.trim(),page:$('#eP').value.trim(),cls,sec,photo:tmpPhoto};
- if(id){Object.assign(db.students.find(x=>x.id===id),o)}else db.students.push({id:uid(),...o});
+ if(id){const st=db.students.find(x=>x.id===id),oc=st.cls,os=st.sec;Object.assign(st,o);if(oc!==cls||os!==sec){st.cls=oc;st.sec=os;recMove(st,cls,sec,todayStr());logA('نقل طالب',`${name}: ${oc} / ${os} ← ${cls} / ${sec}`)}}else db.students.push({id:uid(),...o});
  logA(id?'تعديل بيانات طالب':'إضافة طالب',`${name} — ${cls} / ${sec}`);ensureStruct(cls,sec);save();closeModal();toast('تم الحفظ ✓');render();
 }
 function delStudent(id){askAdmin(()=>confirmBox('سيُنقل الطالب إلى سلة المحذوفات (في الإدارة) ويمكن استرجاعه خلال 60 يوماً. المتابعة؟',()=>{snapshot();const ds=db.students.find(s=>s.id===id);if(ds){db.trash=db.trash||[];db.trash.unshift({id:uid(),t:Date.now(),u:cur&&isAdmin()?cur.n:'',s:JSON.parse(JSON.stringify(ds))});db.trash.length=Math.min(db.trash.length,100)}logA('حذف طالب',ds?`${ds.name} — ${ds.cls} / ${ds.sec}`:'');db.students=db.students.filter(s=>s.id!==id);save();toast('تم الحذف');history.back()},'حذف'))}
@@ -621,7 +628,7 @@ function setWa(c,v){
  db.wa[c]=v;save();toast('تم ربط مجموعة '+c+' ✓');
 }
 function waText(x){
- const list=studentsOf(x.cls,x.sec),ab=list.filter(s=>x.marks[s.id]==='a'),ex=list.filter(s=>x.marks[s.id]==='e'),lt=list.filter(s=>x.marks[s.id]==='l');
+ const list=studentsOf(x.cls,x.sec,x.date),ab=list.filter(s=>x.marks[s.id]==='a'),ex=list.filter(s=>x.marks[s.id]==='e'),lt=list.filter(s=>x.marks[s.id]==='l');
  let t=`*${SCHOOL}*\n📋 كشف الغياب\n${x.cls} — شعبة ${x.sec}\n📅 ${fmtD(x.date,true)}\n${lessonName(x.lesson)} • ${x.subject} • الأستاذ ${x.teacher}\n`;
  t+=ab.length?`\n❌ الغائبون (${ab.length}):\n`+ab.map((s,i)=>`${i+1}. ${s.name}`).join('\n'):'\n✅ لا يوجد غائبون';
  if(ex.length)t+=`\n\n🟡 المجازون (${ex.length}):\n`+ex.map((s,i)=>`${i+1}. ${s.name}`).join('\n');
@@ -734,14 +741,14 @@ function printGrid(cls,sec){
  const r=gridPages(cls,sec,from,to);if(r.err){toast(r.err);return}
  closeModal();printDoc(r.html,true)}
 function gridPages(cls,sec,from,to){
- const list=studentsOf(cls,sec),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
+ const list=studentsIn(cls,sec,from,to),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
  if(!list.length)return{err:'لا يوجد طلاب في هذه الشعبة'};
  if(!ss.length)return{err:'لا توجد دروس مسجّلة في هذه الفترة'};
  const N=Math.max(db.lessons.length,...ss.map(x=>x.lesson)),dates=[...new Set(ss.map(x=>x.date))].sort(),by={};
  ss.forEach(x=>by[x.date+'|'+x.lesson]=x);
  const PER=Math.max(1,Math.floor(30/N)),fd=db.fd||1;
  const wd=d=>{try{return new Date(d+'T12:00:00').toLocaleDateString('ar',{weekday:'long'})}catch(e){return ''}};
- const cell=(s,d,l)=>{const x=by[d+'|'+l];if(!x)return'<td class="gx">·</td>';const m=x.marks[s.id];return m==='a'?'<td class="ga">غ</td>':m==='e'?'<td class="ge">م</td>':m==='l'?'<td class="gt">ت</td>':'<td class="gp">✓</td>'};
+ const cell=(s,d,l)=>{const x=by[d+'|'+l];if(!x||!placeOn(s,cls,sec,d))return'<td class="gx">·</td>';const m=x.marks[s.id];return m==='a'?'<td class="ga">غ</td>':m==='e'?'<td class="ge">م</td>':m==='l'?'<td class="gt">ت</td>':'<td class="gp">✓</td>'};
  const meta=`<div class="pp-meta">${esc(cls)} — شعبة ${esc(sec)} • الفترة: ${fmtD(from)} إلى ${fmtD(to)} • عدد الطلاب: ${list.length} • الدروس المسجّلة: ${ss.length}<br><span style="font-weight:400">✓ حاضر &nbsp; غ غائب &nbsp; م مجاز &nbsp; ت متأخر &nbsp; · لم يُسجَّل الدرس</span></div>`;
  let pages='';
  for(let i=0;i<dates.length;i+=PER){
@@ -753,8 +760,8 @@ function gridPages(cls,sec,from,to){
   pages+=`<div class="pp pp-land">${pHead('')}<div class="pp-title"><span>جدول الحضور والغياب</span></div>${meta}${t}${pFoot()}</div>`;
  }
  const rows=list.map((s,k)=>{let a=0,e=0,fa=0,lt=0;
-  dates.forEach(d=>{const L=ss.filter(x=>x.date===d),aa=L.filter(x=>x.marks[s.id]==='a').length,ee=L.filter(x=>x.marks[s.id]==='e').length;a+=aa;e+=ee;lt+=L.filter(x=>x.marks[s.id]==='l').length;if(aa===L.length&&L.length>=fd)fa++});
-  const p=ss.length-a-e,pc=Math.round(p/ss.length*100);
+  dates.forEach(d=>{if(!placeOn(s,cls,sec,d))return;const L=ss.filter(x=>x.date===d),aa=L.filter(x=>x.marks[s.id]==='a').length,ee=L.filter(x=>x.marks[s.id]==='e').length;a+=aa;e+=ee;lt+=L.filter(x=>x.marks[s.id]==='l').length;if(aa===L.length&&L.length>=fd)fa++});
+  const rg=ss.filter(x=>placeOn(s,cls,sec,x.date)).length,p=rg-a-e,pc=rg?Math.round(p/rg*100):0;
   return `<tr><td>${k+1}</td><td class="gname">${esc(s.name)}</td><td style="${fa?'color:#c0283a;font-weight:800':''}">${fa}</td><td style="${a?'color:#c0283a;font-weight:800':''}">${a}</td><td>${e}</td><td style="color:#1c62c4">${lt}</td><td style="color:#0f8a5f;font-weight:800">${p}</td><td><span dir="ltr">${pc}%</span></td></tr>`}).join('');
  pages+=`<div class="pp pp-land">${pHead('')}<div class="pp-title"><span>ملخص الحضور والغياب للفترة</span></div>${meta}
  <table class="pp-s"><thead><tr><th style="width:8mm">#</th><th>الطالب</th><th>أيام غياب كاملة</th><th>دروس غائبة</th><th>دروس مجازة</th><th>مرات التأخر</th><th>دروس حاضرة</th><th>نسبة الحضور</th></tr></thead><tbody>${rows}</tbody></table>${pFoot()}</div>`;
@@ -981,13 +988,13 @@ function tbRange(){
  const d=new Date();d.setDate(d.getDate()-6);return[dstr(d),t]}
 function tbSecs(){const o=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>{if(tb.k==='all'||tb.k===ttKey(c,s))o.push([c,s])}));return o}
 function gridData(cls,sec,from,to){
- const list=studentsOf(cls,sec),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
+ const list=studentsIn(cls,sec,from,to),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
  const dates=[...new Set(ss.map(x=>x.date))].sort(),by={};ss.forEach(x=>by[x.date+'|'+x.lesson]=x);
  const N=ss.length?Math.max(db.lessons.length,...ss.map(x=>x.lesson)):db.lessons.length;
- const tot={};list.forEach(s=>tot[s.id]={a:0,e:0,l:0});
+ const tot={},reg={};list.forEach(s=>{tot[s.id]={a:0,e:0,l:0};reg[s.id]=ss.filter(x=>placeOn(s,cls,sec,x.date)).length});
  ss.forEach(x=>Object.entries(x.marks||{}).forEach(([id,m])=>{if(tot[id]&&tot[id][m]!==undefined)tot[id][m]++}));
- return{list,ss,dates,by,N,tot}}
-const gm=(by,s,d,l)=>{const x=by[d+'|'+l];return x?(x.marks[s.id]||'p'):''};
+ return{list,ss,dates,by,N,tot,reg}}
+const gm=(by,s,d,l,c,sec)=>{const x=by[d+'|'+l];return x&&placeOn(s,c,sec,d)?(x.marks[s.id]||'p'):''};
 function vTbl(){
  const [from,to]=tbRange(),secs=tbSecs(),t=todayStr();
  const keys=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>keys.push([c,s])));
@@ -1008,7 +1015,7 @@ function vTbl(){
   else{
    const ls=[...Array(x.N)].map((_,j)=>j+1);
    h+=`<div class="tw"><table class="tb"><thead><tr><th class="nm" rowspan="${big?1:2}">الطالب</th><th rowspan="${big?1:2}">غ</th><th rowspan="${big?1:2}">م</th><th rowspan="${big?1:2}">ت</th>${big?'<th>حاضر</th>':x.dates.map(d=>`<th colspan="${x.N}" style="cursor:pointer" onclick="go('days',{date:'${d}',k:${J(ttKey(x.c,x.s))}})">${dd(d)}</th>`).join('')}</tr>${big?'':`<tr>${x.dates.map(d=>ls.map(l=>`<th>${l}</th>`).join('')).join('')}</tr>`}</thead><tbody>`+
-   x.list.map(s=>{const o=x.tot[s.id];return `<tr><td class="nm" onclick="go('stu',{id:'${s.id}'})">${esc(s.name)}</td><td class="tt" style="color:${o.a?'#ff7b88':'inherit'}">${o.a}</td><td class="tt">${o.e}</td><td class="tt">${o.l}</td>${big?`<td>${x.ss.length-o.a-o.e}</td>`:x.dates.map(d=>ls.map(l=>{const m=gm(x.by,s,d,l);return m===''?'<td class="gx">·</td>':m==='a'?'<td class="ga">غ</td>':m==='e'?'<td class="ge">م</td>':m==='l'?'<td class="gt2">ت</td>':'<td class="gp">✓</td>'}).join('')).join('')}</tr>`}).join('')+`</tbody></table></div>`}
+   x.list.map(s=>{const o=x.tot[s.id];return `<tr><td class="nm" onclick="go('stu',{id:'${s.id}'})">${esc(s.name)}</td><td class="tt" style="color:${o.a?'#ff7b88':'inherit'}">${o.a}</td><td class="tt">${o.e}</td><td class="tt">${o.l}</td>${big?`<td>${x.reg[s.id]-o.a-o.e}</td>`:x.dates.map(d=>ls.map(l=>{const m=gm(x.by,s,d,l,x.c,x.s);return m===''?'<td class="gx">·</td>':m==='a'?'<td class="ga">غ</td>':m==='e'?'<td class="ge">م</td>':m==='l'?'<td class="gt2">ت</td>':'<td class="gp">✓</td>'}).join('')).join('')}</tr>`}).join('')+`</tbody></table></div>`}
   h+='</div>'});
  return h+foot();
 }
@@ -1023,7 +1030,7 @@ function tbXLS(){
   const g=gridData(c,s,from,to);if(!g.ss.length||!g.list.length)return;
   const cols=[];g.dates.forEach(d=>{for(let l=1;l<=g.N;l++)cols.push({d,l})});
   const head=['الطالب','غائب (دروس)','مجاز (دروس)','متأخر (دروس)','حاضر (دروس)',...cols.map(k=>dd(k.d)+' د'+k.l)];
-  const rows=g.list.map(st=>{const o=g.tot[st.id];return[st.name,o.a,o.e,o.l,g.ss.length-o.a-o.e,...cols.map(k=>{const m=gm(g.by,st,k.d,k.l);return m===''?'':m==='a'?'غ':m==='e'?'م':m==='l'?'ت':'✓'})]});
+  const rows=g.list.map(st=>{const o=g.tot[st.id];return[st.name,o.a,o.e,o.l,g.reg[st.id]-o.a-o.e,...cols.map(k=>{const m=gm(g.by,st,k.d,k.l,c,s);return m===''?'':m==='a'?'غ':m==='e'?'م':m==='l'?'ت':'✓'})]});
   sheets.push({name:c+' '+s,aoa:[head,...rows]})});
  if(!sheets.length){toast('لا توجد دروس مسجّلة في هذه الفترة');return}
  const fn='جدول-الغياب-'+from+'_'+to;
@@ -1041,6 +1048,34 @@ function tbXLS(){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=fn+'.csv';a.click();
   toast('مكتبة Excel غير محمّلة — نُزّل الملف بصيغة CSV (يفتح في Excel)');
  }}
+
+
+/* ---------- TRANSFER STUDENT ---------- */
+function moveDlg(id){askAdmin(()=>{
+ const s=db.students.find(x=>x.id===id);if(!s)return;
+ const opts=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(sec=>{if(!(c===s.cls&&sec===s.sec))opts.push([c,sec])}));
+ opts.sort((a,b)=>(b[0]===s.cls)-(a[0]===s.cls));
+ openModal(`<h3>🔀 نقل الطالب إلى شعبة أخرى</h3>
+ <div style="color:var(--mut);font-size:13px"><b style="color:var(--g1)">${esc(s.name)}</b><br>الحالية: ${esc(s.cls)} — شعبة ${esc(s.sec)}</div>
+ <label>النقل إلى</label><select id="mvT" onchange="$('#mvNew').style.display=this.value==='__new'?'block':'none'">${opts.map(([c,sec])=>`<option value="${esc(ttKey(c,sec))}">${esc(c)} — شعبة ${esc(sec)}</option>`).join('')}<option value="__new">＋ صف / شعبة جديدة…</option></select>
+ <div id="mvNew" style="display:none"><div class="two"><div><label>الصف</label><input id="mvC" list="dc" value="${esc(s.cls)}"></div><div><label>الشعبة</label><input id="mvS"></div></div><datalist id="dc">${Object.keys(db.structure).map(c=>`<option value="${esc(c)}">`).join('')}</datalist></div>
+ <label>تاريخ النقل (أول يوم في الشعبة الجديدة)</label><input type="date" id="mvD" max="${todayStr()}" value="${todayStr()}">
+ <small style="color:var(--mut);display:block;margin-top:8px">يبقى سجل غيابه السابق محفوظاً في ملفه، ويظهر في جداول شعبته القديمة حتى تاريخ النقل، وفي الجديدة بعده.</small>
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="moveDo('${id}')">نقل الطالب</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
+},2)}
+function moveDo(id){
+ const s=db.students.find(x=>x.id===id);if(!s)return;
+ let c,sec;const v=$('#mvT').value;
+ if(v==='__new'){c=$('#mvC').value.trim();sec=$('#mvS').value.trim();if(!c||!sec){toast('اكتب الصف والشعبة');return}if(/[|\/]/.test(c+sec)){toast('لا تستخدم الرمزين | أو /');return}}
+ else{const i=v.indexOf('|');c=v.slice(0,i);sec=v.slice(i+1)}
+ const date=$('#mvD').value||todayStr();
+ if(date>todayStr()){toast('لا يمكن اختيار تاريخ مستقبلي');return}
+ if(c===s.cls&&sec===s.sec){toast('الطالب في هذه الشعبة أصلاً');return}
+ if(s.since&&date<s.since){toast('التاريخ أقدم من تاريخ دخوله الشعبة الحالية ('+fmtD(s.since)+')');return}
+ const oc=s.cls,os=s.sec;
+ ensureStruct(c,sec);recMove(s,c,sec,date);
+ logA('نقل طالب',`${s.name}: ${oc} / ${os} ← ${c} / ${sec} (من ${fmtD(date)})`);
+ save();closeModal();toast('تم نقل الطالب إلى '+c+' — شعبة '+sec+' ✓');render()}
 
 /* ---------- ADMIN ---------- */
 function vAdmin(){
@@ -1140,8 +1175,8 @@ const FIREBASE_CONFIG={apiKey:'AIzaSyB-SZwVTdZXpQiey9y7w2ODjjTZ9sokFs8',authDoma
 const cloud={on:false,tried:false,st:{},se:{},cfg:'',legacy:null,mig:false,srv:{},got:{},pend:{},defer:{},pr:false,dirty:false,err:false};
 let FS=null;
 const stab=o=>{if(o===null||typeof o!=='object')return JSON.stringify(o);if(Array.isArray(o))return'['+o.map(stab).join(',')+']';return'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+stab(o[k])).join(',')+'}'};
-const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||''});
-const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo;
+const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||'',since:s.since||'',hist:Array.isArray(s.hist)?s.hist:[]});
+const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo&&(a.since||'')===(b.since||'')&&JSON.stringify(a.hist||[])===JSON.stringify(b.hist||[]);
 const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},v:db.v||1});
 /* الجلسات تُخزَّن في مستند لكل (صف+شعبة+شهر) لتقليل عدد القراءات */
 const sparts=id=>{const p=id.split('|'),m=p[0].slice(0,7);return{doc:(p[1]+'|'+p[2]+'|'+m).replace(/\//g,'_'),key:p[0]+'_'+p[3],cls:p[1],sec:p[2],month:m}};
