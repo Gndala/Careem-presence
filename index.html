@@ -233,6 +233,25 @@ table.pp-s tr{page-break-inside:avoid}table.pp-s thead{display:table-header-grou
 .trend i{width:100%;background:linear-gradient(180deg,#ff7b88,#e0384c);border-radius:6px 6px 2px 2px}
 .trend small{font-size:10px;color:var(--mut)}
 table.pp-g td.gt{background:#dcecff;color:#1c62c4;font-weight:900}
+
+.strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;-webkit-overflow-scrolling:touch}
+.dchip{flex:0 0 64px;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px 4px;text-align:center;cursor:pointer;background:rgba(255,255,255,.05)}
+.dchip.on{background:linear-gradient(135deg,#f6d56a,#d9ae2c);color:#0a1438;border-color:transparent}
+.dchip b{display:block;font-size:14px}.dchip small{display:block;font-size:10px;opacity:.8}
+.dchip i{display:inline-block;margin-top:3px;font-style:normal;font-size:11px;font-weight:800;color:#ff7b88;background:rgba(255,80,100,.15);border-radius:8px;padding:0 7px}
+.dchip.on i{color:#8a1226;background:rgba(255,255,255,.6)}
+.tw{overflow:auto;max-height:70vh;border-radius:10px;-webkit-overflow-scrolling:touch}
+table.tb{border-collapse:separate;border-spacing:0;font-size:12px;min-width:100%}
+table.tb th,table.tb td{border-left:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:4px 6px;text-align:center;white-space:nowrap}
+table.tb thead th{position:sticky;top:0;background:#16255a;color:#f6d56a;z-index:2}
+table.tb thead tr:nth-child(2) th{top:27px;background:#1b3a9a;color:#fff;font-size:11px;padding:2px 4px}
+table.tb .nm{position:sticky;right:0;background:#0e1a44;text-align:right;min-width:120px;max-width:150px;overflow:hidden;text-overflow:ellipsis;z-index:1;font-weight:700}
+table.tb thead .nm{z-index:3;background:#16255a}
+table.tb td.ga{background:#ff506433;color:#ff7b88;font-weight:900}
+table.tb td.ge{background:#ffb02a2e;color:#ffbf4d;font-weight:900}
+table.tb td.gt2{background:#4aa3ff2e;color:#6ab8ff;font-weight:900}
+table.tb td.gp{color:#37d9a0}table.tb td.gx{color:rgba(255,255,255,.25)}
+table.tb td.tt{font-weight:800}
 </style>
 </head>
 <body>
@@ -241,6 +260,7 @@ table.pp-g td.gt{background:#dcecff;color:#1c62c4;font-weight:900}
 <nav id="nav">
  <button data-n="home" onclick="go('home')"><span>🏛️</span>الرئيسية</button>
  <button data-n="find" onclick="go('find')"><span>🔎</span>الطلاب</button>
+ <button data-n="tbl" onclick="go('tbl')"><span>📋</span>الجدول</button>
  <button data-n="dash" onclick="openDash()"><span>📊</span>المتابعة</button>
  <button data-n="admin" onclick="openAdmin()"><span>🔐</span>الإدارة</button>
 </nav>
@@ -354,7 +374,7 @@ function openAdmin(){askAdmin(()=>go('admin'))}
 function render(){
  if(!db)return;
  if(((view.n==='admin'||view.n==='tt'||view.n==='audit')&&lvl()<3)||(view.n==='dash'&&lvl()<2))view={n:'home',p:{}};
- const f={home:vHome,sec:vSec,att:vAtt,stu:vStu,find:vFind,admin:vAdmin,dash:vDash,tt:vTT,audit:vAudit}[view.n]||vHome;
+ const f={home:vHome,sec:vSec,att:vAtt,stu:vStu,find:vFind,admin:vAdmin,dash:vDash,tt:vTT,audit:vAudit,days:vDays,tbl:vTbl}[view.n]||vHome;
  $('#app').innerHTML=f(view.p||{});
  $('#nav').style.display=view.n==='att'?'none':'flex';
  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.n===(view.n==='stu'||view.n==='sec'?'home':view.n)));
@@ -367,7 +387,7 @@ const foot=()=>`<div class="foot">تصميم وبرمجة: <b>${DESIGNER}</b><br
 function vHome(){
  const t=todayStr(),ts=db.sessions.filter(x=>x.date===t),ab=new Set();
  ts.forEach(x=>Object.entries(x.marks).forEach(([i,m])=>{if(m==='a')ab.add(i)}));
- let h=`<div class="hero"><img class="logo" src="${LOGO}" alt="شعار المدرسة"><h1 class="gt">${SCHOOL}</h1><div class="en">${SCHOOL_EN}</div><div class="dt">${fmtD(t,true)}</div></div>
+ let h=`<div class="hero"><img class="logo" src="${LOGO}" alt="شعار المدرسة"><h1 class="gt">${SCHOOL}</h1><div class="en">${SCHOOL_EN}</div><button class="btn sm" style="margin:10px auto 6px;display:block" onclick="go('days',{date:'${t}'})">🕘 التواريخ السابقة وغيابها</button><div class="dt" style="cursor:pointer" onclick="go('days',{date:'${t}'})">${fmtD(t,true)}</div></div>
  <div class="tiles"><div class="tile"><b>${db.students.length}</b><span>طالب مسجّل</span></div><div class="tile"><b>${ts.length}</b><span>دروس مسجّلة اليوم</span></div><div class="tile"><b style="color:var(--red)">${ab.size}</b><span>غائبون اليوم</span></div></div>`;
  if(!isStandalone()&&!pwaHide&&(deferredInstall||isIOS))h+=`<div class="card"><b>📲 ثبّت التطبيق على هاتفك</b><br><small style="color:var(--mut)">يفتح بأيقونة مثل التطبيقات ويعمل حتى بدون إنترنت</small><div class="btns" style="margin-top:10px"><button class="btn gold" onclick="installApp()">تثبيت</button><button class="btn sm" onclick="pwaHide=true;idbPut('pwa_hide',1);render()">لاحقاً</button></div></div>`;
  if(lvl()>=3&&lastExport&&Date.now()-lastExport>14*864e5)h+=`<div class="card" style="border-color:var(--amb);cursor:pointer" onclick="openAdmin()"><b style="color:var(--amb)">💾 لم تنزّل نسخة احتياطية منذ ${Math.floor((Date.now()-lastExport)/864e5)} يوماً</b><br><small style="color:var(--mut)">اضغط وافتح الإدارة ثم «تنزيل نسخة احتياطية»</small></div>`;
@@ -395,7 +415,7 @@ function vSec(p){
  <div class="tabs"><button class="${tab==='att'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'att'})},false)">تسجيل الحضور</button><button class="${tab==='stu'?'on':''}" onclick="go('sec',${J({cls,sec,tab:'stu'})},false)">الطلاب والتقارير</button></div>`;
  if(tab==='att'){
   const teachers=[...new Set(db.sessions.map(x=>x.teacher))],subs=[...new Set(db.sessions.map(x=>x.subject))];
-  h+=`<div class="card"><label style="margin-top:0">تاريخ اليوم</label><input type="date" max="${todayStr()}" value="${sel.date}" onchange="sel.date=this.value;sel.lesson=null;render()">
+  h+=`<div class="card"><button class="btn sm" style="margin-bottom:8px" onclick="go('days',{date:'${sel.date}',k:${J(ttKey(cls,sec))}})">🕘 التواريخ السابقة وغيابها</button><label style="margin-top:0">تاريخ اليوم</label><input type="date" max="${todayStr()}" value="${sel.date}" onchange="sel.date=this.value;sel.lesson=null;render()">
   <label>اختر الدرس</label><div class="ls">`+db.lessons.map((l,i)=>{const n=i+1,done=db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,n));
    return `<div class="l ${sel.lesson===n?'on':''} ${done?'done':''}" onclick="pickLesson(${n},${J({cls,sec})})"><b>${lessonName(n)}</b><small>${esc(l.t)}</small>${(()=>{const g=ttGet(cls,sec,sel.date,n);return g&&g.s?`<small style="color:var(--g1)">${esc(g.s)}</small>`:''})()}</div>`}).join('')+`</div></div>`;
   if(sel.lesson){
@@ -711,10 +731,12 @@ function gridDialog(cls,sec){
 function printGrid(cls,sec){
  const from=$('#gF').value,to=$('#gT').value;
  if(!from||!to||from>to){toast('حدّد فترة صحيحة');return}
+ const r=gridPages(cls,sec,from,to);if(r.err){toast(r.err);return}
+ closeModal();printDoc(r.html,true)}
+function gridPages(cls,sec,from,to){
  const list=studentsOf(cls,sec),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
- if(!list.length){toast('لا يوجد طلاب في هذه الشعبة');return}
- if(!ss.length){toast('لا توجد دروس مسجّلة في هذه الفترة');return}
- closeModal();
+ if(!list.length)return{err:'لا يوجد طلاب في هذه الشعبة'};
+ if(!ss.length)return{err:'لا توجد دروس مسجّلة في هذه الفترة'};
  const N=Math.max(db.lessons.length,...ss.map(x=>x.lesson)),dates=[...new Set(ss.map(x=>x.date))].sort(),by={};
  ss.forEach(x=>by[x.date+'|'+x.lesson]=x);
  const PER=Math.max(1,Math.floor(30/N)),fd=db.fd||1;
@@ -736,7 +758,7 @@ function printGrid(cls,sec){
   return `<tr><td>${k+1}</td><td class="gname">${esc(s.name)}</td><td style="${fa?'color:#c0283a;font-weight:800':''}">${fa}</td><td style="${a?'color:#c0283a;font-weight:800':''}">${a}</td><td>${e}</td><td style="color:#1c62c4">${lt}</td><td style="color:#0f8a5f;font-weight:800">${p}</td><td><span dir="ltr">${pc}%</span></td></tr>`}).join('');
  pages+=`<div class="pp pp-land">${pHead('')}<div class="pp-title"><span>ملخص الحضور والغياب للفترة</span></div>${meta}
  <table class="pp-s"><thead><tr><th style="width:8mm">#</th><th>الطالب</th><th>أيام غياب كاملة</th><th>دروس غائبة</th><th>دروس مجازة</th><th>مرات التأخر</th><th>دروس حاضرة</th><th>نسبة الحضور</th></tr></thead><tbody>${rows}</tbody></table>${pFoot()}</div>`;
- printDoc(pages,true);
+ return{html:pages};
 }
 
 
@@ -897,6 +919,128 @@ async function bkDownload(id){
  const e=bkList.find(x=>x.id===id);if(!e)return;
  const b=new Blob([await bkText(e)],{type:'application/json'}),a=document.createElement('a');
  a.href=URL.createObjectURL(b);a.download='nahj-auto-backup-'+e.d+'.json';a.click()}
+
+
+/* ---------- PREVIOUS DAYS ---------- */
+const wd2=d=>{try{return new Date(d+'T12:00:00').toLocaleDateString('ar',{weekday:'short'})}catch(e){return ''}};
+const dd=d=>d.slice(8)+'/'+d.slice(5,7);
+function daysPick(d){view.p=Object.assign({},view.p,{date:d});history.replaceState({n:'days',p:view.p},'');render();window.scrollTo(0,0)}
+function daysSec(k){view.p=Object.assign({},view.p,{k});history.replaceState({n:'days',p:view.p},'');render()}
+function daysStep(dir){
+ const ds=[...new Set(db.sessions.map(x=>x.date))].sort(),d=view.p.date||todayStr();
+ const nx=dir<0?[...ds].reverse().find(x=>x<d):ds.find(x=>x>d);
+ if(nx)daysPick(nx);else toast(dir<0?'لا توجد أيام أقدم':'لا توجد أيام أحدث')}
+function dayData(date,k){
+ const out=[];
+ Object.keys(db.structure).forEach(c=>db.structure[c].forEach(sec=>{
+  if(k&&k!=='all'&&k!==ttKey(c,sec))return;
+  const ss=db.sessions.filter(x=>x.date===date&&x.cls===c&&x.sec===sec);if(!ss.length)return;
+  const per={};
+  ss.forEach(x=>Object.entries(x.marks||{}).forEach(([id,m])=>{if(m==='a'||m==='l'||m==='e'){per[id]=per[id]||{a:[],l:[],e:[]};per[id][m].push(x.lesson)}}));
+  const rows=Object.keys(per).map(id=>({s:db.students.find(z=>z.id===id),m:per[id]})).filter(r=>r.s).sort((p,q)=>p.s.name.localeCompare(q.s.name,'ar'));
+  out.push({c,sec,n:ss.length,rows})}));
+ return out}
+function vDays(){
+ const t=todayStr(),p=view.p||{},date=p.date||t,k=p.k||'all';
+ const days=[...new Set(db.sessions.map(x=>x.date))].sort().reverse().slice(0,40);
+ const keys=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>keys.push([c,s])));
+ const fl=l=>l.join(' ، ');
+ let h=`<div class="top"><button class="back" onclick="history.back()">→</button><div><h2>🕘 الأيام السابقة</h2><small>${fmtD(date,true)}</small></div></div>
+ <div class="strip">${days.map(d=>{const n=dayAb(d).a.size;return `<div class="dchip ${d===date?'on':''}" onclick="daysPick('${d}')"><b>${dd(d)}</b><small>${wd2(d)}</small><i>${n?n:'✓'}</i></div>`}).join('')||'<div class="empty">لا توجد أيام مسجّلة بعد</div>'}</div>
+ <div class="card"><div class="btns"><button class="btn" onclick="daysStep(-1)">‹ اليوم السابق</button><button class="btn" onclick="daysStep(1)">اليوم التالي ›</button></div>
+ <div class="two" style="margin-top:8px"><div><label>التاريخ</label><input type="date" max="${t}" value="${date}" onchange="if(this.value)daysPick(this.value)"></div>
+ <div><label>الشعبة</label><select onchange="daysSec(this.value)"><option value="all">كل الشعب</option>${keys.map(([c,s])=>`<option value="${esc(ttKey(c,s))}" ${ttKey(c,s)===k?'selected':''}>${esc(c)} — ${esc(s)}</option>`).join('')}</select></div></div></div>`;
+ const data=dayData(date,k);
+ if(!data.length)return h+`<div class="card empty">لا توجد دروس مسجّلة في هذا اليوم.</div>`+foot();
+ const a=new Set(),l=new Set(),e=new Set();
+ data.forEach(x=>x.rows.forEach(r=>{if(r.m.a.length)a.add(r.s.id);if(r.m.l.length)l.add(r.s.id);if(r.m.e.length)e.add(r.s.id)}));
+ h+=`<div class="tiles"><div class="tile"><b style="color:var(--red)">${a.size}</b><span>غائب</span></div><div class="tile"><b style="color:#6ab8ff">${l.size}</b><span>متأخر</span></div><div class="tile"><b style="color:var(--amb)">${e.size}</b><span>مجاز</span></div></div>
+ <button class="btn full" style="margin-bottom:10px" onclick="waDay(${J(date)},${J(k)})">📲 إرسال غياب هذا اليوم إلى واتساب</button>`;
+ data.forEach(x=>{
+  h+=`<div class="card"><h3>${esc(x.c)} — شعبة ${esc(x.sec)} <small style="color:var(--mut)">• ${x.n} درس مسجّل</small></h3>`+
+  (x.rows.length?x.rows.map(r=>`<div class="sr" onclick="go('stu',{id:'${r.s.id}'})">${av(r.s)}<div class="nm"><b>${esc(r.s.name)}</b><small>${[r.m.a.length?'غ: '+fl(r.m.a):'',r.m.l.length?'ت: '+fl(r.m.l):'',r.m.e.length?'م: '+fl(r.m.e):''].filter(Boolean).join(' • ')}</small></div><span class="b ${r.m.a.length?'r':r.m.l.length?'y':'a'}">${r.m.a.length?r.m.a.length+' غياب':r.m.l.length?'متأخر':'مجاز'}</span></div>`).join(''):'<div class="empty" style="padding:6px">✓ لا يوجد غياب</div>')+
+  `<button class="btn sm full" style="margin-top:8px" onclick="sel.date='${date}';sel.lesson=null;go('sec',${J({cls:x.c,sec:x.sec})})">فتح الشعبة في هذا التاريخ</button></div>`});
+ return h+foot();
+}
+function waDay(date,k){
+ const data=dayData(date,k);
+ let t=`*${SCHOOL}*\n📋 كشف الغياب — ${fmtD(date,true)}`;
+ let any=false;
+ data.forEach(x=>{const ab=x.rows.filter(r=>r.m.a.length);if(!ab.length)return;any=true;
+  t+=`\n\n*${x.c} — شعبة ${x.sec}* (${ab.length} غائب):\n`+ab.map((r,i)=>`${i+1}. ${r.s.name} (${r.m.a.length} ${r.m.a.length>2?'دروس':'درس'})`).join('\n')});
+ if(!any)t+='\n\n✅ لا يوجد غائبون.';
+ waModal(t,'','📲 غياب اليوم')}
+
+/* ---------- ABSENCE TABLE (all names & lessons) ---------- */
+let tb={k:'all',r:'7',from:'',to:''};
+function tbRange(){
+ const t=todayStr();
+ if(tb.r==='1')return[t,t];
+ if(tb.r==='m')return[t.slice(0,8)+'01',t];
+ if(tb.r==='c')return[tb.from||t.slice(0,8)+'01',tb.to||t];
+ const d=new Date();d.setDate(d.getDate()-6);return[dstr(d),t]}
+function tbSecs(){const o=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>{if(tb.k==='all'||tb.k===ttKey(c,s))o.push([c,s])}));return o}
+function gridData(cls,sec,from,to){
+ const list=studentsOf(cls,sec),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
+ const dates=[...new Set(ss.map(x=>x.date))].sort(),by={};ss.forEach(x=>by[x.date+'|'+x.lesson]=x);
+ const N=ss.length?Math.max(db.lessons.length,...ss.map(x=>x.lesson)):db.lessons.length;
+ const tot={};list.forEach(s=>tot[s.id]={a:0,e:0,l:0});
+ ss.forEach(x=>Object.entries(x.marks||{}).forEach(([id,m])=>{if(tot[id]&&tot[id][m]!==undefined)tot[id][m]++}));
+ return{list,ss,dates,by,N,tot}}
+const gm=(by,s,d,l)=>{const x=by[d+'|'+l];return x?(x.marks[s.id]||'p'):''};
+function vTbl(){
+ const [from,to]=tbRange(),secs=tbSecs(),t=todayStr();
+ const keys=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>keys.push([c,s])));
+ const data=secs.map(([c,s])=>Object.assign({c,s},gridData(c,s,from,to))).filter(x=>tb.k!=='all'||x.list.length);
+ const cells=data.reduce((a,x)=>a+x.list.length*x.dates.length*x.N,0),big=cells>40000;
+ const rb=(r,n)=>`<button class="${tb.r===r?'on':''}" onclick="tb.r='${r}';render()">${n}</button>`;
+ let h=`<div class="top"><div><h2>📋 جدول الغياب</h2><small>كل الأسماء والدروس</small></div></div>
+ <div class="card"><label style="margin-top:0">الشعبة</label><select onchange="tb.k=this.value;render()"><option value="all">كل الشعب</option>${keys.map(([c,s])=>`<option value="${esc(ttKey(c,s))}" ${ttKey(c,s)===tb.k?'selected':''}>${esc(c)} — شعبة ${esc(s)}</option>`).join('')}</select>
+ <label>الفترة</label><div class="tabs">${rb('1','اليوم')}${rb('7','7 أيام')}${rb('m','هذا الشهر')}${rb('c','مخصص')}</div>
+ ${tb.r==='c'?`<div class="two" style="margin-top:8px"><div><label>من</label><input type="date" max="${t}" value="${from}" onchange="tb.from=this.value;render()"></div><div><label>إلى</label><input type="date" max="${t}" value="${to}" onchange="tb.to=this.value;render()"></div></div>`:`<small style="color:var(--mut);display:block;margin-top:6px">${fmtD(from)} — ${fmtD(to)}</small>`}
+ <div class="btns" style="margin-top:12px"><button class="btn gold" onclick="tbPDF()">⬇ تنزيل PDF</button><button class="btn blue" onclick="tbXLS()">⬇ تنزيل Excel</button></div>
+ <small style="color:var(--mut);display:block;margin-top:8px">✓ حاضر • غ غائب • م مجاز • ت متأخر • · لم يُسجَّل الدرس. اضغط على تاريخ لعرض غياب ذلك اليوم.</small></div>`;
+ if(big)h+=`<div class="card" style="border-color:var(--amb)"><small>الفترة طويلة، فيُعرض ملخص كل طالب فقط. للتفصيل الكامل لكل درس نزّل PDF أو Excel، أو اختر فترة أقصر.</small></div>`;
+ data.forEach(x=>{
+  h+=`<div class="card" style="padding:10px"><h3 style="margin-top:0">${esc(x.c)} — شعبة ${esc(x.s)} <small style="color:var(--mut)">• ${x.list.length} طالب • ${x.ss.length} درس مسجّل</small></h3>`;
+  if(!x.list.length)h+='<div class="empty" style="padding:6px">لا يوجد طلاب</div>';
+  else if(!x.ss.length)h+='<div class="empty" style="padding:6px">لا توجد دروس مسجّلة في هذه الفترة</div>';
+  else{
+   const ls=[...Array(x.N)].map((_,j)=>j+1);
+   h+=`<div class="tw"><table class="tb"><thead><tr><th class="nm" rowspan="${big?1:2}">الطالب</th><th rowspan="${big?1:2}">غ</th><th rowspan="${big?1:2}">م</th><th rowspan="${big?1:2}">ت</th>${big?'<th>حاضر</th>':x.dates.map(d=>`<th colspan="${x.N}" style="cursor:pointer" onclick="go('days',{date:'${d}',k:${J(ttKey(x.c,x.s))}})">${dd(d)}</th>`).join('')}</tr>${big?'':`<tr>${x.dates.map(d=>ls.map(l=>`<th>${l}</th>`).join('')).join('')}</tr>`}</thead><tbody>`+
+   x.list.map(s=>{const o=x.tot[s.id];return `<tr><td class="nm" onclick="go('stu',{id:'${s.id}'})">${esc(s.name)}</td><td class="tt" style="color:${o.a?'#ff7b88':'inherit'}">${o.a}</td><td class="tt">${o.e}</td><td class="tt">${o.l}</td>${big?`<td>${x.ss.length-o.a-o.e}</td>`:x.dates.map(d=>ls.map(l=>{const m=gm(x.by,s,d,l);return m===''?'<td class="gx">·</td>':m==='a'?'<td class="ga">غ</td>':m==='e'?'<td class="ge">م</td>':m==='l'?'<td class="gt2">ت</td>':'<td class="gp">✓</td>'}).join('')).join('')}</tr>`}).join('')+`</tbody></table></div>`}
+  h+='</div>'});
+ return h+foot();
+}
+function tbPDF(){
+ const [from,to]=tbRange();let html='',n=0;
+ tbSecs().forEach(([c,s])=>{const r=gridPages(c,s,from,to);if(r.html){html+=r.html;n++}});
+ if(!n){toast('لا توجد دروس مسجّلة في هذه الفترة');return}
+ printDoc(html,true)}
+function tbXLS(){
+ const [from,to]=tbRange(),sheets=[];
+ tbSecs().forEach(([c,s])=>{
+  const g=gridData(c,s,from,to);if(!g.ss.length||!g.list.length)return;
+  const cols=[];g.dates.forEach(d=>{for(let l=1;l<=g.N;l++)cols.push({d,l})});
+  const head=['الطالب','غائب (دروس)','مجاز (دروس)','متأخر (دروس)','حاضر (دروس)',...cols.map(k=>dd(k.d)+' د'+k.l)];
+  const rows=g.list.map(st=>{const o=g.tot[st.id];return[st.name,o.a,o.e,o.l,g.ss.length-o.a-o.e,...cols.map(k=>{const m=gm(g.by,st,k.d,k.l);return m===''?'':m==='a'?'غ':m==='e'?'م':m==='l'?'ت':'✓'})]});
+  sheets.push({name:c+' '+s,aoa:[head,...rows]})});
+ if(!sheets.length){toast('لا توجد دروس مسجّلة في هذه الفترة');return}
+ const fn='جدول-الغياب-'+from+'_'+to;
+ if(typeof XLSX!=='undefined'){
+  const wb=XLSX.utils.book_new(),used=new Set();
+  sheets.forEach((sh,i)=>{
+   const ws=XLSX.utils.aoa_to_sheet(sh.aoa);ws['!cols']=[{wch:28},{wch:10},{wch:10},{wch:10},{wch:10}];
+   let nm=sh.name.replace(/[\\\/?*\[\]:]/g,'-').slice(0,28);if(used.has(nm))nm=nm.slice(0,25)+' '+(i+1);used.add(nm);
+   XLSX.utils.book_append_sheet(wb,ws,nm)});
+  wb.Workbook={Views:[{RTL:true}]};
+  XLSX.writeFile(wb,fn+'.xlsx');
+ }else{
+  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+  const csv='\ufeff'+sheets.map(sh=>sh.name+'\n'+sh.aoa.map(r=>r.map(q).join(',')).join('\n')).join('\n\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=fn+'.csv';a.click();
+  toast('مكتبة Excel غير محمّلة — نُزّل الملف بصيغة CSV (يفتح في Excel)');
+ }}
 
 /* ---------- ADMIN ---------- */
 function vAdmin(){
