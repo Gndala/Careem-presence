@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="الحضور والغياب">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>نظام الحضور والغياب — ثانوية نهج البلاغة الأهلية للبنين</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -278,7 +278,56 @@ table.tb td.tt{font-weight:800}
 .ct .names div{font-weight:800;border-bottom:1px dotted #c9a23f;padding:0 2mm}.ct .names i{font-style:normal;color:#b8892b;margin-left:6px}
 .ct .cf{display:flex;justify-content:space-between;align-items:flex-end;padding:0 10mm}
 .ct .cs{width:62mm;font-size:12px}.ct .cs small{display:block;color:#556}.ct .cs b{display:block;font-size:14px}.ct .sg{height:8mm;border-bottom:1.5px dotted #0b1a4a;margin:2mm 6mm 1mm}
-.ct .seal{width:24mm;height:24mm;border:2px dashed #b8892b;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;color:#b8892b;line-height:1.3}
+.ct svg.seal{width:31mm;height:31mm;filter:drop-shadow(0 .6mm .9mm rgba(90,60,0,.45))}
+.ct .sgw{height:14mm;display:flex;align-items:flex-end;justify-content:center;position:relative}
+.ct .sgimg{max-height:14mm;max-width:52mm;object-fit:contain}
+.ct .sgcal{font-family:'Aref Ruqaa','Reem Kufi',serif;font-size:27px;font-weight:700;line-height:1;transform:rotate(-4deg);white-space:nowrap}
+.ct .sgf{position:absolute;left:8mm;right:8mm;bottom:-1mm;height:6mm}
+.ct .rays{position:absolute;left:50%;top:48%;width:240mm;height:240mm;margin:-120mm 0 0 -120mm;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,215,100,.13) 0 4deg,transparent 4deg 12deg);-webkit-mask-image:radial-gradient(circle,#000 18%,transparent 66%);mask-image:radial-gradient(circle,#000 18%,transparent 66%)}
+.ct .spk{position:absolute;font-size:16px;line-height:1}
+.ct .f4{position:absolute;top:8.6mm;right:8.6mm;bottom:8.6mm;left:8.6mm;border:1px dotted #c9a23f}
+.ct .crn{display:block;width:22mm;height:13mm;margin:0 auto -1.5mm}
+.ct.tr4 .cb,.ct.tr3 .cb{gap:1.5mm}.ct.tr4 .ctt span{font-size:34px;line-height:1.35}.ct.tr4 .l2,.ct.tr3 .l2{line-height:1.7}.ct.tr4 .cst,.ct.tr3 .cst{font-size:21px}.ct.tr4 .orn{line-height:1}.ct.tr4 .nmx{font-size:36px}
+.ct.th-ry .sgimg,.ct.th-im .sgimg{filter:brightness(0) invert(1) sepia(.55) saturate(2.2) brightness(1.15)}
+.ct .cst{font-size:24px;letter-spacing:3px;line-height:1.2}.ct .cst .o{opacity:.28}
+.ct .cst2{font-size:12px;font-weight:700;margin-top:1px}
+.ct .gst{font-style:normal;font-size:.7em;margin-right:4px}
+.ct.tr4 .f1{border-width:3.5px}.ct.tr3 .f1{border-width:3px}
+.ct.tr2 .ctt span{padding:0 22mm}
+
+
+/* ===== STAR PLATES ===== */
+.plate{position:relative;border-radius:14px;padding:6px 10px;margin-top:-2px;margin-bottom:-2px}
+.plate b{color:#f6d56a}
+.stbd{display:inline-block;font-size:11px;font-weight:900;border-radius:9px;padding:0 7px;margin-right:6px;vertical-align:middle;color:#3a2600;background:linear-gradient(135deg,#ffe9a0,#e0a82a);-webkit-text-fill-color:#3a2600}
+.stbar{display:flex;justify-content:center;gap:3px;margin:6px 0}.stbar span{font-size:22px;color:rgba(255,255,255,.18)}.stbar span.on{color:#f6d56a;text-shadow:0 0 8px #f6d56a99}
+@keyframes pbg{from{background-position:0 0,0% 0}to{background-position:0 0,300% 0}}
+@keyframes pglow{0%,100%{box-shadow:0 0 5px var(--gc,#f6d56a55)}50%{box-shadow:0 0 18px var(--gc2,#f6d56acc)}}
+@keyframes pshine{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes ptw{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(90deg)}}
+@keyframes pflt{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-4px) rotate(6deg)}}
+@keyframes pbreath{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+@keyframes psweep{0%{transform:translateX(-130%) skewX(-22deg)}55%,100%{transform:translateX(230%) skewX(-22deg)}}
+.plate.st1{border:1.5px solid #c9a23f;background:rgba(246,213,106,.07)}
+.plate.st2{border:1.5px solid #e0b640;background:rgba(246,213,106,.10);animation:pglow 2.6s ease-in-out infinite}
+.plate.st3{border:1.5px solid #f0c85a;background:rgba(246,213,106,.10);overflow:hidden;animation:pglow 2.4s ease-in-out infinite}
+.plate.st3::before{content:'';position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:psweep 2.8s ease-in-out infinite;pointer-events:none}
+.plate.st4,.plate.st5,.plate.st6,.plate.st7,.plate.st8,.plate.st9,.plate.st10{border:2.5px solid transparent;background-size:100% 100%,300% 100%}
+.plate.st4{--gc:#ffb30055;--gc2:#ffb300aa;background:linear-gradient(#0f1a44,#0f1a44) padding-box,linear-gradient(90deg,#f6d56a,#ff9800,#f6d56a,#ff9800) border-box;animation:pbg 3.4s linear infinite,pglow 2.4s ease-in-out infinite}
+.plate.st5{--gc:#ffe08266;--gc2:#ffe082cc;background:linear-gradient(#0f1a44,#0f1a44) padding-box,linear-gradient(90deg,#f6d56a,#fff,#f6d56a,#e0a82a) border-box;animation:pbg 2.4s linear infinite,pglow 2s ease-in-out infinite}
+.plate.st6{--gc:#00e5ff55;--gc2:#00e5ffcc;background:linear-gradient(#0f1a44,#0f1a44) padding-box,linear-gradient(90deg,#00e5ff,#fff,#f6d56a,#00e5ff) border-box;animation:pbg 2.2s linear infinite,pglow 1.8s ease-in-out infinite}
+.plate.st7{--gc:#a855f755;--gc2:#00f5a0cc;background:linear-gradient(#0f1a44,#0f1a44) padding-box,linear-gradient(90deg,#00f5a0,#00d9f5,#a855f7,#ff4fa3,#00f5a0) border-box;animation:pbg 2s linear infinite,pglow 1.8s ease-in-out infinite}
+.plate.st8{--gc:#ff6d0066;--gc2:#ff3d00dd;background:linear-gradient(#1a1040,#1a1040) padding-box,linear-gradient(90deg,#ff3d00,#ffb300,#fff176,#ffb300,#ff3d00) border-box;animation:pbg 1.5s linear infinite,pglow 1.3s ease-in-out infinite,pbreath 2.4s ease-in-out infinite}
+.plate.st9{--gc:#7b2ff788;--gc2:#ff4fa3dd;background:linear-gradient(#1a0f44,#1a0f44) padding-box,linear-gradient(90deg,#7b2ff7,#f6d56a,#ff4fa3,#f6d56a,#7b2ff7) border-box;animation:pbg 1.6s linear infinite,pglow 1.4s ease-in-out infinite,pbreath 2.6s ease-in-out infinite}
+.plate.st10{border-width:3px;--gc:#ffd86b99;--gc2:#ff4fa3ee;background:linear-gradient(#150b3a,#150b3a) padding-box,linear-gradient(90deg,#ff4fa3,#f6d56a,#00e5ff,#a855f7,#ff9800,#ff4fa3) border-box;animation:pbg 1.1s linear infinite,pglow 1.1s ease-in-out infinite,pbreath 2s ease-in-out infinite}
+.plate.st6::after,.plate.st7::after,.plate.st8::after{content:'✦';position:absolute;top:-9px;left:-6px;font-size:15px;color:#fff8c4;animation:ptw 1.8s infinite;pointer-events:none;-webkit-text-fill-color:#fff8c4}
+.plate.st6::before,.plate.st7::before{content:'✦';position:absolute;bottom:-9px;right:-4px;font-size:13px;color:#fff8c4;animation:ptw 1.8s .9s infinite;pointer-events:none}
+.plate.st8::before{content:'✨';position:absolute;bottom:-10px;right:-4px;font-size:14px;animation:pflt 1.6s infinite;pointer-events:none}
+.plate.st9::after,.plate.st10::after{content:'👑';position:absolute;top:-17px;left:10px;font-size:20px;animation:pflt 2s infinite;pointer-events:none;-webkit-text-fill-color:initial}
+.plate.st9::before,.plate.st10::before{content:'✨';position:absolute;bottom:-10px;right:-4px;font-size:15px;animation:ptw 1.5s infinite;pointer-events:none}
+.plate.st5 b,.plate.st6 b,.plate.st7 b,.plate.st8 b,.plate.st9 b,.plate.st10 b{background:linear-gradient(90deg,#f6d56a 0%,#fff 25%,#f6d56a 50%,#f6d56a 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:pshine 3s linear infinite}
+.plate.st10 b{background-image:linear-gradient(90deg,#fff3b0 0%,#fff 20%,#ffd86b 45%,#ff9ecb 60%,#fff3b0 100%);animation-duration:2s}
+@media (prefers-reduced-motion:reduce){.plate,.plate::before,.plate::after,.plate b{animation:none!important}}
 </style>
 </head>
 <body>
@@ -317,9 +366,9 @@ let db=null,mem={};
 function idb(){return new Promise((res,rej)=>{try{const r=indexedDB.open('nahj_att',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(r.result);r.onerror=()=>rej()}catch(e){rej(e)}})}
 async function idbGet(k){try{const d=await idb();return await new Promise(res=>{const q=d.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>res(null)})}catch(e){return mem[k]||null}}
 async function idbPut(k,v){try{const d=await idb();d.transaction('kv','readwrite').objectStore('kv').put(v,k)}catch(e){mem[k]=v}}
-let st_;function save(){clearTimeout(st_);cloud.dirty=true;st_=setTimeout(()=>{cloud.dirty=false;idbPut('db',db);cloudSave();flushDefer()},150)}
+let st_;function save(){_stm=null;clearTimeout(st_);cloud.dirty=true;st_=setTimeout(()=>{cloud.dirty=false;idbPut('db',db);cloudSave();flushDefer()},150)}
 function snapshot(){idbPut('prev',JSON.parse(JSON.stringify(db)))}
-function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,tt:{},users:[],audit:[],al:{},trash:[],mgr:'',
+function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,tt:{},users:[],audit:[],al:{},trash:[],mgr:'',ss:3,sig:'',
  students:[],
  structure:{'الرابع العلمي':['أ','ب'],'الرابع الأدبي':['أ'],'الخامس العلمي':['أ','ب'],'الخامس الأدبي':['أ'],'السادس العلمي':['أ','ب'],'السادس الأدبي':['أ']},
  sessions:[],
@@ -405,7 +454,7 @@ let view={n:'home',p:{}};
 function go(n,p={},push=true){view={n,p};if(push)history.pushState({n,p},'');render();window.scrollTo(0,0)}
 addEventListener('popstate',e=>{view=e.state||{n:'home',p:{}};render()});
 function openAdmin(){askAdmin(()=>go('admin'))}
-function render(){
+function render(){_stm=null;
  if(!db)return;
  if(((view.n==='admin'||view.n==='tt'||view.n==='audit')&&lvl()<3)||((view.n==='dash'||view.n==='rank')&&lvl()<2))view={n:'home',p:{}};
  const f={home:vHome,sec:vSec,att:vAtt,stu:vStu,find:vFind,admin:vAdmin,dash:vDash,tt:vTT,audit:vAudit,days:vDays,tbl:vTbl,rank:vRank}[view.n]||vHome;
@@ -464,7 +513,7 @@ function vSec(p){
   h+=`<div class="btns" style="margin-bottom:6px"><button class="btn gold" onclick="editStudent(null,${J(cls)},${J(sec)})">＋ إضافة طالب جديد 🔐</button><button class="btn blue" onclick="gridDialog(${J(cls)},${J(sec)})">📊 جدول الحضور (PDF)</button></div>`;
   if(!list.length)h+='<div class="card empty">لا يوجد طلاب في هذه الشعبة.<br>استورد ملف Excel أو أضف طالباً من هنا.</div>';
   list.forEach((s,i)=>{const x=stats(s);
-   h+=`<div class="sr" onclick="go('stu',{id:'${s.id}'})"><div class="num">${i+1}</div>${av(s)}<div class="nm"><b>${esc(s.name)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small>
+   h+=`<div class="sr" onclick="go('stu',{id:'${s.id}'})"><div class="num">${i+1}</div>${av(s)}<div class="nm${plate(s)}"><b>${esc(s.name)}${stBadge(s)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small>
    <div class="bd"><span class="b r">يوم كامل: ${x.fullAbs}</span>${(()=>{const l=alLevel(x.fullAbs);return l?`<span class="b a">🚨 ${l.n}</span>`:''})()}<span class="b a">دروس: ${x.partAbs}</span>${x.excL?`<span class="b y">مجاز: ${x.excL}</span>`:''}${x.lateL?`<span class="b y">تأخر: ${x.lateL}</span>`:''}${x.neg?`<span class="b r">سلوك: ${x.neg}</span>`:''}</div></div></div>`});
  }
  return h+foot();
@@ -483,7 +532,7 @@ function startAtt(p){
 }
 function rowH(s,i){
  const m=draft.marks[s.id],b=(draft.beh[s.id]||[]).length+(draft.notes[s.id]?1:0);
- return `<div class="row ${m||''}" id="r_${s.id}"><div class="t"><div class="num">${i+1}</div>${av(s)}<div class="nm"><b>${esc(s.name)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small></div></div>
+ return `<div class="row ${m||''}" id="r_${s.id}"><div class="t"><div class="num">${i+1}</div>${av(s)}<div class="nm${plate(s)}"><b>${esc(s.name)}${stBadge(s)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small></div></div>
  <div class="acts"><button class="bA ${m==='a'?'on':''}" onclick="mark('${s.id}','a')">غائب</button><button class="bE ${m==='e'?'on':''}" onclick="mark('${s.id}','e')">مجاز</button><button class="bL ${m==='l'?'on':''}" onclick="mark('${s.id}','l')">متأخر</button><button class="bB ${b?'has':''}" onclick="behSheet('${s.id}')">⚑${b?`<i>${b}</i>`:''}</button><button class="bW ${m?'on':''}" aria-label="إرسال إلى واتساب" onclick="waOne('${s.id}')">📲</button></div></div>`}
 function waOne(id){
  const m=draft.marks[id];
@@ -532,7 +581,8 @@ function vStu(p){
  const x=stats(s);
  let h=`<div class="top"><button class="back" onclick="history.back()">→</button><div><h2>ملف الطالب</h2></div></div>
  <div class="card"><div class="prof"><div class="ph">${s.photo?`<img src="${s.photo}">`:esc(initial(s.name))}</div><div><h2>${esc(s.name)}</h2><p>${esc(s.cls)} — شعبة ${esc(s.sec)}</p><p>رقم القيد: <b>${esc(s.reg||'—')}</b> • الصفحة: <b>${esc(s.page||'—')}</b></p></div></div></div>
- ${(()=>{const l=alLevel(x.fullAbs);return l?`<div class="card" style="border-color:var(--red)"><b style="color:var(--red)">🚨 بلغ ${x.fullAbs} أيام غياب كاملة</b><div style="margin:4px 0 10px">المستوى المستحق: <b>${l.n}</b></div><div class="btns"><button class="btn red" onclick="warnFor('${s.id}',false)">🖨 طباعة الإنذار</button><button class="btn blue" onclick="warnFor('${s.id}',true)">📲 صورة الإنذار</button></div></div>`:''})()}
+ ${starCard(s)}
+  ${(()=>{const l=alLevel(x.fullAbs);return l?`<div class="card" style="border-color:var(--red)"><b style="color:var(--red)">🚨 بلغ ${x.fullAbs} أيام غياب كاملة</b><div style="margin:4px 0 10px">المستوى المستحق: <b>${l.n}</b></div><div class="btns"><button class="btn red" onclick="warnFor('${s.id}',false)">🖨 طباعة الإنذار</button><button class="btn blue" onclick="warnFor('${s.id}',true)">📲 صورة الإنذار</button></div></div>`:''})()}
   <div class="kp"><div class="k r"><b>${x.fullAbs}</b><span>غياب يوم كامل</span></div><div class="k a"><b>${x.partAbs}</b><span>غياب دروس (في أيام حضر فيها)</span></div><div class="k y"><b>${x.excL}</b><span>دروس مجازة</span></div><div class="k"><b style="color:#6ab8ff">${x.lateL}</b><span>مرات التأخر عن الدرس</span></div><div class="k g" style="grid-column:1/-1"><b>${x.days}</b><span>أيام مسجّلة</span></div></div>
  <div class="card"><h3>السلوك</h3>${Object.keys(x.beh).length?'<div class="chips">'+Object.entries(x.beh).map(([t,n])=>{const k=(db.behaviors.find(z=>z.n===t)||{}).k;return `<span class="b ${k==='pos'?'g':'r'}" style="font-size:13px;padding:4px 12px">${esc(t)} × ${n}</span>`}).join('')+'</div>':'<div class="empty" style="padding:6px">لا توجد سلوكيات مسجّلة</div>'}</div>
  <div class="card"><h3>سجل الغياب والإجازات</h3>${x.log.length?`<table class="t"><tr><th>التاريخ</th><th>الدرس</th><th>المادة</th><th>الحالة</th></tr>`+x.log.slice().reverse().map(r=>`<tr><td>${fmtD(r.date)}</td><td>${r.lesson}</td><td>${esc(r.subject)}</td><td><span class="b ${r.st==='a'?'r':r.st==='l'?'y':'a'}">${stLbl(r.st)}</span></td></tr>`).join('')+'</table>':'<div class="empty" style="padding:6px">لا يوجد غياب مسجّل ✓</div>'}</div>
@@ -548,7 +598,7 @@ function vFind(){
 function doFind(){
  const q=norm($('#q')?.value||''),c=$('#qc')?.value||'',r=$('#res');if(!r)return;
  const l=db.students.filter(s=>(!c||s.cls===c)&&(!q||norm(s.name).includes(q)||String(s.reg).includes(q))).sort(cmp).slice(0,60);
- r.innerHTML=l.length?l.map(s=>`<div class="sr" onclick="go('stu',{id:'${s.id}'})">${av(s)}<div class="nm"><b>${esc(s.name)}</b><small>${esc(s.cls)} / ${esc(s.sec)} • قيد ${esc(s.reg||'—')}</small></div></div>`).join(''):'<div class="card empty">لا توجد نتائج</div>';
+ r.innerHTML=l.length?l.map(s=>`<div class="sr" onclick="go('stu',{id:'${s.id}'})">${av(s)}<div class="nm${plate(s)}"><b>${esc(s.name)}${stBadge(s)}</b><small>${esc(s.cls)} / ${esc(s.sec)} • قيد ${esc(s.reg||'—')}</small></div></div>`).join(''):'<div class="card empty">لا توجد نتائج</div>';
 }
 
 /* ---------- PHOTO ---------- */
@@ -832,7 +882,7 @@ function vDash(){
   const ab=st.filter(s=>a.has(s.id)).length,pc=Math.round(ab/st.length*100);
   return `<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><b>${esc(c)}</b><span>${ab} من ${st.length} • <span dir="ltr">${pc}%</span></span></div><div class="bar"><i style="width:${ab?Math.max(pc,3):0}%"></i></div></div>`}).join('');
  const al=alv(),over=db.students.map(s=>({s,d:stats(s).fullAbs})).filter(r=>r.d>=al.a1).sort((p,q)=>q.d-p.d);
- h+=`<div class="card"><h3>🚨 تجاوزوا حد الغياب</h3><small style="color:var(--mut);display:block;margin-bottom:6px">حسب أيام الغياب الكاملة • أول إنذار عند ${al.a1} أيام</small>${over.length?over.slice(0,30).map(r=>{const l=alLevel(r.d);return `<div class="sr" onclick="go('stu',{id:'${r.s.id}'})">${av(r.s)}<div class="nm"><b>${esc(r.s.name)}</b><small>${esc(r.s.cls)} — شعبة ${esc(r.s.sec)}</small></div><div style="text-align:left"><span class="b r">${r.d} يوم</span><br><small style="color:var(--amb)">${l.n}</small></div></div>`}).join('')+(over.length>30?`<small style="color:var(--mut)">… و${over.length-30} آخرون</small>`:''):emp('✓ لا يوجد طلاب تجاوزوا الحد')}</div>`;
+ h+=`<div class="card"><h3>🚨 تجاوزوا حد الغياب</h3><small style="color:var(--mut);display:block;margin-bottom:6px">حسب أيام الغياب الكاملة • أول إنذار عند ${al.a1} أيام</small>${over.length?over.slice(0,30).map(r=>{const l=alLevel(r.d);return `<div class="sr" onclick="go('stu',{id:'${r.s.id}'})">${av(r.s)}<div class="nm${plate(r.s)}"><b>${esc(r.s.name)}${stBadge(r.s)}</b><small>${esc(r.s.cls)} — شعبة ${esc(r.s.sec)}</small></div><div style="text-align:left"><span class="b r">${r.d} يوم</span><br><small style="color:var(--amb)">${l.n}</small></div></div>`}).join('')+(over.length>30?`<small style="color:var(--mut)">… و${over.length-30} آخرون</small>`:''):emp('✓ لا يوجد طلاب تجاوزوا الحد')}</div>`;
  h+=`<div class="card"><h3>نسبة الغياب حسب الصف</h3>${rows||emp('لا توجد بيانات لهذا اليوم')}</div>`;
  const days=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=dstr(d),r=dayAb(k);if(r.ss.length)days.push({k,n:r.a.size})}
  const mx=Math.max(1,...days.map(x=>x.n));
@@ -840,7 +890,7 @@ function vDash(){
  const since=(()=>{const d=new Date();d.setDate(d.getDate()-29);return dstr(d)})(),cn={};
  db.sessions.forEach(x=>{if(x.date>=since)Object.entries(x.marks||{}).forEach(([id,m])=>{if(m==='a')cn[id]=(cn[id]||0)+1})});
  const top=Object.entries(cn).map(([id,n])=>({s:db.students.find(z=>z.id===id),n})).filter(r=>r.s).sort((p,q)=>q.n-p.n).slice(0,10);
- h+=`<div class="card"><h3>الأكثر غياباً (آخر 30 يوماً)</h3>${top.length?top.map((r,i)=>`<div class="sr" onclick="go('stu',{id:'${r.s.id}'})"><div class="num">${i+1}</div>${av(r.s)}<div class="nm"><b>${esc(r.s.name)}</b><small>${esc(r.s.cls)} — شعبة ${esc(r.s.sec)}</small></div><span class="b r">${r.n} درس</span></div>`).join(''):emp('لا يوجد غياب مسجّل ✓')}</div>`;
+ h+=`<div class="card"><h3>الأكثر غياباً (آخر 30 يوماً)</h3>${top.length?top.map((r,i)=>`<div class="sr" onclick="go('stu',{id:'${r.s.id}'})"><div class="num">${i+1}</div>${av(r.s)}<div class="nm${plate(r.s)}"><b>${esc(r.s.name)}${stBadge(r.s)}</b><small>${esc(r.s.cls)} — شعبة ${esc(r.s.sec)}</small></div><span class="b r">${r.n} درس</span></div>`).join(''):emp('لا يوجد غياب مسجّل ✓')}</div>`;
  return h+foot();
 }
 
@@ -993,7 +1043,7 @@ function vDays(){
  <button class="btn full" style="margin-bottom:10px" onclick="waDay(${J(date)},${J(k)})">📲 إرسال غياب هذا اليوم إلى واتساب</button>`;
  data.forEach(x=>{
   h+=`<div class="card"><h3>${esc(x.c)} — شعبة ${esc(x.sec)} <small style="color:var(--mut)">• ${x.n} درس مسجّل</small></h3>`+
-  (x.rows.length?x.rows.map(r=>`<div class="sr" onclick="go('stu',{id:'${r.s.id}'})">${av(r.s)}<div class="nm"><b>${esc(r.s.name)}</b><small>${[r.m.a.length?'غ: '+fl(r.m.a):'',r.m.l.length?'ت: '+fl(r.m.l):'',r.m.e.length?'م: '+fl(r.m.e):''].filter(Boolean).join(' • ')}</small></div><span class="b ${r.m.a.length?'r':r.m.l.length?'y':'a'}">${r.m.a.length?r.m.a.length+' غياب':r.m.l.length?'متأخر':'مجاز'}</span></div>`).join(''):'<div class="empty" style="padding:6px">✓ لا يوجد غياب</div>')+
+  (x.rows.length?x.rows.map(r=>`<div class="sr" onclick="go('stu',{id:'${r.s.id}'})">${av(r.s)}<div class="nm${plate(r.s)}"><b>${esc(r.s.name)}${stBadge(r.s)}</b><small>${[r.m.a.length?'غ: '+fl(r.m.a):'',r.m.l.length?'ت: '+fl(r.m.l):'',r.m.e.length?'م: '+fl(r.m.e):''].filter(Boolean).join(' • ')}</small></div><span class="b ${r.m.a.length?'r':r.m.l.length?'y':'a'}">${r.m.a.length?r.m.a.length+' غياب':r.m.l.length?'متأخر':'مجاز'}</span></div>`).join(''):'<div class="empty" style="padding:6px">✓ لا يوجد غياب</div>')+
   `<button class="btn sm full" style="margin-top:8px" onclick="sel.date='${date}';sel.lesson=null;go('sec',${J({cls:x.c,sec:x.sec})})">فتح الشعبة في هذا التاريخ</button></div>`});
  return h+foot();
 }
@@ -1147,7 +1197,7 @@ function vRank(){
  <small style="color:var(--mut);display:block;margin-top:6px">الجدول والتنزيل يشملان المحدَّدين، وإن لم تحدّد أحداً فيشملان كل القائمة.</small></div>`;
  if(!rows.length)return h+`<div class="card empty">لا يوجد طلاب ضمن هذا التصنيف.</div>`+foot();
  h+=rows.map((r,i)=>{const s=r.s,x=r.x,on=rk.sel.has(s.id),tg=rkTags(x);
-  return `<div class="sr rkr ${on?'on':''}"><div class="ck" onclick="rkTog('${s.id}',this.parentNode)">${on?'☑':'☐'}</div><div class="num">${i+1}</div>${av(s)}<div class="nm" onclick="go('stu',{id:'${s.id}'})"><b>${esc(s.name)}</b><small>${esc(s.cls)} — شعبة ${esc(s.sec)}</small>${tg?`<small style="color:var(--g1)">${esc(tg)}</small>`:''}
+  return `<div class="sr rkr ${on?'on':''}"><div class="ck" onclick="rkTog('${s.id}',this.parentNode)">${on?'☑':'☐'}</div><div class="num">${i+1}</div>${av(s)}<div class="nm${plate(s)}" onclick="go('stu',{id:'${s.id}'})"><b>${esc(s.name)}${stBadge(s)}</b><small>${esc(s.cls)} — شعبة ${esc(s.sec)}</small>${tg?`<small style="color:var(--g1)">${esc(tg)}</small>`:''}
   <div class="rkc"><span class="b g">⭐ ${x.pos}</span><span class="b r">⚠ ${x.neg}</span><span class="b r">غ ${x.fullAbs} يوم / ${x.absL} درس</span><span class="b y">ت ${x.lateL}</span><span class="b a">م ${x.excL}</span></div></div></div>`}).join('');
  return h+foot()}
 function rkCols(r){const x=r.x;return[r.s.name,r.s.cls,r.s.sec,x.pos,x.neg,x.fullAbs,x.absL,x.lateL,x.excL,rkTags(x)]}
@@ -1176,36 +1226,88 @@ function rkXLS(){
 
 /* ---------- THANK-YOU CERTIFICATE ---------- */
 const CT_R=[['لتميّزه في السلوك الحسن والانضباط','لتميّزهم في السلوك الحسن والانضباط'],['لمواظبته على الدوام وحرصه على الحضور','لمواظبتهم على الدوام وحرصهم على الحضور'],['لتفوّقه ومشاركته الفاعلة في الدروس','لتفوّقهم ومشاركتهم الفاعلة في الدروس'],['لحسن خلقه وتعاونه مع زملائه ومدرّسيه','لحسن أخلاقهم وتعاونهم مع زملائهم ومدرّسيهم']];
+const CT_TH={
+ cl:{n:'كلاسيكي ذهبي',bg:'linear-gradient(135deg,#fffef8,#fbf1d4 55%,#fffef8)',ink:'#0b1a4a',gold:'#b8892b',gold2:'#e9cf86',fr1:'#0b1a4a',fr2:'#c9a23f',sub:'#556',acc:'#1b3a9a',wm:.06,orn:'#0b1a4a',ts:'1px 1px 0 #f6e7b0,2px 2px 0 rgba(10,26,74,.15)'},
+ em:{n:'زمردي',bg:'linear-gradient(135deg,#f4fff9,#d6f1e3 55%,#f4fff9)',ink:'#07331f',gold:'#a8791c',gold2:'#e8d49a',fr1:'#0b5a39',fr2:'#c9a23f',sub:'#4a6a5a',acc:'#0b6b45',wm:.07,orn:'#0b5a39',ts:'1px 1px 0 #f1e0a6,2px 2px 0 rgba(7,51,31,.15)'},
+ bg:{n:'عنابي',bg:'linear-gradient(135deg,#fff9f8,#f5dede 55%,#fff9f8)',ink:'#4a0f1c',gold:'#b07a1f',gold2:'#ecd59c',fr1:'#7a1530',fr2:'#c9a23f',sub:'#6a4a52',acc:'#8a1a36',wm:.07,orn:'#7a1530',ts:'1px 1px 0 #f2dfae,2px 2px 0 rgba(74,15,28,.15)'},
+ ry:{n:'ملكي كحلي',bg:'radial-gradient(ellipse at 50% 42%,#1b3578,#0a1438 72%)',ink:'#fff4cf',gold:'#f0c85a',gold2:'#fff2b8',fr1:'#f0c85a',fr2:'#c9a23f',sub:'#b9c4ea',acc:'#ffe08a',wm:0,orn:'#f0c85a',ts:'0 0 14px rgba(240,200,90,.55)'},
+ im:{n:'إمبراطوري بنفسجي',bg:'radial-gradient(ellipse at 50% 42%,#4a1678,#14052a 74%)',ink:'#fff4cf',gold:'#ffd86b',gold2:'#fff2b8',fr1:'#ffd86b',fr2:'#ff9ecb',sub:'#d6c2f0',acc:'#ffd1e6',wm:0,orn:'#ffd86b',ts:'0 0 16px rgba(255,216,107,.65)'}};
+const CT_ORDER=['cl','em','bg','ry','im'];
+(function(){const css=Object.entries(CT_TH).map(([k,t])=>{const q='.ct.th-'+k;return `${q}{background:${t.bg};color:${t.ink}}${q} .f1{border-color:${t.fr1}}${q} .f2{border-color:${t.fr2}}${q} .f3{border-color:${t.gold}}${q} .f4{border-color:${t.gold}}${q} .ctt span{color:${t.gold};border-color:${t.gold};text-shadow:${t.ts}}${q} .orn,${q} .cay b,${q} .names i,${q} .cst{color:${t.gold}}${q} .nmx{border-bottom-color:${t.gold}}${q} .cl,${q} .cst2{color:${t.acc}}${q} .rg,${q} .cay,${q} .cs small{color:${t.sub}}${q} .se{color:${t.gold}}${q} .wm{opacity:${t.wm}}${q} .names div{border-bottom-color:${t.gold}}${q} .sg{border-bottom-color:${t.gold}}${q} .spk{color:${t.gold2}}`}).join('\n');
+ const st=document.createElement('style');st.id='ctcss';st.textContent=css;document.head.appendChild(st)})();
+const cTier=l=>l>=9?4:l>=7?3:l>=5?2:l>=3?1:0;
 const acYear=()=>{const d=new Date(),y=d.getFullYear();return d.getMonth()>=8?y+' / '+(y+1):(y-1)+' / '+y};
+let _sealN=0;
+function sealSVG(){
+ const u=++_sealN,pts=[];
+ for(let i=0;i<96;i++){const a=Math.PI*i/48-Math.PI/2,r=i%2?91:99;pts.push((100+r*Math.cos(a)).toFixed(1)+','+(100+r*Math.sin(a)).toFixed(1))}
+ return `<svg class="seal" viewBox="0 0 200 200"><defs>
+ <linearGradient id="sg${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6c8"/><stop offset=".22" stop-color="#f3cf5c"/><stop offset=".48" stop-color="#b8860b"/><stop offset=".74" stop-color="#f7dc7a"/><stop offset="1" stop-color="#7d5a0f"/></linearGradient>
+ <radialGradient id="sr${u}" cx=".33" cy=".28" r=".95"><stop offset="0" stop-color="#fff4b8"/><stop offset=".5" stop-color="#e5b43f"/><stop offset="1" stop-color="#9c6e10"/></radialGradient>
+ <linearGradient id="ss${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+ <path id="tp${u}" d="M 36 100 A 64 64 0 0 1 164 100"/><path id="bp${u}" d="M 27 100 A 73 73 0 0 0 173 100"/>
+ <clipPath id="cp${u}"><circle cx="100" cy="100" r="38"/></clipPath></defs>
+ <polygon points="${pts.join(' ')}" fill="url(#sg${u})" stroke="#6f4f0c" stroke-width="1.2"/>
+ <circle cx="100" cy="100" r="87" fill="none" stroke="#6f4f0c" stroke-width="1.6"/>
+ <circle cx="100" cy="100" r="84" fill="url(#sr${u})" stroke="#fff1a8" stroke-width="1.4"/>
+ <circle cx="100" cy="100" r="51" fill="none" stroke="#7d5a0f" stroke-width="1.6"/>
+ <circle cx="100" cy="100" r="48.5" fill="#fffaf0" stroke="#d9ab2f" stroke-width="2.2"/>
+ <image href="${LOGO}" x="62" y="62" width="76" height="76" clip-path="url(#cp${u})" preserveAspectRatio="xMidYMid slice"/>
+ <text font-family="Cairo,sans-serif" font-size="15" font-weight="900" fill="#4d3304" text-anchor="middle"><textPath href="#tp${u}" startOffset="50%">ثانوية نهج البلاغة الأهلية</textPath></text>
+ <text font-family="Cairo,sans-serif" font-size="11" font-weight="900" fill="#4d3304" text-anchor="middle" letter-spacing="1.4"><textPath href="#bp${u}" startOffset="50%">NAHJ AL-BALAGHA</textPath></text>
+ <text x="22" y="105" font-size="15" fill="#4d3304" text-anchor="middle">★</text><text x="178" y="105" font-size="15" fill="#4d3304" text-anchor="middle">★</text>
+ <ellipse cx="76" cy="46" rx="56" ry="24" fill="url(#ss${u})" transform="rotate(-28 76 46)" opacity=".75"/>
+ <path d="M18 128 A 88 88 0 0 0 60 176" fill="none" stroke="#fff6c8" stroke-width="2.4" stroke-linecap="round" opacity=".7"/></svg>`}
+function crownSVG(){const u=++_sealN;return `<svg class="crn" viewBox="0 0 120 70"><defs><linearGradient id="cg${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2b0"/><stop offset=".5" stop-color="#d9a52c"/><stop offset="1" stop-color="#8a6410"/></linearGradient></defs><path d="M10 62 L8 18 L34 38 L60 6 L86 38 L112 18 L110 62 Z" fill="url(#cg${u})" stroke="#6f4f0c" stroke-width="1.5"/><rect x="10" y="56" width="100" height="9" rx="3" fill="url(#cg${u})" stroke="#6f4f0c"/><circle cx="60" cy="10" r="5" fill="#ff4f6d" stroke="#6f4f0c"/><circle cx="8" cy="18" r="4" fill="#4fc3ff" stroke="#6f4f0c"/><circle cx="112" cy="18" r="4" fill="#4fc3ff" stroke="#6f4f0c"/><circle cx="34" cy="40" r="3.5" fill="#fff" stroke="#6f4f0c"/><circle cx="86" cy="40" r="3.5" fill="#fff" stroke="#6f4f0c"/></svg>`}
+function sigHTML(o,t){
+ if(db.sig&&!o.cal)return `<div class="sgw"><img class="sgimg" src="${db.sig}"></div>`;
+ return `<div class="sgw">${o.mgr?`<div class="sgcal" style="color:${t.ink}">${esc(o.mgr)}</div>`:''}<svg class="sgf" viewBox="0 0 200 24" preserveAspectRatio="none"><path d="M4 16 C30 2 52 24 84 11 S132 3 150 13 S182 18 196 8" fill="none" stroke="${t.gold}" stroke-width="2" stroke-linecap="round"/><path d="M120 20 C140 15 160 22 186 17" fill="none" stroke="${t.gold}" stroke-width="1.2" stroke-linecap="round" opacity=".7"/></svg></div>`}
 function rkCert(){
  if(!rk.sel.size){toast('حدّد طالباً واحداً على الأقل بالضغط على المربع ☐');return}
  certDlg([...rk.sel],rk.f==='ideal'?1:rk.f==='top'?0:undefined)}
+function sigUpload(inp){
+ const f=inp.files&&inp.files[0];if(!f)return;
+ const im=new Image();im.onload=()=>{
+  const w=Math.min(520,im.width),h=Math.round(im.height*w/im.width),c=document.createElement('canvas');c.width=w;c.height=h;
+  const x=c.getContext('2d');x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h),a=d.data;
+  for(let i=0;i<a.length;i+=4){const l=(a[i]+a[i+1]+a[i+2])/3;if(l>238)a[i+3]=0;else if(l>190)a[i+3]=Math.round(a[i+3]*(238-l)/48)}
+  x.putImageData(d,0,0);db.sig=c.toDataURL('image/png');save();logA('رفع صورة توقيع المدير','');
+  const pv=$('#sgPv');if(pv){pv.src=db.sig;pv.style.display='block'}toast('تم حفظ التوقيع ✓')};
+ im.onerror=()=>toast('تعذّر قراءة الصورة');im.src=URL.createObjectURL(f)}
+function sigClear(){db.sig='';save();const pv=$('#sgPv');if(pv)pv.style.display='none';toast('تمت إزالة التوقيع')}
 function certDlg(ids,pre){askAdmin(()=>{
  const sts=ids.map(i=>db.students.find(s=>s.id===i)).filter(Boolean);if(!sts.length)return;
- openModal(`<h3>🏅 كتاب شكر وتقدير</h3><div style="color:var(--mut);font-size:13px">${sts.length===1?esc(sts[0].name):sts.length+' طالب محدَّد'}</div>
+ const mx=Math.max(...sts.map(stars));
+ openModal(`<h3>🏅 كتاب شكر وتقدير</h3><div style="color:var(--mut);font-size:13px">${sts.length===1?esc(sts[0].name)+(mx?` — ★ ${mx}`:''):sts.length+' طالب محدَّد'+(mx?` (أعلى مستوى ★ ${mx})`:'')}</div>
  <label>سبب الشكر</label><select id="ctR" onchange="$('#ctC').style.display=this.value==='__c'?'block':'none'">${CT_R.map((r,i)=>`<option value="${i}" ${pre===i?'selected':''}>${r[0]}</option>`).join('')}<option value="__c">سبب آخر (اكتبه)…</option></select>
  <textarea id="ctC" rows="2" style="display:none;margin-top:6px" placeholder="اكتب العبارة بعد «وذلك تقديراً»، مثال: لجهوده المتميزة في النشاط المدرسي"></textarea>
+ <label>تصميم الكتاب</label><select id="ctT"><option value="auto">تلقائي — يزداد فخامة مع عدد النجوم ⭐</option>${CT_ORDER.map(k=>`<option value="${k}">${CT_TH[k].n}</option>`).join('')}</select>
  ${sts.length>1?`<label>طريقة الطباعة</label><select id="ctM"><option value="one">كتاب مستقل لكل طالب (صفحة لكل طالب)</option><option value="grp">كتاب واحد جماعي بأسماء الطلاب</option></select>`:''}
  <div class="two"><div><label>اسم مدير المدرسة</label><input id="ctG" value="${esc(db.mgr||'')}" placeholder="الاسم الكامل"></div><div><label>التاريخ</label><input type="date" id="ctD" max="${todayStr()}" value="${todayStr()}"></div></div>
+ <label>التوقيع</label><div class="card" style="padding:10px;margin:0"><img id="sgPv" src="${db.sig||''}" style="display:${db.sig?'block':'none'};max-height:60px;max-width:100%;background:#fff;border-radius:8px;margin:0 auto 8px"><input type="file" accept="image/*" onchange="sigUpload(this)">
+ <label style="display:flex;align-items:center;gap:8px;margin-top:8px"><input type="checkbox" id="ctCal" style="width:auto" ${db.sig?'':'checked'}> استخدام توقيع مخطوط جميل بالاسم بدل الصورة</label>${db.sig?`<button class="btn sm" style="margin-top:6px" onclick="sigClear()">إزالة الصورة المرفوعة</button>`:''}<small style="color:var(--mut);display:block;margin-top:6px">ارفع صورة توقيع المدير على ورقة بيضاء (يُزال الخلفية تلقائياً)، أو اترك التوقيع المخطوط.</small></div>
  <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="certDo(${J(ids)})">🖨 طباعة / حفظ PDF</button>${sts.length===1?`<button class="btn blue" onclick="certImg('${ids[0]}')">📲 صورة</button>`:''}</div><button class="btn full" style="margin-top:8px" onclick="closeModal()">إلغاء</button>`)
 },2)}
 function certOpts(){
  const v=$('#ctR').value;let rs=v==='__c'?$('#ctC').value.trim():CT_R[+v][0];
  if(!rs){toast('اكتب سبب الشكر');return null}
- const o={rs,rsp:v==='__c'?rs:CT_R[+v][1],mgr:$('#ctG').value.trim(),date:$('#ctD').value||todayStr(),grp:$('#ctM')&&$('#ctM').value==='grp'};
+ const o={rs,rsp:v==='__c'?rs:CT_R[+v][1],mgr:$('#ctG').value.trim(),date:$('#ctD').value||todayStr(),grp:$('#ctM')&&$('#ctM').value==='grp',th:$('#ctT').value,cal:!db.sig||$('#ctCal').checked};
  db.mgr=o.mgr;save();return o}
-function ctPage(inner,o){
- const co=(pos,tf)=>`<svg class="co" style="${pos};transform:${tf}" viewBox="0 0 100 100"><path d="M0 0H100V9H9V100H0Z" fill="#b8892b"/><path d="M26 26l9-9 9 9-9 9z" fill="#0b1a4a"/><circle cx="60" cy="13" r="4" fill="#0b1a4a"/><circle cx="13" cy="60" r="4" fill="#0b1a4a"/></svg>`;
- return `<div class="ct"><div class="f3"></div><div class="f1"></div><div class="f2"></div>${co('top:7mm;right:7mm','none')}${co('top:7mm;left:7mm','scaleX(-1)')}${co('bottom:7mm;right:7mm','scaleY(-1)')}${co('bottom:7mm;left:7mm','scale(-1,-1)')}<img class="wm" src="${LOGO}">
+function ctPage(inner,o,lv){
+ const tr=cTier(lv),th=o.th==='auto'?CT_ORDER[tr]:o.th,t=CT_TH[th],cs=tr>=3?19:15;
+ const co=(pos,tf)=>`<svg class="co" style="${pos};width:${cs}mm;height:${cs}mm;transform:${tf}" viewBox="0 0 100 100"><path d="M0 0H100V9H9V100H0Z" fill="${t.gold}"/><path d="M26 26l9-9 9 9-9 9z" fill="${t.orn}"/><circle cx="60" cy="13" r="4" fill="${t.orn}"/><circle cx="13" cy="60" r="4" fill="${t.orn}"/>${tr>=2?`<path d="M26 26 L62 62" stroke="${t.gold}" stroke-width="3" stroke-linecap="round"/><circle cx="68" cy="68" r="5" fill="${t.gold}"/>`:''}</svg>`;
+ const spk=tr>=3?[['top:30mm;right:30mm','✦'],['top:44mm;left:34mm','✧'],['bottom:46mm;right:40mm','✦'],['bottom:36mm;left:46mm','✧'],['top:70mm;right:16mm','✦'],['top:84mm;left:18mm','✦']].map(([p,c])=>`<span class="spk" style="${p}">${c}</span>`).join(''):'';
+ const stRow=lv?`<div class="cst">${[...Array(10)].map((_,k)=>k<lv?'★':'<span class="o">★</span>').join('')}</div><div class="cst2">مستوى التميّز: ${lv} من 10</div>`:'';
+ return `<div class="ct th-${th} tr${tr}"><div class="f3"></div><div class="f1"></div><div class="f2"></div>${tr>=1?'<div class="f4"></div>':''}${tr>=3?'<div class="rays"></div>':''}${co('top:7mm;right:7mm','none')}${co('top:7mm;left:7mm','scaleX(-1)')}${co('bottom:7mm;right:7mm','scaleY(-1)')}${co('bottom:7mm;left:7mm','scale(-1,-1)')}<img class="wm" src="${LOGO}">${spk}
  <div class="ci"><div class="ch"><img src="${LOGO}"><div class="cht"><div class="rg">جمهورية العراق — وزارة التربية</div><div class="sn">${SCHOOL}</div><div class="se">${SCHOOL_EN}</div></div><div class="cay">العام الدراسي<br><b dir="ltr">${acYear()}</b></div></div>
- <div class="ctt"><span>كتاب شكر وتقدير</span></div><div class="orn">✦ ✦ ✦</div>${inner}
- <div class="cf"><div class="cs"><small>التاريخ</small><b>${fmtD(o.date)}</b></div><div class="seal">ختم<br>المدرسة</div><div class="cs"><small>مدير المدرسة</small><div class="sg"></div><b>${esc(o.mgr||'')}</b></div></div></div></div>`}
+ <div class="ctt">${tr>=4?crownSVG():''}<span>كتاب شكر وتقدير</span></div><div class="orn">${tr>=2?'❖ ✦ ❖ ✦ ❖':'✦ ✦ ✦'}</div>${inner.replace('@@ST@@',stRow)}
+ <div class="cf"><div class="cs"><small>التاريخ</small><b>${fmtD(o.date)}</b></div>${sealSVG()}<div class="cs"><small>مدير المدرسة</small>${sigHTML(o,t)}<div class="sg"></div><b>${esc(o.mgr||'')}</b></div></div></div></div>`}
 function certOne(s,o){
- const fs=s.name.length>28?27:s.name.length>22?31:36;
- return ctPage(`<div class="cb"><div class="l1">تتقدّم إدارة ${SCHOOL} بوافر الشكر والتقدير للطالب المتميّز</div><div class="nmx" style="font-size:${fs}px">${esc(s.name)}</div><div class="cl">${esc(s.cls)} — شعبة ${esc(s.sec)}</div><div class="l2">وذلك تقديراً ${esc(o.rs)}،<br>سائلين المولى عزّ وجلّ له دوام التوفيق والنجاح.</div></div>`,o)}
+ const lv=stars(s),fs=s.name.length>28?27:s.name.length>22?31:40;
+ return ctPage(`<div class="cb"><div class="l1">تتقدّم إدارة ${SCHOOL} بوافر الشكر والتقدير للطالب المتميّز</div><div class="nmx" style="font-size:${fs}px">${esc(s.name)}</div><div class="cl">${esc(s.cls)} — شعبة ${esc(s.sec)}</div>@@ST@@<div class="l2">وذلك تقديراً ${esc(o.rs)}،<br>سائلين المولى عزّ وجلّ له دوام التوفيق والنجاح.</div></div>`,o,lv)}
 function certGroup(list,o){
- const c=list.length<=8?2:list.length<=18?3:4,fs=list.length<=8?20:list.length<=18?17:14;
- return ctPage(`<div class="cb"><div class="l1">تتقدّم إدارة ${SCHOOL} بوافر الشكر والتقدير للطلبة الأعزاء</div><div class="names" style="grid-template-columns:repeat(${c},1fr);font-size:${fs}px">${list.map((s,i)=>`<div><i>${i+1}</i>${esc(s.name)}</div>`).join('')}</div><div class="l2">وذلك تقديراً ${esc(o.rsp||o.rs)}،<br>سائلين المولى عزّ وجلّ لهم دوام التوفيق والنجاح.</div></div>`,o)}
+ const c=list.length<=8?2:list.length<=18?3:4,fs=list.length<=8?20:list.length<=18?17:14,lv=Math.max(...list.map(stars));
+ return ctPage(`<div class="cb"><div class="l1">تتقدّم إدارة ${SCHOOL} بوافر الشكر والتقدير للطلبة الأعزاء</div><div class="names" style="grid-template-columns:repeat(${c},1fr);font-size:${fs}px">${list.map((s,i)=>`<div><i>${i+1}</i>${esc(s.name)}${stars(s)?`<em class="gst">★${stars(s)}</em>`:''}</div>`).join('')}</div><div class="l2">وذلك تقديراً ${esc(o.rsp||o.rs)}،<br>سائلين المولى عزّ وجلّ لهم دوام التوفيق والنجاح.</div></div>`,o,lv)}
 function certHTML(ids,o){
  const sts=ids.map(i=>db.students.find(s=>s.id===i)).filter(Boolean);
  if(o.grp&&sts.length>1){let h='';for(let i=0;i<sts.length;i+=24)h+=certGroup(sts.slice(i,i+24),o);return h}
@@ -1219,6 +1321,35 @@ function certImg(id){
  const o=certOpts();if(!o)return;const s=db.students.find(x=>x.id===id);
  logA('إصدار كتاب شكر وتقدير (صورة)',s.name+' — '+o.rs);
  closeModal();makeImage(certOne(s,o),'شكر-'+s.name,`🏅 ${SCHOOL}\nكتاب شكر وتقدير للطالب ${s.name} (${s.cls} / ${s.sec})`,s.cls,1058)}
+
+
+/* ---------- STARS ENGINE ---------- */
+let _stm=null;
+function buildStars(){
+ const bm={};db.behaviors.forEach(b=>bm[b.n]=b.k);
+ const P={},N={};
+ db.sessions.forEach(x=>{if(!x.beh)return;for(const id in x.beh)(x.beh[id]||[]).forEach(t=>{const k=bm[t];if(k==='pos')P[id]=(P[id]||0)+1;else if(k==='neg')N[id]=(N[id]||0)+1})});
+ const step=Math.max(1,+db.ss||3),m={};
+ db.students.forEach(s=>{const net=Math.max(0,(P[s.id]||0)-(N[s.id]||0)),bn=+s.bn||0;m[s.id]={pos:P[s.id]||0,neg:N[s.id]||0,bn,lv:Math.max(0,Math.min(10,Math.floor(net/step)+bn))}});
+ return m}
+function starInfo(s){if(!_stm)_stm=buildStars();return _stm[s.id]||{pos:0,neg:0,bn:0,lv:0}}
+const stars=s=>starInfo(s).lv;
+const plate=s=>{const l=stars(s);return l?' plate st'+l:''};
+const stBadge=s=>{const l=stars(s);return l?`<span class="stbd">★ ${l}</span>`:''};
+function starCard(s){
+ const i=starInfo(s),l=i.lv;
+ return `<div class="card"><h3 style="margin-top:0">⭐ نظام النجمات</h3>
+ <div style="text-align:center;margin:10px 8px 12px"><div class="nm${plate(s)}" style="display:block"><b>${esc(s.name)}${stBadge(s)}</b></div></div>
+ <div class="stbar">${[...Array(10)].map((_,k)=>`<span class="${k<l?'on':''}">★</span>`).join('')}</div>
+ <small style="color:var(--mut);display:block;text-align:center">المستوى ${l} من 10 • إيجابي ${i.pos} − سلبي ${i.neg} = ${Math.max(0,i.pos-i.neg)} نقطة (كل ${db.ss||3} = نجمة)${i.bn?` • ممنوحة: ${i.bn>0?'+':''}${i.bn}`:''}</small>
+ <div class="btns" style="margin-top:10px"><button class="btn sm" onclick="giveStar('${s.id}',1)">➕ منح نجمة</button><button class="btn sm" onclick="giveStar('${s.id}',-1)">➖ سحب نجمة</button></div></div>`}
+function giveStar(id,d){askAdmin(()=>{
+ const s=db.students.find(x=>x.id===id);if(!s)return;
+ const l=starInfo(s).lv;
+ if(d>0&&l>=10){toast('وصل الطالب إلى الحد الأقصى (10 نجوم)');return}
+ if(d<0&&l<=0){toast('لا توجد نجوم لسحبها');return}
+ s.bn=(+s.bn||0)+d;logA(d>0?'منح نجمة':'سحب نجمة',`${s.name} ← ${l+d} نجمة`);save();toast(d>0?'تم منح نجمة ⭐':'تم سحب نجمة');render()},2)}
+function setSS(v){db.ss=Math.max(1,parseInt(v)||3);logA('تعديل نقاط النجمة',String(db.ss));save();toast('تم الحفظ ✓');render()}
 
 /* ---------- ADMIN ---------- */
 function vAdmin(){
@@ -1237,6 +1368,9 @@ function vAdmin(){
  <details class="card"><summary>📲 مجموعات واتساب</summary><p style="color:var(--mut);font-size:13px;margin:0 0 6px">ألصق رابط دعوة مجموعة كل صف (يبدأ بـ chat.whatsapp.com). اتركه فارغاً إن لم تريد ربط الصف.</p>${Object.keys(db.structure).map(c=>`<label>${esc(c)}</label><input dir="ltr" placeholder="https://chat.whatsapp.com/..." value="${esc((db.wa||{})[c]||'')}" onchange="setWa(${J(c)},this.value)">`).join('')}</details>
  <details class="card"><summary>🗑 سلة المحذوفات (${(db.trash||[]).length})</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">الطلاب المحذوفون يُحفظون 60 يوماً على هذا الجهاز، ويُسترجعون بكل سجلات حضورهم.</p>${(db.trash||[]).length?(db.trash||[]).slice(0,30).map(x=>`<div style="padding:10px 0;border-top:1px solid rgba(255,255,255,.08)"><b>${esc(x.s.name)}</b><br><small style="color:var(--mut)">${esc(x.s.cls)} — شعبة ${esc(x.s.sec)} • ${fmtD(dstr(new Date(x.t)))}${x.u?' • '+esc(x.u):''}</small><div class="btns" style="margin-top:8px"><button class="btn sm" onclick="trashRestore('${x.id}')">↩ استرجاع</button><button class="btn sm" onclick="trashDel('${x.id}')">حذف نهائي</button></div></div>`).join('')+'<button class="btn full" style="margin-top:8px" onclick="trashEmpty()">تفريغ السلة</button>':'<div class="empty" style="padding:6px">السلة فارغة</div>'}</details>
  <details class="card"><summary>💾 النسخ الاحتياطية التلقائية</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">تُحفظ نسخة يومية على هذا الجهاز (آخر ${BK_KEEP} أيام). ${lastExport?`آخر نسخة نزّلتها كملف: منذ ${Math.floor((Date.now()-lastExport)/864e5)} يوماً.`:''}</p>${bkList.length?bkList.map(e=>`<div style="padding:10px 0;border-top:1px solid rgba(255,255,255,.08)"><b>${fmtD(e.d)}</b><br><small style="color:var(--mut)">${e.n} طالب • ${e.s} درس مسجّل</small><div class="btns" style="margin-top:8px"><button class="btn sm" onclick="bkRestore('${e.id}')">استرجاع</button><button class="btn sm" onclick="bkDownload('${e.id}')">⬇ تنزيل</button></div></div>`).join(''):'<div class="empty" style="padding:6px">لا توجد نسخ بعد (تُنشأ تلقائياً عند أول فتح كل يوم)</div>'}<button class="btn full" style="margin-top:8px" onclick="autoBackup(true).then(()=>toast('تم إنشاء النسخة ✓'))">إنشاء نسخة الآن</button></details>
+ <details class="card"><summary>⭐ نظام النجمات</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">نقاط التميّز = السلوك الإيجابي − السلبي. كل عدد من النقاط تحدّده أدناه = نجمة، حتى 10 نجوم. يظهر اسم الطالب بإطار متحرك يختلف مع كل مستوى، ويمكن منح نجمة أو سحبها من ملف الطالب.</p>
+ <div class="lt"><span>نقاط كل نجمة</span><input type="number" min="1" inputmode="numeric" value="${db.ss||3}" onchange="setSS(this.value)"></div>
+ <label>معاينة المستويات العشرة</label>${[...Array(10)].map((_,k)=>`<div class="nm plate st${k+1}" style="margin:12px 4px;flex:none"><b>المستوى ${k+1} — اسم الطالب<span class="stbd">★ ${k+1}</span></b></div>`).join('')}</details>
  <details class="card"><summary>📲 تثبيت التطبيق</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">${isStandalone()?'التطبيق مثبّت على هذا الجهاز ✓':'ثبّت التطبيق ليفتح بأيقونة مستقلة ويعمل بدون إنترنت.'}</p>${isStandalone()?'':'<button class="btn gold full" onclick="installApp()">تثبيت على هذا الجهاز</button>'}</details>
  <details class="card"><summary>♻️ النسخ الاحتياطي والاسترداد</summary>
   <div class="btns"><button class="btn gold" onclick="exportDB()">⬇ تنزيل نسخة احتياطية</button><button class="btn" onclick="importDB()">⬆ استرداد من ملف</button><button class="btn" onclick="restorePrev()">↩ استرداد آخر حالة تلقائية</button></div>
@@ -1318,9 +1452,9 @@ const FIREBASE_CONFIG={apiKey:'AIzaSyB-SZwVTdZXpQiey9y7w2ODjjTZ9sokFs8',authDoma
 const cloud={on:false,tried:false,st:{},se:{},cfg:'',legacy:null,mig:false,srv:{},got:{},pend:{},defer:{},pr:false,dirty:false,err:false};
 let FS=null;
 const stab=o=>{if(o===null||typeof o!=='object')return JSON.stringify(o);if(Array.isArray(o))return'['+o.map(stab).join(',')+']';return'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+stab(o[k])).join(',')+'}'};
-const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||'',since:s.since||'',hist:Array.isArray(s.hist)?s.hist:[]});
-const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo&&(a.since||'')===(b.since||'')&&JSON.stringify(a.hist||[])===JSON.stringify(b.hist||[]);
-const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},mgr:db.mgr||'',v:db.v||1});
+const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||'',since:s.since||'',hist:Array.isArray(s.hist)?s.hist:[],bn:+s.bn||0});
+const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo&&(a.since||'')===(b.since||'')&&(a.bn||0)===(b.bn||0)&&JSON.stringify(a.hist||[])===JSON.stringify(b.hist||[]);
+const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},mgr:db.mgr||'',ss:+db.ss||3,sig:db.sig||'',v:db.v||1});
 /* الجلسات تُخزَّن في مستند لكل (صف+شعبة+شهر) لتقليل عدد القراءات */
 const sparts=id=>{const p=id.split('|'),m=p[0].slice(0,7);return{doc:(p[1]+'|'+p[2]+'|'+m).replace(/\//g,'_'),key:p[0]+'_'+p[3],cls:p[1],sec:p[2],month:m}};
 
@@ -1399,11 +1533,11 @@ function startListeners(){
  FS.collection('meta').doc('config').onSnapshot({includeMetadataChanges:true},d=>{
   cloud.err=false;cloud.pend.cfg=d.metadata.hasPendingWrites;cbadge();
   if(!d.exists){if(!d.metadata.fromCache&&!cloud.mig){cloud.mig=true;migrate()}return}
-  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,tt:c.tt||'{}',users:c.users||'[]',al:c.al||{},mgr:c.mgr||'',v:c.v||1});
+  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,tt:c.tt||'{}',users:c.users||'[]',al:c.al||{},mgr:c.mgr||'',ss:+c.ss||3,sig:c.sig||'',v:c.v||1});
   if(j===cloud.cfg)return;
   whenClean('cfg',()=>{
    if(Array.isArray(c.structure)){db.structure={};c.structure.forEach(x=>{db.structure[x.c]=x.s||[]})}
-   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;try{db.tt=JSON.parse(c.tt||'{}')}catch(e){db.tt={}}try{db.users=JSON.parse(c.users||'[]')}catch(e){db.users=[]}db.al=c.al||{};db.mgr=c.mgr||'';
+   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;try{db.tt=JSON.parse(c.tt||'{}')}catch(e){db.tt={}}try{db.users=JSON.parse(c.users||'[]')}catch(e){db.users=[]}db.al=c.al||{};db.mgr=c.mgr||'';db.ss=+c.ss||3;db.sig=c.sig||'';
    cloud.cfg=j;softRender()});
  },cloudErr);
  FS.collection('meta').doc('counter').onSnapshot(d=>{if(d.exists&&db)db.counter=Math.max(db.counter||0,d.data().n||0)},()=>{});
