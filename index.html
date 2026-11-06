@@ -350,6 +350,55 @@ table.tb td.tt{font-weight:800}
 .rp .rok{margin:14px 0;padding:14px;text-align:center;border:1px dashed #0f8a5f;border-radius:10px;color:#0f8a5f;font-weight:800;font-size:14px}
 .rp .rsig{display:flex;justify-content:space-around;margin-top:14mm;text-align:center;font-size:11px;color:#13203f}
 .rp .rsig .sgl{border-bottom:1.5px dotted #0b1a4a;width:50mm;margin:2mm auto 0}
+
+/* ===== TEACHER GRADE SHEET ===== */
+.gr{width:194mm;margin:0 auto;color:#000;font-family:'Cairo','DejaVu Sans',sans-serif;page-break-after:always}
+.gr:last-child{page-break-after:auto}
+.gr *{box-sizing:border-box}
+.gr .grh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.gr .grh2{display:grid;grid-template-columns:56mm 1fr 56mm;align-items:center}
+.gr .grs{text-align:right;font-size:15px;font-weight:900;line-height:1.6}
+.gr .grs small{display:block;font-size:10.5px;font-weight:600}
+.gr .grl{width:24mm;height:24mm;object-fit:contain}
+.gr .grj{text-align:left;font-size:15px;font-weight:800;line-height:1.6}
+.gr .grh2{margin:2mm 0 3.5mm}
+.gr .grc{text-align:right;font-size:13.5px;font-weight:700;line-height:1.7;white-space:nowrap}
+.gr .grtt{font-size:15px;font-weight:900;border:1.6px solid #000;border-radius:3px;padding:1.5mm 4mm;text-align:center;line-height:1.55;margin:0 auto}
+.gr table.grtb{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}
+.gr .grtb th,.gr .grtb td{border:1px solid #000;text-align:center;padding:0 2px;height:8.4mm;overflow:hidden}
+.gr .grtb th{background:#e6e6e6;font-size:10px;height:13mm;font-weight:800;line-height:1.35;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.gr .grtb td.nmc{text-align:right;padding:0 2.5mm;font-weight:700;white-space:nowrap;text-overflow:ellipsis}
+.gr .grtb thead{display:table-header-group}.gr .grtb tr{page-break-inside:avoid}
+.gr .grf{display:grid;grid-template-columns:1fr 1fr;margin-top:9mm;font-size:13.5px;font-weight:700;page-break-inside:avoid}
+.gr .grf>div:last-child{text-align:left}.gr .grf small{display:block;font-weight:600;font-size:10.5px;margin-top:6mm}
+
+/* ===== ATTENDANCE GRID (duplex-ready) ===== */
+.gq{position:relative;width:281mm;height:193mm;box-sizing:border-box;padding:4mm 6mm 8mm;border:1.6px solid #b8892b;background:#fff;color:#13203f;font-family:'Cairo','DejaVu Sans',sans-serif;page-break-after:always;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.gq:before{content:'';position:absolute;top:1.6mm;left:1.6mm;right:1.6mm;bottom:1.6mm;border:1px solid #c9a23f;pointer-events:none}
+.gq:last-child{page-break-after:auto}.gq *{box-sizing:border-box}
+.gq .gqh{position:relative;display:grid;grid-template-columns:19mm 1fr auto 42mm;align-items:center;gap:8px;height:17mm}
+.gq .gqh img{width:16mm;height:16mm;object-fit:contain}
+.gq .gqt b{display:block;font-size:17px;font-weight:900;line-height:1.3}.gq .gqt small{display:block;font-size:9.5px;color:#8a6417;letter-spacing:.7px;font-weight:700}
+.gq .gqp span{display:inline-block;background:linear-gradient(135deg,#0a1438,#1b3a9a);color:#f6d56a;border-radius:18px;padding:1.5mm 7mm;font-weight:900;font-size:15px;white-space:nowrap}
+.gq .gqd{font-size:9.5px;color:#556;text-align:left;line-height:1.5}.gq .gqd b{font-size:11px;color:#13203f}
+.gq .gqm{position:relative;display:flex;justify-content:space-between;align-items:center;height:5.5mm;font-size:11.5px;font-weight:800;border-top:1.5px solid #b8892b;padding-top:.8mm}
+.gq .gqm i{font-style:normal;font-weight:600;color:#556;font-size:10.5px}
+.gq table.gqT{position:relative;width:100%;border-collapse:collapse;table-layout:fixed;margin-top:1mm}
+.gq .gqT th,.gq .gqT td{border:1px solid #c9b77f;text-align:center;padding:0;overflow:hidden}
+.gq .gqT th{background:#0a1438;color:#f6d56a;font-weight:800}
+.gq .gqT .n1{width:9mm}.gq .gqT .n2{width:58mm}
+.gq .gqT td.nm,.gq .gqT th.nm{text-align:right;padding:0 2mm;white-space:nowrap;text-overflow:ellipsis}
+.gq .gqT th.d1{font-size:12.5px;height:6.5mm}.gq .gqT th.d1 small{font-weight:500;font-size:9.5px;opacity:.85;margin-right:5px}
+.gq .gqT th.l1{background:#1b3a9a;color:#fff;font-size:11px;height:5mm}
+.gq .gqT th.s1{background:#f7f0d9;color:#0a1438;height:17mm;vertical-align:bottom}
+.gq .gqT th.s1 span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:9px;font-weight:700;display:inline-block;max-height:16mm;overflow:hidden;white-space:nowrap}
+.gq .gqT td{font-size:12.5px;line-height:1.05}.gq .gqT td.nm{font-weight:700;font-size:12px;background:#fffdf6;line-height:1.05}
+.gq .gqT td.p1{color:#0f8a5f;font-weight:900}.gq .gqT td.a1{background:#fde0e3;color:#c0283a;font-weight:900}.gq .gqT td.e1{background:#fff1d6;color:#c27a00;font-weight:900}.gq .gqT td.t1{background:#dcecff;color:#1c62c4;font-weight:900}.gq .gqT td.x1{color:#c9c9c9}
+.gq .gqT tbody tr:nth-child(even) td:not(.a1):not(.e1):not(.t1){background:#fbf7e8}
+.gq table.gqS{font-size:14px}.gq .gqS th{font-size:12.5px;height:8mm}.gq .gqS td{font-size:13.5px;font-weight:600;line-height:1.05}.gq .gqS td.nm{font-size:13px}
+.gq .gqS tr.tot td{background:#0a1438!important;color:#f6d56a;font-weight:900}
+.gq .gqf{position:absolute;bottom:3.4mm;left:6mm;right:6mm;text-align:center;font-size:9.5px;color:#7a86a6}
+.gq.gqb .gqf{bottom:50%;font-size:13px;color:#c0c0c0}
 </style>
 </head>
 <body>
@@ -390,7 +439,7 @@ async function idbGet(k){try{const d=await idb();return await new Promise(res=>{
 async function idbPut(k,v){try{const d=await idb();d.transaction('kv','readwrite').objectStore('kv').put(v,k)}catch(e){mem[k]=v}}
 let st_;function save(){_stm=null;clearTimeout(st_);cloud.dirty=true;st_=setTimeout(()=>{cloud.dirty=false;idbPut('db',db);cloudSave();flushDefer()},150)}
 function snapshot(){idbPut('prev',JSON.parse(JSON.stringify(db)))}
-function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,tt:{},users:[],audit:[],al:{},trash:[],mgr:'',ss:3,sig:'',tg:{},chan:'wa',
+function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,tt:{},users:[],audit:[],al:{},trash:[],mgr:'',ss:3,sig:'',tg:{},chan:'wa',yr:'',
  students:[],
  structure:{'الرابع العلمي':['أ','ب'],'الرابع الأدبي':['أ'],'الخامس العلمي':['أ','ب'],'الخامس الأدبي':['أ'],'السادس العلمي':['أ','ب'],'السادس الأدبي':['أ']},
  sessions:[],
@@ -479,8 +528,8 @@ addEventListener('popstate',e=>{view=e.state||{n:'home',p:{}};render()});
 function openAdmin(){askAdmin(()=>go('admin'))}
 function render(){_stm=null;
  if(!db)return;
- if(((view.n==='admin'||view.n==='tt'||view.n==='audit')&&lvl()<3)||((view.n==='dash'||view.n==='rank'||view.n==='outs')&&lvl()<2))view={n:'home',p:{}};
- const f={home:vHome,sec:vSec,att:vAtt,stu:vStu,find:vFind,admin:vAdmin,dash:vDash,tt:vTT,audit:vAudit,days:vDays,tbl:vTbl,rank:vRank,outs:vOuts}[view.n]||vHome;
+ if(((view.n==='admin'||view.n==='tt'||view.n==='audit'||view.n==='arch')&&lvl()<3)||((view.n==='dash'||view.n==='rank'||view.n==='outs')&&lvl()<2))view={n:'home',p:{}};
+ const f={home:vHome,sec:vSec,att:vAtt,stu:vStu,find:vFind,admin:vAdmin,dash:vDash,tt:vTT,audit:vAudit,days:vDays,tbl:vTbl,rank:vRank,outs:vOuts,arch:vArch}[view.n]||vHome;
  $('#app').innerHTML=f(view.p||{});
  $('#nav').style.display=view.n==='att'?'none':'flex';
  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.n===(view.n==='stu'||view.n==='sec'?'home':view.n)));
@@ -534,7 +583,7 @@ function vSec(p){
    <button class="btn gold full" style="margin-top:14px" onclick="startAtt(${J({cls,sec})})">${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?'تعديل الحضور المسجّل 🔐':'ابدأ تسجيل الطلاب'}</button>${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?`<button class="btn full" style="margin-top:8px" onclick="waPrompt(${J(sKey(sel.date,cls,sec,sel.lesson))})">📲 إرسال الغياب (واتساب / تلكرام)</button><button class="btn full" style="margin-top:8px" onclick="lessonPDF(${J(sKey(sel.date,cls,sec,sel.lesson))})">📄 تنزيل كشف الغياب PDF</button>`:''}</div>`;
   }
  }else{
-  h+=`<div class="btns" style="margin-bottom:6px"><button class="btn gold" onclick="editStudent(null,${J(cls)},${J(sec)})">＋ إضافة طالب جديد 🔐</button><button class="btn blue" onclick="gridDialog(${J(cls)},${J(sec)})">📊 جدول الحضور (PDF)</button></div>`;
+  h+=`<div class="btns" style="margin-bottom:6px"><button class="btn gold" onclick="editStudent(null,${J(cls)},${J(sec)})">＋ إضافة طالب جديد 🔐</button><button class="btn blue" onclick="gridDialog(${J(cls)},${J(sec)})">📊 جدول الحضور (PDF)</button><button class="btn" onclick="grDlg(${J(cls)},${J(sec)})">📝 سجل الدرجات</button></div>`;
   if(!list.length)h+='<div class="card empty">لا يوجد طلاب في هذه الشعبة.<br>استورد ملف Excel أو أضف طالباً من هنا.</div>';
   list.forEach((s,i)=>{const x=stats(s);
    h+=`<div class="sr" onclick="go('stu',{id:'${s.id}'})"><div class="num">${i+1}</div>${av(s)}<div class="nm${plate(s)}"><b>${esc(s.name)}${stBadge(s)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small>
@@ -842,32 +891,37 @@ function printGrid(cls,sec){
  if(!from||!to||from>to){toast('حدّد فترة صحيحة');return}
  const r=gridPages(cls,sec,from,to);if(r.err){toast(r.err);return}
  closeModal();printDoc(r.html,true)}
-function gridPages(cls,sec,from,to){
+function gridPages(cls,sec,from,to,pad){
  const list=studentsIn(cls,sec,from,to),ss=db.sessions.filter(x=>x.cls===cls&&x.sec===sec&&x.date>=from&&x.date<=to);
  if(!list.length)return{err:'لا يوجد طلاب في هذه الشعبة'};
  if(!ss.length)return{err:'لا توجد دروس مسجّلة في هذه الفترة'};
  const N=Math.max(db.lessons.length,...ss.map(x=>x.lesson)),dates=[...new Set(ss.map(x=>x.date))].sort(),by={};
  ss.forEach(x=>by[x.date+'|'+x.lesson]=x);
- const PER=Math.max(1,Math.floor(30/N)),fd=db.fd||1;
- const wd=d=>{try{return new Date(d+'T12:00:00').toLocaleDateString('ar',{weekday:'long'})}catch(e){return ''}};
- const cell=(s,d,l)=>{const x=by[d+'|'+l];if(!x||!placeOn(s,cls,sec,d))return'<td class="gx">·</td>';const m=x.marks[s.id];return m==='a'?'<td class="ga">غ</td>':m==='e'?'<td class="ge">م</td>':m==='l'?'<td class="gt">ت</td>':'<td class="gp">✓</td>'};
- const meta=`<div class="pp-meta">${esc(cls)} — شعبة ${esc(sec)} • الفترة: ${fmtD(from)} إلى ${fmtD(to)} • عدد الطلاب: ${list.length} • الدروس المسجّلة: ${ss.length}<br><span style="font-weight:400">✓ حاضر &nbsp; غ غائب &nbsp; م مجاز &nbsp; ت متأخر &nbsp; · لم يُسجَّل الدرس</span></div>`;
- let pages='';
- for(let i=0;i<dates.length;i+=PER){
-  const ch=dates.slice(i,i+PER),ls=[...Array(N)].map((_,j)=>j+1);
-  const t=`<table class="pp-g"><thead><tr><th rowspan="3" class="gn">#</th><th rowspan="3" class="gname" style="text-align:center">الطالب</th>${ch.map(d=>`<th colspan="${N}" class="gd">${d.slice(8)}/${d.slice(5,7)}<br><small>${wd(d)}</small></th>`).join('')}</tr>
-  <tr>${ch.map(d=>ls.map(l=>`<th class="gl">${l}</th>`).join('')).join('')}</tr>
-  <tr>${ch.map(d=>ls.map(l=>{const x=by[d+'|'+l];return `<th class="gs">${x?`<span>${esc(x.subject)}</span>`:''}</th>`}).join('')).join('')}</tr></thead>
-  <tbody>${list.map((s,k)=>`<tr><td>${k+1}</td><td class="gname">${esc(s.name)}</td>${ch.map(d=>ls.map(l=>cell(s,d,l)).join('')).join('')}</tr>`).join('')}</tbody></table>`;
-  pages+=`<div class="pp pp-land">${pHead('')}<div class="pp-title"><span>جدول الحضور والغياب</span></div>${meta}${t}${pFoot()}</div>`;
- }
- const rows=list.map((s,k)=>{let a=0,e=0,fa=0,lt=0;
+ const fd=db.fd||1,nm=cls+' — شعبة '+sec,ls=[...Array(N)].map((_,j)=>j+1);
+ const cut=(arr,mx)=>{const np=Math.ceil(arr.length/mx),per=Math.ceil(arr.length/np),out=[];for(let i=0;i<arr.length;i+=per)out.push({off:i,rows:arr.slice(i,i+per)});return out};
+ const slices=cut(list,23),per=slices[0].rows.length;
+ const DPP=Math.max(1,Math.floor(24/N)),nch=Math.ceil(dates.length/DPP),csz=Math.ceil(dates.length/nch),chunks=[];
+ for(let i=0;i<dates.length;i+=csz)chunks.push(dates.slice(i,i+csz));
+ const cell=(s,d,l)=>{const x=by[d+'|'+l];if(!x||!placeOn(s,cls,sec,d))return'<td class="x1">·</td>';const m=x.marks[s.id];return m==='a'?'<td class="a1">غ</td>':m==='e'?'<td class="e1">م</td>':m==='l'?'<td class="t1">ت</td>':'<td class="p1">✓</td>'};
+ const sum=list.map(s=>{let a=0,e=0,fa=0,lt=0;
   dates.forEach(d=>{if(!placeOn(s,cls,sec,d))return;const L=ss.filter(x=>x.date===d),aa=L.filter(x=>x.marks[s.id]==='a').length,ee=L.filter(x=>x.marks[s.id]==='e').length;a+=aa;e+=ee;lt+=L.filter(x=>x.marks[s.id]==='l').length;if(aa===L.length&&L.length>=fd)fa++});
   const rg=ss.filter(x=>placeOn(s,cls,sec,x.date)).length,p=rg-a-e,pc=rg?Math.round(p/rg*100):0;
-  return `<tr><td>${k+1}</td><td class="gname">${esc(s.name)}</td><td style="${fa?'color:#c0283a;font-weight:800':''}">${fa}</td><td style="${a?'color:#c0283a;font-weight:800':''}">${a}</td><td>${e}</td><td style="color:#1c62c4">${lt}</td><td style="color:#0f8a5f;font-weight:800">${p}</td><td><span dir="ltr">${pc}%</span></td></tr>`}).join('');
- pages+=`<div class="pp pp-land">${pHead('')}<div class="pp-title"><span>ملخص الحضور والغياب للفترة</span></div>${meta}
- <table class="pp-s"><thead><tr><th style="width:8mm">#</th><th>الطالب</th><th>أيام غياب كاملة</th><th>دروس غائبة</th><th>دروس مجازة</th><th>مرات التأخر</th><th>دروس حاضرة</th><th>نسبة الحضور</th></tr></thead><tbody>${rows}</tbody></table>${pFoot()}</div>`;
- return{html:pages};
+  return{s,a,e,fa,lt,p,pc}});
+ const ssl=cut(sum,26),K0=chunks.length*slices.length+ssl.length,K=K0+(pad&&K0%2?1:0);
+ let k=0;
+ const page=inner=>`<div class="gq">${inner}<div class="gqf">${SCHOOL} — ${esc(nm)} — صفحة ${++k} من ${K}</div></div>`;
+ const head=t=>`<div class="gqh"><img src="${LOGO}"><div class="gqt"><b>${SCHOOL}</b><small>${SCHOOL_EN}</small></div><div class="gqp"><span>${t}</span></div><div class="gqd">التاريخ<br><b>${fmtD(todayStr())}</b></div></div><div class="gqm"><span>${esc(nm)} • الفترة: ${fmtD(from)} إلى ${fmtD(to)} • الطلاب: ${list.length} • الدروس المسجّلة: ${ss.length}</span><i>✓ حاضر • غ غائب • م مجاز • ت متأخر • · لم يُسجَّل</i></div>`;
+ const rhG=Math.max(5,Math.min(9,Math.floor((132-0.32*per)/per*10)/10)),rhS=n=>Math.max(5,Math.min(10,Math.floor((148-0.32*(n+1))/(n+1)*10)/10));
+ let out='';
+ chunks.forEach(ch=>slices.forEach(sl=>{
+  out+=page(head('جدول الحضور والغياب')+`<table class="gqT"><thead><tr><th class="n1" rowspan="3">#</th><th class="n2 nm" rowspan="3" style="text-align:center">الطالب</th>${ch.map(d=>`<th colspan="${N}" class="d1">${dd(d)}<small>${wd2(d)}</small></th>`).join('')}</tr><tr>${ch.map(d=>ls.map(l=>`<th class="l1">${l}</th>`).join('')).join('')}</tr><tr>${ch.map(d=>ls.map(l=>{const x=by[d+'|'+l];return `<th class="s1">${x?`<span>${esc(x.subject)}</span>`:''}</th>`}).join('')).join('')}</tr></thead>
+  <tbody>${sl.rows.map((s,i)=>`<tr style="height:${rhG}mm"><td>${sl.off+i+1}</td><td class="nm">${esc(s.name)}</td>${ch.map(d=>ls.map(l=>cell(s,d,l)).join('')).join('')}</tr>`).join('')}</tbody></table>`)}));
+ ssl.forEach((sl,si)=>{
+  const last=si===ssl.length-1,rh=rhS(sl.rows.length),T=sum.reduce((o,r)=>({a:o.a+r.a,e:o.e+r.e,l:o.l+r.lt}),{a:0,e:0,l:0});
+  out+=page(head('ملخص الحضور والغياب للفترة')+`<table class="gqT gqS"><thead><tr><th class="n1">#</th><th class="n2 nm" style="text-align:center">الطالب</th><th>أيام غياب كاملة</th><th>دروس غائبة</th><th>دروس مجازة</th><th>مرات التأخر</th><th>دروس حاضرة</th><th>نسبة الحضور</th></tr></thead>
+  <tbody>${sl.rows.map((r,i)=>`<tr style="height:${rh}mm"><td>${sl.off+i+1}</td><td class="nm">${esc(r.s.name)}</td><td style="${r.fa?'color:#c0283a;font-weight:900':''}">${r.fa}</td><td style="${r.a?'color:#c0283a;font-weight:900':''}">${r.a}</td><td>${r.e}</td><td style="color:#1c62c4">${r.lt}</td><td style="color:#0f8a5f;font-weight:900">${r.p}</td><td style="${r.pc<75?'color:#c0283a;font-weight:900':''}"><span dir="ltr">${r.pc}%</span></td></tr>`).join('')}${last?`<tr class="tot" style="height:${rh}mm"><td></td><td class="nm">المجموع</td><td></td><td>${T.a}</td><td>${T.e}</td><td>${T.l}</td><td></td><td></td></tr>`:''}</tbody></table>`)});
+ if(pad&&K0%2)out+=`<div class="gq gqb"><div class="gqf">— صفحة فارغة لتبدأ الشعبة التالية على وجه جديد —</div></div>`;
+ return{html:out};
 }
 
 
@@ -1082,7 +1136,7 @@ function waDay(date,k){
  waModal(t,'','📲 غياب اليوم')}
 
 /* ---------- ABSENCE TABLE (all names & lessons) ---------- */
-let tb={k:'all',r:'7',from:'',to:''};
+let tb={k:'all',r:'7',from:'',to:'',dx:true};
 function tbRange(){
  const t=todayStr();
  if(tb.r==='1')return[t,t];
@@ -1109,6 +1163,7 @@ function vTbl(){
  <label>الفترة</label><div class="tabs">${rb('1','اليوم')}${rb('7','7 أيام')}${rb('m','هذا الشهر')}${rb('c','مخصص')}</div>
  ${tb.r==='c'?`<div class="two" style="margin-top:8px"><div><label>من</label><input type="date" max="${t}" value="${from}" onchange="tb.from=this.value;render()"></div><div><label>إلى</label><input type="date" max="${t}" value="${to}" onchange="tb.to=this.value;render()"></div></div>`:`<small style="color:var(--mut);display:block;margin-top:6px">${fmtD(from)} — ${fmtD(to)}</small>`}
  <div class="btns" style="margin-top:12px"><button class="btn gold" onclick="tbPDF()">⬇ تنزيل PDF</button><button class="btn blue" onclick="tbXLS()">⬇ تنزيل Excel</button></div>
+ <label style="display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px"><input type="checkbox" style="width:auto" ${tb.dx!==false?'checked':''} onchange="tb.dx=this.checked"> طباعة على وجهين (كل شعبة تبدأ على وجه جديد)</label>
  <small style="color:var(--mut);display:block;margin-top:8px">✓ حاضر • غ غائب • م مجاز • ت متأخر • · لم يُسجَّل الدرس. اضغط على تاريخ لعرض غياب ذلك اليوم.</small></div>`;
  if(big)h+=`<div class="card" style="border-color:var(--amb)"><small>الفترة طويلة، فيُعرض ملخص كل طالب فقط. للتفصيل الكامل لكل درس نزّل PDF أو Excel، أو اختر فترة أقصر.</small></div>`;
  data.forEach(x=>{
@@ -1124,7 +1179,7 @@ function vTbl(){
 }
 function tbPDF(){
  const [from,to]=tbRange();let html='',n=0;
- tbSecs().forEach(([c,s])=>{const r=gridPages(c,s,from,to);if(r.html){html+=r.html;n++}});
+ const sc=tbSecs();sc.forEach(([c,s])=>{const r=gridPages(c,s,from,to,tb.dx!==false&&sc.length>1);if(r.html){html+=r.html;n++}});
  if(!n){toast('لا توجد دروس مسجّلة في هذه الفترة');return}
  printDoc(html,true)}
 function tbXLS(){
@@ -1261,7 +1316,7 @@ const CT_ORDER=['cl','em','bg','ry','im'];
 (function(){const css=Object.entries(CT_TH).map(([k,t])=>{const q='.ct.th-'+k;return `${q}{background:${t.bg};color:${t.ink}}${q} .f1{border-color:${t.fr1}}${q} .f2{border-color:${t.fr2}}${q} .f3{border-color:${t.gold}}${q} .f4{border-color:${t.gold}}${q} .ctt span{color:${t.gold};border-color:${t.gold};text-shadow:${t.ts}}${q} .orn,${q} .cay b,${q} .names i,${q} .cst{color:${t.gold}}${q} .nmx{border-bottom-color:${t.gold}}${q} .cl,${q} .cst2{color:${t.acc}}${q} .rg,${q} .cay,${q} .cs small{color:${t.sub}}${q} .se{color:${t.gold}}${q} .wm{opacity:${t.wm}}${q} .names div{border-bottom-color:${t.gold}}${q} .sg{border-bottom-color:${t.gold}}${q} .spk{color:${t.gold2}}`}).join('\n');
  const st=document.createElement('style');st.id='ctcss';st.textContent=css;document.head.appendChild(st)})();
 const cTier=l=>l>=9?4:l>=7?3:l>=5?2:l>=3?1:0;
-const acYear=()=>{const d=new Date(),y=d.getFullYear();return d.getMonth()>=8?y+' / '+(y+1):(y-1)+' / '+y};
+const acYear=()=>{if(db.yr)return db.yr;const d=new Date(),y=d.getFullYear();return d.getMonth()>=8?y+' / '+(y+1):(y-1)+' / '+y};
 let _sealN=0;
 function sealSVG(){
  const u=++_sealN,pts=[];
@@ -1494,6 +1549,166 @@ function otXLS(){
  const rows=otRows();if(!rows.length){toast('لا يوجد طلاب');return}
  saveSheets([{name:'المنقولون',aoa:[['#',...OT_H],...rows.map((s,i)=>[i+1,...otCols(s)])]}],'المنقولون-'+todayStr())}
 
+
+/* ---------- YEAR ARCHIVE ---------- */
+let arcList=[],arCur={id:'',k:'all',q:'',o:'name'},arCache={};
+async function loadArc(){try{arcList=(await idbGet('arch'))||[]}catch(e){arcList=[]}}
+function nextYear(l){const m=String(l).match(/(\d{4})\D+(\d{4})/);return m?(+m[1]+1)+' / '+(+m[2]+1):l+' (جديدة)'}
+const arcSnap=()=>({v:1,label:db.yr||acYear(),t:Date.now(),students:db.students,sessions:db.sessions,structure:db.structure,behaviors:db.behaviors,lessons:db.lessons,tt:db.tt||{},al:db.al||{},ss:db.ss||3});
+function arcDlg(clear){askAdmin(()=>{
+ const cl=db.yr||acYear();
+ openModal(`<h3>${clear?'📅 أرشفة وبدء سنة جديدة':'🗄 أرشفة السنة الحالية'}</h3>
+ <p style="margin:4px 0;color:var(--mut);font-size:13px">سيُحفظ في الأرشيف: <b>${db.students.length}</b> طالب • <b>${db.sessions.length}</b> درس مسجّل.</p>
+ <label>اسم السنة المؤرشفة</label><input id="arL" value="${esc(cl)}">
+ ${clear?`<label>اسم السنة الجديدة</label><input id="arN" value="${esc(nextYear(cl))}">
+ <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="arB" checked style="width:auto"> تصفير النجوم الممنوحة يدوياً</label>
+ <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="arO" style="width:auto"> إزالة الطلاب المنقولين من القوائم الحالية (يبقون في الأرشيف)</label>
+ <div style="background:rgba(255,176,42,.12);border:1px solid var(--amb);border-radius:12px;padding:10px;margin-top:10px;font-size:13px">سيتم <b>حذف سجلات الحضور والغياب والسلوك الحالية</b> من التطبيق ومن كل الأجهزة لتبدأ السنة الجديدة نظيفة، وتبقى محفوظة في الأرشيف. يبقى الطلاب كما هم في شعبهم، ويمكنك التراجع من «الحالة السابقة» في الإدارة.</div>
+ <label>اكتب كلمة «أرشفة» للتأكيد</label><input id="arC" autocomplete="off">`:''}
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="arcDo(${clear})">تنفيذ</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)},3)}
+async function arcDo(clear){
+ const label=$('#arL').value.trim();
+ if(!label){toast('اكتب اسم السنة');return}
+ if(clear&&$('#arC').value.trim()!=='أرشفة'){toast('اكتب كلمة أرشفة للتأكيد');return}
+ await loadArc();
+ if(arcList.some(a=>a.label===label)){toast('يوجد أرشيف بهذا الاسم، غيّر اسم السنة');return}
+ const snap=arcSnap();snap.label=label;
+ const c=await bkBytes(JSON.stringify(snap)),e={id:uid(),label,t:Date.now(),n:db.students.length,s:db.sessions.length,gz:c.gz,b:c.b};
+ arcList=[e,...arcList];await idbPut('arch',arcList);
+ arcDownload(e.id);
+ if(clear){
+  const nx=($('#arN').value||'').trim()||nextYear(label),rb=$('#arB').checked,ro=$('#arO').checked;
+  snapshot();db.sessions=[];
+  if(rb)db.students.forEach(s=>{s.bn=0});
+  if(ro)db.students=db.students.filter(s=>!s.out);
+  db.yr=nx;logA('أرشفة سنة وبدء سنة جديدة',`${label} ← ${nx} (${e.n} طالب، ${e.s} درس)`);
+ }else{if(!db.yr)db.yr=label;logA('أرشفة السنة الحالية',`${label} (${e.n} طالب، ${e.s} درس)`)}
+ save();closeModal();toast(clear?'تمت الأرشفة وبدأت سنة جديدة ✓':'تمت الأرشفة ✓');render()}
+async function arcDownload(id){
+ const e=arcList.find(x=>x.id===id);if(!e)return;
+ const b=new Blob([await bkText(e)],{type:'application/json'}),a=document.createElement('a');
+ a.href=URL.createObjectURL(b);a.download='أرشيف-'+e.label.replace(/[\\\/:*?"<>|\s]+/g,'-')+'.json';a.click()}
+function arcImport(inp){
+ const f=inp.files&&inp.files[0];if(!f)return;
+ const r=new FileReader();r.onload=async()=>{
+  try{
+   const o=JSON.parse(r.result);if(!Array.isArray(o.students)||!Array.isArray(o.sessions)||!o.structure)throw 0;
+   await loadArc();let label=o.label||'أرشيف مستورد';while(arcList.some(a=>a.label===label))label+=' (2)';o.label=label;
+   const c=await bkBytes(JSON.stringify(o));
+   arcList=[{id:uid(),label,t:o.t||Date.now(),n:o.students.length,s:o.sessions.length,gz:c.gz,b:c.b},...arcList];
+   await idbPut('arch',arcList);logA('استيراد أرشيف سنة',label);toast('تم استيراد الأرشيف ✓');render()
+  }catch(x){toast('الملف ليس أرشيفاً صالحاً')}inp.value=''};
+ r.readAsText(f)}
+function arcDel(id){
+ const e=arcList.find(x=>x.id===id);if(!e)return;
+ confirmBox(`حذف أرشيف «${esc(e.label)}» نهائياً من هذا الجهاز؟ نزّل ملفه أولاً إن أردت الاحتفاظ به.`,async()=>{
+  arcList=arcList.filter(x=>x.id!==id);delete arCache[id];await idbPut('arch',arcList);if(arCur.id===id)arCur.id=arcList[0]?arcList[0].id:'';
+  logA('حذف أرشيف سنة',e.label);closeModal();toast('تم الحذف');render()},'حذف')}
+function openArch(){askAdmin(()=>{loadArc().then(()=>{if(!arcList.find(a=>a.id===arCur.id))arCur.id=arcList[0]?arcList[0].id:'';go('arch')})},3)}
+function arcCompute(snap){
+ const keep=db;
+ try{
+  db=Object.assign(defDB(),{students:snap.students,sessions:snap.sessions,structure:snap.structure,behaviors:snap.behaviors||keep.behaviors,lessons:snap.lessons||keep.lessons,tt:snap.tt||{},al:snap.al||{},ss:snap.ss||3});
+  _stm=null;
+  return db.students.map(s=>({s,x:stats(s),lv:stars(s)}));
+ }finally{db=keep;_stm=null}}
+async function arcLoad(id){
+ const e=arcList.find(x=>x.id===id);if(!e||arCache[id])return;
+ try{const snap=JSON.parse(await bkText(e));arCache[id]={snap,rows:arcCompute(snap)}}catch(x){arCache[id]={snap:null,rows:[],err:true}}
+ if(view.n==='arch')render()}
+function arcRows(){
+ const c=arCache[arCur.id];if(!c)return[];
+ const q=norm(arCur.q||'');
+ let rows=c.rows.filter(r=>(arCur.k==='all'||(arCur.k.startsWith('c|')&&r.s.cls===arCur.k.slice(2))||arCur.k==='s|'+r.s.cls+'|'+r.s.sec)&&(!q||norm(r.s.name).includes(q)||String(r.s.reg||'').includes(q)));
+ const key={abs:r=>r.x.fullAbs*1000+r.x.absL,late:r=>r.x.lateL,stars:r=>r.lv,neg:r=>r.x.neg}[arCur.o];
+ rows.sort((a,b)=>(key?key(b)-key(a):0)||a.s.name.localeCompare(b.s.name,'ar'));
+ return rows}
+function vArch(){
+ let h=`<div class="top"><button class="back" onclick="history.back()">→</button><div><h2>🗄 أرشيف السنوات</h2><small>عرض للقراءة فقط</small></div></div>`;
+ if(!arcList.length)return h+`<div class="card empty">لا توجد سنوات مؤرشفة بعد. ابدأ من الإدارة ← 🗄 أرشيف السنوات الدراسية.</div>`+foot();
+ const e=arcList.find(a=>a.id===arCur.id)||arcList[0];arCur.id=e.id;
+ if(!arCache[e.id]){arcLoad(e.id);return h+`<div class="card"><label style="margin-top:0">السنة</label><select>${arcList.map(a=>`<option>${esc(a.label)}</option>`).join('')}</select></div><div class="card empty">جارٍ تحميل الأرشيف…</div>`}
+ const c=arCache[e.id];
+ if(c.err)return h+`<div class="card empty">تعذّر قراءة هذا الأرشيف.</div><button class="btn full" onclick="arcDel('${e.id}')">حذف هذا الأرشيف</button>`+foot();
+ const st=c.snap.structure,keys=[];Object.keys(st).forEach(k=>st[k].forEach(sec=>keys.push([k,sec])));
+ const rows=arcRows(),tot=c.rows.reduce((a,r)=>({ab:a.ab+r.x.absL,l:a.l+r.x.lateL}),{ab:0,l:0});
+ h+=`<div class="card"><label style="margin-top:0">السنة الدراسية</label><select onchange="arCur.id=this.value;arCur.k='all';render()">${arcList.map(a=>`<option value="${a.id}" ${a.id===e.id?'selected':''}>${esc(a.label)}</option>`).join('')}</select>
+ <small style="color:var(--mut);display:block;margin-top:6px">أُنشئ في ${fmtD(dstr(new Date(e.t)))} • ${e.n} طالب • ${e.s} درس مسجّل</small></div>
+ <div class="tiles"><div class="tile"><b>${c.rows.length}</b><span>طالب</span></div><div class="tile"><b style="color:var(--red)">${tot.ab}</b><span>درس غائب</span></div><div class="tile"><b style="color:#6ab8ff">${tot.l}</b><span>مرات تأخر</span></div></div>
+ <div class="card"><div class="two"><div><label style="margin-top:0">النطاق</label><select onchange="arCur.k=this.value;render()"><option value="all">كل الطلاب</option>${Object.keys(st).map(k=>`<option value="c|${esc(k)}" ${arCur.k==='c|'+k?'selected':''}>${esc(k)} (كل الشعب)</option>`).join('')}${keys.map(([k,sec])=>`<option value="s|${esc(k)}|${esc(sec)}" ${arCur.k==='s|'+k+'|'+sec?'selected':''}>${esc(k)} — شعبة ${esc(sec)}</option>`).join('')}</select></div>
+ <div><label style="margin-top:0">الفرز</label><select onchange="arCur.o=this.value;render()"><option value="name" ${arCur.o==='name'?'selected':''}>الاسم</option><option value="abs" ${arCur.o==='abs'?'selected':''}>الأكثر غياباً</option><option value="late" ${arCur.o==='late'?'selected':''}>الأكثر تأخراً</option><option value="stars" ${arCur.o==='stars'?'selected':''}>الأعلى نجوماً</option><option value="neg" ${arCur.o==='neg'?'selected':''}>الأكثر مخالفات</option></select></div></div>
+ <label>بحث</label><input value="${esc(arCur.q||'')}" placeholder="اسم الطالب أو رقم القيد" onchange="arCur.q=this.value;render()">
+ <div class="btns" style="margin-top:10px"><button class="btn gold sm" onclick="arcPDF()">⬇ جدول PDF</button><button class="btn blue sm" onclick="arcXLS()">⬇ Excel</button><button class="btn sm" onclick="arcDownload('${e.id}')">⬇ ملف الأرشيف</button></div></div>`;
+ h+=rows.length?rows.map(r=>{const s=r.s,x=r.x;return `<div class="sr" onclick="arcStu('${s.id}')"><div class="nm"><b>${esc(s.name)}${r.lv?`<span class="stbd">★ ${r.lv}</span>`:''}${s.out?` <small style="color:var(--amb)">(منقول: ${esc(s.out.to)})</small>`:''}</b><small>${esc(s.cls)} — شعبة ${esc(s.sec)}</small><div class="rkc"><span class="b r">غ ${x.fullAbs} يوم / ${x.absL} درس</span><span class="b y">ت ${x.lateL}</span><span class="b a">م ${x.excL}</span><span class="b g">⭐ ${x.pos}</span><span class="b r">⚠ ${x.neg}</span></div></div></div>`}).join(''):`<div class="card empty">لا توجد نتائج.</div>`;
+ h+=`<button class="btn full" style="margin-top:12px;color:var(--red)" onclick="arcDel('${e.id}')">🗑 حذف هذا الأرشيف من الجهاز</button>`;
+ return h+foot()}
+function arcStu(id){
+ const c=arCache[arCur.id],r=c&&c.rows.find(z=>z.s.id===id);if(!r)return;
+ const x=r.x,lg=x.log.slice().sort((a,b)=>b.date.localeCompare(a.date));
+ openModal(`<h3>${esc(r.s.name)}</h3><div style="color:var(--mut);font-size:13px">${esc(r.s.cls)} — شعبة ${esc(r.s.sec)} • سنة ${esc(arcList.find(a=>a.id===arCur.id).label)}</div>
+ <div class="tiles" style="margin-top:10px"><div class="tile"><b style="color:var(--red)">${x.fullAbs}</b><span>أيام غياب</span></div><div class="tile"><b>${x.absL}</b><span>دروس غائبة</span></div><div class="tile"><b style="color:#6ab8ff">${x.lateL}</b><span>تأخر</span></div></div>
+ <div style="max-height:40vh;overflow:auto;margin-top:8px">${lg.length?lg.map(l=>`<div class="lt"><span>${fmtD(l.date)} — ${lessonName(l.lesson)}${l.subject?' • '+esc(l.subject):''}</span><span class="b ${l.st==='a'?'r':l.st==='l'?'y':'a'}">${stLbl(l.st)}</span></div>`).join(''):'<div class="empty" style="padding:8px">لا غياب ولا تأخر مسجّل ✓</div>'}</div>
+ <button class="btn full" style="margin-top:10px" onclick="closeModal()">إغلاق</button>`)}
+const AR_H=['الطالب','الصف','الشعبة','أيام غياب كاملة','دروس غائبة','مرات التأخر','دروس مجازة','سلوك إيجابي','سلوك سلبي','النجوم','أيام مسجّلة'];
+const arCols=r=>[r.s.name+(r.s.out?' (منقول: '+r.s.out.to+')':''),r.s.cls,r.s.sec,r.x.fullAbs,r.x.absL,r.x.lateL,r.x.excL,r.x.pos,r.x.neg,r.lv,r.x.days];
+function arcPDF(){
+ const rows=arcRows(),e=arcList.find(a=>a.id===arCur.id);if(!rows.length){toast('لا يوجد طلاب');return}
+ printNamed(`<div class="pp pp-land">${pHead('')}<div class="pp-title"><span>أرشيف السنة الدراسية ${esc(e.label)}</span></div><div class="pp-meta">عدد الطلاب: ${rows.length}</div>
+ <table class="pp-s"><thead><tr><th style="width:8mm">#</th>${AR_H.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td>${arCols(r).map((v,j)=>`<td class="${j===0?'gname':''}">${esc(String(v))}</td>`).join('')}</tr>`).join('')}</tbody></table>${pFoot()}</div>`,'أرشيف '+e.label,true)}
+function arcXLS(){
+ const rows=arcRows(),e=arcList.find(a=>a.id===arCur.id);if(!rows.length){toast('لا يوجد طلاب');return}
+ saveSheets([{name:'أرشيف '+e.label,aoa:[['#',...AR_H],...rows.map((r,i)=>[i+1,...arCols(r)])]}],'أرشيف-'+e.label.replace(/[\\\/:*?"<>|\s]+/g,'-'))}
+
+
+/* ---------- TEACHER GRADE SHEET ---------- */
+const GR_SUBJ=['التربية الإسلامية','اللغة العربية','اللغة الإنكليزية','الرياضيات','الفيزياء','الكيمياء','الأحياء','الحاسوب','التاريخ','الجغرافية','الاجتماعيات','العلوم','التربية الرياضية','التربية الفنية','اللغة الفرنسية','علم الأرض','الاقتصاد','الفلسفة'];
+function grSubjects(cls,sec){
+ const set=new Set(GR_SUBJ);
+ db.sessions.forEach(x=>{if(x.cls===cls&&x.sec===sec&&x.subject&&x.subject!=='م')set.add(x.subject)});
+ Object.values((db.tt||{})[ttKey(cls,sec)]||{}).forEach(a=>(a||[]).forEach(e=>{if(e&&e.s)set.add(e.s)}));
+ return [...set]}
+function grTeacher(cls,sec,subj){
+ if(!subj)return'';
+ for(const a of Object.values((db.tt||{})[ttKey(cls,sec)]||{}))for(const e of a||[])if(e&&e.s===subj&&e.t)return e.t;
+ const x=db.sessions.find(z=>z.cls===cls&&z.sec===sec&&z.subject===subj&&z.teacher);return x?x.teacher:''}
+function grTeachers(){const t=new Set();Object.values(db.tt||{}).forEach(o=>Object.values(o).forEach(a=>(a||[]).forEach(e=>{if(e&&e.t)t.add(e.t)})));db.sessions.forEach(x=>{if(x.teacher&&x.teacher!=='ت')t.add(x.teacher)});return [...t]}
+function grDlg(cls,sec){
+ const yr=(db.yr||acYear()).replace(/\s*\/\s*/g,'-');
+ window.__grAuto='';
+ openModal(`<h3>📝 سجل درجات المدرسين</h3><div style="color:var(--mut);font-size:13px">${esc(cls)} — شعبة ${esc(sec)} • ${studentsOf(cls,sec).length} طالب</div>
+ <label>المادة (اختر أو اكتب)</label><input id="grS" list="grSL" placeholder="مثال: الكيمياء" autocomplete="off" oninput="grFill(${J(cls)},${J(sec)})"><datalist id="grSL">${grSubjects(cls,sec).map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+ <small style="color:var(--mut);display:block;margin-top:4px">لعدة مواد افصل بينها بفاصلة، فتُطبع ورقة لكل مادة، مثل: الكيمياء، الفيزياء</small>
+ <label>اسم المدرس</label><input id="grT" list="grTL" placeholder="يُملأ تلقائياً من الجدول الأسبوعي إن وُجد" autocomplete="off"><datalist id="grTL">${grTeachers().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+ <div class="two"><div><label>العام الدراسي</label><input id="grY" value="${esc(yr)}"></div><div><label>اسم المدير</label><input id="grM" value="${esc(db.mgr||'')}" placeholder="الاسم الكامل"></div></div>
+ <div class="two"><div><label>صفوف فارغة إضافية</label><input id="grB" type="number" min="0" max="20" inputmode="numeric" value="0"></div><div><label style="display:block">&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="grO" checked style="width:auto"> إظهار المنقولين (حالتهم: منقول)</label></div></div>
+ <small style="color:var(--mut);display:block;margin-top:8px">تُطبع على ورقة A4 بوجهين: تكملة الأسماء في الصفحة الثانية مع تكرار رأس الجدول، والجدول متمركز بهوامش متساوية. في نافذة الطباعة فعّل «الطباعة على الوجهين».</small>
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)})">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
+function grFill(cls,sec){
+ const t=$('#grT'),first=($('#grS').value.split(/[،,]/)[0]||'').trim(),g=grTeacher(cls,sec,first);
+ if(g&&(!t.value||t.value===window.__grAuto)){t.value=g;window.__grAuto=g}}
+function grSheet(o){
+ const w=[8,60,16,19,17,19,17,19,19];
+ const heads=['ت','اسم الطالب','الحالة','معدل النصف الأول','نصف السنة','معدل النصف الثاني','السعي السنوي','درجة الامتحان النهائي','الدرجة النهائية'];
+ const row=(n,name,st)=>`<tr><td>${n}</td><td class="nmc">${esc(name)}</td><td>${st}</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
+ let rows=o.list.map((s,i)=>row(i+1,s.name,s.out?'منقول':'')).join('');
+ for(let i=0;i<o.blank;i++)rows+=row(o.list.length+i+1,'','');
+ return `<div class="gr"><div class="grh"><div class="grs">${SCHOOL}</div><img class="grl" src="${LOGO}"><div class="grj">المادة: ${esc(o.subj)}</div></div>
+ <div class="grh2"><div class="grc">الصف: ${esc(o.cls)}<br>الشعبة: ${esc(o.sec)}</div><div class="grtt">سجل درجات المدرسين للعام الدراسي ${esc(o.yr)}</div><div></div></div>
+ <table class="grtb"><colgroup>${w.map(x=>`<col style="width:${x}mm">`).join('')}</colgroup><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
+ <div class="grf"><div>اسم المدرس: ${esc(o.teacher||'')}<small>التوقيع:</small></div><div>اسم المدير: ${esc(o.mgr||'')}<small>التوقيع:</small></div></div></div>`}
+function grDo(cls,sec){
+ const subs=($('#grS').value||'').split(/[،,]/).map(x=>x.trim()).filter(Boolean);
+ if(!subs.length){toast('اكتب اسم المادة');return}
+ const o={cls,sec,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:Math.max(0,Math.min(20,parseInt($('#grB').value)||0))};
+ const inc=$('#grO').checked;
+ let list=studentsOf(cls,sec);
+ if(inc)list=[...list,...db.students.filter(x=>x.out&&x.cls===cls&&x.sec===sec)].sort(cmp);
+ if(!list.length){toast('لا يوجد طلاب في هذه الشعبة');return}
+ o.list=list;db.mgr=o.mgr;save();
+ logA('طباعة سجل درجات',`${cls} / ${sec} — ${subs.join('، ')}`);
+ closeModal();
+ printNamed(subs.map((sb,i)=>grSheet(Object.assign({},o,{subj:sb,teacher:subs.length>1?(grTeacher(cls,sec,sb)||o.teacher):o.teacher}))).join(''),'سجل درجات '+subs.join(' ')+' '+cls+' '+sec)}
+
 /* ---------- ADMIN ---------- */
 function vAdmin(){
  const struct=Object.keys(db.structure).map(c=>`<div style="margin:10px 0"><b>${esc(c)}</b> <span style="color:var(--mut);font-size:12px">(${act().filter(s=>s.cls===c).length} طالب)</span><div class="chips" style="margin-top:6px">${db.structure[c].map(s=>`<span class="chip">${esc(s)}<b onclick="delSec(${J([c,s])})">×</b></span>`).join('')}<span class="chip" onclick="addSec(${J(c)})">＋ شعبة</span></div></div>`).join('');
@@ -1514,6 +1729,11 @@ function vAdmin(){
   <p style="color:var(--mut);font-size:13px;margin:10px 0 4px">روابط دعوة مجموعات تلكرام لكل صف (يبدأ بـ t.me). اتركه فارغاً إن لم تردّ الربط.</p>
   ${Object.keys(db.structure).map(c=>`<label>${esc(c)}</label><input dir="ltr" placeholder="https://t.me/+..." value="${esc((db.tg||{})[c]||'')}" onchange="setTg(${J(c)},this.value)">`).join('')}</details>
  <details class="card"><summary>📲 مجموعات واتساب</summary><p style="color:var(--mut);font-size:13px;margin:0 0 6px">ألصق رابط دعوة مجموعة كل صف (يبدأ بـ chat.whatsapp.com). اتركه فارغاً إن لم تريد ربط الصف.</p>${Object.keys(db.structure).map(c=>`<label>${esc(c)}</label><input dir="ltr" placeholder="https://chat.whatsapp.com/..." value="${esc((db.wa||{})[c]||'')}" onchange="setWa(${J(c)},this.value)">`).join('')}</details>
+ <details class="card"><summary>🗄 أرشيف السنوات الدراسية (${arcList.length})</summary>
+ <p style="margin:0 0 6px">السنة الحالية: <b style="color:var(--g1)">${esc(db.yr||acYear())}</b></p>
+ <small style="color:var(--mut);display:block;margin-bottom:10px">الأرشيف يحفظ الطلاب وكل سجلات الحضور والغياب والسلوك لسنة كاملة، لتعود إليها وتطبعها لاحقاً. يُحفظ على هذا الجهاز ويُنزَّل كملف أيضاً (احتفظ بالملف في مكان آمن).</small>
+ <div class="btns"><button class="btn gold" onclick="arcDlg(false)">🗄 أرشفة السنة الحالية</button><button class="btn" onclick="arcDlg(true)">📅 أرشفة وبدء سنة جديدة</button></div>
+ <div class="btns" style="margin-top:8px"><button class="btn sm" onclick="openArch()">عرض الأرشيف (${arcList.length})</button><label class="btn sm" style="cursor:pointer;text-align:center">استيراد أرشيف من ملف<input type="file" accept=".json,application/json" style="display:none" onchange="arcImport(this)"></label></div></details>
  <details class="card"><summary>🗑 سلة المحذوفات (${(db.trash||[]).length})</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">الطلاب المحذوفون يُحفظون 60 يوماً على هذا الجهاز، ويُسترجعون بكل سجلات حضورهم.</p>${(db.trash||[]).length?(db.trash||[]).slice(0,30).map(x=>`<div style="padding:10px 0;border-top:1px solid rgba(255,255,255,.08)"><b>${esc(x.s.name)}</b><br><small style="color:var(--mut)">${esc(x.s.cls)} — شعبة ${esc(x.s.sec)} • ${fmtD(dstr(new Date(x.t)))}${x.u?' • '+esc(x.u):''}</small><div class="btns" style="margin-top:8px"><button class="btn sm" onclick="trashRestore('${x.id}')">↩ استرجاع</button><button class="btn sm" onclick="trashDel('${x.id}')">حذف نهائي</button></div></div>`).join('')+'<button class="btn full" style="margin-top:8px" onclick="trashEmpty()">تفريغ السلة</button>':'<div class="empty" style="padding:6px">السلة فارغة</div>'}</details>
  <details class="card"><summary>💾 النسخ الاحتياطية التلقائية</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">تُحفظ نسخة يومية على هذا الجهاز (آخر ${BK_KEEP} أيام). ${lastExport?`آخر نسخة نزّلتها كملف: منذ ${Math.floor((Date.now()-lastExport)/864e5)} يوماً.`:''}</p>${bkList.length?bkList.map(e=>`<div style="padding:10px 0;border-top:1px solid rgba(255,255,255,.08)"><b>${fmtD(e.d)}</b><br><small style="color:var(--mut)">${e.n} طالب • ${e.s} درس مسجّل</small><div class="btns" style="margin-top:8px"><button class="btn sm" onclick="bkRestore('${e.id}')">استرجاع</button><button class="btn sm" onclick="bkDownload('${e.id}')">⬇ تنزيل</button></div></div>`).join(''):'<div class="empty" style="padding:6px">لا توجد نسخ بعد (تُنشأ تلقائياً عند أول فتح كل يوم)</div>'}<button class="btn full" style="margin-top:8px" onclick="autoBackup(true).then(()=>toast('تم إنشاء النسخة ✓'))">إنشاء نسخة الآن</button></details>
  <details class="card"><summary>⭐ نظام النجمات</summary><p style="color:var(--mut);font-size:13px;margin:0 0 8px">نقاط التميّز = السلوك الإيجابي − السلبي. كل عدد من النقاط تحدّده أدناه = نجمة، حتى 10 نجوم. يظهر اسم الطالب بإطار متحرك يختلف مع كل مستوى، ويمكن منح نجمة أو سحبها من ملف الطالب.</p>
@@ -1602,7 +1822,7 @@ let FS=null;
 const stab=o=>{if(o===null||typeof o!=='object')return JSON.stringify(o);if(Array.isArray(o))return'['+o.map(stab).join(',')+']';return'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+stab(o[k])).join(',')+'}'};
 const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||'',since:s.since||'',hist:Array.isArray(s.hist)?s.hist:[],bn:+s.bn||0,out:s.out?{d:s.out.d||'',to:s.out.to||'',note:s.out.note||'',by:s.out.by||''}:null});
 const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo&&(a.since||'')===(b.since||'')&&(a.bn||0)===(b.bn||0)&&JSON.stringify(a.out||null)===JSON.stringify(b.out||null)&&JSON.stringify(a.hist||[])===JSON.stringify(b.hist||[]);
-const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},mgr:db.mgr||'',ss:+db.ss||3,sig:db.sig||'',tg:db.tg||{},chan:db.chan||'wa',v:db.v||1});
+const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},mgr:db.mgr||'',ss:+db.ss||3,sig:db.sig||'',tg:db.tg||{},chan:db.chan||'wa',yr:db.yr||'',v:db.v||1});
 /* الجلسات تُخزَّن في مستند لكل (صف+شعبة+شهر) لتقليل عدد القراءات */
 const sparts=id=>{const p=id.split('|'),m=p[0].slice(0,7);return{doc:(p[1]+'|'+p[2]+'|'+m).replace(/\//g,'_'),key:p[0]+'_'+p[3],cls:p[1],sec:p[2],month:m}};
 
@@ -1681,11 +1901,11 @@ function startListeners(){
  FS.collection('meta').doc('config').onSnapshot({includeMetadataChanges:true},d=>{
   cloud.err=false;cloud.pend.cfg=d.metadata.hasPendingWrites;cbadge();
   if(!d.exists){if(!d.metadata.fromCache&&!cloud.mig){cloud.mig=true;migrate()}return}
-  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,tt:c.tt||'{}',users:c.users||'[]',al:c.al||{},mgr:c.mgr||'',ss:+c.ss||3,sig:c.sig||'',tg:c.tg||{},chan:c.chan||'wa',v:c.v||1});
+  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,tt:c.tt||'{}',users:c.users||'[]',al:c.al||{},mgr:c.mgr||'',ss:+c.ss||3,sig:c.sig||'',tg:c.tg||{},chan:c.chan||'wa',yr:c.yr||'',v:c.v||1});
   if(j===cloud.cfg)return;
   whenClean('cfg',()=>{
    if(Array.isArray(c.structure)){db.structure={};c.structure.forEach(x=>{db.structure[x.c]=x.s||[]})}
-   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;try{db.tt=JSON.parse(c.tt||'{}')}catch(e){db.tt={}}try{db.users=JSON.parse(c.users||'[]')}catch(e){db.users=[]}db.al=c.al||{};db.mgr=c.mgr||'';db.ss=+c.ss||3;db.sig=c.sig||'';db.tg=c.tg||{};db.chan=c.chan||'wa';
+   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;try{db.tt=JSON.parse(c.tt||'{}')}catch(e){db.tt={}}try{db.users=JSON.parse(c.users||'[]')}catch(e){db.users=[]}db.al=c.al||{};db.mgr=c.mgr||'';db.ss=+c.ss||3;db.sig=c.sig||'';db.tg=c.tg||{};db.chan=c.chan||'wa';db.yr=c.yr||'';
    cloud.cfg=j;softRender()});
  },cloudErr);
  FS.collection('meta').doc('counter').onSnapshot(d=>{if(d.exists&&db)db.counter=Math.max(db.counter||0,d.data().n||0)},()=>{});
@@ -1726,7 +1946,7 @@ if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))addEventLis
  if(d&&FIREBASE_CONFIG.apiKey){cloud.legacy=JSON.parse(JSON.stringify(d));if(!(await idbGet('legacy_backup')))idbPut('legacy_backup',d)}
  idbGet('pwa_hide').then(v=>{pwaHide=!!v;if(view.n==='home')render()});
  idbGet('lastExport').then(v=>{if(v)lastExport=v;else{lastExport=Date.now();idbPut('lastExport',lastExport)}});
- loadBks().then(()=>{if(view.n==='admin')render()});setTimeout(autoBackup,8000);
+ loadBks().then(()=>{if(view.n==='admin')render()});loadArc();setTimeout(autoBackup,8000);
  history.replaceState({n:'home',p:{}},'');render();cbadge();
  cloudInit();
 })();
