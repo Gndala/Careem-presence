@@ -352,26 +352,38 @@ table.tb td.tt{font-weight:800}
 .rp .rsig .sgl{border-bottom:1.5px dotted #0b1a4a;width:50mm;margin:2mm auto 0}
 
 /* ===== TEACHER GRADE SHEET ===== */
-.gr{width:194mm;margin:0 auto;color:#000;font-family:'Cairo','DejaVu Sans',sans-serif;page-break-after:always}
-.gr:last-child{page-break-after:auto}
-.gr *{box-sizing:border-box}
-.gr .grh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
-.gr .grh2{display:grid;grid-template-columns:56mm 1fr 56mm;align-items:center}
-.gr .grs{text-align:right;font-size:15px;font-weight:900;line-height:1.6}
-.gr .grs small{display:block;font-size:10.5px;font-weight:600}
-.gr .grl{width:24mm;height:24mm;object-fit:contain}
-.gr .grj{text-align:left;font-size:15px;font-weight:800;line-height:1.6}
-.gr .grh2{margin:2mm 0 3.5mm}
-.gr .grc{text-align:right;font-size:13.5px;font-weight:700;line-height:1.7;white-space:nowrap}
-.gr .grtt{font-size:15px;font-weight:900;border:1.6px solid #000;border-radius:3px;padding:1.5mm 4mm;text-align:center;line-height:1.55;margin:0 auto}
-.gr table.grtb{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}
-.gr .grtb th,.gr .grtb td{border:1px solid #000;text-align:center;padding:0 2px;height:8.4mm;overflow:hidden}
-.gr .grtb th{background:#e6e6e6;font-size:10px;height:13mm;font-weight:800;line-height:1.35;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.gr .grtb td.nmc{text-align:right;padding:0 2.5mm;font-weight:700;white-space:nowrap;text-overflow:ellipsis}
+.gr{width:194mm;margin:0 auto;color:#101828;font-family:'Cairo','DejaVu Sans',sans-serif;page-break-after:always;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.gr:last-child{page-break-after:auto}.gr *{box-sizing:border-box}
+.gr .grb{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6mm;padding:4mm 7mm;border-radius:5mm;color:#fff;overflow:hidden;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:inset 0 1.2mm 1px -.6mm rgba(255,255,255,.5),0 1.4mm 0 rgba(0,0,0,.28),0 3.5mm 5mm rgba(0,0,0,.2)}
+.gr .grb:before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 88% -25%,rgba(255,255,255,.32),transparent 46%),repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1.6mm,transparent 1.6mm 3.2mm);pointer-events:none}
+.gr .grb>*{position:relative}
+.gr .grs{text-align:right;line-height:1.55}.gr .grs .mn{font-size:10px;opacity:.9}.gr .grs b{display:block;font-size:16px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.45)}.gr .grs small{display:block;font-size:9.5px;letter-spacing:.7px;color:var(--ac);font-weight:700}
+.gr .grlw{width:27mm;height:27mm;border-radius:50%;background:#fff;padding:.9mm;border:1.1mm solid var(--ac);box-shadow:0 0 0 .6mm var(--c1),0 1.6mm 3mm rgba(0,0,0,.4)}
+.gr .grlw img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.gr .grj{text-align:left;line-height:1.4}.gr .grj .lb{font-size:10.5px;opacity:.92;display:block}
+.gr .grj b{display:inline-block;margin-top:1mm;background:linear-gradient(180deg,#fff8d6,var(--ac));color:#3a2600;border-radius:5mm;padding:1mm 5mm;font-size:15.5px;font-weight:900;box-shadow:inset 0 1px 0 #fff,0 1.2mm 0 rgba(0,0,0,.3);max-width:58mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gr .grh2{display:grid;grid-template-columns:56mm 1fr 56mm;align-items:center;margin:4mm 0 4.5mm}
+.gr .grc{display:flex;flex-direction:column;gap:1.2mm;align-items:flex-start}
+.gr .grc span{display:inline-block;background:linear-gradient(180deg,#fff,var(--t1));border:1px solid var(--c2);border-right:3mm solid var(--c2);border-radius:2mm;padding:.5mm 3.5mm;font-size:13px;font-weight:800;color:var(--c1);box-shadow:0 .7mm 0 rgba(0,0,0,.14)}
+.gr .grn{display:flex;justify-content:flex-end}
+.gr .grn span{display:inline-block;background:linear-gradient(180deg,#fff,var(--t1));border:1px solid var(--c2);border-left:3mm solid var(--ac);border-radius:2mm;padding:.5mm 3.5mm;font-size:12px;font-weight:800;color:var(--c1);box-shadow:0 .7mm 0 rgba(0,0,0,.14)}
+.gr .grtt{position:relative;text-align:center;font-size:14.5px;font-weight:900;color:#fff;padding:1.7mm 8mm;margin:0 auto;border-radius:2mm;line-height:1.5;border:.6mm solid var(--ac);background:linear-gradient(180deg,var(--c2),var(--c1));text-shadow:0 1px 2px rgba(0,0,0,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1.1mm 0 rgba(0,0,0,.3),0 2.4mm 3mm rgba(0,0,0,.2)}
+.gr .grtt i{font-style:normal;color:var(--ac);margin:0 2mm}
+.gr table.grtb{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:12px;border-radius:3mm}
+.gr .grtb th{color:#fff;font-weight:900;font-size:10.2px;line-height:1.35;height:14mm;padding:0 1mm;border-left:1px solid rgba(255,255,255,.4);text-shadow:0 1px 1px rgba(0,0,0,.5);box-shadow:inset 0 1.5mm 1px -1mm rgba(255,255,255,.6),inset 0 -1.2mm 0 rgba(0,0,0,.3)}
+.gr .grtb th:first-child{border-top-right-radius:3mm}.gr .grtb th:last-child{border-top-left-radius:3mm;border-left:0}
+.gr .grtb td{height:8.4mm;text-align:center;border-bottom:1px solid #a9b7da;border-left:1px solid #b9c5e2;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(0,0,0,.05);overflow:hidden}
+.gr .grtb td:last-child{border-left:0}
+.gr .grtb td.nmc{text-align:right;padding:0 3mm;font-weight:800;white-space:nowrap;text-overflow:ellipsis}
+.gr .grtb td.no{color:#fff;font-weight:900;text-shadow:0 1px 0 rgba(0,0,0,.4);box-shadow:inset 0 1.2mm 1px -.8mm rgba(255,255,255,.55),inset 0 -1.3mm 0 rgba(0,0,0,.28)}
+.gr .grtb tbody tr:nth-child(even) td:not(.no){box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 0 0 20mm rgba(0,0,0,.035)}
+.gr .grtb tbody tr:last-child td{border-bottom:.7mm solid var(--c1)}
 .gr .grtb thead{display:table-header-group}.gr .grtb tr{page-break-inside:avoid}
-.gr .grf{display:grid;grid-template-columns:1fr 1fr;margin-top:9mm;font-size:13.5px;font-weight:700;page-break-inside:avoid}
-.gr .grf>div:last-child{text-align:left}.gr .grf small{display:block;font-weight:600;font-size:10.5px;margin-top:6mm}
-
+.gr .grf{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:9mm;page-break-inside:avoid}
+.gr .grf>div{border:1px solid var(--c2);border-top:1.4mm solid var(--c2);border-radius:2.5mm;padding:2mm 4mm 2.5mm;background:linear-gradient(180deg,#fff,var(--t1));box-shadow:0 .9mm 0 rgba(0,0,0,.16);font-size:13px;font-weight:800;color:var(--c1)}
+.gr .grf small{display:block;font-size:10.5px;font-weight:600;color:#475467;margin-top:7mm}
+.gr.flat .grb,.gr.flat .grtt,.gr.flat .grj b,.gr.flat .grtb th,.gr.flat .grtb td,.gr.flat .grc span,.gr.flat .grn span,.gr.flat .grf>div{box-shadow:none!important;text-shadow:none!important}
+.gr.flat .grtb th{background:var(--c1)!important}
 /* ===== ATTENDANCE GRID (duplex-ready) ===== */
 .gq{position:relative;width:281mm;height:193mm;box-sizing:border-box;padding:4mm 6mm 8mm;border:1.6px solid #b8892b;background:#fff;color:#13203f;font-family:'Cairo','DejaVu Sans',sans-serif;page-break-after:always;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .gq:before{content:'';position:absolute;top:1.6mm;left:1.6mm;right:1.6mm;bottom:1.6mm;border:1px solid #c9a23f;pointer-events:none}
@@ -1680,26 +1692,42 @@ function grDlg(cls,sec){
  <small style="color:var(--mut);display:block;margin-top:4px">لعدة مواد افصل بينها بفاصلة، فتُطبع ورقة لكل مادة، مثل: الكيمياء، الفيزياء</small>
  <label>اسم المدرس</label><input id="grT" list="grTL" placeholder="يُملأ تلقائياً من الجدول الأسبوعي إن وُجد" autocomplete="off"><datalist id="grTL">${grTeachers().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
  <div class="two"><div><label>العام الدراسي</label><input id="grY" value="${esc(yr)}"></div><div><label>اسم المدير</label><input id="grM" value="${esc(db.mgr||'')}" placeholder="الاسم الكامل"></div></div>
+ <label>تصميم السجل</label><select id="grD">${Object.entries(GR_TH).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('')}</select>
+ <label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="grX" checked style="width:auto"> جدول ثلاثي الأبعاد ملوّن (ألغِه لتوفير الحبر)</label>
+ <label style="display:flex;gap:8px;align-items:center;margin-top:6px"><input type="checkbox" id="grH" style="width:auto"> رأس الجدول فارغاً (بدون عناوين الأعمدة)</label>
  <div class="two"><div><label>صفوف فارغة إضافية</label><input id="grB" type="number" min="0" max="20" inputmode="numeric" value="0"></div><div><label style="display:block">&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="grO" checked style="width:auto"> إظهار المنقولين (حالتهم: منقول)</label></div></div>
  <small style="color:var(--mut);display:block;margin-top:8px">تُطبع على ورقة A4 بوجهين: تكملة الأسماء في الصفحة الثانية مع تكرار رأس الجدول، والجدول متمركز بهوامش متساوية. في نافذة الطباعة فعّل «الطباعة على الوجهين».</small>
  <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)})">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
 function grFill(cls,sec){
  const t=$('#grT'),first=($('#grS').value.split(/[،,]/)[0]||'').trim(),g=grTeacher(cls,sec,first);
  if(g&&(!t.value||t.value===window.__grAuto)){t.value=g;window.__grAuto=g}}
+const GR_TH={
+ navy:{n:'ملكي أزرق وذهبي',c1:'#0a1438',c2:'#2f55d4',ac:'#f0c040',t1:'#e9efff',t2:'#f6f8ff'},
+ emerald:{n:'زمردي أخضر',c1:'#064e3b',c2:'#10b981',ac:'#f5cd55',t1:'#e3f7ee',t2:'#f3fcf8'},
+ burgundy:{n:'عنابي',c1:'#5b0f24',c2:'#d04a68',ac:'#f5cd55',t1:'#fde8ed',t2:'#fff6f8'},
+ purple:{n:'بنفسجي',c1:'#2e1065',c2:'#8b5cf6',ac:'#fbbf24',t1:'#efe8ff',t2:'#faf7ff'},
+ sunset:{n:'برتقالي غروب',c1:'#7c2d12',c2:'#f97316',ac:'#fde047',t1:'#ffefe0',t2:'#fffaf4'},
+ rainbow:{n:'ملوّن — ألوان متعددة',c1:'#0a1438',c2:'#7c3aed',ac:'#fbbf24',t1:'#f1eaff',t2:'#faf7ff'}};
+const GR_RB=[['#0a1438','#2f55d4'],['#0f766e','#2dd4bf'],['#6d28d9','#a78bfa'],['#1d4ed8','#60a5fa'],['#15803d','#4ade80'],['#c2410c','#fb923c'],['#be185d','#f472b6'],['#b91c1c','#f87171'],['#a16207','#facc15']];
+const GR_RT=['#e8eeff','#e0faf6','#f1e9ff','#e5efff','#e6f8ec','#ffeedd','#ffe8f3','#ffe7e7','#fff6cc'];
 function grSheet(o){
+ const t=GR_TH[o.th]||GR_TH.navy,rb=o.th==='rainbow';
  const w=[8,60,16,19,17,19,17,19,19];
  const heads=['ت','اسم الطالب','الحالة','معدل النصف الأول','نصف السنة','معدل النصف الثاني','السعي السنوي','درجة الامتحان النهائي','الدرجة النهائية'];
- const row=(n,name,st)=>`<tr><td>${n}</td><td class="nmc">${esc(name)}</td><td>${st}</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
+ const thBg=i=>{const c=rb?GR_RB[i]:[t.c1,t.c2];return `background:linear-gradient(180deg,${c[1]},${c[0]})`};
+ const tdBg=i=>rb?GR_RT[i]:(i>=3?(i%2?t.t1:t.t2):'#fff');
+ const row=(n,name,st)=>`<tr><td class="no" style="${thBg(0)}">${n}</td><td class="nmc" style="background:linear-gradient(90deg,#fff,${rb?GR_RT[1]:t.t2})">${esc(name)}</td><td style="background:${tdBg(2)}">${st}</td>${[3,4,5,6,7,8].map(i=>`<td style="background:${tdBg(i)}"></td>`).join('')}</tr>`;
  let rows=o.list.map((s,i)=>row(i+1,s.name,s.out?'منقول':'')).join('');
  for(let i=0;i<o.blank;i++)rows+=row(o.list.length+i+1,'','');
- return `<div class="gr"><div class="grh"><div class="grs">${SCHOOL}</div><img class="grl" src="${LOGO}"><div class="grj">المادة: ${esc(o.subj)}</div></div>
- <div class="grh2"><div class="grc">الصف: ${esc(o.cls)}<br>الشعبة: ${esc(o.sec)}</div><div class="grtt">سجل درجات المدرسين للعام الدراسي ${esc(o.yr)}</div><div></div></div>
- <table class="grtb"><colgroup>${w.map(x=>`<col style="width:${x}mm">`).join('')}</colgroup><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
+ return `<div class="gr${o.flat?' flat':''}" style="--c1:${t.c1};--c2:${t.c2};--ac:${t.ac};--t1:${t.t1};--t2:${t.t2}">
+ <div class="grb"><div class="grs"><span class="mn">جمهورية العراق — وزارة التربية</span><b>${SCHOOL}</b><small>${SCHOOL_EN}</small></div><div class="grlw"><img src="${LOGO}"></div><div class="grj"><span class="lb">المادة</span><b>${esc(o.subj)}</b></div></div>
+ <div class="grh2"><div class="grc"><span>الصف: ${esc(o.cls)}</span><span>الشعبة: ${esc(o.sec)}</span></div><div class="grtt"><i>✦</i>سجل درجات المدرسين للعام الدراسي ${esc(o.yr)}<i>✦</i></div><div class="grn"><span>عدد الطلاب: ${o.list.length}</span></div></div>
+ <table class="grtb"><colgroup>${w.map(x=>`<col style="width:${x}mm">`).join('')}</colgroup><thead><tr>${heads.map((h,i)=>`<th style="${thBg(i)}">${o.nohead?'&nbsp;':h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
  <div class="grf"><div>اسم المدرس: ${esc(o.teacher||'')}<small>التوقيع:</small></div><div>اسم المدير: ${esc(o.mgr||'')}<small>التوقيع:</small></div></div></div>`}
 function grDo(cls,sec){
  const subs=($('#grS').value||'').split(/[،,]/).map(x=>x.trim()).filter(Boolean);
  if(!subs.length){toast('اكتب اسم المادة');return}
- const o={cls,sec,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:Math.max(0,Math.min(20,parseInt($('#grB').value)||0))};
+ const o={cls,sec,th:$('#grD').value,flat:!$('#grX').checked,nohead:$('#grH').checked,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:Math.max(0,Math.min(20,parseInt($('#grB').value)||0))};
  const inc=$('#grO').checked;
  let list=studentsOf(cls,sec);
  if(inc)list=[...list,...db.students.filter(x=>x.out&&x.cls===cls&&x.sec===sec)].sort(cmp);
