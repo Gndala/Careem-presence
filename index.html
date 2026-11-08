@@ -370,20 +370,64 @@ table.tb td.tt{font-weight:800}
 .gr .grtt{position:relative;text-align:center;font-size:14.5px;font-weight:900;color:#fff;padding:1.7mm 8mm;margin:0 auto;border-radius:2mm;line-height:1.5;border:.6mm solid var(--ac);background:linear-gradient(180deg,var(--c2),var(--c1));text-shadow:0 1px 2px rgba(0,0,0,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1.1mm 0 rgba(0,0,0,.3),0 2.4mm 3mm rgba(0,0,0,.2)}
 .gr .grtt i{font-style:normal;color:var(--ac);margin:0 2mm}
 .gr table.grtb{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:12px;border-radius:3mm}
-.gr .grtb th{color:#fff;font-weight:900;font-size:10.2px;line-height:1.35;height:14mm;padding:0 1mm;border-left:1px solid rgba(255,255,255,.4);text-shadow:0 1px 1px rgba(0,0,0,.5);box-shadow:inset 0 1.5mm 1px -1mm rgba(255,255,255,.6),inset 0 -1.2mm 0 rgba(0,0,0,.3)}
+.gr .grtb th{background:var(--bg);color:#fff;font-weight:900;font-size:10.2px;line-height:1.35;height:14mm;padding:0 1mm;border-left:1px solid rgba(255,255,255,.4);text-shadow:0 1px 2px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.35);box-shadow:inset 0 1.5mm 1px -1mm rgba(255,255,255,.6),inset 0 -1.2mm 0 rgba(0,0,0,.3)}
 .gr .grtb th:first-child{border-top-right-radius:3mm}.gr .grtb th:last-child{border-top-left-radius:3mm;border-left:0}
-.gr .grtb td{height:8.4mm;text-align:center;border-bottom:1px solid #a9b7da;border-left:1px solid #b9c5e2;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(0,0,0,.05);overflow:hidden}
+.gr .grtb td{background:var(--tb,#fff);height:8.4mm;text-align:center;border-bottom:1px solid #a9b7da;border-left:1px solid #b9c5e2;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(0,0,0,.05);overflow:hidden}
 .gr .grtb td:last-child{border-left:0}
 .gr .grtb td.nmc{text-align:right;padding:0 3mm;font-weight:800;white-space:nowrap;text-overflow:ellipsis}
-.gr .grtb td.no{color:#fff;font-weight:900;text-shadow:0 1px 0 rgba(0,0,0,.4);box-shadow:inset 0 1.2mm 1px -.8mm rgba(255,255,255,.55),inset 0 -1.3mm 0 rgba(0,0,0,.28)}
+.gr .grtb td.no{background:var(--bg);color:#fff;font-weight:900;text-shadow:0 1px 0 rgba(0,0,0,.4);box-shadow:inset 0 1.2mm 1px -.8mm rgba(255,255,255,.55),inset 0 -1.3mm 0 rgba(0,0,0,.28)}
 .gr .grtb tbody tr:nth-child(even) td:not(.no){box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 0 0 20mm rgba(0,0,0,.035)}
 .gr .grtb tbody tr:last-child td{border-bottom:.7mm solid var(--c1)}
 .gr .grtb thead{display:table-header-group}.gr .grtb tr{page-break-inside:avoid}
 .gr .grf{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:9mm;page-break-inside:avoid}
 .gr .grf>div{border:1px solid var(--c2);border-top:1.4mm solid var(--c2);border-radius:2.5mm;padding:2mm 4mm 2.5mm;background:linear-gradient(180deg,#fff,var(--t1));box-shadow:0 .9mm 0 rgba(0,0,0,.16);font-size:13px;font-weight:800;color:var(--c1)}
 .gr .grf small{display:block;font-size:10.5px;font-weight:600;color:#475467;margin-top:7mm}
-.gr.flat .grb,.gr.flat .grtt,.gr.flat .grj b,.gr.flat .grtb th,.gr.flat .grtb td,.gr.flat .grc span,.gr.flat .grn span,.gr.flat .grf>div{box-shadow:none!important;text-shadow:none!important}
-.gr.flat .grtb th{background:var(--c1)!important}
+/* ---- header styles ---- */
+.gr.h-wave .grb{border-radius:5mm 5mm 0 0;padding-bottom:10mm;box-shadow:none}
+.gr.h-wave .grb:after{content:'';position:absolute;left:0;right:0;bottom:-.3mm;height:8.5mm;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'><path d='M0 34 C150 64 330 4 600 34 S1050 62 1200 22 V60 H0Z' fill='%23ffffff'/></svg>") center/100% 100% no-repeat,url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'><path d='M0 24 C200 -6 420 52 700 22 S1020 -4 1200 30 V60 H0Z' fill='%23ffffff' fill-opacity='.4'/></svg>") center/100% 100% no-repeat;z-index:2}
+.gr.h-wave .grh2{margin-top:1mm}
+.gr.h-split .grb{background:linear-gradient(115deg,var(--c1) 0 36%,var(--c2) 36% 64%,var(--ac) 64% 100%)}
+.gr.h-split .grb:before{background:repeating-linear-gradient(115deg,rgba(255,255,255,.08) 0 1.4mm,transparent 1.4mm 2.8mm)}
+.gr.h-split .grj b{background:linear-gradient(180deg,var(--c2),var(--c1));color:#fff}
+.gr.h-split .grj .lb{color:var(--c1);font-weight:800;opacity:1}
+.gr.h-glass .grb{background:linear-gradient(135deg,#fff,var(--t1));color:var(--c1);border:.8mm solid var(--c2);box-shadow:0 1.4mm 0 var(--c2),0 3.5mm 5mm rgba(0,0,0,.14)}
+.gr.h-glass .grb:before{background:linear-gradient(90deg,var(--c1),var(--c2),var(--ac));height:2.6mm;bottom:auto;opacity:.95}
+.gr.h-glass .grs b{text-shadow:none;color:var(--c1)}.gr.h-glass .grs .mn{color:#475467}.gr.h-glass .grs small{color:var(--c2)}
+.gr.h-ribbon .grb{background:#fff;color:var(--c1);border-radius:0;border-top:2.6mm solid var(--c1);border-bottom:1.4mm solid var(--ac);box-shadow:0 2.5mm 4mm rgba(0,0,0,.14);padding:4mm 15mm}
+.gr.h-ribbon .grb:before{top:0;bottom:0;left:0;right:auto;width:14mm;background:linear-gradient(180deg,var(--c2),var(--c1));clip-path:polygon(0 0,100% 0,45% 100%,0 100%)}
+.gr.h-ribbon .grb:after{content:'';position:absolute;top:0;bottom:0;right:0;width:14mm;background:linear-gradient(180deg,var(--c2),var(--c1));clip-path:polygon(0 0,100% 0,100% 100%,55% 100%)}
+.gr.h-ribbon .grs b{text-shadow:none;color:var(--c1);font-size:14.5px;white-space:nowrap}.gr.h-ribbon .grs .mn{color:#475467}.gr.h-ribbon .grs small{color:var(--c2)}
+.gr.h-arch .grb{background:radial-gradient(ellipse at 50% -10%,var(--c2),var(--c1) 72%);border-radius:5mm 5mm 50% 50%/5mm 5mm 9mm 9mm;padding-bottom:6mm}
+.gr.h-arch .grlw{width:29mm;height:29mm;box-shadow:0 0 0 .6mm var(--c1),0 0 5mm var(--ac),0 1.6mm 3mm rgba(0,0,0,.4)}
+.gr.h-neon .grb{background:linear-gradient(135deg,#0a0f26,#131a3d);box-shadow:0 0 0 .6mm var(--c2),0 0 5mm var(--c2),inset 0 0 6mm rgba(255,255,255,.06)}
+.gr.h-neon .grb:before{background:linear-gradient(90deg,transparent,var(--c2),transparent);height:.7mm;bottom:auto;top:auto;bottom:0;opacity:.9}
+.gr.h-neon .grs b{text-shadow:0 0 6px var(--c2)}.gr.h-neon .grlw{box-shadow:0 0 0 .6mm #0a0f26,0 0 5mm var(--ac)}
+/* ---- table styles ---- */
+.gr.t-glossy .grtb th{background:linear-gradient(180deg,rgba(255,255,255,.34) 0 46%,rgba(255,255,255,0) 54%),var(--bg);border-left:1px solid rgba(255,255,255,.55);box-shadow:inset 0 -1.5mm 0 rgba(0,0,0,.25),inset 0 0 0 .3mm rgba(255,255,255,.4)}
+.gr.t-glossy .grtb td.no{background:linear-gradient(180deg,rgba(255,255,255,.34) 0 46%,rgba(255,255,255,0) 54%),var(--bg)}
+.gr.t-tiles table.grtb{border-collapse:separate;border-spacing:1mm 1.2mm;margin:0;width:100%}
+.gr.t-tiles .grtb th,.gr.t-tiles .grtb td{border:0!important;border-radius:2mm;box-shadow:0 .7mm 0 rgba(0,0,0,.22),inset 0 .5mm 0 rgba(255,255,255,.7)}
+.gr.t-tiles .grtb td{height:7.1mm}.gr.t-tiles .grtb th{height:13mm}
+.gr.t-ledger table.grtb{border-collapse:collapse;border:.9mm double var(--c1);border-radius:0}
+.gr.t-ledger .grtb th{background:var(--c1);color:var(--ac);box-shadow:none;border:1px solid var(--ac);text-shadow:none;border-radius:0!important}
+.gr.t-ledger .grtb td{background:#fff;border:1px solid var(--c1);box-shadow:none!important;border-radius:0}
+.gr.t-ledger .grtb tbody tr:nth-child(even) td:not(.no){background:var(--t2)}
+.gr.t-ledger .grtb td.no{background:var(--t1);color:var(--c1);text-shadow:none}
+.gr.t-neon .grtb{border-radius:2mm;box-shadow:0 0 0 .5mm var(--c2),0 0 4mm var(--c2)}
+.gr.t-neon .grtb th{background:linear-gradient(180deg,#0e1538,#05081a);color:var(--ac);border-left:1px solid var(--c2);box-shadow:inset 0 -.8mm 0 var(--c2);text-shadow:0 0 6px var(--ac)}
+.gr.t-neon .grtb td{background:#0b1128;color:#eaf2ff;border-bottom:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.1);box-shadow:none!important}
+.gr.t-neon .grtb tbody tr:nth-child(even) td:not(.no){background:#111a3e}
+.gr.t-neon .grtb td.no{background:linear-gradient(180deg,var(--c2),var(--c1));color:#fff}
+.gr.t-metal .grtb th{background:linear-gradient(180deg,#fdfdfe 0,#cbd2dc 46%,#8e99a8 52%,#d9dee6 100%);color:#1f2937;text-shadow:0 1px 0 #fff;border-left:1px solid #6b7686;box-shadow:inset 0 1px 0 #fff,inset 0 -1mm 0 rgba(0,0,0,.2)}
+.gr.t-metal .grtb td{background:#fff;border-bottom:1px solid #98a3b3;border-left:1px solid #b6bfcc}
+.gr.t-metal .grtb tbody tr:nth-child(even) td:not(.no){background:#f1f4f8}
+.gr.t-metal .grtb td.no{background:linear-gradient(180deg,#eef1f5,#9aa5b4);color:#111827;text-shadow:0 1px 0 #fff}
+.gr.t-flat .grb,.gr.t-flat .grtt,.gr.t-flat .grj b,.gr.t-flat .grc span,.gr.t-flat .grn span,.gr.t-flat .grf>div{box-shadow:none!important;text-shadow:none!important}
+.gr.t-flat .grtb th,.gr.t-flat .grtb td,.gr.t-flat .grtb td.no{box-shadow:none!important;text-shadow:none!important}
+.gr.t-flat .grtb th{background:var(--c1)}.gr.t-flat .grtb td.no{background:var(--c1)}
+.grpv{position:relative;overflow:hidden;border-radius:10px;background:#fff;border:1px solid rgba(255,255,255,.25);margin-top:6px}
+.grpv .gr{position:absolute;top:0;right:0;transform-origin:top right;pointer-events:none}
+.grxr{display:flex;gap:6px;align-items:center;margin-top:6px}.grxr input{flex:1.2;min-width:0}.grxr select{flex:1;min-width:0}
 /* ===== ATTENDANCE GRID (duplex-ready) ===== */
 .gq{position:relative;width:281mm;height:193mm;box-sizing:border-box;padding:4mm 6mm 8mm;border:1.6px solid #b8892b;background:#fff;color:#13203f;font-family:'Cairo','DejaVu Sans',sans-serif;page-break-after:always;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .gq:before{content:'';position:absolute;top:1.6mm;left:1.6mm;right:1.6mm;bottom:1.6mm;border:1px solid #c9a23f;pointer-events:none}
@@ -451,7 +495,7 @@ async function idbGet(k){try{const d=await idb();return await new Promise(res=>{
 async function idbPut(k,v){try{const d=await idb();d.transaction('kv','readwrite').objectStore('kv').put(v,k)}catch(e){mem[k]=v}}
 let st_;function save(){_stm=null;clearTimeout(st_);cloud.dirty=true;st_=setTimeout(()=>{cloud.dirty=false;idbPut('db',db);cloudSave();flushDefer()},150)}
 function snapshot(){idbPut('prev',JSON.parse(JSON.stringify(db)))}
-function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,tt:{},users:[],audit:[],al:{},trash:[],mgr:'',ss:3,sig:'',tg:{},chan:'wa',yr:'',
+function defDB(){return{v:1,counter:0,code:'123123',wa:{},fd:1,tt:{},users:[],audit:[],al:{},trash:[],mgr:'',ss:3,sig:'',tg:{},chan:'wa',yr:'',grp:{},
  students:[],
  structure:{'الرابع العلمي':['أ','ب'],'الرابع الأدبي':['أ'],'الخامس العلمي':['أ','ب'],'الخامس الأدبي':['أ'],'السادس العلمي':['أ','ب'],'السادس الأدبي':['أ']},
  sessions:[],
@@ -1707,32 +1751,97 @@ const GR_TH={
  burgundy:{n:'عنابي',c1:'#5b0f24',c2:'#d04a68',ac:'#f5cd55',t1:'#fde8ed',t2:'#fff6f8'},
  purple:{n:'بنفسجي',c1:'#2e1065',c2:'#8b5cf6',ac:'#fbbf24',t1:'#efe8ff',t2:'#faf7ff'},
  sunset:{n:'برتقالي غروب',c1:'#7c2d12',c2:'#f97316',ac:'#fde047',t1:'#ffefe0',t2:'#fffaf4'},
+ ocean:{n:'محيطي سماوي',c1:'#023e5c',c2:'#06b6d4',ac:'#fde047',t1:'#e0f7fb',t2:'#f2fcfe'},
+ rose:{n:'وردي',c1:'#831843',c2:'#ec4899',ac:'#fde68a',t1:'#fde7f3',t2:'#fff5fa'},
+ goldblack:{n:'أسود وذهبي فاخر',c1:'#111111',c2:'#b8860b',ac:'#ffd86b',t1:'#fbf3dc',t2:'#fffaf0'},
+ forest:{n:'غابة خضراء',c1:'#14532d',c2:'#65a30d',ac:'#fde68a',t1:'#eef7dc',t2:'#f8fcee'},
+ sky:{n:'أزرق سماوي',c1:'#075985',c2:'#38bdf8',ac:'#fbbf24',t1:'#e3f4ff',t2:'#f4fbff'},
+ candy:{n:'حلوى (وردي وبنفسجي)',c1:'#be185d',c2:'#818cf8',ac:'#fde047',t1:'#f3e8ff',t2:'#fff5fb'},
+ lava:{n:'حمم حمراء',c1:'#450a0a',c2:'#ef4444',ac:'#fbbf24',t1:'#ffe6e3',t2:'#fff6f4'},
+ graphite:{n:'رمادي جرافيت',c1:'#1f2937',c2:'#6b7280',ac:'#fbbf24',t1:'#eceff3',t2:'#f8f9fb'},
  rainbow:{n:'ملوّن — ألوان متعددة',c1:'#0a1438',c2:'#7c3aed',ac:'#fbbf24',t1:'#f1eaff',t2:'#faf7ff'}};
+const GR_HD={band:'شريط متدرّج',wave:'موجة',split:'مقسوم بثلاثة ألوان',glass:'زجاجي فاتح',ribbon:'شرائط الأطراف',arch:'قوس مضيء',neon:'نيون داكن'};
+const GR_TB={'3d':'ثلاثي الأبعاد','glossy':'لامع زجاجي','tiles':'بلاطات بارزة','ledger':'دفتر رسمي','neon':'نيون داكن','metal':'معدني فضي','flat':'مسطّح (توفير حبر)'};
 const GR_RB=[['#0a1438','#2f55d4'],['#0f766e','#2dd4bf'],['#6d28d9','#a78bfa'],['#1d4ed8','#60a5fa'],['#15803d','#4ade80'],['#c2410c','#fb923c'],['#be185d','#f472b6'],['#b91c1c','#f87171'],['#a16207','#facc15']];
 const GR_RT=['#e8eeff','#e0faf6','#f1e9ff','#e5efff','#e6f8ec','#ffeedd','#ffe8f3','#ffe7e7','#fff6cc'];
+const GR_HEADS=['ت','اسم الطالب','الحالة','معدل النصف الأول','نصف السنة','معدل النصف الثاني','السعي السنوي','درجة الامتحان النهائي','الدرجة النهائية'];
+function grCols(extra){
+ const base=[8,60,16,19,17,19,17,19,19];
+ const ex=(extra||[]).filter(e=>e&&e.n).map((e,k)=>({h:e.n,i:9+k,x:true,a:Math.max(1,Math.min(8,+e.a||8))}));
+ const cols=[];
+ GR_HEADS.forEach((h,i)=>{cols.push({h,i,w:base[i],x:false});ex.filter(e=>e.a===i).forEach(e=>cols.push(Object.assign({w:17},e)))});
+ const k=ex.length;
+ if(k){
+  const w=k<=2?17:k===3?15:13;cols.forEach(c=>{if(c.x)c.w=w});
+  let others=cols.filter(c=>c.i!==1).reduce((a,c)=>a+c.w,0);
+  if(194-others<40){const f=(194-40)/others;cols.forEach(c=>{if(c.i!==1)c.w=Math.round(c.w*f*10)/10});others=cols.filter(c=>c.i!==1).reduce((a,c)=>a+c.w,0)}
+  cols.find(c=>c.i===1).w=Math.round((194-others)*10)/10}
+ return cols}
 function grSheet(o){
- const t=GR_TH[o.th]||GR_TH.navy,rb=o.th==='rainbow';
- const w=[8,60,16,19,17,19,17,19,19];
- const heads=['ت','اسم الطالب','الحالة','معدل النصف الأول','نصف السنة','معدل النصف الثاني','السعي السنوي','درجة الامتحان النهائي','الدرجة النهائية'];
- const thBg=i=>{const c=rb?GR_RB[i]:[t.c1,t.c2];return `background:linear-gradient(180deg,${c[1]},${c[0]})`};
- const tdBg=i=>rb?GR_RT[i]:(i>=3?(i%2?t.t1:t.t2):'#fff');
- const row=(n,name,st)=>`<tr><td class="no" style="${thBg(0)}">${n}</td><td class="nmc" style="background:linear-gradient(90deg,#fff,${rb?GR_RT[1]:t.t2})">${esc(name)}</td><td style="background:${tdBg(2)}">${st}</td>${[3,4,5,6,7,8].map(i=>`<td style="background:${tdBg(i)}"></td>`).join('')}</tr>`;
+ const t=GR_TH[o.th]||GR_TH.navy,rb=o.th==='rainbow',cols=grCols(o.extra);
+ if(o.tb==='tiles'){const f=(194-1*(cols.length+1))/194;cols.forEach(c=>{c.w=Math.round(c.w*f*100)/100})}
+ const bg=(c,j)=>{const p=rb?GR_RB[(c.x?5+j:c.i)%9]:[t.c1,t.c2];return `--bg:linear-gradient(180deg,${p[1]},${p[0]})`};
+ const tb=(c,j)=>c.x?(rb?GR_RT[(5+j)%9]:(j%2?t.t2:t.t1)):(rb?GR_RT[c.i]:(c.i>=3?(c.i%2?t.t1:t.t2):'#fff'));
+ const row=(n,name,st)=>`<tr>${cols.map((c,j)=>{
+  if(c.i===0)return `<td class="no" style="${bg(c,j)}">${n}</td>`;
+  if(c.i===1)return `<td class="nmc" style="--tb:linear-gradient(90deg,#fff,${rb?GR_RT[1]:t.t2})">${esc(name)}</td>`;
+  if(c.i===2)return `<td style="--tb:${tb(c,j)}">${st}</td>`;
+  return `<td style="--tb:${tb(c,j)}"></td>`}).join('')}</tr>`;
  let rows=o.list.map((s,i)=>row(i+1,s.name,s.out?'منقول':'')).join('');
  for(let i=0;i<o.blank;i++)rows+=row(o.list.length+i+1,'','');
- return `<div class="gr${o.flat?' flat':''}" style="--c1:${t.c1};--c2:${t.c2};--ac:${t.ac};--t1:${t.t1};--t2:${t.t2}">
+ let xj=-1;
+ return `<div class="gr h-${o.hd||'band'} t-${o.tb||'3d'}" style="--c1:${t.c1};--c2:${t.c2};--ac:${t.ac};--t1:${t.t1};--t2:${t.t2}">
  <div class="grb"><div class="grs"><span class="mn">جمهورية العراق — وزارة التربية</span><b>${SCHOOL}</b><small>${SCHOOL_EN}</small></div><div class="grlw"><img src="${LOGO}"></div><div class="grj"><span class="lb">المادة</span><b>${esc(o.subj)}</b></div></div>
  <div class="grh2"><div class="grc"><span>الصف: ${esc(o.cls)}</span><span>الشعبة: ${esc(o.sec)}</span></div><div class="grtt"><i>✦</i>سجل درجات المدرسين للعام الدراسي ${esc(o.yr)}<i>✦</i></div><div class="grn"><span>عدد الطلاب: ${o.list.length}</span></div></div>
- <table class="grtb"><colgroup>${w.map(x=>`<col style="width:${x}mm">`).join('')}</colgroup><thead><tr>${heads.map((h,i)=>`<th style="${thBg(i)}">${o.nohead?'&nbsp;':h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
+ <table class="grtb"><colgroup>${cols.map(c=>`<col style="width:${c.w}mm">`).join('')}</colgroup><thead><tr>${cols.map((c,j)=>`<th style="${bg(c,j)}">${o.nohead?'&nbsp;':esc(c.h)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
  <div class="grf"><div>اسم المدرس: ${esc(o.teacher||'')}<small>التوقيع:</small></div><div>اسم المدير: ${esc(o.mgr||'')}<small>التوقيع:</small></div></div></div>`}
+function grSubjects(cls,sec){
+ const set=new Set(GR_SUBJ);
+ db.sessions.forEach(x=>{if(x.cls===cls&&x.sec===sec&&x.subject&&x.subject!=='م')set.add(x.subject)});
+ Object.values((db.tt||{})[ttKey(cls,sec)]||{}).forEach(a=>(a||[]).forEach(e=>{if(e&&e.s)set.add(e.s)}));
+ return [...set]}
+function grXRow(n,a){
+ return `<div class="grxr"><input class="xn" placeholder="اسم العمود، مثل: ملاحظات" value="${esc(n||'')}" oninput="grPrev()"><select class="xa" onchange="grPrev()">${GR_HEADS.map((h,i)=>i>=1?`<option value="${i}" ${(+a||8)===i?'selected':''}>${i===8?'في النهاية (يسار الجدول)':'بعد: '+h}</option>`:'').join('')}</select><button class="btn sm" style="flex:none" onclick="this.parentNode.remove();grPrev()">✕</button></div>`}
+function grAddX(){const b=$('#grXC');if(b.children.length>=5){toast('الحد الأقصى 5 أعمدة إضافية');return}b.insertAdjacentHTML('beforeend',grXRow('',8));grPrev();const l=b.querySelector('.grxr:last-child .xn');if(l)l.focus()}
+function grRead(){
+ return {th:$('#grD').value,hd:$('#grHd').value,tb:$('#grTb').value,nohead:$('#grH').checked,
+  extra:[...document.querySelectorAll('#grXC .grxr')].map(r=>({n:r.querySelector('.xn').value.trim(),a:+r.querySelector('.xa').value})).filter(e=>e.n)}}
+function grPrev(){
+ const w=$('#grPv');if(!w)return;
+ const c=window.__grCtx,r=grRead(),subj=($('#grS').value.split(/[،,]/)[0]||'المادة').trim()||'المادة';
+ w.innerHTML=grSheet(Object.assign({cls:c.cls,sec:c.sec,subj,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:0,list:c.list.slice(0,6)},r));
+ const g=w.firstElementChild,sc=w.clientWidth/(194*3.7795);
+ g.style.transform=`scale(${sc})`;w.style.height=Math.ceil(g.offsetHeight*sc)+'px'}
+function grDlg(cls,sec){
+ const yr=(db.yr||acYear()).replace(/\s*\/\s*/g,'-'),P=db.grp||{};
+ window.__grAuto='';window.__grCtx={cls,sec,list:studentsOf(cls,sec)};
+ const sel=(id,obj,cur)=>`<select id="${id}" onchange="grPrev()">${Object.entries(obj).map(([k,v])=>`<option value="${k}" ${cur===k?'selected':''}>${typeof v==='string'?v:v.n}</option>`).join('')}</select>`;
+ openModal(`<h3>📝 سجل درجات المدرسين</h3><div style="color:var(--mut);font-size:13px">${esc(cls)} — شعبة ${esc(sec)} • ${studentsOf(cls,sec).length} طالب</div>
+ <div class="grpv" id="grPv"></div>
+ <label>المادة (اختر أو اكتب)</label><input id="grS" list="grSL" placeholder="مثال: الكيمياء" autocomplete="off" oninput="grFill(${J(cls)},${J(sec)});grPrev()"><datalist id="grSL">${grSubjects(cls,sec).map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+ <small style="color:var(--mut);display:block;margin-top:4px">لعدة مواد افصل بينها بفاصلة، فتُطبع ورقة لكل مادة، مثل: الكيمياء، الفيزياء</small>
+ <label>اسم المدرس</label><input id="grT" list="grTL" placeholder="يُملأ تلقائياً من الجدول الأسبوعي إن وُجد" autocomplete="off" oninput="grPrev()"><datalist id="grTL">${grTeachers().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+ <div class="two"><div><label>العام الدراسي</label><input id="grY" value="${esc(yr)}" oninput="grPrev()"></div><div><label>اسم المدير</label><input id="grM" value="${esc(db.mgr||'')}" placeholder="الاسم الكامل" oninput="grPrev()"></div></div>
+ <label>ألوان التصميم</label>${sel('grD',GR_TH,P.th||'navy')}
+ <div class="two"><div><label>شكل الترويسة</label>${sel('grHd',GR_HD,P.hd||'band')}</div><div><label>شكل الجدول</label>${sel('grTb',GR_TB,P.tb||'3d')}</div></div>
+ <label>أعمدة إضافية (اسم العمود وموضعه)</label><div id="grXC">${(P.x||[]).map(e=>grXRow(e.n,e.a)).join('')}</div><button class="btn sm" style="margin-top:8px" onclick="grAddX()">＋ إضافة عمود</button>
+ <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="grH" style="width:auto" onchange="grPrev()"> رأس الجدول فارغاً (بدون عناوين الأعمدة)</label>
+ <div class="two"><div><label>صفوف فارغة إضافية</label><input id="grB" type="number" min="0" max="20" inputmode="numeric" value="0"></div><div><label style="display:block">&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="grO" checked style="width:auto"> إظهار المنقولين (حالتهم: منقول)</label></div></div>
+ <small style="color:var(--mut);display:block;margin-top:8px">تُطبع على ورقة A4 بوجهين: تكملة الأسماء في الصفحة الثانية مع تكرار رأس الجدول. في نافذة الطباعة فعّل «الطباعة على الوجهين» و«طباعة الخلفيات».</small>
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)})">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
+ setTimeout(grPrev,60)}
+function grFill(cls,sec){
+ const t=$('#grT'),first=($('#grS').value.split(/[،,]/)[0]||'').trim(),g=grTeacher(cls,sec,first);
+ if(g&&(!t.value||t.value===window.__grAuto)){t.value=g;window.__grAuto=g}}
 function grDo(cls,sec){
  const subs=($('#grS').value||'').split(/[،,]/).map(x=>x.trim()).filter(Boolean);
  if(!subs.length){toast('اكتب اسم المادة');return}
- const o={cls,sec,th:$('#grD').value,flat:!$('#grX').checked,nohead:$('#grH').checked,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:Math.max(0,Math.min(20,parseInt($('#grB').value)||0))};
+ const ro=grRead(),o={cls,sec,th:ro.th,hd:ro.hd,tb:ro.tb,nohead:ro.nohead,extra:ro.extra,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:Math.max(0,Math.min(20,parseInt($('#grB').value)||0))};
  const inc=$('#grO').checked;
  let list=studentsOf(cls,sec);
  if(inc)list=[...list,...db.students.filter(x=>x.out&&x.cls===cls&&x.sec===sec)].sort(cmp);
  if(!list.length){toast('لا يوجد طلاب في هذه الشعبة');return}
- o.list=list;db.mgr=o.mgr;save();
+ o.list=list;db.mgr=o.mgr;db.grp={th:ro.th,hd:ro.hd,tb:ro.tb,x:ro.extra};save();
  logA('طباعة سجل درجات',`${cls} / ${sec} — ${subs.join('، ')}`);
  closeModal();
  printNamed(subs.map((sb,i)=>grSheet(Object.assign({},o,{subj:sb,teacher:subs.length>1?(grTeacher(cls,sec,sb)||o.teacher):o.teacher}))).join(''),'سجل درجات '+subs.join(' ')+' '+cls+' '+sec)}
@@ -1850,7 +1959,7 @@ let FS=null;
 const stab=o=>{if(o===null||typeof o!=='object')return JSON.stringify(o);if(Array.isArray(o))return'['+o.map(stab).join(',')+']';return'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+stab(o[k])).join(',')+'}'};
 const stuO=s=>({name:s.name||'',reg:s.reg||'',page:s.page||'',cls:s.cls||'',sec:s.sec||'',photo:s.photo||'',since:s.since||'',hist:Array.isArray(s.hist)?s.hist:[],bn:+s.bn||0,out:s.out?{d:s.out.d||'',to:s.out.to||'',note:s.out.note||'',by:s.out.by||''}:null});
 const sameStu=(a,b)=>!!a&&a.name===b.name&&a.reg===b.reg&&a.page===b.page&&a.cls===b.cls&&a.sec===b.sec&&a.photo===b.photo&&(a.since||'')===(b.since||'')&&(a.bn||0)===(b.bn||0)&&JSON.stringify(a.out||null)===JSON.stringify(b.out||null)&&JSON.stringify(a.hist||[])===JSON.stringify(b.hist||[]);
-const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},mgr:db.mgr||'',ss:+db.ss||3,sig:db.sig||'',tg:db.tg||{},chan:db.chan||'wa',yr:db.yr||'',v:db.v||1});
+const cfgObj=()=>({structure:Object.entries(db.structure).map(([c,s])=>({c,s})),lessons:db.lessons,behaviors:db.behaviors,code:db.code,wa:db.wa||{},fd:db.fd||1,tt:JSON.stringify(db.tt||{}),users:JSON.stringify(db.users||[]),al:db.al||{},mgr:db.mgr||'',ss:+db.ss||3,sig:db.sig||'',tg:db.tg||{},chan:db.chan||'wa',yr:db.yr||'',grp:JSON.stringify(db.grp||{}),v:db.v||1});
 /* الجلسات تُخزَّن في مستند لكل (صف+شعبة+شهر) لتقليل عدد القراءات */
 const sparts=id=>{const p=id.split('|'),m=p[0].slice(0,7);return{doc:(p[1]+'|'+p[2]+'|'+m).replace(/\//g,'_'),key:p[0]+'_'+p[3],cls:p[1],sec:p[2],month:m}};
 
@@ -1929,11 +2038,11 @@ function startListeners(){
  FS.collection('meta').doc('config').onSnapshot({includeMetadataChanges:true},d=>{
   cloud.err=false;cloud.pend.cfg=d.metadata.hasPendingWrites;cbadge();
   if(!d.exists){if(!d.metadata.fromCache&&!cloud.mig){cloud.mig=true;migrate()}return}
-  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,tt:c.tt||'{}',users:c.users||'[]',al:c.al||{},mgr:c.mgr||'',ss:+c.ss||3,sig:c.sig||'',tg:c.tg||{},chan:c.chan||'wa',yr:c.yr||'',v:c.v||1});
+  const c=d.data(),j=stab({structure:c.structure,lessons:c.lessons,behaviors:c.behaviors,code:c.code,wa:c.wa||{},fd:c.fd||1,tt:c.tt||'{}',users:c.users||'[]',al:c.al||{},mgr:c.mgr||'',ss:+c.ss||3,sig:c.sig||'',tg:c.tg||{},chan:c.chan||'wa',yr:c.yr||'',grp:c.grp||'{}',v:c.v||1});
   if(j===cloud.cfg)return;
   whenClean('cfg',()=>{
    if(Array.isArray(c.structure)){db.structure={};c.structure.forEach(x=>{db.structure[x.c]=x.s||[]})}
-   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;try{db.tt=JSON.parse(c.tt||'{}')}catch(e){db.tt={}}try{db.users=JSON.parse(c.users||'[]')}catch(e){db.users=[]}db.al=c.al||{};db.mgr=c.mgr||'';db.ss=+c.ss||3;db.sig=c.sig||'';db.tg=c.tg||{};db.chan=c.chan||'wa';db.yr=c.yr||'';
+   ['lessons','behaviors','code'].forEach(k=>{if(c[k]!==undefined)db[k]=c[k]});db.wa=c.wa||{};db.fd=c.fd||1;try{db.tt=JSON.parse(c.tt||'{}')}catch(e){db.tt={}}try{db.users=JSON.parse(c.users||'[]')}catch(e){db.users=[]}db.al=c.al||{};db.mgr=c.mgr||'';db.ss=+c.ss||3;db.sig=c.sig||'';db.tg=c.tg||{};db.chan=c.chan||'wa';db.yr=c.yr||'';try{db.grp=JSON.parse(c.grp||'{}')}catch(e){db.grp={}}
    cloud.cfg=j;softRender()});
  },cloudErr);
  FS.collection('meta').doc('counter').onSnapshot(d=>{if(d.exists&&db)db.counter=Math.max(db.counter||0,d.data().n||0)},()=>{});
