@@ -370,9 +370,9 @@ table.tb td.tt{font-weight:800}
 .gr .grtt{position:relative;text-align:center;font-size:14.5px;font-weight:900;color:#fff;padding:1.7mm 8mm;margin:0 auto;border-radius:2mm;line-height:1.5;border:.6mm solid var(--ac);background:linear-gradient(180deg,var(--c2),var(--c1));text-shadow:0 1px 2px rgba(0,0,0,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1.1mm 0 rgba(0,0,0,.3),0 2.4mm 3mm rgba(0,0,0,.2)}
 .gr .grtt i{font-style:normal;color:var(--ac);margin:0 2mm}
 .gr table.grtb{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:12px;border-radius:3mm}
-.gr .grtb th{background:var(--bg);color:#fff;font-weight:900;font-size:10.2px;line-height:1.35;height:14mm;padding:0 1mm;border-left:1px solid rgba(255,255,255,.4);text-shadow:0 1px 2px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.35);box-shadow:inset 0 1.5mm 1px -1mm rgba(255,255,255,.6),inset 0 -1.2mm 0 rgba(0,0,0,.3)}
+.gr .grtb th{background:var(--bg);color:#fff;font-weight:900;font-size:10.2px;line-height:1.35;height:14mm;padding:0 1mm;border-left:var(--bwh,.26mm) solid rgba(255,255,255,.55);text-shadow:0 1px 2px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.35);box-shadow:inset 0 1.5mm 1px -1mm rgba(255,255,255,.6),inset 0 -1.2mm 0 rgba(0,0,0,.3)}
 .gr .grtb th:first-child{border-top-right-radius:3mm}.gr .grtb th:last-child{border-top-left-radius:3mm;border-left:0}
-.gr .grtb td{background:var(--tb,#fff);height:8.4mm;text-align:center;border-bottom:1px solid #a9b7da;border-left:1px solid #b9c5e2;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(0,0,0,.05);overflow:hidden}
+.gr .grtb td{background:var(--tb,#fff);height:8.4mm;text-align:center;border-bottom:var(--bw,.26mm) solid var(--bc,#a9b7da);border-left:var(--bw,.26mm) solid var(--bcl,#b9c5e2);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(0,0,0,.05);overflow:hidden}
 .gr .grtb td:last-child{border-left:0}
 .gr .grtb td.nmc{text-align:right;padding:0 3mm;font-weight:800;white-space:nowrap;text-overflow:ellipsis}
 .gr .grtb td.no{background:var(--bg);color:#fff;font-weight:900;text-shadow:0 1px 0 rgba(0,0,0,.4);box-shadow:inset 0 1.2mm 1px -.8mm rgba(255,255,255,.55),inset 0 -1.3mm 0 rgba(0,0,0,.28)}
@@ -406,25 +406,49 @@ table.tb td.tt{font-weight:800}
 .gr.t-glossy .grtb th{background:linear-gradient(180deg,rgba(255,255,255,.34) 0 46%,rgba(255,255,255,0) 54%),var(--bg);border-left:1px solid rgba(255,255,255,.55);box-shadow:inset 0 -1.5mm 0 rgba(0,0,0,.25),inset 0 0 0 .3mm rgba(255,255,255,.4)}
 .gr.t-glossy .grtb td.no{background:linear-gradient(180deg,rgba(255,255,255,.34) 0 46%,rgba(255,255,255,0) 54%),var(--bg)}
 .gr.t-tiles table.grtb{border-collapse:separate;border-spacing:1mm 1.2mm;margin:0;width:100%}
-.gr.t-tiles .grtb th,.gr.t-tiles .grtb td{border:0!important;border-radius:2mm;box-shadow:0 .7mm 0 rgba(0,0,0,.22),inset 0 .5mm 0 rgba(255,255,255,.7)}
+.gr.t-tiles .grtb th,.gr.t-tiles .grtb td{border:var(--bwT,0) solid var(--bc,#a9b7da)!important;border-radius:2mm;box-shadow:0 .7mm 0 rgba(0,0,0,.22),inset 0 .5mm 0 rgba(255,255,255,.7)}
 .gr.t-tiles .grtb td{height:7.1mm}.gr.t-tiles .grtb th{height:13mm}
 .gr.t-ledger table.grtb{border-collapse:collapse;border:.9mm double var(--c1);border-radius:0}
-.gr.t-ledger .grtb th{background:var(--c1);color:var(--ac);box-shadow:none;border:1px solid var(--ac);text-shadow:none;border-radius:0!important}
-.gr.t-ledger .grtb td{background:#fff;border:1px solid var(--c1);box-shadow:none!important;border-radius:0}
+.gr.t-ledger .grtb th{background:var(--c1);color:var(--ac);box-shadow:none;border:var(--bw,.26mm) solid var(--ac);text-shadow:none;border-radius:0!important}
+.gr.t-ledger .grtb td{background:#fff;border:var(--bw,.26mm) solid var(--c1);box-shadow:none!important;border-radius:0}
 .gr.t-ledger .grtb tbody tr:nth-child(even) td:not(.no){background:var(--t2)}
 .gr.t-ledger .grtb td.no{background:var(--t1);color:var(--c1);text-shadow:none}
 .gr.t-neon .grtb{border-radius:2mm;box-shadow:0 0 0 .5mm var(--c2),0 0 4mm var(--c2)}
 .gr.t-neon .grtb th{background:linear-gradient(180deg,#0e1538,#05081a);color:var(--ac);border-left:1px solid var(--c2);box-shadow:inset 0 -.8mm 0 var(--c2);text-shadow:0 0 6px var(--ac)}
-.gr.t-neon .grtb td{background:#0b1128;color:#eaf2ff;border-bottom:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.1);box-shadow:none!important}
+.gr.t-neon .grtb td{background:#0b1128;color:#eaf2ff;border-bottom:var(--bw,.26mm) solid var(--nbc,rgba(255,255,255,.16));border-left:var(--bw,.26mm) solid var(--nbc2,rgba(255,255,255,.1));box-shadow:none!important}
 .gr.t-neon .grtb tbody tr:nth-child(even) td:not(.no){background:#111a3e}
 .gr.t-neon .grtb td.no{background:linear-gradient(180deg,var(--c2),var(--c1));color:#fff}
 .gr.t-metal .grtb th{background:linear-gradient(180deg,#fdfdfe 0,#cbd2dc 46%,#8e99a8 52%,#d9dee6 100%);color:#1f2937;text-shadow:0 1px 0 #fff;border-left:1px solid #6b7686;box-shadow:inset 0 1px 0 #fff,inset 0 -1mm 0 rgba(0,0,0,.2)}
-.gr.t-metal .grtb td{background:#fff;border-bottom:1px solid #98a3b3;border-left:1px solid #b6bfcc}
+.gr.t-metal .grtb td{background:#fff;border-bottom:var(--bw,.26mm) solid var(--bc,#98a3b3);border-left:var(--bw,.26mm) solid var(--bcl,#b6bfcc)}
 .gr.t-metal .grtb tbody tr:nth-child(even) td:not(.no){background:#f1f4f8}
 .gr.t-metal .grtb td.no{background:linear-gradient(180deg,#eef1f5,#9aa5b4);color:#111827;text-shadow:0 1px 0 #fff}
 .gr.t-flat .grb,.gr.t-flat .grtt,.gr.t-flat .grj b,.gr.t-flat .grc span,.gr.t-flat .grn span,.gr.t-flat .grf>div{box-shadow:none!important;text-shadow:none!important}
 .gr.t-flat .grtb th,.gr.t-flat .grtb td,.gr.t-flat .grtb td.no{box-shadow:none!important;text-shadow:none!important}
 .gr.t-flat .grtb th{background:var(--c1)}.gr.t-flat .grtb td.no{background:var(--c1)}
+
+/* ---- line thickness / sizes / header size / blanks ---- */
+.gr.bw-1{--bw:.26mm;--bwh:.26mm;--bwT:0}
+.gr.bw-2{--bw:.53mm;--bwh:.26mm;--bwT:.53mm;--bc:#5f72a0;--bcl:#6f82ae;--nbc:rgba(255,255,255,.4);--nbc2:rgba(255,255,255,.3)}
+.gr.bw-3{--bw:.8mm;--bwh:.53mm;--bwT:.8mm;--bc:var(--c1);--bcl:var(--c1);--nbc:var(--c2);--nbc2:var(--c2)}
+.gr.bw-4{--bw:1.32mm;--bwh:.8mm;--bwT:1.06mm;--bc:#0b0f1a;--bcl:#0b0f1a;--nbc:var(--ac);--nbc2:var(--ac)}
+.gr.rs-2 .grtb td{height:9.8mm;font-size:14px}.gr.rs-2 .grtb th{font-size:11.3px;height:15mm}
+.gr.rs-3 .grtb td{height:11.4mm;font-size:16px}.gr.rs-3 .grtb th{font-size:12.5px;height:16.5mm}
+.gr.t-tiles.rs-2 .grtb td{height:9mm}.gr.t-tiles.rs-3 .grtb td{height:10.6mm}
+.gr.hs-1 .grb{padding:2.3mm 6mm;gap:4mm;border-radius:4mm}
+.gr.hs-1 .grlw{width:17mm;height:17mm;border-width:.8mm}
+.gr.hs-1 .grs b{font-size:13px}.gr.hs-1 .grs .mn{font-size:8.5px}.gr.hs-1 .grs small{font-size:8px}
+.gr.hs-1 .grj .lb{font-size:9px}.gr.hs-1 .grj b{font-size:12.5px;padding:.5mm 4mm}
+.gr.hs-1 .grh2{margin:2mm 0 2.5mm}.gr.hs-1 .grtt{font-size:12px;padding:1mm 5mm}.gr.hs-1 .grc{flex-direction:row;gap:2mm}.gr.hs-1 .grc span{font-size:11px;padding:.3mm 2.5mm}.gr.hs-1 .grn span{font-size:10.5px;padding:.3mm 2.5mm}
+.gr.hs-2 .grb{padding:1.4mm 5mm;gap:3mm;border-radius:3mm}
+.gr.hs-2 .grlw{width:11.5mm;height:11.5mm;border-width:.6mm;padding:.5mm}
+.gr.hs-2 .grs .mn,.gr.hs-2 .grs small,.gr.hs-2 .grj .lb{display:none}.gr.hs-2 .grs b{font-size:12px}.gr.hs-2 .grj b{font-size:11.5px;padding:.4mm 3mm;margin-top:0}
+.gr.hs-2 .grh2{margin:1.5mm 0 2mm;grid-template-columns:70mm 1fr 40mm}.gr.hs-2 .grtt{font-size:11px;padding:.7mm 4mm;white-space:nowrap}.gr.hs-2 .grtt i{display:none}
+.gr.hs-2 .grc{flex-direction:row;gap:2mm}.gr.hs-2 .grc span{font-size:10.5px;padding:.2mm 2mm;border-right-width:2mm}.gr.hs-2 .grn span{font-size:10px;padding:.2mm 2mm}
+.gr.h-wave.hs-1 .grb{padding-bottom:6.5mm}.gr.h-wave.hs-2 .grb{padding-bottom:5mm}.gr.h-wave.hs-1 .grb:after,.gr.h-wave.hs-2 .grb:after{height:5mm}
+.gr.h-ribbon.hs-1 .grb,.gr.h-ribbon.hs-2 .grb{padding-left:14mm;padding-right:14mm}
+.gr .grj b.bl{background:#fff;color:#fff;min-width:46mm;height:7.5mm;border-bottom:.5mm dotted #8a8a8a;box-shadow:0 1.2mm 0 rgba(0,0,0,.3)}
+.gr.hs-2 .grj b.bl{height:5.5mm;min-width:36mm}
+.gr .dl{display:inline-block;min-width:80mm;height:1em;border-bottom:.45mm dotted currentColor;vertical-align:baseline}
 .grpv{position:relative;overflow:hidden;border-radius:10px;background:#fff;border:1px solid rgba(255,255,255,.25);margin-top:6px}
 .grpv .gr{position:absolute;top:0;right:0;transform-origin:top right;pointer-events:none}
 .grxr{display:flex;gap:6px;align-items:center;margin-top:6px}.grxr input{flex:1.2;min-width:0}.grxr select{flex:1;min-width:0}
@@ -442,7 +466,7 @@ table.tb td.tt{font-weight:800}
 .gq table.gqT{position:relative;width:100%;border-collapse:collapse;table-layout:fixed;margin-top:1mm}
 .gq .gqT th,.gq .gqT td{border:1px solid #c9b77f;text-align:center;padding:0;overflow:hidden}
 .gq .gqT th{background:#0a1438;color:#f6d56a;font-weight:800}
-.gq .gqT .n1{width:9mm}.gq .gqT .n2{width:58mm}
+.gq .gqT .n1{width:9mm}.gq .gqT .n2{width:50mm}.gq .gqT .n3{width:14mm}.gq .gqT .n4{width:11mm}.gq .gqT td.rg2{font-size:10.5px;font-weight:700;background:#fffdf6}
 .gq .gqT td.nm,.gq .gqT th.nm{text-align:right;padding:0 2mm;white-space:nowrap;text-overflow:ellipsis}
 .gq .gqT th.d1{font-size:12.5px;height:6.5mm}.gq .gqT th.d1 small{font-weight:500;font-size:9.5px;opacity:.85;margin-right:5px}
 .gq .gqT th.l1{background:#1b3a9a;color:#fff;font-size:11px;height:5mm}
@@ -639,7 +663,7 @@ function vSec(p){
    <button class="btn gold full" style="margin-top:14px" onclick="startAtt(${J({cls,sec})})">${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?'تعديل الحضور المسجّل 🔐':'ابدأ تسجيل الطلاب'}</button>${db.sessions.some(x=>x.id===sKey(sel.date,cls,sec,sel.lesson))?`<button class="btn full" style="margin-top:8px" onclick="waPrompt(${J(sKey(sel.date,cls,sec,sel.lesson))})">📲 إرسال الغياب (واتساب / تلكرام)</button><button class="btn full" style="margin-top:8px" onclick="lessonPDF(${J(sKey(sel.date,cls,sec,sel.lesson))})">📄 تنزيل كشف الغياب PDF</button>`:''}</div>`;
   }
  }else{
-  h+=`<div class="btns" style="margin-bottom:6px"><button class="btn gold" onclick="editStudent(null,${J(cls)},${J(sec)})">＋ إضافة طالب جديد 🔐</button><button class="btn blue" onclick="gridDialog(${J(cls)},${J(sec)})">📊 جدول الحضور (PDF)</button><button class="btn" onclick="grDlg(${J(cls)},${J(sec)})">📝 سجل الدرجات</button></div>`;
+  h+=`<div class="btns" style="margin-bottom:6px"><button class="btn gold" onclick="editStudent(null,${J(cls)},${J(sec)})">＋ إضافة طالب جديد 🔐</button><button class="btn blue" onclick="gridDialog(${J(cls)},${J(sec)})">📊 جدول الحضور (PDF)</button><button class="btn" onclick="grDlg(${J(cls)},${J(sec)})">📝 سجل الدرجات</button><button class="btn" onclick="namesXLS(${J(cls)},${J(sec)})">⬇ الأسماء Excel</button></div>`;
   if(!list.length)h+='<div class="card empty">لا يوجد طلاب في هذه الشعبة.<br>استورد ملف Excel أو أضف طالباً من هنا.</div>';
   list.forEach((s,i)=>{const x=stats(s);
    h+=`<div class="sr" onclick="go('stu',{id:'${s.id}'})"><div class="num">${i+1}</div>${av(s)}<div class="nm${plate(s)}"><b>${esc(s.name)}${stBadge(s)}</b><small>قيد ${esc(s.reg||'—')} • صفحة ${esc(s.page||'—')}</small>
@@ -970,12 +994,12 @@ function gridPages(cls,sec,from,to,pad){
  const rhG=Math.max(5,Math.min(9,Math.floor((132-0.32*per)/per*10)/10)),rhS=n=>Math.max(5,Math.min(10,Math.floor((148-0.32*(n+1))/(n+1)*10)/10));
  let out='';
  chunks.forEach(ch=>slices.forEach(sl=>{
-  out+=page(head('جدول الحضور والغياب')+`<table class="gqT"><thead><tr><th class="n1" rowspan="3">#</th><th class="n2 nm" rowspan="3" style="text-align:center">الطالب</th>${ch.map(d=>`<th colspan="${N}" class="d1">${dd(d)}<small>${wd2(d)}</small></th>`).join('')}</tr><tr>${ch.map(d=>ls.map(l=>`<th class="l1">${l}</th>`).join('')).join('')}</tr><tr>${ch.map(d=>ls.map(l=>{const x=by[d+'|'+l];return `<th class="s1">${x?`<span>${esc(x.subject)}</span>`:''}</th>`}).join('')).join('')}</tr></thead>
-  <tbody>${sl.rows.map((s,i)=>`<tr style="height:${rhG}mm"><td>${sl.off+i+1}</td><td class="nm">${esc(s.name)}</td>${ch.map(d=>ls.map(l=>cell(s,d,l)).join('')).join('')}</tr>`).join('')}</tbody></table>`)}));
+  out+=page(head('جدول الحضور والغياب')+`<table class="gqT"><thead><tr><th class="n1" rowspan="3">#</th><th class="n2 nm" rowspan="3" style="text-align:center">الطالب</th><th class="n3" rowspan="3">رقم القيد</th><th class="n4" rowspan="3">الصفحة</th>${ch.map(d=>`<th colspan="${N}" class="d1">${dd(d)}<small>${wd2(d)}</small></th>`).join('')}</tr><tr>${ch.map(d=>ls.map(l=>`<th class="l1">${l}</th>`).join('')).join('')}</tr><tr>${ch.map(d=>ls.map(l=>{const x=by[d+'|'+l];return `<th class="s1">${x?`<span>${esc(x.subject)}</span>`:''}</th>`}).join('')).join('')}</tr></thead>
+  <tbody>${sl.rows.map((s,i)=>`<tr style="height:${rhG}mm"><td>${sl.off+i+1}</td><td class="nm">${esc(s.name)}</td><td class="rg2">${esc(s.reg||'')}</td><td class="rg2">${esc(s.page||'')}</td>${ch.map(d=>ls.map(l=>cell(s,d,l)).join('')).join('')}</tr>`).join('')}</tbody></table>`)}));
  ssl.forEach((sl,si)=>{
   const last=si===ssl.length-1,rh=rhS(sl.rows.length),T=sum.reduce((o,r)=>({a:o.a+r.a,e:o.e+r.e,l:o.l+r.lt}),{a:0,e:0,l:0});
-  out+=page(head('ملخص الحضور والغياب للفترة')+`<table class="gqT gqS"><thead><tr><th class="n1">#</th><th class="n2 nm" style="text-align:center">الطالب</th><th>أيام غياب كاملة</th><th>دروس غائبة</th><th>دروس مجازة</th><th>مرات التأخر</th><th>دروس حاضرة</th><th>نسبة الحضور</th></tr></thead>
-  <tbody>${sl.rows.map((r,i)=>`<tr style="height:${rh}mm"><td>${sl.off+i+1}</td><td class="nm">${esc(r.s.name)}</td><td style="${r.fa?'color:#c0283a;font-weight:900':''}">${r.fa}</td><td style="${r.a?'color:#c0283a;font-weight:900':''}">${r.a}</td><td>${r.e}</td><td style="color:#1c62c4">${r.lt}</td><td style="color:#0f8a5f;font-weight:900">${r.p}</td><td style="${r.pc<75?'color:#c0283a;font-weight:900':''}"><span dir="ltr">${r.pc}%</span></td></tr>`).join('')}${last?`<tr class="tot" style="height:${rh}mm"><td></td><td class="nm">المجموع</td><td></td><td>${T.a}</td><td>${T.e}</td><td>${T.l}</td><td></td><td></td></tr>`:''}</tbody></table>`)});
+  out+=page(head('ملخص الحضور والغياب للفترة')+`<table class="gqT gqS"><thead><tr><th class="n1">#</th><th class="n2 nm" style="text-align:center">الطالب</th><th class="n3">رقم القيد</th><th class="n4">الصفحة</th><th>أيام غياب كاملة</th><th>دروس غائبة</th><th>دروس مجازة</th><th>مرات التأخر</th><th>دروس حاضرة</th><th>نسبة الحضور</th></tr></thead>
+  <tbody>${sl.rows.map((r,i)=>`<tr style="height:${rh}mm"><td>${sl.off+i+1}</td><td class="nm">${esc(r.s.name)}</td><td class="rg2">${esc(r.s.reg||'')}</td><td class="rg2">${esc(r.s.page||'')}</td><td style="${r.fa?'color:#c0283a;font-weight:900':''}">${r.fa}</td><td style="${r.a?'color:#c0283a;font-weight:900':''}">${r.a}</td><td>${r.e}</td><td style="color:#1c62c4">${r.lt}</td><td style="color:#0f8a5f;font-weight:900">${r.p}</td><td style="${r.pc<75?'color:#c0283a;font-weight:900':''}"><span dir="ltr">${r.pc}%</span></td></tr>`).join('')}${last?`<tr class="tot" style="height:${rh}mm"><td></td><td class="nm">المجموع</td><td></td><td></td><td></td><td>${T.a}</td><td>${T.e}</td><td>${T.l}</td><td></td><td></td></tr>`:''}</tbody></table>`)});
  if(pad&&K0%2)out+=`<div class="gq gqb"><div class="gqf">— صفحة فارغة لتبدأ الشعبة التالية على وجه جديد —</div></div>`;
  return{html:out};
 }
@@ -1243,25 +1267,11 @@ function tbXLS(){
  tbSecs().forEach(([c,s])=>{
   const g=gridData(c,s,from,to);if(!g.ss.length||!g.list.length)return;
   const cols=[];g.dates.forEach(d=>{for(let l=1;l<=g.N;l++)cols.push({d,l})});
-  const head=['الطالب','غائب (دروس)','مجاز (دروس)','متأخر (دروس)','حاضر (دروس)',...cols.map(k=>dd(k.d)+' د'+k.l)];
-  const rows=g.list.map(st=>{const o=g.tot[st.id];return[st.name,o.a,o.e,o.l,g.reg[st.id]-o.a-o.e,...cols.map(k=>{const m=gm(g.by,st,k.d,k.l,c,s);return m===''?'':m==='a'?'غ':m==='e'?'م':m==='l'?'ت':'✓'})]});
-  sheets.push({name:c+' '+s,aoa:[head,...rows]})});
+  const head=['الطالب','رقم القيد','الصفحة','غائب (دروس)','مجاز (دروس)','متأخر (دروس)','حاضر (دروس)',...cols.map(k=>dd(k.d)+' د'+k.l)];
+  const rows=g.list.map(st=>{const o=g.tot[st.id];return[st.name,st.reg||'',st.page||'',o.a,o.e,o.l,g.reg[st.id]-o.a-o.e,...cols.map(k=>{const m=gm(g.by,st,k.d,k.l,c,s);return m===''?'':m==='a'?'غ':m==='e'?'م':m==='l'?'ت':'✓'})]});
+  sheets.push({name:c+' '+s,w:[28,11,9,12,12,12,12],aoa:[head,...rows]})});
  if(!sheets.length){toast('لا توجد دروس مسجّلة في هذه الفترة');return}
- const fn='جدول-الغياب-'+from+'_'+to;
- if(typeof XLSX!=='undefined'){
-  const wb=XLSX.utils.book_new(),used=new Set();
-  sheets.forEach((sh,i)=>{
-   const ws=XLSX.utils.aoa_to_sheet(sh.aoa);ws['!cols']=[{wch:28},{wch:10},{wch:10},{wch:10},{wch:10}];
-   let nm=sh.name.replace(/[\\\/?*\[\]:]/g,'-').slice(0,28);if(used.has(nm))nm=nm.slice(0,25)+' '+(i+1);used.add(nm);
-   XLSX.utils.book_append_sheet(wb,ws,nm)});
-  wb.Workbook={Views:[{RTL:true}]};
-  XLSX.writeFile(wb,fn+'.xlsx');
- }else{
-  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
-  const csv='\ufeff'+sheets.map(sh=>sh.name+'\n'+sh.aoa.map(r=>r.map(q).join(',')).join('\n')).join('\n\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=fn+'.csv';a.click();
-  toast('مكتبة Excel غير محمّلة — نُزّل الملف بصيغة CSV (يفتح في Excel)');
- }}
+ saveSheets(sheets,'جدول-الغياب-'+(tb.k==='all'?'كل-الشعب-':'')+from+'_'+to)}
 
 
 /* ---------- TRANSFER STUDENT ---------- */
@@ -1349,7 +1359,7 @@ function rkPDF(){
 function saveSheets(sheets,fn){
  if(typeof XLSX!=='undefined'){
   const wb=XLSX.utils.book_new(),used=new Set();
-  sheets.forEach((sh,i)=>{const ws=XLSX.utils.aoa_to_sheet(sh.aoa);ws['!cols']=[{wch:28}];let nm=sh.name.replace(/[\\\/?*\[\]:]/g,'-').slice(0,28);if(used.has(nm))nm=nm.slice(0,25)+' '+(i+1);used.add(nm);XLSX.utils.book_append_sheet(wb,ws,nm)});
+  sheets.forEach((sh,i)=>{const ws=XLSX.utils.aoa_to_sheet(sh.aoa);ws['!cols']=(sh.w||[28]).map(x=>({wch:x}));if(sh.merges)ws['!merges']=sh.merges;let nm=sh.name.replace(/[\\\/?*\[\]:]/g,'-').slice(0,28);if(used.has(nm))nm=nm.slice(0,25)+' '+(i+1);used.add(nm);XLSX.utils.book_append_sheet(wb,ws,nm)});
   wb.Workbook={Views:[{RTL:true}]};XLSX.writeFile(wb,fn+'.xlsx');return}
  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
  const csv='\ufeff'+sheets.map(sh=>sh.name+'\n'+sh.aoa.map(r=>r.map(q).join(',')).join('\n')).join('\n\n');
@@ -1718,33 +1728,11 @@ function arcXLS(){
 
 /* ---------- TEACHER GRADE SHEET ---------- */
 const GR_SUBJ=['التربية الإسلامية','اللغة العربية','اللغة الإنكليزية','الرياضيات','الفيزياء','الكيمياء','الأحياء','الحاسوب','التاريخ','الجغرافية','الاجتماعيات','العلوم','التربية الرياضية','التربية الفنية','اللغة الفرنسية','علم الأرض','الاقتصاد','الفلسفة'];
-function grSubjects(cls,sec){
- const set=new Set(GR_SUBJ);
- db.sessions.forEach(x=>{if(x.cls===cls&&x.sec===sec&&x.subject&&x.subject!=='م')set.add(x.subject)});
- Object.values((db.tt||{})[ttKey(cls,sec)]||{}).forEach(a=>(a||[]).forEach(e=>{if(e&&e.s)set.add(e.s)}));
- return [...set]}
 function grTeacher(cls,sec,subj){
  if(!subj)return'';
  for(const a of Object.values((db.tt||{})[ttKey(cls,sec)]||{}))for(const e of a||[])if(e&&e.s===subj&&e.t)return e.t;
  const x=db.sessions.find(z=>z.cls===cls&&z.sec===sec&&z.subject===subj&&z.teacher);return x?x.teacher:''}
 function grTeachers(){const t=new Set();Object.values(db.tt||{}).forEach(o=>Object.values(o).forEach(a=>(a||[]).forEach(e=>{if(e&&e.t)t.add(e.t)})));db.sessions.forEach(x=>{if(x.teacher&&x.teacher!=='ت')t.add(x.teacher)});return [...t]}
-function grDlg(cls,sec){
- const yr=(db.yr||acYear()).replace(/\s*\/\s*/g,'-');
- window.__grAuto='';
- openModal(`<h3>📝 سجل درجات المدرسين</h3><div style="color:var(--mut);font-size:13px">${esc(cls)} — شعبة ${esc(sec)} • ${studentsOf(cls,sec).length} طالب</div>
- <label>المادة (اختر أو اكتب)</label><input id="grS" list="grSL" placeholder="مثال: الكيمياء" autocomplete="off" oninput="grFill(${J(cls)},${J(sec)})"><datalist id="grSL">${grSubjects(cls,sec).map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
- <small style="color:var(--mut);display:block;margin-top:4px">لعدة مواد افصل بينها بفاصلة، فتُطبع ورقة لكل مادة، مثل: الكيمياء، الفيزياء</small>
- <label>اسم المدرس</label><input id="grT" list="grTL" placeholder="يُملأ تلقائياً من الجدول الأسبوعي إن وُجد" autocomplete="off"><datalist id="grTL">${grTeachers().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
- <div class="two"><div><label>العام الدراسي</label><input id="grY" value="${esc(yr)}"></div><div><label>اسم المدير</label><input id="grM" value="${esc(db.mgr||'')}" placeholder="الاسم الكامل"></div></div>
- <label>تصميم السجل</label><select id="grD">${Object.entries(GR_TH).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('')}</select>
- <label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="grX" checked style="width:auto"> جدول ثلاثي الأبعاد ملوّن (ألغِه لتوفير الحبر)</label>
- <label style="display:flex;gap:8px;align-items:center;margin-top:6px"><input type="checkbox" id="grH" style="width:auto"> رأس الجدول فارغاً (بدون عناوين الأعمدة)</label>
- <div class="two"><div><label>صفوف فارغة إضافية</label><input id="grB" type="number" min="0" max="20" inputmode="numeric" value="0"></div><div><label style="display:block">&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="grO" checked style="width:auto"> إظهار المنقولين (حالتهم: منقول)</label></div></div>
- <small style="color:var(--mut);display:block;margin-top:8px">تُطبع على ورقة A4 بوجهين: تكملة الأسماء في الصفحة الثانية مع تكرار رأس الجدول، والجدول متمركز بهوامش متساوية. في نافذة الطباعة فعّل «الطباعة على الوجهين».</small>
- <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)})">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`)}
-function grFill(cls,sec){
- const t=$('#grT'),first=($('#grS').value.split(/[،,]/)[0]||'').trim(),g=grTeacher(cls,sec,first);
- if(g&&(!t.value||t.value===window.__grAuto)){t.value=g;window.__grAuto=g}}
 const GR_TH={
  navy:{n:'ملكي أزرق وذهبي',c1:'#0a1438',c2:'#2f55d4',ac:'#f0c040',t1:'#e9efff',t2:'#f6f8ff'},
  emerald:{n:'زمردي أخضر',c1:'#064e3b',c2:'#10b981',ac:'#f5cd55',t1:'#e3f7ee',t2:'#f3fcf8'},
@@ -1765,36 +1753,58 @@ const GR_TB={'3d':'ثلاثي الأبعاد','glossy':'لامع زجاجي','ti
 const GR_RB=[['#0a1438','#2f55d4'],['#0f766e','#2dd4bf'],['#6d28d9','#a78bfa'],['#1d4ed8','#60a5fa'],['#15803d','#4ade80'],['#c2410c','#fb923c'],['#be185d','#f472b6'],['#b91c1c','#f87171'],['#a16207','#facc15']];
 const GR_RT=['#e8eeff','#e0faf6','#f1e9ff','#e5efff','#e6f8ec','#ffeedd','#ffe8f3','#ffe7e7','#fff6cc'];
 const GR_HEADS=['ت','اسم الطالب','الحالة','معدل النصف الأول','نصف السنة','معدل النصف الثاني','السعي السنوي','درجة الامتحان النهائي','الدرجة النهائية'];
-function grCols(extra){
+function grCols(extra,reg){
  const base=[8,60,16,19,17,19,17,19,19];
  const ex=(extra||[]).filter(e=>e&&e.n).map((e,k)=>({h:e.n,i:9+k,x:true,a:Math.max(1,Math.min(8,+e.a||8))}));
  const cols=[];
- GR_HEADS.forEach((h,i)=>{cols.push({h,i,w:base[i],x:false});ex.filter(e=>e.a===i).forEach(e=>cols.push(Object.assign({w:17},e)))});
+ GR_HEADS.forEach((h,i)=>{cols.push({h,i,w:base[i],x:false});if(i===1&&reg){cols.push({h:'رقم القيد',i:20,w:16,x:false});cols.push({h:'الصفحة',i:21,w:13,x:false})}ex.filter(e=>e.a===i).forEach(e=>cols.push(Object.assign({w:17},e)))});
  const k=ex.length;
- if(k){
+ if(k||reg){
   const w=k<=2?17:k===3?15:13;cols.forEach(c=>{if(c.x)c.w=w});
   let others=cols.filter(c=>c.i!==1).reduce((a,c)=>a+c.w,0);
   if(194-others<40){const f=(194-40)/others;cols.forEach(c=>{if(c.i!==1)c.w=Math.round(c.w*f*10)/10});others=cols.filter(c=>c.i!==1).reduce((a,c)=>a+c.w,0)}
   cols.find(c=>c.i===1).w=Math.round((194-others)*10)/10}
  return cols}
-function grSheet(o){
- const t=GR_TH[o.th]||GR_TH.navy,rb=o.th==='rainbow',cols=grCols(o.extra);
+function grPrep(o){
+ const t=GR_TH[o.th]||GR_TH.navy,rb=o.th==='rainbow',cols=grCols(o.extra,o.reg);
  if(o.tb==='tiles'){const f=(194-1*(cols.length+1))/194;cols.forEach(c=>{c.w=Math.round(c.w*f*100)/100})}
  const bg=(c,j)=>{const p=rb?GR_RB[(c.x?5+j:c.i)%9]:[t.c1,t.c2];return `--bg:linear-gradient(180deg,${p[1]},${p[0]})`};
- const tb=(c,j)=>c.x?(rb?GR_RT[(5+j)%9]:(j%2?t.t2:t.t1)):(rb?GR_RT[c.i]:(c.i>=3?(c.i%2?t.t1:t.t2):'#fff'));
- const row=(n,name,st)=>`<tr>${cols.map((c,j)=>{
-  if(c.i===0)return `<td class="no" style="${bg(c,j)}">${n}</td>`;
-  if(c.i===1)return `<td class="nmc" style="--tb:linear-gradient(90deg,#fff,${rb?GR_RT[1]:t.t2})">${esc(name)}</td>`;
-  if(c.i===2)return `<td style="--tb:${tb(c,j)}">${st}</td>`;
+ const tb=(c,j)=>c.x?(rb?GR_RT[(5+j)%9]:(j%2?t.t2:t.t1)):(rb?GR_RT[c.i%9]:(c.i>=3?(c.i%2?t.t1:t.t2):'#fff'));
+ const cls=`gr h-${o.hd||'band'} t-${o.tb||'3d'} bw-${o.bw||2} rs-${o.rs||1} hs-${o.hs||0}`,vars=`--c1:${t.c1};--c2:${t.c2};--ac:${t.ac};--t1:${t.t1};--t2:${t.t2}`;
+ const row=r=>`<tr>${cols.map((c,j)=>{
+  if(c.i===0)return `<td class="no" style="${bg(c,j)}">${r.n}</td>`;
+  if(c.i===1)return `<td class="nmc" style="--tb:linear-gradient(90deg,#fff,${rb?GR_RT[1]:t.t2})">${esc(r.name)}</td>`;
+  if(c.i===2)return `<td style="--tb:${tb(c,j)}">${esc(r.st||'')}</td>`;
+  if(c.i===20)return `<td style="--tb:${tb(c,j)}">${esc(r.reg||'')}</td>`;
+  if(c.i===21)return `<td style="--tb:${tb(c,j)}">${esc(r.page||'')}</td>`;
   return `<td style="--tb:${tb(c,j)}"></td>`}).join('')}</tr>`;
- let rows=o.list.map((s,i)=>row(i+1,s.name,s.out?'منقول':'')).join('');
- for(let i=0;i<o.blank;i++)rows+=row(o.list.length+i+1,'','');
- let xj=-1;
- return `<div class="gr h-${o.hd||'band'} t-${o.tb||'3d'}" style="--c1:${t.c1};--c2:${t.c2};--ac:${t.ac};--t1:${t.t1};--t2:${t.t2}">
- <div class="grb"><div class="grs"><span class="mn">جمهورية العراق — وزارة التربية</span><b>${SCHOOL}</b><small>${SCHOOL_EN}</small></div><div class="grlw"><img src="${LOGO}"></div><div class="grj"><span class="lb">المادة</span><b>${esc(o.subj)}</b></div></div>
- <div class="grh2"><div class="grc"><span>الصف: ${esc(o.cls)}</span><span>الشعبة: ${esc(o.sec)}</span></div><div class="grtt"><i>✦</i>سجل درجات المدرسين للعام الدراسي ${esc(o.yr)}<i>✦</i></div><div class="grn"><span>عدد الطلاب: ${o.list.length}</span></div></div>
- <table class="grtb"><colgroup>${cols.map(c=>`<col style="width:${c.w}mm">`).join('')}</colgroup><thead><tr>${cols.map((c,j)=>`<th style="${bg(c,j)}">${o.nohead?'&nbsp;':esc(c.h)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
- <div class="grf"><div>اسم المدرس: ${esc(o.teacher||'')}<small>التوقيع:</small></div><div>اسم المدير: ${esc(o.mgr||'')}<small>التوقيع:</small></div></div></div>`}
+ return {cols,bg,row,wrap:inner=>`<div class="${cls}" style="${vars}">${inner}</div>`}}
+const grHead=o=>`<div class="grb"><div class="grs"><span class="mn">جمهورية العراق — وزارة التربية</span><b>${SCHOOL}</b><small>${SCHOOL_EN}</small></div><div class="grlw"><img src="${LOGO}"></div><div class="grj"><span class="lb">المادة</span><b${o.subj?'':' class="bl"'}>${o.subj?esc(o.subj):'&nbsp;'}</b></div></div>
+ <div class="grh2"><div class="grc"><span>الصف: ${esc(o.cls)}</span><span>الشعبة: ${esc(o.sec)}</span></div><div class="grtt"><i>✦</i>سجل درجات المدرسين للعام الدراسي ${esc(o.yr)}<i>✦</i></div><div class="grn"><span>عدد الطلاب: ${o.list.length}</span></div></div>`;
+const grFoot=o=>`<div class="grf"><div>اسم المدرس: ${o.teacher?esc(o.teacher):'<span class="dl"></span>'}<small>التوقيع:</small></div><div>اسم المدير: ${o.mgr?esc(o.mgr):'<span class="dl" style="min-width:60mm"></span>'}<small>التوقيع:</small></div></div>`;
+function grTable(o,P,rows){
+ return `<table class="grtb"><colgroup>${P.cols.map(c=>`<col style="width:${c.w}mm">`).join('')}</colgroup><thead><tr>${P.cols.map((c,j)=>`<th style="${P.bg(c,j)}">${o.nohead?'&nbsp;':esc(c.h)}</th>`).join('')}</tr></thead><tbody>${rows.map(P.row).join('')}</tbody></table>`}
+function grRows(o){
+ const rows=o.list.map((s,i)=>({n:i+1,name:s.name,st:s.out?'منقول':'',reg:s.reg||'',page:s.page||''}));
+ for(let i=0;i<(o.blank||0);i++)rows.push({n:o.list.length+i+1,name:'',st:'',reg:'',page:''});
+ return rows}
+function grMeasure(o,P){
+ const px=inner=>{const d=document.createElement('div');d.style.cssText='position:fixed;left:-10000px;top:0;width:194mm';d.innerHTML=P.wrap(inner);document.body.appendChild(d);const g=d.firstElementChild;g.style.display='flow-root';const h=g.getBoundingClientRect().height;d.remove();return h};
+ const r=n=>Array.from({length:n},(_,i)=>({n:i+1,name:'اختبار',st:'',reg:'0000',page:'00'}));
+ const t2=px(grTable(o,P,r(2))),t3=px(grTable(o,P,r(3))),row=Math.max(8,t3-t2);
+ return {head:px(grHead(o)),thead:t2-2*row,row,foot:px(grFoot(o))}}
+function grSheet(o){
+ const P=grPrep(o),rows=grRows(o);
+ if(o.preview||!(o.eq||o.rp)||!rows.length)return P.wrap(grHead(o)+grTable(o,P,rows)+grFoot(o));
+ const m=grMeasure(o,P),AV=273*3.7795,R=Math.max(4,Math.floor((AV-m.head-m.thead-m.foot)/m.row));
+ if(rows.length<=R)return P.wrap(grHead(o)+grTable(o,P,rows)+grFoot(o));
+ const pages=Math.ceil(rows.length/R);
+ if(o.eq)while(rows.length<pages*R)rows.push({n:rows.length+1,name:'',st:'',reg:'',page:''});
+ let out='';
+ for(let k=0;k<pages;k++){
+  const ch=rows.slice(k*R,(k+1)*R);
+  out+=P.wrap((k===0||o.rp?grHead(o):'')+grTable(o,P,ch)+(k===pages-1?grFoot(o):''))}
+ return out}
 function grSubjects(cls,sec){
  const set=new Set(GR_SUBJ);
  db.sessions.forEach(x=>{if(x.cls===cls&&x.sec===sec&&x.subject&&x.subject!=='م')set.add(x.subject)});
@@ -1804,47 +1814,113 @@ function grXRow(n,a){
  return `<div class="grxr"><input class="xn" placeholder="اسم العمود، مثل: ملاحظات" value="${esc(n||'')}" oninput="grPrev()"><select class="xa" onchange="grPrev()">${GR_HEADS.map((h,i)=>i>=1?`<option value="${i}" ${(+a||8)===i?'selected':''}>${i===8?'في النهاية (يسار الجدول)':'بعد: '+h}</option>`:'').join('')}</select><button class="btn sm" style="flex:none" onclick="this.parentNode.remove();grPrev()">✕</button></div>`}
 function grAddX(){const b=$('#grXC');if(b.children.length>=5){toast('الحد الأقصى 5 أعمدة إضافية');return}b.insertAdjacentHTML('beforeend',grXRow('',8));grPrev();const l=b.querySelector('.grxr:last-child .xn');if(l)l.focus()}
 function grRead(){
- return {th:$('#grD').value,hd:$('#grHd').value,tb:$('#grTb').value,nohead:$('#grH').checked,
+ return {th:$('#grD').value,hd:$('#grHd').value,tb:$('#grTb').value,bw:+$('#grBw').value,rs:+$('#grRs').value,hs:+$('#grHs').value,
+  nohead:$('#grH').checked,reg:$('#grRg').checked,eq:$('#grEq').checked,rp:$('#grRp').checked,sb:$('#grSb').checked,tb0:$('#grT0').checked,
   extra:[...document.querySelectorAll('#grXC .grxr')].map(r=>({n:r.querySelector('.xn').value.trim(),a:+r.querySelector('.xa').value})).filter(e=>e.n)}}
 function grPrev(){
  const w=$('#grPv');if(!w)return;
- const c=window.__grCtx,r=grRead(),subj=($('#grS').value.split(/[،,]/)[0]||'المادة').trim()||'المادة';
- w.innerHTML=grSheet(Object.assign({cls:c.cls,sec:c.sec,subj,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:0,list:c.list.slice(0,6)},r));
+ const c=window.__grCtx,r=grRead(),subj=r.sb?'':(($('#grS').value.split(/[،,]/)[0]||'المادة').trim()||'المادة');
+ w.innerHTML=grSheet(Object.assign({cls:c.cls,sec:c.sec,subj,teacher:r.tb0?'':$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:0,list:c.list.slice(0,6),preview:true},r));
  const g=w.firstElementChild,sc=w.clientWidth/(194*3.7795);
- g.style.transform=`scale(${sc})`;w.style.height=Math.ceil(g.offsetHeight*sc)+'px'}
+ g.style.transform=`scale(${sc})`;w.style.height=Math.ceil(g.offsetHeight*sc)+'px';
+ const sb=$('#grSbW');if(sb)sb.style.display=r.sb?'block':'none'}
 function grDlg(cls,sec){
  const yr=(db.yr||acYear()).replace(/\s*\/\s*/g,'-'),P=db.grp||{};
  window.__grAuto='';window.__grCtx={cls,sec,list:studentsOf(cls,sec)};
- const sel=(id,obj,cur)=>`<select id="${id}" onchange="grPrev()">${Object.entries(obj).map(([k,v])=>`<option value="${k}" ${cur===k?'selected':''}>${typeof v==='string'?v:v.n}</option>`).join('')}</select>`;
+ const sel=(id,obj,cur)=>`<select id="${id}" onchange="grPrev()">${Object.entries(obj).map(([k,v])=>`<option value="${k}" ${String(cur)===k?'selected':''}>${typeof v==='string'?v:v.n}</option>`).join('')}</select>`;
+ const ck=(id,txt,on)=>`<label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13.5px"><input type="checkbox" id="${id}" style="width:auto" ${on?'checked':''} onchange="grPrev()"> ${txt}</label>`;
  openModal(`<h3>📝 سجل درجات المدرسين</h3><div style="color:var(--mut);font-size:13px">${esc(cls)} — شعبة ${esc(sec)} • ${studentsOf(cls,sec).length} طالب</div>
  <div class="grpv" id="grPv"></div>
  <label>المادة (اختر أو اكتب)</label><input id="grS" list="grSL" placeholder="مثال: الكيمياء" autocomplete="off" oninput="grFill(${J(cls)},${J(sec)});grPrev()"><datalist id="grSL">${grSubjects(cls,sec).map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
  <small style="color:var(--mut);display:block;margin-top:4px">لعدة مواد افصل بينها بفاصلة، فتُطبع ورقة لكل مادة، مثل: الكيمياء، الفيزياء</small>
+ ${ck('grSb','ترك المادة فارغة (أكتبها بخط اليد)',P.sb)}
+ <div id="grSbW" style="display:none"><label>عدد النسخ الفارغة المراد طباعتها</label><input id="grN" type="number" min="1" max="12" inputmode="numeric" value="1"></div>
  <label>اسم المدرس</label><input id="grT" list="grTL" placeholder="يُملأ تلقائياً من الجدول الأسبوعي إن وُجد" autocomplete="off" oninput="grPrev()"><datalist id="grTL">${grTeachers().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+ ${ck('grT0','ترك اسم المدرس فارغاً (أكتبه بخط اليد)',P.tb0)}
  <div class="two"><div><label>العام الدراسي</label><input id="grY" value="${esc(yr)}" oninput="grPrev()"></div><div><label>اسم المدير</label><input id="grM" value="${esc(db.mgr||'')}" placeholder="الاسم الكامل" oninput="grPrev()"></div></div>
  <label>ألوان التصميم</label>${sel('grD',GR_TH,P.th||'navy')}
  <div class="two"><div><label>شكل الترويسة</label>${sel('grHd',GR_HD,P.hd||'band')}</div><div><label>شكل الجدول</label>${sel('grTb',GR_TB,P.tb||'3d')}</div></div>
+ <div class="two"><div><label>سماكة خطوط الجدول</label>${sel('grBw',{1:'عادية',2:'واضحة',3:'سميكة',4:'سميكة جداً'},P.bw||2)}</div><div><label>حجم الخلايا والخط</label>${sel('grRs',{1:'عادي',2:'كبير',3:'كبير جداً'},P.rs||1)}</div></div>
+ <label>حجم الترويسة</label>${sel('grHs',{0:'عادية',1:'مصغّرة',2:'مصغّرة جداً'},P.hs||0)}
  <label>أعمدة إضافية (اسم العمود وموضعه)</label><div id="grXC">${(P.x||[]).map(e=>grXRow(e.n,e.a)).join('')}</div><button class="btn sm" style="margin-top:8px" onclick="grAddX()">＋ إضافة عمود</button>
- <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="grH" style="width:auto" onchange="grPrev()"> رأس الجدول فارغاً (بدون عناوين الأعمدة)</label>
- <div class="two"><div><label>صفوف فارغة إضافية</label><input id="grB" type="number" min="0" max="20" inputmode="numeric" value="0"></div><div><label style="display:block">&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="grO" checked style="width:auto"> إظهار المنقولين (حالتهم: منقول)</label></div></div>
- <small style="color:var(--mut);display:block;margin-top:8px">تُطبع على ورقة A4 بوجهين: تكملة الأسماء في الصفحة الثانية مع تكرار رأس الجدول. في نافذة الطباعة فعّل «الطباعة على الوجهين» و«طباعة الخلفيات».</small>
- <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)})">🖨 طباعة / حفظ PDF</button><button class="btn" onclick="closeModal()">إلغاء</button></div>`);
+ ${ck('grRg','إظهار رقم القيد والصفحة لكل طالب',P.reg!==false)}
+ ${ck('grH','رأس الجدول فارغاً (بدون عناوين الأعمدة)',false)}
+ ${ck('grEq','جعل الصفحة الثانية مثل الأولى في عدد الصفوف (تُكمَل بصفوف فارغة)',P.eq)}
+ ${ck('grRp','تكرار الترويسة كاملة في الصفحة الثانية',P.rp)}
+ <div class="two"><div><label>صفوف فارغة إضافية</label><input id="grB" type="number" min="0" max="40" inputmode="numeric" value="0"></div><div><label style="display:block">&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="grO" checked style="width:auto"> إظهار المنقولين (حالتهم: منقول)</label></div></div>
+ <small style="color:var(--mut);display:block;margin-top:8px">تُطبع على ورقة A4 بوجهين. في نافذة الطباعة فعّل «الطباعة على الوجهين» و«طباعة الخلفيات».</small>
+ <div class="btns" style="margin-top:14px"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)})">🖨 طباعة / حفظ PDF</button><button class="btn blue" onclick="grXLS(${J(cls)},${J(sec)})">⬇ تنزيل Excel</button></div>
+ <div style="margin-top:12px;padding:10px;border:1px dashed var(--g2);border-radius:14px"><b style="color:var(--g1);font-size:14px">📦 تنزيل جميع الصفوف والشعب معاً</b><small style="display:block;color:var(--mut);margin:4px 0 8px">بنفس المادة والإعدادات أعلاه، لكل شعبة في المدرسة ملف واحد. اسم المدرس يُؤخذ تلقائياً من الجدول الأسبوعي لكل شعبة.</small>
+ <div class="btns"><button class="btn gold" onclick="grDo(${J(cls)},${J(sec)},true)">🖨 كل الصفوف PDF</button><button class="btn blue" onclick="grXLS(${J(cls)},${J(sec)},true)">⬇ كل الصفوف Excel</button></div></div>
+ <button class="btn full" style="margin-top:8px" onclick="closeModal()">إلغاء</button>`);
  setTimeout(grPrev,60)}
 function grFill(cls,sec){
  const t=$('#grT'),first=($('#grS').value.split(/[،,]/)[0]||'').trim(),g=grTeacher(cls,sec,first);
  if(g&&(!t.value||t.value===window.__grAuto)){t.value=g;window.__grAuto=g}}
-function grDo(cls,sec){
- const subs=($('#grS').value||'').split(/[،,]/).map(x=>x.trim()).filter(Boolean);
- if(!subs.length){toast('اكتب اسم المادة');return}
- const ro=grRead(),o={cls,sec,th:ro.th,hd:ro.hd,tb:ro.tb,nohead:ro.nohead,extra:ro.extra,teacher:$('#grT').value.trim(),yr:$('#grY').value.trim(),mgr:$('#grM').value.trim(),blank:Math.max(0,Math.min(20,parseInt($('#grB').value)||0))};
- const inc=$('#grO').checked;
- let list=studentsOf(cls,sec);
- if(inc)list=[...list,...db.students.filter(x=>x.out&&x.cls===cls&&x.sec===sec)].sort(cmp);
- if(!list.length){toast('لا يوجد طلاب في هذه الشعبة');return}
- o.list=list;db.mgr=o.mgr;db.grp={th:ro.th,hd:ro.hd,tb:ro.tb,x:ro.extra};save();
- logA('طباعة سجل درجات',`${cls} / ${sec} — ${subs.join('، ')}`);
+function grSecs(cls,sec,all){
+ if(!all)return[[cls,sec]];
+ const o=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>o.push([c,s])));return o}
+function grList(c,s){
+ let list=studentsOf(c,s);
+ if($('#grO').checked)list=[...list,...db.students.filter(x=>x.out&&x.cls===c&&x.sec===s)].sort(cmp);
+ return list}
+function grTch(ro,c,s,sb,multi,all){
+ if(ro.tb0)return'';
+ const inp=$('#grT').value.trim();
+ if(all)return sb?((inp&&inp!==window.__grAuto)?inp:(grTeacher(c,s,sb)||inp)):inp;
+ return (multi&&sb)?(grTeacher(c,s,sb)||inp):inp}
+function grDo(cls,sec,all){
+ const ro=grRead(),cp=ro.sb?Math.max(1,Math.min(12,parseInt($('#grN').value)||1)):0;
+ const subs=ro.sb?Array(cp).fill(''):($('#grS').value||'').split(/[،,]/).map(x=>x.trim()).filter(Boolean);
+ if(!subs.length){toast('اكتب اسم المادة أو فعّل «ترك المادة فارغة»');return}
+ const yr=$('#grY').value.trim(),mgr=$('#grM').value.trim(),blank=Math.max(0,Math.min(40,parseInt($('#grB').value)||0));
+ let html='',n=0;
+ grSecs(cls,sec,all).forEach(([c,s])=>{
+  const list=grList(c,s);if(!list.length)return;
+  const o=Object.assign({cls:c,sec:s,yr,mgr,blank,list},ro);
+  html+=subs.map(sb=>grSheet(Object.assign({},o,{subj:sb,teacher:grTch(ro,c,s,sb,subs.length>1,all)}))).join('');n++});
+ if(!n){toast('لا يوجد طلاب في '+(all?'المدرسة':'هذه الشعبة'));return}
+ db.mgr=mgr;
+ db.grp={th:ro.th,hd:ro.hd,tb:ro.tb,bw:ro.bw,rs:ro.rs,hs:ro.hs,eq:ro.eq,rp:ro.rp,sb:ro.sb,tb0:ro.tb0,reg:ro.reg,x:ro.extra};save();
+ logA('طباعة سجل درجات',(all?'كل الصفوف ('+n+' شعبة) — ':cls+' / '+sec+' — ')+(ro.sb?'مادة فارغة ×'+cp:subs.join('، ')));
  closeModal();
- printNamed(subs.map((sb,i)=>grSheet(Object.assign({},o,{subj:sb,teacher:subs.length>1?(grTeacher(cls,sec,sb)||o.teacher):o.teacher}))).join(''),'سجل درجات '+subs.join(' ')+' '+cls+' '+sec)}
+ printNamed(html,'سجل درجات '+(ro.sb?'':subs.join(' '))+' '+(all?'كل الصفوف':cls+' '+sec))}
+
+
+/* ---------- NAMES / GRADE-SHEET → EXCEL ---------- */
+function namesSheets(cls,sec){
+ const secs=[];Object.keys(db.structure).forEach(c=>db.structure[c].forEach(s=>{if((!cls||c===cls)&&(!sec||s===sec))secs.push([c,s])}));
+ const sheets=[];
+ secs.forEach(([c,s])=>{const l=studentsOf(c,s);if(!l.length)return;
+  sheets.push({name:c+' '+s,w:[6,36,12,12,18,10],aoa:[['ت','اسم الطالب','رقم القيد','رقم الصفحة','الصف','الشعبة'],...l.map((x,i)=>[i+1,x.name,x.reg||'',x.page||'',x.cls,x.sec])]})});
+ if(!cls){const o=outList();if(o.length)sheets.push({name:'المنقولون',w:[6,36,12,18,10,14,26,24],aoa:[['ت','اسم الطالب','رقم القيد','الصف','الشعبة','تاريخ النقل','المدرسة المنقول إليها','ملاحظة'],...o.map((x,i)=>[i+1,x.name,x.reg||'',x.cls,x.sec,fmtD(x.out.d),x.out.to,x.out.note||''])]})}
+ return sheets}
+function namesXLS(cls,sec){
+ const sh=namesSheets(cls,sec);if(!sh.length){toast('لا يوجد طلاب');return}
+ logA('تنزيل الأسماء Excel',cls?cls+(sec?' / '+sec:''):'كل الطلاب');
+ saveSheets(sh,'أسماء-'+(cls?cls+(sec?'-'+sec:''):'كل-الطلاب')+'-'+todayStr())}
+function grXLS(cls,sec,all){
+ const ro=grRead(),cp=ro.sb?Math.max(1,Math.min(12,parseInt($('#grN').value)||1)):0;
+ const subs=ro.sb?Array.from({length:cp},()=>''):($('#grS').value||'').split(/[،,]/).map(x=>x.trim()).filter(Boolean);
+ if(!subs.length){toast('اكتب اسم المادة أو فعّل «ترك المادة فارغة»');return}
+ const yr=$('#grY').value.trim(),mgr=$('#grM').value.trim(),blank=Math.max(0,Math.min(40,parseInt($('#grB').value)||0));
+ const cols=grCols(ro.extra,ro.reg),W=cols.length,heads=cols.map(c=>ro.nohead?'':c.h),pad=n=>Array.from({length:Math.max(0,n)},()=>'');
+ const iSt=cols.findIndex(c=>c.i===2),iRg=cols.findIndex(c=>c.i===20),iPg=cols.findIndex(c=>c.i===21);
+ const sheets=[];let n=0;
+ grSecs(cls,sec,all).forEach(([c,s])=>{
+  const list=grList(c,s);if(!list.length)return;n++;
+  subs.forEach((sb,i)=>{
+   const teacher=grTch(ro,c,s,sb,subs.length>1,all);
+   const rows=[[SCHOOL,...pad(W-1)],['سجل درجات المدرسين للعام الدراسي '+yr,...pad(W-1)],['المادة: '+sb,'الصف: '+c,'الشعبة: '+s,...pad(W-3)],pad(W),heads];
+   list.forEach((st,k)=>{const r=pad(W);r[0]=k+1;r[1]=st.name;if(iSt>=0)r[iSt]=st.out?'منقول':'';if(iRg>=0)r[iRg]=st.reg||'';if(iPg>=0)r[iPg]=st.page||'';rows.push(r)});
+   for(let k=0;k<blank;k++){const r=pad(W);r[0]=list.length+k+1;rows.push(r)}
+   rows.push(pad(W));
+   const f=pad(W);f[0]='اسم المدرس: '+teacher;f[W-1]='اسم المدير: '+mgr;rows.push(f);
+   const nm=all?((sb?sb.slice(0,9)+' ':'')+c.slice(0,12)+' '+s):(sb||('نسخة '+(i+1)));
+   sheets.push({name:nm,w:cols.map(x=>x.i===0?6:x.i===1?36:x.i===2?12:x.i===20?12:x.i===21?10:15),merges:[{s:{r:0,c:0},e:{r:0,c:W-1}},{s:{r:1,c:0},e:{r:1,c:W-1}}],aoa:rows})})});
+ if(!n){toast('لا يوجد طلاب في '+(all?'المدرسة':'هذه الشعبة'));return}
+ logA('تنزيل سجل درجات Excel',(all?'كل الصفوف ('+n+' شعبة) — ':cls+' / '+sec+' — ')+(ro.sb?'مادة فارغة ×'+cp:subs.join('، ')));
+ saveSheets(sheets,'سجل-درجات-'+(all?'كل-الصفوف':cls+'-'+sec)+'-'+todayStr());closeModal()}
 
 /* ---------- ADMIN ---------- */
 function vAdmin(){
@@ -1852,7 +1928,7 @@ function vAdmin(){
  return `<div class="top"><button class="back" onclick="go('home')">→</button><div><h2>🔐 لوحة الإدارة</h2><small>جميع التعديلات تتم من هنا</small></div></div>
  <details class="card" open><summary>📥 استيراد الأسماء من Excel</summary>
   <p style="color:var(--mut);font-size:13px;margin:0 0 10px">يقرأ الأعمدة: الاسم، القيد، الصفحة، الصف، الشعبة (إن وُجدت)، ويرتّب الأسماء أبجدياً تلقائياً.</p>
-  <div class="btns"><button class="btn gold" onclick="pickXlsx()">اختر ملف Excel</button><button class="btn" onclick="editStudent(null)">＋ إضافة طالب</button></div></details>
+  <div class="btns"><button class="btn gold" onclick="pickXlsx()">اختر ملف Excel</button><button class="btn" onclick="editStudent(null)">＋ إضافة طالب</button></div><div class="btns" style="margin-top:8px"><button class="btn blue" onclick="namesXLS()">⬇ تنزيل كل الأسماء Excel</button></div></details>
  <details class="card"><summary>⏱ أوقات الدروس</summary><label style="margin-top:0">أقل عدد دروس مسجّلة ليُحسب الغياب «يوم كامل»</label><input type="number" min="1" inputmode="numeric" value="${db.fd||1}" onchange="db.fd=Math.max(1,parseInt(this.value)||1);save();toast('تم الحفظ ✓')"><small style="color:var(--mut);display:block;margin:4px 0 10px">مثال: اجعلها 7 إن كان اليوم الكامل 7 دروس، فلا يُحسب غياب درس واحد يوماً كاملاً.</small>${db.lessons.map((l,i)=>`<div class="lt"><span>${lessonName(i+1)}</span><input value="${esc(l.t)}" onchange="db.lessons[${i}].t=this.value;save()"></div>`).join('')}
   <div class="btns"><button class="btn sm" onclick="db.lessons.push({t:''});save();render()">＋ درس</button><button class="btn sm" onclick="if(db.lessons.length>1){db.lessons.pop();save();render()}">حذف الأخير</button></div></details>
  <details class="card"><summary>📅 الجدول الأسبوعي للدروس</summary><p style="color:var(--mut);font-size:13px;margin:0 0 10px">حدّد مادة ومدرس كل درس لكل شعبة. يملأ التطبيق المادة والمدرس تلقائياً ويدقّق الدروس غير المسجّلة حسب الجدول الفعلي.</p><button class="btn gold full" onclick="openTT()">فتح الجدول الأسبوعي</button></details>
